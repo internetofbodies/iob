@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subscription Payment</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID"></script>
+</head>
+<body>
+    <div class="payment-wrapper">
+        <form id="payment-form" class="payment-form">
+            <h1>Subscription Payment</h1>
+            <div class="input-box">
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
+            </div>
+            <div class="input-box">
+                <input type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div class="input-box">
+                <select id="subscription-plan" name="subscription-plan" required>
+                    <option value="" disabled selected>Select Subscription Plan</option>
+                    <option value="monthly">Monthly - $10</option>
+                    <option value="yearly">Yearly - $100</option>
+                </select>
+            </div>
+            <button type="submit" id="subscribe-btn" class="btn">Subscribe</button>
+            <a href="index.html" class="back-btn">Back</a>
+        </form>
+        <div id="paypal-button-container"></div>
+    </div>
+
+    <script>
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return fetch('/create-payment', {
+                    method: 'post'
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(data) {
+                    return data.id;
+                });
+            },
+            onApprove: function(data, actions) {
+                return fetch('/execute-payment', {
+                    method: 'post',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        orderId: data.orderID
+                    })
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(details) {
+                    alert('Transaction completed by ' + details.payer.name.given_name);
+                });
+            }
+        }).render('#paypal-button-container');
+    </script>
+</body>
+</html>
