@@ -6,13 +6,12 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 const User = require('./models/User'); // Correct import
 const paypal = require('@paypal/checkout-server-sdk'); // Correct PayPal SDK
 const cors = require('cors'); // Import CORS
 
 const app = express();
-const PORT = process.env.PORT || 30029; // Changed port 
+const PORT = process.env.PORT || 30031; // Changed port 
 
 // CORS configuration
 const corsOptions = {
@@ -50,16 +49,8 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-app.get('/register', (req, res) => {
+app.post('/register', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'register.html'));
-});
-
-app.get('/subscription', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'subscription.html'));
-});
-
-app.get('/confirmation', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'confirmation.html'));
 });
 
 // Handle registration form submission
@@ -92,59 +83,6 @@ app.post('/login', async (req, res) => {
         console.error('Login error:', error);
         res.status(400).send(error.message);
     }
-});
-
-// Handle subscription form submission
-app.post('/subscription', async (req, res) => {
-    const { email, subscriptionPlan } = req.body;
-    try {
-        const user = await User.findOne({ email });
-        if (!user) return res.status(400).send('User not found');
-
-        user.subscription = true; // Update subscription status
-        await user.save();
-
-        res.status(200).send('Subscription successful');
-    } catch (error) {
-        console.error('Subscription error:', error);
-        res.status(400).send(error.message);
-    }
-});
-
-// Handle booking form submission
-app.post('/book-meeting', async (req, res) => {
-    const { name, email } = req.body;
-
-    // Generate booking date and time
-    const bookingDate = new Date();
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    const formattedDate = bookingDate.toLocaleDateString('en-US', options);
-
-    // Set up Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'internetofbodies.iob@gmail.com',
-            pass: 'accountablestructure' // Use the App Password here
-        }
-    });
-
-    // Email options
-    const mailOptions = {
-        from: 'internetofbodies.iob@gmail.com',
-        to: email,
-        subject: 'Meeting Booking Confirmation',
-        text: `Hello ${name},\n\nYour meeting has been booked successfully!\n\nDate and Time: ${formattedDate}\n\nThank you!`
-    };
-
-    // Send email
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            console.error('Error sending email:', error);
-            return res.status(500).send('Error sending email: ' + error.message);
-        }
-        res.redirect('/confirmation.html');
-    });
 });
 
 // PayPal payment routes
