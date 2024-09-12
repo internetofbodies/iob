@@ -57,7 +57,7 @@ app.get('/register', (req, res) => {
 app.post('/register', async (req, res) => {
     const { username, email, password } = req.body;
     try {
-        const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 10);
         const user = new User({ username, email, password: hashedPassword });
         await user.save();
         res.status(201).send('User registered');
@@ -66,6 +66,7 @@ app.post('/register', async (req, res) => {
         res.status(400).send(error.message);
     }
 });
+
 
 // Handle login form submission
 app.post('/login', async (req, res) => {
