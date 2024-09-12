@@ -15,12 +15,10 @@ const PORT = process.env.PORT || 30031; // Changed port
 
 // CORS configuration
 const corsOptions = {
-    origin: 'https://internetofbodies.ai',
+    origin: 'http://127.0.0.1:5500',
     credentials: true,
     methods: ['GET', 'POST', 'OPTIONS']
 };
-app.use(cors(corsOptions));
-
 
 app.use(cors(corsOptions)); // Use CORS middleware
 
@@ -57,18 +55,19 @@ app.get('/register', (req, res) => {
 
 // Handle registration form submission
 app.post('/register', async (req, res) => {
+    console.log('Received POST request to /register');
     const { username, email, password } = req.body;
     try {
-        const hashedPassword = await bcrypt.hash(password, 10);
+        const hashedPassword = await bcrypt.hash(password, 10); // Hash the password
         const user = new User({ username, email, password: hashedPassword });
         await user.save();
+        console.log('User registered successfully');
         res.status(201).send('User registered');
     } catch (error) {
         console.error('Registration error:', error);
         res.status(400).send(error.message);
     }
 });
-
 
 // Handle login form submission
 app.post('/login', async (req, res) => {
