@@ -1,0 +1,21 @@
+{
+  "name": "iob",
+  "version": "1.0.0",
+  "description": "Internet of Bodies Landing Page",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "express": "^4.20.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.6.1",
+    "nodemailer": "^6.9.15",
+    "path": "^0.12.7"
+  },
+  "author": "",
+  "license": "ISC"
+}
