@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <header>
+            <a href="logo.png" class="logo"></a>
+            <nav class="navigation">
+                <a href="#">Profile</a>  
+                <a href="home.html" id="logout-btn">Logout</a>
+            </nav>
+        </header>
+        <div class="content">
+            <div class="info"> 
+                <h2>Welcome, <span id="username"></span>!</h2>
+                <h2>Internet of Bodies</h2>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Retrieve the username from local storage
+        const loggedInUser = localStorage.getItem('loggedInUser');
+        if (loggedInUser) {
+            document.getElementById('username').textContent = loggedInUser;
+        }
+
+        document.getElementById('logout-btn').addEventListener('click', function(event) {
+            event.preventDefault();
+            // Clear user data from local storage
+            localStorage.removeItem('loggedInUser');
+            // Redirect to home page
+            window.location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
