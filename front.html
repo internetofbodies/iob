@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet of Bodies Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for the graph -->
+</head>
+
+<body>
+    <header>
+        <a href="index.html" class="logo"></a>
+        <h1>Health Dashboard</h1>
+
+    </header>
+
+    <main>
+        <section id="devices" class="feature-section">
+            <h3>Your Devices</h3>
+            <p>Manage your connected devices and ensure they're providing accurate and up-to-date information about your health.</p>
+            <ul>
+                <li>Smartwatch: <span id="smartwatch-status">Connected</span></li>
+                <li>Heart Rate Monitor: <span id="monitor-status">Disconnected</span></li>
+            </ul>
+        </section>
+
+        <section id="data" class="feature-section">
+            <h3>Health Data</h3>
+            <p>Analyze your health trends over time. Access your heart rate, steps, sleep patterns, and more with easy-to-read charts.</p>
+            <p id="heartRate">Heart Rate: 0 BPM</p>
+            <p id="steps">Steps: 0</p>
+            <p id="sleep">Sleep: 0 hours</p>
+
+            <!-- Canvas for Chart.js -->
+            <canvas id="healthChart"></canvas>
+        </section>
+    </main>
+
+    <footer>
+        <p>Internet of Bodies ©2024</p>
+    </footer>
+
+    <!-- JavaScript Section -->
+    <script>
+        // 1. Personalized Greeting
+        const username = "Admin"; // This could be fetched dynamically from the server
+        document.addEventListener("DOMContentLoaded", function () {
+            const greeting = document.createElement("h2");
+            greeting.textContent = `Welcome, ${username}!`;
+            document.querySelector("header").appendChild(greeting);
+        });
+
+        // 2. Update Health Data every 5 seconds
+        const updateHealthData = () => {
+            const heartRate = Math.floor(Math.random() * (100 - 60 + 1)) + 60; // Simulating heart rate between 60 and 100
+            const steps = Math.floor(Math.random() * 10000); // Simulating random steps
+            const sleep = Math.floor(Math.random() * (8 - 4 + 1)) + 4; // Simulating hours of sleep
+
+            document.getElementById("heartRate").textContent = `Heart Rate: ${heartRate} BPM`;
+            document.getElementById("steps").textContent = `Steps: ${steps}`;
+            document.getElementById("sleep").textContent = `Sleep: ${sleep} hours`;
+        };
+
+        setInterval(updateHealthData, 5000); // Update every 5 seconds
+
+        // 4. Chart.js for health data visualization
+        const ctx = document.getElementById('healthChart').getContext('2d');
+        const healthChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Heart Rate', 'Steps', 'Sleep'],
+                datasets: [{
+                    label: 'Health Data',
+                    data: [72, 5000, 7], // Placeholder data
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
