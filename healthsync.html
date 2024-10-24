@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Sync Alert</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Linking external CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</head>
+<body>
+    <!-- Add a label describing the checkbox -->
+    <input type="checkbox" id="check" aria-label="Toggle mobile menu">
+    
+    <!-- Navbar --> 
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="#" id="navbar__logo">
+          <img src="logo.png" alt="Logo" class="logo-image">
+        </a>
+        <ul class="navbar__menu">
+          <li class="navbar__item"><a href="front.html" class="navbar__links">Health Dashboard</a></li>
+          <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
+        </ul>
+        
+        <!-- Mobile Menu Icon -->
+        <label for="check" class="mobile-menu-icon">
+          <i class="fas fa-bars menu-btn"></i>
+          <i class="fas fa-times close-btn"></i>
+        </label>
+      </div>
+    </nav>
+
+
+    <h1 class="dashboard-title">Health Sync Alert</h1>
+
+    <!-- User Input Form -->
+    <div class="input-container">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="name-input" placeholder="Enter name...">
+        <button onclick="loadUserData()">Submit</button>
+    </div>
+
+    <!-- Symptom Checker Dashboard -->
+    <div class="symptom-container" id="symptom-section" style="display: none;">
+        <h2 id="user-greeting">Health Data for </h2>
+        <div class="symptom-card">
+            <h3>Heart Rate</h3>
+            <p id="heart-rate">Loading...</p>
+        </div>
+        <div class="symptom-card">
+            <h3>SpO2</h3>
+            <p id="spO2">Loading...</p>
+        </div>
+        <div class="symptom-card">
+            <h3>Body Temperature</h3>
+            <p id="body-temp">Loading...</p>
+        </div>
+        <div class="symptom-card">
+            <h3>Cholesterol Level</h3>
+            <p id="cholesterol">Loading...</p>
+            <p id="cholesterol-note" style="color: red;"></p> <!-- Diabetes risk note -->
+        </div>
+        <div class="symptom-card">
+            <h3>Potassium Level</h3>
+            <p id="potassium">Loading...</p>
+        </div>
+        <div class="symptom-card">
+            <h3>Diabetes Status</h3>
+            <p id="diabetes">Loading...</p>
+        </div>
+        <div class="symptom-card">
+            <h3>ECG Monitor</h3>
+            <canvas id="ecgChart"></canvas>
+        </div>
+        <div class="symptom-card">
+            <h3>Other Major Diseases</h3>
+            <ul id="major-diseases">Loading...</ul>
+        </div>
+        <div class="symptom-card">
+            <h3>Bird Flu / COVID-19 Detection</h3>
+            <ul id="flu-covid-detection">Loading...</ul>
+        </div>
+        <div class="symptom-card">
+            <h3>Registered City</h3>
+            <p id="registered-city">Loading...</p>
+        </div>
+        <div class="symptom-card" id="cause-of-death-card" style="display: none;">
+            <h3>Cause of Death</h3>
+            <p id="cause-of-death"></p>
+        </div>
+        <div class="symptom-card" id="headache-note-card" style="display: none;">
+            <p style="color: red;" id="headache-note"></p> <!-- Migraine note -->
+        </div>
+    </div>
+
+    <!-- JavaScript for handling form and displaying health data -->
+    <script>
+        let ecgChart; // Variable for storing the chart instance
+
+        // Sample data associated with users, including registered city and cause of death
+        const userData = {
+            'Maria James': { 
+                heartRate: 75, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.5, diabetes: 'Non-diabetic', 
+                ecg: [70, 72, 75, 80, 78], majorDiseases: ['Hypertension'], hasSymptoms: { fever: false, cough: true, breathShortness: false, headache: false },
+                registeredCity: 'Los Angeles', causeOfDeath: null  // Still alive
+            },
+            'Alex Ching': { 
+                heartRate: 85, spO2: 97, bodyTemp: 37.8, cholesterol: 250, potassium: 3.8, diabetes: 'Type 2 Diabetic', 
+                ecg: [80, 82, 85, 90, 88], majorDiseases: ['Asthma', 'High Cholesterol'], hasSymptoms: { fever: true, cough: true, breathShortness: true, headache: true },
+                registeredCity: 'New York', causeOfDeath: 'Heart Attack'
+            },
+            'Jacob Ness': { 
+                heartRate: 65, spO2: 99, bodyTemp: 36.7, cholesterol: 150, potassium: 4.1, diabetes: 'Non-diabetic', 
+                ecg: [60, 62, 65, 70, 68], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+                registeredCity: 'London', causeOfDeath: 'Car Accident'
+            },
+            'John Doe': { 
+                heartRate: 65, spO2: 99, bodyTemp: 36.7, cholesterol: 150, potassium: 4.1, diabetes: 'Non-diabetic', 
+                ecg: [60, 62, 65, 70, 68], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+                registeredCity: 'London', causeOfDeath: null
+            }
+            
+        };
+
+        // Function to check for Bird Flu or COVID-19 symptoms
+        function detectFluOrCovid(symptoms) {
+            const results = [];
+            if (symptoms.fever && symptoms.cough && symptoms.breathShortness) {
+                results.push('Possible COVID-19 or Bird Flu. Please seek medical attention.');
+            } else if (symptoms.fever || symptoms.cough) {
+                results.push('Mild symptoms detected. Monitor for potential flu-like conditions.');
+            } else {
+                results.push('No symptoms of COVID-19 or Bird Flu detected.');
+            }
+            return results;
+        }
+
+        // Function to display health data based on name input
+        function loadUserData() {
+            const name = document.getElementById('name-input').value.trim();
+            const data = userData[name];
+
+            if (data) {
+                // Display the symptom section and health data
+                document.getElementById('symptom-section').style.display = 'block';
+                document.getElementById('user-greeting').textContent = `Health Data for ${name}`;
+                document.getElementById('heart-rate').textContent = `${data.heartRate} bpm`;
+                document.getElementById('spO2').textContent = `${data.spO2}%`;
+                document.getElementById('body-temp').textContent = `${data.bodyTemp}°C`;
+                document.getElementById('cholesterol').textContent = `${data.cholesterol} mg/dL`;
+                document.getElementById('potassium').textContent = `${data.potassium} mmol/L`;
+                document.getElementById('diabetes').textContent = `${data.diabetes}`;
+                document.getElementById('registered-city').textContent = `Registered City: ${data.registeredCity}`;
+
+                // Handle Cause of Death display
+                if (data.causeOfDeath) {
+                    document.getElementById('cause-of-death-card').style.display = 'block';
+                    document.getElementById('cause-of-death').textContent = `Cause of Death: ${data.causeOfDeath}`;
+                } else {
+                    document.getElementById('cause-of-death-card').style.display = 'none'; // Hide if still alive
+                }
+
+                // Display major diseases
+                const diseaseList = document.getElementById('major-diseases');
+                diseaseList.innerHTML = '';  // Clear previous list
+                if (data.majorDiseases.length > 0) {
+                    data.majorDiseases.forEach(disease => {
+                        const li = document.createElement('li');
+                        li.textContent = disease;
+                        diseaseList.appendChild(li);
+                    });
+                } else {
+                    const li = document.createElement('li');
+                    li.textContent = 'None';
+                    diseaseList.appendChild(li);
+                }
+
+                // Detect Bird Flu / COVID-19
+                const fluCovidList = document.getElementById('flu-covid-detection');
+                fluCovidList.innerHTML = '';  // Clear previous list
+                const detectionResults = detectFluOrCovid(data.hasSymptoms);
+                detectionResults.forEach(result => {
+                    const li = document.createElement('li');
+                    li.textContent = result;
+                    fluCovidList.appendChild(li);
+                });
+
+                // Check for high cholesterol and add note for diabetes risk
+                if (data.cholesterol > 200) {
+                    document.getElementById('cholesterol-note').textContent = 'Note: Possible risk of diabetes due to high sugar level.';
+                } else {
+                    document.getElementById('cholesterol-note').textContent = ''; // Clear the note if not applicable
+                }
+
+                // Check for headache and display possible migraine note
+                if (data.hasSymptoms.headache) {
+                    document.getElementById('headache-note-card').style.display = 'block';
+                    document.getElementById('headache-note').textContent = 'Note: Possible migraine due to reported headache.';
+                } else {
+                    document.getElementById('headache-note-card').style.display = 'none'; // Hide if no headache
+                }
+
+                // Update the ECG chart based on whether the person is alive or not
+                updateECGChart(data.ecg, data.causeOfDeath === null);
+            } else {
+                alert('User not found! Please enter a valid name.');
+            }
+        }
+
+        // Function to update ECG chart
+        function updateECGChart(ecgData, isAlive) {
+            const ctx = document.getElementById('ecgChart').getContext('2d');
+            
+            if (ecgChart) {
+                ecgChart.destroy();  // Destroy the previous chart instance
+            }
+
+            // If the person is alive, show normal ECG data, otherwise show a flat line
+            const ecgValues = isAlive ? ecgData : new Array(ecgData.length).fill(0); // Flat line for deceased
+
+            ecgChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Array.from({ length: ecgValues.length }, (_, i) => i + 1),
+                    datasets: [{
+                        label: 'ECG (bpm)',
+                        data: ecgValues,
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 2,
+                        fill: false
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            beginAtZero: true
+                        },
+                        y: {
+                            beginAtZero: true,
+                            max: 120
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
