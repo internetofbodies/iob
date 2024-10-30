@@ -1,0 +1,1974 @@
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Kumbh Sans', sans-serif;
+}
+
+body {
+  background-color: #131313;
+  color: white;
+  justify-content: center; 
+  align-items: center; 
+}
+
+/* Navbar Styles */
+.navbar {
+  background: #131313;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 50px;
+}
+
+#navbar__logo {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 2rem;
+  text-decoration: none;
+}
+
+#navbar__logo i {
+  margin-right: 0.5rem;
+}
+
+.navbar__menu {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.navbar__links {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+}
+
+.navbar__btn .button {
+  padding: 10px 20px;
+  background-color: #f77062;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+
+.button:hover {
+  background-color: #ff665e;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
+    transform: scale(1.05); /* Slight scaling effect */
+}
+
+.cta__button {
+  padding: 10px 20px;
+  background-color: #f77062;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cta__button:hover {
+  background: linear-gradient(90deg, #2979ff, #3f51b5); 
+}
+
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.hero__content {
+  max-width: 50%;
+}
+
+.hero__content h1 {
+  font-size: 4rem;
+  color: white;
+  margin-bottom: 1rem;
+  background-image: linear-gradient(to right, #ff0844, #ffb199);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__content h1 span {
+  background-image: linear-gradient(to right, #00c6ff, #0072ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero__content p {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+/* Hero Image */
+.hero__image img {
+  width: 400px;
+  height: auto;
+  transition: transform 0.3s ease-in-out; 
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 960px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    padding: 50px 20px; /* Adjust padding for smaller screens */
+  }
+
+  .hero__content {
+    max-width: 100%;
+  }
+
+  .hero__content h1 {
+    font-size: 3rem; /* Reduce heading size for medium screens */
+  }
+
+  .hero__content p {
+    font-size: 1.2rem; /* Adjust paragraph font size */
+  }
+
+  .hero__image {
+    margin-top: 2rem;
+  }
+
+  .hero__image img {
+    width: 350px; /* Reduce image size for medium screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 40px 20px; /* Further reduce padding for smaller screens */
+  }
+
+  .hero__content h1 {
+    font-size: 3.5rem; /* Reduce heading size for smaller screens */
+  }
+
+  .hero__content p {
+    font-size: 1.1rem; /* Smaller font size for paragraph text */
+  }
+
+  .hero__image img {
+    width: 250px; /* Further reduce image size */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero {
+    padding: 30px 15px; /* Minimal padding for extra small screens */
+  }
+
+  .hero__content h1 {
+    font-size: 2rem; /* Further reduce heading size for small mobile devices */
+  }
+
+  .hero__content p {
+    font-size: 1rem; /* Adjust font size for readability */
+  }
+
+  .hero__image img {
+    width: 350px; /* Make the image smaller on small mobile devices */
+  }
+}
+
+
+/* Hype Section */
+.hype {
+  padding: 100px 50px;
+  text-align: center;
+  background-color: #131313;
+}
+
+.hype h2 {
+  font-size: 2.5rem;
+  margin-bottom: 50px;
+  background-image: linear-gradient(to right, #ff0844, #ffb199);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Hype Container with Grid Layout */
+.hype__container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
+  gap: 20px; /* Space between cards */
+  justify-items: center;
+}
+
+/* Hype Card Styling */
+.hype__card {
+  background-color: #1a1a1a;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: left;
+  width: 100%;
+  max-width: 350px; /* Limit the card width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hype__card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.hype__card h3 {
+  font-size: 1.8rem;
+  color: white;
+  margin-bottom: 10px;
+}
+
+.hype__card p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+}
+
+/* Responsive Design for Cards */
+@media screen and (max-width: 960px) {
+  .hype__container {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .hype__container {
+    grid-template-columns: 1fr; /* 1 column for smaller screens */
+  }
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 50px 0;
+}
+
+.footer__container {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 50px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer__logo a {
+  display: flex;
+  align-items: center;
+  color: #ff8177;
+  text-decoration: none;
+  font-size: 1.8rem;
+}
+
+.footer__logo i {
+  margin-right: 0.5rem;
+}
+
+.footer__columns {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.footer__column {
+  width: 23%;
+  margin-bottom: 20px;
+}
+
+.footer__column h3 {
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+.footer__column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer__column ul li {
+  margin-bottom: 10px;
+}
+
+.footer__column ul li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer__column ul li a:hover {
+  color: #ff8177;
+}
+
+.footer__bottom {
+  text-align: center;
+  padding: 20px 0;
+  border-top: 1px solid #333;
+}
+
+.footer__bottom p {
+  margin-bottom: 10px;
+} 
+
+.footer__socials a {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+  font-size: 1.2rem;
+}
+
+.footer__socials a:hover {
+  color: #ff8177;
+}
+
+/* Responsive Footer */
+@media screen and (max-width: 960px) {
+  .footer__column {
+    width: 45%;
+  }
+
+  .footer__logo {
+    margin-bottom: 30px;
+  }
+
+  .footer__socials a {
+    margin: 0 5px;
+  }
+}
+
+/* Separator */
+
+.separator {
+  height: 40px; /* Adjust the value as needed */
+  background: transparent;
+}
+
+/* Mobile Navigation Bar */
+label {
+  display: none; 
+  font-size: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+  transition-property: color;
+  color: white;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+}
+
+label .menu-btn {
+  display: block;
+}
+
+label .close-btn {
+  display: none;
+}
+
+#check:checked ~ header label .menu-btn {
+  display: none;
+}
+
+#check:checked ~ header label .close-btn {
+  display: block;
+}
+/* Hide the checkbox */
+#check {
+  display: none;
+}
+
+
+/* Mobile Menu Styles */
+@media screen and (max-width: 768px) {
+  .navbar__menu {
+    position: fixed;
+    top: 80px;
+    right: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: #131313;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.5s ease;
+    transform: translateX(100%);
+  }
+
+  /* Show the menu when checkbox is checked */
+  #check:checked ~ nav .navbar__menu {
+    transform: translateX(0);
+  }
+
+  .navbar__menu li {
+    margin: 20px 0;
+  }
+
+  .navbar__links {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 10px 20px;
+  }
+
+  .navbar__btn .button {
+    padding: 10px 20px;
+    background-color: #f77062;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1.5rem;
+  }
+
+  .mobile-menu-icon {
+    display: block;
+    cursor: pointer;
+    font-size: 2rem;
+    color: white;
+  }
+
+  .menu-btn {
+    display: inline;
+  }
+
+  .close-btn {
+    display: none;
+  }
+
+  #check:checked ~ nav .menu-btn {
+    display: none;
+  }
+
+  #check:checked ~ nav .close-btn {
+    display: inline;
+  }
+}
+
+/* Table of Contents Section */
+.toc-section {
+  padding: 40px 5%;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+}
+
+/* TOC Heading */
+.toc-section h2 {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+}
+
+/* TOC List */
+.toc-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* List Items */
+.toc-list li {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.toc-list li::before {
+  content: '\2022';
+  color: #ff8177;
+  font-weight: bold;
+  display: inline-block;
+  width: 20px;
+  margin-right: 10px;
+}
+
+/* TOC Links */
+.toc-list li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #b3b3b3;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.toc-list li a:hover {
+  color: #ff8177;
+}
+
+/* Section Headings */
+.toc-list .section-heading {
+  font-weight: bold;
+  color: #ff8177;
+  margin-top: 20px;
+}
+
+/* Content Sections Under TOC */
+.exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist{
+  padding: 20px;
+  margin-top: 40px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section Heading Styles */
+.exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 20px;
+  background-image: linear-gradient(to right, #ff0844, #ffb199);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Paragraph Styles */
+.exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+/* Link Styles Inside Sections */
+.exploring a, .understanding a, .rise a, .benefits a, .transhumanism a, .graphene a, .scientist a {
+  color: #f77062;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.exploring a:hover, .understanding a:hover, .rise a:hover, .benefits a:hover, .transhumanism a:hover {
+  color: #ff665e;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+    padding: 30px 6%; /* Added extra padding for better readability */
+  }
+
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+    font-size: 1.75rem;
+  }
+
+  .toc-list li a {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+    padding: 25px 5%; /* Increased padding for smaller screens */
+    margin-top: 30px;
+  }
+
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+    font-size: 1.5rem;
+  }
+
+  .toc-list li a {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+    padding: 20px 5%; /* Padding on left and right for mobile view */
+    margin: 20px 10px; /* Add margin on left and right for mobile view */
+    border: 1px solid #333; /* Optional: add border for a more defined look */
+  }
+
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+    font-size: 1.25rem;
+  }
+
+  .toc-list li a {
+    font-size: 15px;
+  }
+
+  /* Adjust font size and spacing for smaller screens */
+  .exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* How Section table of contents */
+.how {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313;
+}
+
+.how h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.how p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+.how li {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.how img {
+  width: 100%; /* Set to take up full width of the container */
+  max-width: 800px; /* Set a larger max-width for larger screens */
+  margin: 20px auto;
+  display: block;
+}
+
+/* Mobile Responsive for How Section */
+@media screen and (max-width: 960px) {
+  .how {
+    padding: 50px 20px;
+  }
+
+  .how h2 {
+    font-size: 2rem;
+  }
+}
+
+/*lipid */
+
+.lipid {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313;
+}
+
+.lipid h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.lipid p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+.lipid li {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.lipid img {
+  width: 100%; /* Set to take up full width of the container */
+  max-width: 800px; /* Set a larger max-width for larger screens */
+  margin: 20px auto;
+  display: block;
+}
+
+/* Mobile Responsive for How Section */
+@media screen and (max-width: 960px) {
+  .lipid {
+    padding: 50px 20px;
+  }
+
+  .lipid h2 {
+    font-size: 2rem;
+  }
+}
+
+
+/* Research dropdown */
+
+.navbar__menu .dropdown {
+  position: relative;
+}
+
+.dropdown__menu {
+  display: none; /* Hide the dropdown menu by default */
+  position: absolute; /* Position the dropdown relative to its parent */
+  top: 100%; /* Position it just below the parent */
+  left: 0; /* Align it to the left of the parent */
+  background-color: #fff; /* Background color for the dropdown */
+  padding: 10px 0; /* Add some padding */
+  list-style: none; /* Remove bullet points */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for effect */
+  z-index: 1000; /* Ensure it appears above other elements */
+}
+
+.dropdown__menu li {
+  padding: 8px 20px; /* Padding for the individual items */
+}
+
+.dropdown__menu li a {
+  color: #333; /* Text color */
+  text-decoration: none; /* Remove underlines from links */
+  display: block; /* Make the entire area of the item clickable */
+  font-size: 16px; /* Adjust the font size */
+}
+
+.dropdown__menu li a:hover {
+  background-color: #f0f0f0; /* Change background color on hover */
+  color: #f77062; /* Change text color on hover (matches accent color) */
+}
+
+/* Display the dropdown menu when the parent item is hovered */
+.dropdown:hover .dropdown__menu {
+  display: block; /* Show the menu */
+}
+
+/* Adjust the link color and spacing */
+.dropdown__link {
+  color: #fff; /* Color for the Research link in the navbar */
+  padding: 0 20px; /* Spacing for the link */
+}
+
+/* Mobile styling */
+@media screen and (max-width: 768px) {
+  .dropdown__menu {
+    position: static; /* Remove absolute positioning for mobile view */
+    display: none; /* Hide the dropdown initially */
+    width: 100%; /* Make it full width */
+    background-color: #333; /* Set background for mobile */
+  }
+  
+  .dropdown:hover .dropdown__menu {
+    display: block; /* Ensure it expands on hover/tap */
+  }
+
+  .dropdown__menu li {
+    padding: 10px; /* Adjust padding for mobile */
+  }
+
+  .dropdown__menu li a {
+    color: #fff; /* White text for better contrast on mobile */
+  }
+
+  .dropdown__menu li a:hover {
+    background-color: #444; /* Darker hover effect for mobile */
+    color: #f77062; /* Accent color */
+  }
+}
+
+
+/* Login Wrapper */
+#login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+}
+
+.login-wrapper {
+  background: #1a1a1a; 
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.login-form h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  background-image: linear-gradient(to right, #ff0844, #ffb199);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Input Box Styling (same as contact form) */
+.input-box {
+  margin-bottom: 20px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.8);
+  transition: background 0.3s, border-color 0.3s;
+}
+
+
+.input-box input:hover {
+  background: rgba(255, 255, 255, 1);
+  border-color: #0C4F60;
+}
+
+.input-box input:focus {
+  border-color: #226A80;
+  outline: none;
+}
+
+/* Remember me and forgot password */
+.remember-forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.remember-forgot a {
+  color: #f77062;
+  text-decoration: none;
+}
+
+.remember-forgot a:hover {
+  text-decoration: underline;
+}
+
+/* Button Styling (same as contact form) */
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #f77062;
+  color: white;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s ease;
+}
+
+.btn:hover {
+  background: #ff665e;
+  transform: translateY(-2px);
+}
+
+/* Back Button Styling */
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  color: #f77062;
+  text-decoration: none;
+}
+
+.back-btn:hover {
+  color: #ff665e;
+}
+
+/* Responsive Styles Logo */
+@media (max-width: 768px) {
+  .login-wrapper {
+      padding: 30px;
+  }
+  .login-form h1 {
+      font-size: 1.8rem;
+  }
+  .btn {
+      padding: 8px;
+      font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-wrapper {
+      padding: 20px;
+  }
+  .login-form h1 {
+      font-size: 1.6rem;
+  }
+  .input-box input {
+      padding: 8px;
+      font-size: 0.9rem;
+  }
+  .btn {
+      padding: 8px;
+      font-size: 0.9rem;
+  }
+  .register-link a {
+      font-size: 0.9rem;
+  }
+  .back-btn {
+      font-size: 0.9rem;
+  }
+}
+
+
+/* Logo in Footer */
+.footer-logo {
+  width: 55px;
+  height: auto;
+  margin-right: 10px;
+}
+
+  /* About Us Section */
+.main-section {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.about-info, .info-details {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.about-info h2, .info-details h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #f77062;
+}
+
+.about-info h3, .info-details h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: white;
+}
+
+.about-info p, .info-details p {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  margin-bottom: 20px;
+}
+
+/* Responsive Design About */
+@media screen and (max-width: 960px) {
+  .main-section {
+    padding: 50px 20px;
+  }
+
+  .about-info, .info-details {
+    padding: 30px;
+  }
+
+  .about-info h2, .info-details h2 {
+    font-size: 2rem;
+  }
+
+  .about-info h3, .info-details h3 {
+    font-size: 1.6rem;
+  }
+
+  .about-info p, .info-details p {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main-section {
+    padding: 30px 15px;
+  } 
+
+  .about-info, .info-details {
+    padding: 20px;
+  }
+
+  .about-info h2, .info-details h2 {
+    font-size: 1.8rem;
+  }
+
+  .about-info h3, .info-details h3 {
+    font-size: 1.5rem;
+  }
+
+  .about-info p, .info-details p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Smart Home */
+.smarthome {
+  padding: 100px 50px;
+  text-align: center;
+  background-color: #131313;
+}
+
+
+/* Services Section */
+.services-section {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.services-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+  min-height: 90vh;
+}
+
+.services-details {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 800px;
+}
+
+.services-details h2 {
+  font-size: 2.5rem;
+  color: #f77062;
+  margin-bottom: 20px;
+}
+
+.services-details p,
+.services-details ul li {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  margin-bottom: 10px;
+}
+
+.services-details ul {
+  list-style-type: disc;
+  margin-left: 20px;
+}
+
+@media screen and (max-width: 960px) {
+  .services-section {
+      padding: 50px 20px;
+  }
+
+  .services-details {
+      padding: 30px;
+  }
+}
+
+/* Contact Form Section */
+.contact-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #131313;
+  padding: 20px;
+}
+
+.contact-form {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  color: white; 
+}
+
+.contact-form h1 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #f77062;
+}
+
+.input-box {
+  margin-bottom: 20px;
+}
+
+.input-box input, .input-box textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transition: background 0.3s, border-color 0.3s;
+}
+
+.input-box input:hover, .input-box textarea:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: #0C4F60;
+}
+
+.input-box input:focus, .input-box textarea:focus {
+  border-color: #226A80; 
+  outline: none;
+}
+
+.input-box textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.btn {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background: #f77062;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background: #ff665e; 
+}
+
+.back-btn {
+  display: inline-block;
+  margin-top: 20px;
+  color: #f77062;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-btn:hover {
+  color: #ff665e;
+}
+
+/* Responsive styles for smaller devices */
+@media screen and (max-width: 768px) {
+  .contact-form {
+      padding: 30px;
+      max-width: 90%;
+  }
+
+  .contact-form h1 {
+      font-size: 20px;
+  }
+
+  .input-box input, .input-box textarea {
+      font-size: 14px;
+  }
+
+  .btn {
+      font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact-form {
+      padding: 20px;
+      max-width: 100%;
+  }
+
+  .contact-form h1 {
+      font-size: 18px;
+  }
+
+  .input-box input, .input-box textarea {
+      padding: 8px;
+      font-size: 12px;
+  }
+
+  .btn {
+      padding: 8px;
+      font-size: 12px;
+  }
+
+  .back-btn {
+      font-size: 12px;
+  }
+}
+
+/* Navbar Styles */
+.navbar {
+  background: #131313;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #131313;
+}
+
+.logo-image {
+  width: 55px; 
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px;
+  background-color: #131313;
+}
+
+.logo-image {
+  width: 55px; 
+}
+
+/* Center the Health Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: #f77062; 
+  margin: 20px 0;
+}
+
+/* Main Content */
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Feature Section */
+.feature-section {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.feature-section h3 {
+  color: #f77062;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  header {
+      padding: 15px 20px;
+  }
+
+  .logo-image {
+      width: 80px;
+  }
+
+  .logout-button {
+      padding: 8px 16px;
+      font-size: 0.9rem;
+  }
+
+  .dashboard-title {
+      font-size: 2rem;
+  }
+}
+
+#virtual-doctor-simulation {
+  margin-top: 40px;
+}
+
+#simulation-data p, #ask-question textarea {
+  margin-bottom: 10px;
+}
+
+#ask-question textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+}
+
+#ask-question button {
+  background-color: #f77062;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#ask-question button:hover {
+  background-color: #e65a54;
+}
+
+#doctor-response p {
+  margin-top: 10px;
+  font-style: italic;
+}
+
+/* City Tracker */
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Feature Sections */
+.feature-section {
+  margin: 2rem;
+}
+
+/* Map */
+#map {
+  height: 500px; 
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Map adjustments for mobile devices */
+@media (max-width: 768px) {
+  #map {
+      height: 300px;
+  }
+}
+/* Chatbot Styles */
+.chatbot-container {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+}
+
+.chatbot-container input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.chatbot-container button {
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.chatbot-container button:hover {
+  background-color: #45a049;
+}
+
+.chatbot-response {
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#population-graphic {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.population-icons {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.person {
+  width: 20px;
+  height: 40px;
+  background-color: #ccc;
+  clip-path: polygon(50% 0%, 62% 12%, 75% 25%, 75% 62%, 50% 100%, 25% 62%, 25% 25%, 38% 12%);
+}
+
+.person.positive {
+  background-color: #f77062;
+}
+
+.citybaron-link {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #ff8177;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+.citybaron-link:hover {
+  background-color: #ff665e;
+}
+
+/* Disease Outbreak Predictor */
+
+/* Dashboard Title */
+#prediction-dashboard h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 20px;
+  color: #f77062;
+}
+
+/* Data Input Section */
+.data-input {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  width: 80%;
+  max-width: 600px;
+}
+
+.data-input h2 {
+  text-align: center;
+  color: #333;
+}
+
+.data-input label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+.data-input input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.data-input button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f77062;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.data-input button:hover {
+  background-color: #e65d50;
+}
+
+/* Results Section */
+#results {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#results h2 {
+  color: #333;
+}
+
+#prediction-text {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Weather Simulation Section */
+#weather-simulation {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  width: 80%;
+  max-width: 600px;
+}
+
+#weather-simulation h2 {
+  text-align: center;
+  color: #333;
+}
+
+#weather-simulation label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #333;
+}
+
+#weather-simulation input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#weather-simulation button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f77062;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+#weather-simulation button:hover {
+  background-color: #e65d50;
+}
+
+/* Weather Results Section */
+#weather-results {
+  text-align: center;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#weather-results h2 {
+  color: #333;
+}
+
+#simulation-text {
+  font-size: 1.2rem;
+  color: #555;
+  margin-top: 10px;
+}
+
+/* Health Sync Alert Styles */
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 20px;
+  color: #f77062;
+}
+
+/* Input Container */
+.input-container {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.input-container h2 {
+  color: #333;
+}
+
+.input-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f77062;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.input-container button:hover {
+  background-color: #e65d50;
+}
+
+/* Symptom Checker Dashboard */
+.symptom-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.symptom-card {
+  background-color: #fff;
+  width: 100%;
+  max-width: 250px;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.symptom-card h3 {
+  font-size: 1.2rem;
+  color: #f77062;
+}
+
+.symptom-card p, .symptom-card ul {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Cholesterol and Migraine Notes */
+#cholesterol-note, #headache-note {
+  color: red;
+  font-weight: bold;
+}
+
+/* ECG Chart */
+.symptom-card canvas {
+  margin-top: 1rem;
+  height: 150px;
+}
+
+/* Cause of Death and Migraine Cards */
+#cause-of-death-card, #headache-note-card {
+  display: none;
+  background-color: #fef2f2;
+  color: #d9534f;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .symptom-card {
+    max-width: 100%;
+  }
+
+  .input-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+
+
+/* Article Section */
+.article {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313;
+}
+
+.article h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.article p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+.article li {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+
+.article img {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  display: block;
+}
+
+
+/* Mobile Responsive for Article Section */
+@media screen and (max-width: 960px) {
+  .article {
+    padding: 50px 20px;
+  }
+
+  .article h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Article Section 2 (Consistent design with Article 1) */
+.article2 {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313; 
+}
+
+.article2 h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.article2 p {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+}
+
+.article2 li {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.article2 img {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+/* Mobile Responsive for Article Section 2 */
+@media screen and (max-width: 960px) {
+  .article2 {
+    padding: 50px 20px;
+  }
+
+  .article2 h2 {
+    font-size: 2rem;
+  }
+}
+
+/* article section 3 */
+
+.hype__card1 {
+  text-align: center;
+  margin-bottom: 30px;
+  max-width: 300px;
+}
+
+.hype__card1 img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.hype__card1 img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hype__card1 h3 {
+  font-size: 1.5rem;
+  color: #ff8177;
+  margin-bottom: 10px;
+}
+
+.hype__card1 p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.hype h3 {
+  font-size: 1.5rem;
+  color: #fdfbfb;
+  margin-bottom: 10px;
+}
+
+/* Responsive article 3 */
+@media screen and (max-width: 960px) {
+  .hype__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hype__card1 img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hype__card1 h3 {
+    font-size: 1.25rem;
+  }
+
+  .hype__card1 p {
+    font-size: 0.9rem;
+  }
+}
+
+/* article 4 */
+
+#article4 {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align all child elements */
+}
+
+.article4 h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.article4 p {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+}
+
+.article4 li {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.article4 img {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+/* Mobile Responsive for Article Section 2 */
+@media screen and (max-width: 960px) {
+  .article4 {
+    padding: 50px 20px;
+  }
+
+  .article4 h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Video Summary Section */
+.video-summary {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313; /* Same dark background for consistency */
+}
+
+.video-summary h3 {
+  font-size: 2rem;
+  color: #fdfbfb;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.video-summary iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  margin: 20px auto;
+  display: block;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.video-summary iframe:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.video-summary p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.video-summary a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Mobile Responsive for Video Summary Section */
+@media screen and (max-width: 960px) {
+  .video-summary {
+    padding: 50px 20px;
+  }
+
+  .video-summary h3 {
+    font-size: 1.75rem;
+  }
+
+  .video-summary iframe {
+    width: 100%;
+    height: 350px;
+  }
+
+  .video-summary p {
+    font-size: 1rem;
+  }
+}
+

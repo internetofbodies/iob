@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Tracker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <!-- Linking external CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+</head>
+<body>
+    <!-- Add a label describing the checkbox -->
+    <input type="checkbox" id="check" aria-label="Toggle mobile menu">
+    
+    <!-- Navbar --> 
+    <nav class="navbar">
+      <div class="navbar__container">
+        <a href="#" id="navbar__logo">
+          <img src="logo.png" alt="Logo" class="logo-image">
+        </a>
+        <ul class="navbar__menu">
+
+                <!-- Dropdown for Research -->
+          <li class="navbar__item dropdown">
+            <a href="#" class="navbar__links dropdown__link">Research</a>
+            <ul class="dropdown__menu">
+              <li><a href="research.html#article1" class="dropdown__item" onclick="closeMenu()">Internet Of Bodies May Lead To Internet Of Brains by 2050</a></li>
+              <li><a href="research.html#article2" class="dropdown__item" onclick="closeMenu()">“Internet Of Bodies” - Turning the Body Into a Wire - Transhumanism & Nano-tech</a></li>
+              <li><a href="research.html#NonVax420" class="dropdown__item" onclick="closeMenu()">NonVaxer420 Source</a></li>
+              <li><a href="research.html#article4" class="dropdown__item" onclick="closeMenu()">Psinergy Source</a></li>
+              <li><a href="research.html#video-summary" class="dropdown__item" onclick="closeMenu()">World Economic Forum</a></li>
+            </ul>
+          </li>
+          
+          <li class="navbar__item"><a href="front.html" class="navbar__links">Health Dashboard</a></li>
+          <li class="navbar__item"><a href="prediction.html" class="navbar__links">Prediction</a></li>
+          <li class="navbar__item"><a href="healthsync.html" class="navbar__links">Health Sync Alert</a></li>
+          <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
+        </ul>
+        
+        <!-- Mobile Menu Icon -->
+        <label for="check" class="mobile-menu-icon">
+          <i class="fas fa-bars menu-btn"></i>
+          <i class="fas fa-times close-btn"></i>
+        </label>
+      </div>
+    </nav>
+
+    <h1 class="dashboard-title">CityBaron Disease Tracker</h1>
+
+    <main>
+        
+        <section id="map-section" class="feature-section">
+            <h3>CityBaron Diseases</h3>
+            <p>Click on a city marker to view COVID-19 cases, Bird Flu cases, and vaccination data. For more details visit a citybaron.ai.</p>
+            <p><a href="https://citybaron.ai" target="_blank" class="citybaron-link">CityBaron.ai</a></p>
+        
+            <!-- Map Container -->
+            <div id="map"></div>
+            <div class="layer-controls">
+                <label><input type="checkbox" id="toggle-covid" checked> Show COVID-19 Cases</label>
+                <label><input type="checkbox" id="toggle-birdflu" checked> Show Bird Flu Cases</label>
+                <label><input type="checkbox" id="toggle-vaccination" checked> Show Vaccination Rates</label>
+            </div>
+        </section>
+        
+            
+        
+        <!-- Chatbot Section -->
+        <section id="chatbot-section" class="feature-section">
+            <h3>Ask the CityBaron Chatbot</h3>
+            <p>Ask questions about Bird-Flu, Covid-19 and Vaccinatiion rate in the CityBaron.</p>
+            
+            <div class="chatbot-container">
+                <label for="question">Ask a question:</label>
+                <input type="text" id="question" placeholder="Type a question..." value="">
+                <button onclick="getChatbotResponse()">Ask</button>
+                <div id="chatbot-response" class="chatbot-response"></div>
+            </div>
+        </section>
+
+        <section id="city-data" class="feature-section">
+            <h3>CityBaron Disease Statistics</h3>
+            <p>Monitor the spread of diseases in real-time across cities in CityBaron.</p>
+        
+            <!-- Checkbox to toggle the city data -->
+            <div class="checkbox-container">
+                <input type="checkbox" id="toggle-city-data">
+                <label for="toggle-city-data">Show City Diseases Data</label>
+            </div>
+        
+            <div id="city-data-content" style="display: none;">
+                <div id="city-list">
+                    <p>New York: COVID-19 Cases: <span id="nyc-covid">Loading...</span></p>
+                    <p>New York: Bird Flu Cases: <span id="nyc-birdflu">Loading...</span></p>
+                    <p>Los Angeles: COVID-19 Cases: <span id="la-covid">Loading...</span></p>
+                    <p>Los Angeles: Bird Flu Cases: <span id="la-birdflu">Loading...</span></p>
+                    <p>Chicago: COVID-19 Cases: <span id="chicago-covid">Loading...</span></p>
+                    <p>Chicago: Bird Flu Cases: <span id="chicago-birdflu">Loading...</span></p>
+                </div>
+        
+                <!-- Disease Chart as a Pie Chart -->
+                <canvas id="diseaseChart"></canvas>
+        
+                <!-- Weekly Summary Bar Chart -->
+                <canvas id="weeklySummaryChart"></canvas>
+        
+                <!-- Population Representation for COVID Positive Rate -->
+                <div id="population-graphic">
+                    <p>50% of the population are tested positive for COVID</p>
+                    <div class="population-icons">
+                        <div class="person positive"></div>
+                        <div class="person positive"></div>
+                        <div class="person positive"></div>
+                        <div class="person positive"></div>
+                        <div class="person positive"></div>
+                        <div class="person positive"></div>
+                        <div class="person positive"></div>
+                        <div class="person"></div>
+                        <div class="person"></div>
+                        <div class="person"></div>
+                        <div class="person"></div>
+                        <div class="person"></div>
+                        <!-- Add more as needed for a larger visual -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        <script>
+            // Initialize the map
+            var map = L.map('map').setView([37.0902, -95.7129], 4);
+        
+            // Add OpenStreetMap tiles
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '© OpenStreetMap contributors'
+            }).addTo(map);
+        
+            // Define cities with their coordinates, COVID cases, and Bird Flu cases
+            var cities = [
+                { name: "New York", coords: [40.7128, -74.0060], covidCases: 8419, birdFluCases: 72 },
+                { name: "Los Angeles", coords: [34.0522, -118.2437], covidCases: 3980, birdFluCases: 50 },
+                { name: "Chicago", coords: [41.8781, -87.6298], covidCases: 2716, birdFluCases: 72 }
+            ];
+        
+            // Function to update city data with bird flu cases, COVID cases, and vaccination data
+            const updateCityData = () => {
+                cities.forEach(city => {
+                    const birdFluElement = document.getElementById(`${city.name.toLowerCase().replace(/\s/g, '')}-birdflu`);
+                    const covidElement = document.getElementById(`${city.name.toLowerCase().replace(/\s/g, '')}-covid`);
+        
+                    if (birdFluElement) {
+                        birdFluElement.textContent = city.birdFluCases;
+                    }
+        
+                    if (covidElement) {
+                        covidElement.textContent = city.covidCases;
+                    }
+        
+                    // Generate random vaccination data
+                    const vaccinationRate = Math.floor(Math.random() * 41) + 50; // Random rate between 50-90%
+                    const vaccineType = Math.random() < 0.5 ? "Moderna" : "Pfizer";
+        
+                    // Display vaccination data in a popup on the map
+                    L.marker(city.coords).bindPopup(
+                        `<b>${city.name}</b><br>COVID-19 Cases: ${city.covidCases}<br>Bird Flu Cases: ${city.birdFluCases}<br>Vaccination Rate: ${vaccinationRate}%<br>Vaccine Type: ${vaccineType}`
+                    ).addTo(map);
+                });
+        
+                // Update the chart with the new COVID data
+                diseaseChart.data.datasets[0].data = cities.map(city => city.covidCases);
+                diseaseChart.update();
+            };
+        
+            // Execute updateCityData on page load and at regular intervals
+            window.onload = function() {
+                updateCityData();
+                setInterval(updateCityData, 5000); // Update every 5 seconds
+            };
+        
+            // Chart.js for visualizing disease cases as a Pie Chart
+            const ctx = document.getElementById('diseaseChart').getContext('2d');
+            const diseaseChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: cities.map(city => `${city.name} COVID-19`),
+                    datasets: [{
+                        label: 'COVID-19 Cases',
+                        data: cities.map(city => city.covidCases),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.label}: ${context.raw} cases`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Toggle city data visibility
+            const toggleCityDataCheckbox = document.getElementById('toggle-city-data');
+            const cityDataContent = document.getElementById('city-data-content');
+        
+            toggleCityDataCheckbox.addEventListener('change', function () {
+                cityDataContent.style.display = toggleCityDataCheckbox.checked ? 'block' : 'none';
+            });
+        
+            // Chatbot Response Function
+            function getChatbotResponse() {
+                const question = document.getElementById('question').value.toLowerCase();
+                const chatbotResponse = document.getElementById('chatbot-response');
+        
+                const findCity = (cityName) => cities.find(city => city.name.toLowerCase() === cityName.toLowerCase());
+                const getDiseaseData = (city, disease) => {
+                    if (disease.includes("covid")) {
+                        return `${city.name} has ${city.covidCases} COVID-19 cases.`;
+                    } else if (disease.includes("bird flu")) {
+                        return `${city.name} has ${city.birdFluCases} Bird Flu cases.`;
+                    } else {
+                        return `I don't have information on that disease.`;
+                    }
+                };
+        
+                let city = null;
+                let disease = null;
+        
+                if (question.includes("new york")) {
+                    city = findCity("New York");
+                } else if (question.includes("los angeles")) {
+                    city = findCity("Los Angeles");
+                } else if (question.includes("chicago")) {
+                    city = findCity("Chicago");
+                }
+        
+                if (question.includes("covid")) {
+                    disease = "covid";
+                } else if (question.includes("bird flu")) {
+                    disease = "bird flu";
+                }
+        
+                if (city && disease) {
+                    chatbotResponse.innerHTML = `<p>${getDiseaseData(city, disease)}</p>`;
+                } else if (!city) {
+                    chatbotResponse.innerHTML = `<p>Sorry, I couldn't identify the city in your question. Please specify a city like New York, Los Angeles, or Chicago.</p>`;
+                } else if (!disease) {
+                    chatbotResponse.innerHTML = `<p>Sorry, I couldn't identify the disease in your question. Please ask about COVID-19 or Bird Flu cases.</p>`;
+                } else {
+                    chatbotResponse.innerHTML = `<p>Sorry, I couldn't process your question. Please try again.</p>`;
+                }
+            }
+
+            // Extend the chatbot response function to handle vaccination rate queries
+function getChatbotResponse() {
+    const question = document.getElementById('question').value.toLowerCase();
+    const chatbotResponse = document.getElementById('chatbot-response');
+
+    const findCity = (cityName) => cities.find(city => city.name.toLowerCase() === cityName.toLowerCase());
+    const getDiseaseData = (city, disease) => {
+        if (disease.includes("covid")) {
+            return `${city.name} has ${city.covidCases} COVID-19 cases.`;
+        } else if (disease.includes("bird flu")) {
+            return `${city.name} has ${city.birdFluCases} Bird Flu cases.`;
+        } else {
+            return `I don't have information on that disease.`;
+        }
+    };
+
+    let city = null;
+    let disease = null;
+    let vaccination = false;
+
+    // Check for city in question
+    if (question.includes("new york")) {
+        city = findCity("New York");
+    } else if (question.includes("los angeles")) {
+        city = findCity("Los Angeles");
+    } else if (question.includes("chicago")) {
+        city = findCity("Chicago");
+    }
+
+    // Check for disease in question
+    if (question.includes("covid")) {
+        disease = "covid";
+    } else if (question.includes("bird flu")) {
+        disease = "bird flu";
+    }
+
+    // Check for vaccination question
+    if (question.includes("vaccination") || question.includes("vaccine")) {
+        vaccination = true;
+    }
+
+    // Generate response based on user input
+    if (city && vaccination) {
+        const vaccinationRate = Math.floor(Math.random() * 41) + 50; // Random rate between 50-90%
+        const vaccineType = Math.random() < 0.5 ? "Moderna" : "Pfizer";
+        chatbotResponse.innerHTML = `<p>${city.name} has a vaccination rate of ${vaccinationRate}%, and the most common vaccine type is ${vaccineType}.</p>`;
+    } else if (city && disease) {
+        chatbotResponse.innerHTML = `<p>${getDiseaseData(city, disease)}</p>`;
+    } else if (!city) {
+        chatbotResponse.innerHTML = `<p>Sorry, I couldn't identify the city in your question. Please specify a city like New York, Los Angeles, or Chicago.</p>`;
+    } else if (!disease && !vaccination) {
+        chatbotResponse.innerHTML = `<p>Sorry, I couldn't identify the disease or vaccination data in your question. Please ask about COVID-19, Bird Flu, or vaccination rates.</p>`;
+    } else {
+        chatbotResponse.innerHTML = `<p>Sorry, I couldn't process your question. Please try again.</p>`;
+    }
+}
+
+        </script>
+
+  <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__logo">
+        <a href="index.html">
+          <img src="logo.png" alt="NEXT Logo" class="footer-logo">
+        </a>
+      </div>
+      <div class="footer__columns">
+        <div class="footer__column">
+          <h3>About Us</h3>
+          <ul>
+            <li><a href="about.html">Who We are?</a></li>
+            <li><a href="about.html">Our Mission</a></li>
+            <li><a href="about.html">Why choose Us?</a></li>
+            <li><a href="about.html">Information</a></li>
+            <li><a href="about.html">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer__column">
+          <h3>Contact Us</h3>
+          <ul>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__column">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="services.html">Wearable</a></li>
+            <li><a href="services.html">Remote</a></li>
+            <li><a href="services.html">Security</a></li>
+            <li><a href="services.html">Wellness</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>Internet of Bodies&copy;Accountable Infrastracture 2024</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html> 

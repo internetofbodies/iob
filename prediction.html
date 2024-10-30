@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" /> <!-- Leaflet CSS -->
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script> <!-- Leaflet JS -->
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <input type="checkbox" id="check" aria-label="Toggle mobile menu">
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="#" id="navbar__logo">
+                <img src="logo.png" alt="Logo" class="logo-image">
+            </a>
+            <ul class="navbar__menu">
+
+              <!-- Dropdown for Research -->
+          <li class="navbar__item dropdown">
+            <a href="#" class="navbar__links dropdown__link">Research</a>
+            <ul class="dropdown__menu">
+              <li><a href="research.html#article1" class="dropdown__item" onclick="closeMenu()">Internet Of Bodies May Lead To Internet Of Brains by 2050</a></li>
+              <li><a href="research.html#article2" class="dropdown__item" onclick="closeMenu()">“Internet Of Bodies” - Turning the Body Into a Wire - Transhumanism & Nano-tech</a></li>
+              <li><a href="research.html#NonVax420" class="dropdown__item" onclick="closeMenu()">NonVaxer420 Source</a></li>
+              <li><a href="research.html#article4" class="dropdown__item" onclick="closeMenu()">Psinergy Source</a></li>
+              <li><a href="research.html#video-summary" class="dropdown__item" onclick="closeMenu()">World Economic Forum</a></li>
+            </ul>
+          </li>
+          
+                <li class="navbar__item"><a href="front.html" class="navbar__links">Health Dashboard</a></li>
+                <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Tracker Diseases</a></li>
+          <li class="navbar__item"><a href="healthsync.html" class="navbar__links">Health Sync Alert</a></li>
+                <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
+            </ul>
+
+            <!-- Mobile Menu Icon -->
+            <label for="check" class="mobile-menu-icon">
+                <i class="fas fa-bars menu-btn"></i>
+                <i class="fas fa-times close-btn"></i>
+            </label>
+        </div>
+    </nav>
+
+    <!-- Prediction Dashboard -->
+    <div id="prediction-dashboard">
+        <h1>Future Disease Outbreak Predictor</h1>
+
+        <section class="data-input">
+            <h2>Enter Current Data</h2>
+            <form id="dataForm">
+                <!-- Labels outside the input fields -->
+                <input type="number" id="cases" name="cases" placeholder="Enter number of cases" required>
+
+                <input type="number" id="symptoms" name="symptoms" placeholder="Enter number of reported symptoms" required>
+                <input type="number" id="agePopulation" name="agePopulation" placeholder="Enter population age 40-100" required>
+
+                <button type="submit">Predict</button>
+            </form>
+        </section>
+
+        <section id="results">
+            <h2>Prediction</h2>
+            <p id="prediction-text">Enter data to see predictions</p>
+        </section>
+
+        <!-- New Section: Future Weather Simulation -->
+        <h1>Future Weather</h1>
+        <section id="weather-simulation">
+            <h2>Ask for Future Weather</h2>
+            <form id="weatherForm">
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" placeholder="Enter city" required>
+
+                <label for="date">Date (yyyy-mm-dd):</label>
+                <input type="date" id="date" name="date" required>
+
+                <button type="submit">Simulate Weather</button>
+            </form>
+        </section>
+
+        <section id="weather-results">
+            <h2>Weather Simulation Result</h2>
+            <p id="simulation-text">Ask about future weather to see predictions.</p>
+        </section>
+    </div>
+
+    <script>
+        // Disease prediction logic
+        document.getElementById("dataForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            let cases = parseInt(document.getElementById("cases").value);
+            let symptoms = parseInt(document.getElementById("symptoms").value);
+            let agePopulation = parseInt(document.getElementById("agePopulation").value);
+
+            let predictionText = '';
+
+            // Basic prediction logic with age population risk factor
+            let riskFactor = agePopulation / 1000; // Arbitrary factor based on the population
+
+            if (cases > 1000 && symptoms > 500 && riskFactor > 2) {
+                predictionText = 'High risk of outbreak in the coming years, especially among the older population.';
+            } else if ((cases > 500 && symptoms > 200) || riskFactor > 1) {
+                predictionText = 'Moderate risk of outbreak. Older population may face higher risk.';
+            } else {
+                predictionText = 'Low risk of outbreak.';
+            }
+
+            // Generate a random year between 2025 and 2050
+            let futureYear = Math.floor(Math.random() * (2050 - 2025 + 1)) + 2025;
+
+            // Generate a random month (0-11)
+            let randomMonth = Math.floor(Math.random() * 12);  
+
+            // Generate a random day based on the month
+            let daysInMonth = new Date(futureYear, randomMonth + 1, 0).getDate();
+            let randomDay = Math.floor(Math.random() * daysInMonth) + 1;
+
+            // Create a date object with the random year, month, and day
+            let futureDate = new Date(futureYear, randomMonth, randomDay);
+
+            // Format the future date to display
+            let options = { year: 'numeric', month: 'long', day: 'numeric' };
+            let formattedDate = futureDate.toLocaleDateString(undefined, options);
+
+            // Update the prediction text with the future year and date
+            predictionText += ` Prediction is for the date: ${formattedDate}.`;
+
+            document.getElementById("prediction-text").innerText = predictionText;
+        });
+
+        // Weather simulation logic
+        document.getElementById("weatherForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    let city = document.getElementById("city").value;
+    let dateInput = document.getElementById("date").value;
+
+    // Parse the input date as a local date (YYYY-MM-DD)
+    let dateParts = dateInput.split('-');
+    let year = parseInt(dateParts[0], 10);
+    let month = parseInt(dateParts[1], 10) - 1;
+    let day = parseInt(dateParts[2], 10);
+
+    // Create the date object using the local time
+    let date = new Date(year, month, day);
+
+    let simulationText = '';
+
+    // Generate random weather conditions
+    const temperatures = [-10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40];
+    const conditions = ["sunny", "rainy", "cloudy", "stormy", "snowy", "foggy", "windy", "thunderstorm"];
+
+    let randomTemp = temperatures[Math.floor(Math.random() * temperatures.length)];
+    let randomCondition = conditions[Math.floor(Math.random() * conditions.length)];
+
+    // Create a prediction message
+    simulationText = `The weather in ${city} on ${date.toDateString()} is predicted to be ${randomTemp}°C with ${randomCondition} conditions.`;
+
+    // Output the simulation text
+    document.getElementById("simulation-text").innerText = simulationText;
+});
+
+    </script>
+
+<!-- Footer Section -->
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__logo">
+      <a href="index.html">
+        <img src="logo.png" alt="NEXT Logo" class="footer-logo">
+      </a>
+    </div>
+    <div class="footer__columns">
+      <div class="footer__column">
+        <h3>About Us</h3>
+        <ul>
+          <li><a href="about.html">Who We are?</a></li>
+          <li><a href="about.html">Our Mission</a></li>
+          <li><a href="about.html">Why choose Us?</a></li>
+          <li><a href="about.html">Information</a></li>
+          <li><a href="about.html">Terms of Service</a></li>
+        </ul>
+      </div>
+      <div class="footer__column">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer__column">
+        <h3>Services</h3>
+        <ul>
+          <li><a href="services.html">Wearable</a></li>
+          <li><a href="services.html">Remote</a></li>
+          <li><a href="services.html">Security</a></li>
+          <li><a href="services.html">Wellness</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>Internet of Bodies&copy;Accountable Infrastracture 2024</p>
+  </div>
+</footer>
+
+</body>
+</html>
