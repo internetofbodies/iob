@@ -133,30 +133,71 @@ body {
   transition: transform 0.3s ease-in-out; 
 }
 
-.hero__image img:hover {
-  transform: scale(1.1);
-}
-
-
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
   .hero {
     flex-direction: column;
     text-align: center;
+    padding: 50px 20px; /* Adjust padding for smaller screens */
   }
 
   .hero__content {
     max-width: 100%;
   }
 
+  .hero__content h1 {
+    font-size: 3rem; /* Reduce heading size for medium screens */
+  }
+
+  .hero__content p {
+    font-size: 1.2rem; /* Adjust paragraph font size */
+  }
+
   .hero__image {
     margin-top: 2rem;
   }
 
-  .navbar__menu {
-    flex-direction: column;
+  .hero__image img {
+    width: 350px; /* Reduce image size for medium screens */
   }
 }
+
+@media screen and (max-width: 768px) {
+  .hero {
+    padding: 40px 20px; /* Further reduce padding for smaller screens */
+  }
+
+  .hero__content h1 {
+    font-size: 3.5rem; /* Reduce heading size for smaller screens */
+  }
+
+  .hero__content p {
+    font-size: 1.1rem; /* Smaller font size for paragraph text */
+  }
+
+  .hero__image img {
+    width: 250px; /* Further reduce image size */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero {
+    padding: 30px 15px; /* Minimal padding for extra small screens */
+  }
+
+  .hero__content h1 {
+    font-size: 2rem; /* Further reduce heading size for small mobile devices */
+  }
+
+  .hero__content p {
+    font-size: 1rem; /* Adjust font size for readability */
+  }
+
+  .hero__image img {
+    width: 350px; /* Make the image smaller on small mobile devices */
+  }
+}
+
 
 /* Hype Section */
 .hype {
@@ -166,7 +207,7 @@ body {
 }
 
 .hype h2 {
-  font-size: 3rem;
+  font-size: 2.5rem;
   margin-bottom: 50px;
   background-image: linear-gradient(to right, #ff0844, #ffb199);
   -webkit-background-clip: text;
@@ -174,18 +215,25 @@ body {
   color: transparent;
 }
 
+/* Hype Container with Grid Layout */
 .hype__container {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
+  gap: 20px; /* Space between cards */
+  justify-items: center;
 }
 
+/* Hype Card Styling */
 .hype__card {
   background-color: #1a1a1a;
   padding: 20px;
   border-radius: 10px;
-  width: 45%;
   text-align: left;
+  width: 100%;
+  max-width: 350px; /* Limit the card width */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .hype__card img {
@@ -193,12 +241,6 @@ body {
   border-radius: 10px;
   margin-bottom: 20px;
 }
-
-.hype__card img:hover {
-  transform: scale(1.1);
-
-}
-
 
 .hype__card h3 {
   font-size: 1.8rem;
@@ -215,15 +257,16 @@ body {
 /* Responsive Design for Cards */
 @media screen and (max-width: 960px) {
   .hype__container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hype__card {
-    width: 80%;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
   }
 }
+
+@media screen and (max-width: 768px) {
+  .hype__container {
+    grid-template-columns: 1fr; /* 1 column for smaller screens */
+  }
+}
+
 /* Footer Styles */
 .footer {
   background-color: #1a1a1a;
@@ -296,7 +339,7 @@ body {
 
 .footer__bottom p {
   margin-bottom: 10px;
-}
+} 
 
 .footer__socials a {
   color: #fff;
@@ -322,6 +365,13 @@ body {
   .footer__socials a {
     margin: 0 5px;
   }
+}
+
+/* Separator */
+
+.separator {
+  height: 40px; /* Adjust the value as needed */
+  background: transparent;
 }
 
 /* Mobile Navigation Bar */
@@ -424,326 +474,254 @@ label .close-btn {
   }
 }
 
-/* Article Section (Ensure consistent design for new sections) */
-.article {
+/* Table of Contents Section */
+.toc-section {
+  padding: 40px 5%;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+}
+
+/* TOC Heading */
+.toc-section h2 {
+  text-align: left;
+  font-size: 24px;
+  font-weight: bold;
+  color: #b3b3b3;
+  margin-bottom: 20px;
+}
+
+/* TOC List */
+.toc-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* List Items */
+.toc-list li {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.toc-list li::before {
+  content: '\2022';
+  color: #ff8177;
+  font-weight: bold;
+  display: inline-block;
+  width: 20px;
+  margin-right: 10px;
+}
+
+/* TOC Links */
+.toc-list li a {
+  text-decoration: none;
+  font-size: 18px;
+  color: #b3b3b3;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.toc-list li a:hover {
+  color: #ff8177;
+}
+
+/* Section Headings */
+.toc-list .section-heading {
+  font-weight: bold;
+  color: #ff8177;
+  margin-top: 20px;
+}
+
+/* Content Sections Under TOC */
+.exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist{
+  padding: 20px;
+  margin-top: 40px;
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Section Heading Styles */
+.exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 20px;
+  background-image: linear-gradient(to right, #ff0844, #ffb199);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Paragraph Styles */
+.exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+/* Link Styles Inside Sections */
+.exploring a, .understanding a, .rise a, .benefits a, .transhumanism a, .graphene a, .scientist a {
+  color: #f77062;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.exploring a:hover, .understanding a:hover, .rise a:hover, .benefits a:hover, .transhumanism a:hover {
+  color: #ff665e;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+    padding: 30px 6%; /* Added extra padding for better readability */
+  }
+
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+    font-size: 1.75rem;
+  }
+
+  .toc-list li a {
+    font-size: 17px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+    padding: 25px 5%; /* Increased padding for smaller screens */
+    margin-top: 30px;
+  }
+
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+    font-size: 1.5rem;
+  }
+
+  .toc-list li a {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+    padding: 20px 5%; /* Padding on left and right for mobile view */
+    margin: 20px 10px; /* Add margin on left and right for mobile view */
+    border: 1px solid #333; /* Optional: add border for a more defined look */
+  }
+
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+    font-size: 1.25rem;
+  }
+
+  .toc-list li a {
+    font-size: 15px;
+  }
+
+  /* Adjust font size and spacing for smaller screens */
+  .exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+}
+
+/* How Section table of contents */
+.how {
   padding: 100px 50px;
   max-width: 1300px;
   margin: 0 auto;
   background-color: #131313;
 }
 
-.article h2 {
+.how h2 {
   font-size: 2.5rem;
   color: #ff8177; 
   margin-bottom: 30px;
 }
 
-.article p {
+.how p {
   font-size: 1.1rem;
   color: #b3b3b3;
   line-height: 1.6;
 }
 
-.article li {
+.how li {
   font-size: 1.1rem;
   color: #b3b3b3; 
   line-height: 1.6;
   margin-bottom: 10px;
 }
 
-
-.article img {
-  width: 100%;
-  max-width: 500px;
+.how img {
+  width: 100%; /* Set to take up full width of the container */
+  max-width: 800px; /* Set a larger max-width for larger screens */
   margin: 20px auto;
   display: block;
 }
 
-.article img:hover {
-  transform: scale(1.1);
-}
-
-/* Mobile Responsive for Article Section */
+/* Mobile Responsive for How Section */
 @media screen and (max-width: 960px) {
-  .article {
+  .how {
     padding: 50px 20px;
   }
 
-  .article h2 {
+  .how h2 {
     font-size: 2rem;
   }
 }
 
-/* Article Section 2 (Consistent design with Article 1) */
-.article2 {
+/*lipid */
+
+.lipid {
   padding: 100px 50px;
   max-width: 1300px;
   margin: 0 auto;
-  background-color: #131313; 
+  background-color: #131313;
 }
 
-.article2 h2 {
+.lipid h2 {
   font-size: 2.5rem;
   color: #ff8177; 
   margin-bottom: 30px;
 }
 
-.article2 p {
+.lipid p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+.lipid li {
   font-size: 1.1rem;
   color: #b3b3b3; 
   line-height: 1.6;
-}
-
-.article2 li {
-  font-size: 1.1rem;
-  color: #b3b3b3;
-  line-height: 1.6;
   margin-bottom: 10px;
 }
 
-.article2 img {
-  width: 100%;
-  max-width: 600px;
+.lipid img {
+  width: 100%; /* Set to take up full width of the container */
+  max-width: 800px; /* Set a larger max-width for larger screens */
   margin: 20px auto;
   display: block;
-  transition: transform 0.3s ease-in-out;
 }
 
-.article2 img:hover {
-  transform: scale(1.1);
-}
-
-/* Mobile Responsive for Article Section 2 */
+/* Mobile Responsive for How Section */
 @media screen and (max-width: 960px) {
-  .article2 {
+  .lipid {
     padding: 50px 20px;
   }
 
-  .article2 h2 {
+  .lipid h2 {
     font-size: 2rem;
-  }
-}
-
-/* article section 3 */
-
-.hype__card1 {
-  text-align: center;
-  margin-bottom: 30px;
-  max-width: 300px;
-}
-
-.hype__card1 img {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%; /* This makes the image circular */
-  object-fit: cover; /* Ensures the image fits inside the circle without distortion */
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: block;
-  margin: 0 auto 20px;
-}
-
-.hype__card1 img:hover {
-  transform: scale(1.1);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
-}
-
-.hype__card1 h3 {
-  font-size: 1.5rem;
-  color: #ff8177; /* Matching your color scheme */
-  margin-bottom: 10px;
-}
-
-.hype__card1 p {
-  font-size: 1rem;
-  color: #b3b3b3;
-  line-height: 1.5;
-  margin-bottom: 20px;
-}
-
-.hype h3 {
-  font-size: 1.5rem;
-  color: #fdfbfb;
-  margin-bottom: 10px;
-}
-
-/* Responsive article 3 */
-@media screen and (max-width: 960px) {
-  .hype__container {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .hype__card1 img {
-    width: 120px;
-    height: 120px;
-  }
-
-  .hype__card1 h3 {
-    font-size: 1.25rem;
-  }
-
-  .hype__card1 p {
-    font-size: 0.9rem;
-  }
-}
-
-/* article 4 */
-
-/* Style for the article4 section */
-.article4 {
-  padding: 100px 50px;
-  max-width: 1300px;
-  margin: 0 auto;
-  background-color: #131313; /* Dark background matching your other sections */
-}
-
-.article4 h2 {
-  font-size: 2.5rem;
-  color: #ff8177; /* Title color to match existing design */
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.article4 h3 {
-  font-size: 2rem;
-  color: #f6f4f4; /* Subheading color */
-  margin-bottom: 30px;
-  text-align: center;
-  padding: 5%;
-  
-}
-
-.article4 p {
-  font-size: 1.1rem;
-  color: #b3b3b3; /* Light gray text for readability */
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.article4 a {
-  color: #ff8177; /* Link color matching your style */
-  text-decoration: none;
-  font-weight: bold;
-}
-
-.article4 a:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-
-.article4 img.article-image4 {
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto;
-  display: block;
-  transition: transform 0.3s ease;
-}
-
-.article4 img.article-image4:hover {
-  transform: scale(1.1); /* Zoom effect on hover */
-}
-
-.article4 ul {
-  list-style: disc inside;
-  margin-left: 20px;
-}
-
-.article4 li {
-  font-size: 1.1rem;
-  color: #b3b3b3;
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
-/* Mobile Responsive for Article4 Section */
-@media screen and (max-width: 960px) {
-  .article4 {
-    padding: 50px 20px;
-  }
-
-  .article4 h2 {
-    font-size: 2rem;
-  }
-
-  .article4 h3 {
-    font-size: 1.75rem;
-  }
-
-  .article4 p {
-    font-size: 1rem;
-  }
-
-  .article4 img.article-image4 {
-    width: 100%;
-  }
-}
-
-/* Video Article Nonvax430 */
-
-/* Video Summary Section */
-.video-summary {
-  padding: 100px 50px;
-  max-width: 1300px;
-  margin: 0 auto;
-  background-color: #131313; /* Same dark background for consistency */
-}
-
-.video-summary h3 {
-  font-size: 2rem;
-  color: #fdfbfb;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.video-summary iframe {
-  width: 100%;
-  max-width: 800px;
-  height: 450px;
-  margin: 20px auto;
-  display: block;
-  border: none;
-  transition: transform 0.3s ease;
-}
-
-.video-summary iframe:hover {
-  transform: scale(1.05); /* Slight zoom effect on hover */
-}
-
-.video-summary p {
-  font-size: 1.1rem;
-  color: #b3b3b3;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.video-summary a:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-
-/* Mobile Responsive for Video Summary Section */
-@media screen and (max-width: 960px) {
-  .video-summary {
-    padding: 50px 20px;
-  }
-
-  .video-summary h3 {
-    font-size: 1.75rem;
-  }
-
-  .video-summary iframe {
-    width: 100%;
-    height: 350px;
-  }
-
-  .video-summary p {
-    font-size: 1rem;
   }
 }
 
 
 /* Research dropdown */
 
-/* Dropdown menu styling */
 .navbar__menu .dropdown {
   position: relative;
 }
@@ -1383,7 +1361,6 @@ main {
       height: 300px;
   }
 }
-
 /* Chatbot Styles */
 .chatbot-container {
   margin-top: 20px;
@@ -1420,6 +1397,45 @@ main {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 4px;
+}
+
+#population-graphic {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.population-icons {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.person {
+  width: 20px;
+  height: 40px;
+  background-color: #ccc;
+  clip-path: polygon(50% 0%, 62% 12%, 75% 25%, 75% 62%, 50% 100%, 25% 62%, 25% 25%, 38% 12%);
+}
+
+.person.positive {
+  background-color: #f77062;
+}
+
+.citybaron-link {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 20px;
+  background-color: #ff8177;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  max-width: 200px;
+  transition: background-color 0.3s ease;
+}
+
+.citybaron-link:hover {
+  background-color: #ff665e;
 }
 
 /* Disease Outbreak Predictor */
@@ -1500,8 +1516,6 @@ main {
   margin-top: 10px;
 }
 
-/* Weather Simulation */
-
 /* Weather Simulation Section */
 #weather-simulation {
   background-color: #f0f0f0;
@@ -1568,5 +1582,393 @@ main {
   font-size: 1.2rem;
   color: #555;
   margin-top: 10px;
+}
+
+/* Health Sync Alert Styles */
+
+/* Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 20px;
+  color: #f77062;
+}
+
+/* Input Container */
+.input-container {
+  background-color: #f0f0f0;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.input-container h2 {
+  color: #333;
+}
+
+.input-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-top: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.input-container button {
+  width: 100%;
+  padding: 10px;
+  background-color: #f77062;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.input-container button:hover {
+  background-color: #e65d50;
+}
+
+/* Symptom Checker Dashboard */
+.symptom-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.symptom-card {
+  background-color: #fff;
+  width: 100%;
+  max-width: 250px;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.symptom-card h3 {
+  font-size: 1.2rem;
+  color: #f77062;
+}
+
+.symptom-card p, .symptom-card ul {
+  color: #555;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Cholesterol and Migraine Notes */
+#cholesterol-note, #headache-note {
+  color: red;
+  font-weight: bold;
+}
+
+/* ECG Chart */
+.symptom-card canvas {
+  margin-top: 1rem;
+  height: 150px;
+}
+
+/* Cause of Death and Migraine Cards */
+#cause-of-death-card, #headache-note-card {
+  display: none;
+  background-color: #fef2f2;
+  color: #d9534f;
+  padding: 1rem;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 1rem auto;
+  text-align: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .symptom-card {
+    max-width: 100%;
+  }
+
+  .input-container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+}
+
+
+/* Article Section */
+.article {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313;
+}
+
+.article h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.article p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+}
+
+.article li {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+
+.article img {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  display: block;
+}
+
+
+/* Mobile Responsive for Article Section */
+@media screen and (max-width: 960px) {
+  .article {
+    padding: 50px 20px;
+  }
+
+  .article h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Article Section 2 (Consistent design with Article 1) */
+.article2 {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313; 
+}
+
+.article2 h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.article2 p {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+}
+
+.article2 li {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.article2 img {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+/* Mobile Responsive for Article Section 2 */
+@media screen and (max-width: 960px) {
+  .article2 {
+    padding: 50px 20px;
+  }
+
+  .article2 h2 {
+    font-size: 2rem;
+  }
+}
+
+/* article section 3 */
+
+.hype__card1 {
+  text-align: center;
+  margin-bottom: 30px;
+  max-width: 300px;
+}
+
+.hype__card1 img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; 
+  object-fit: cover; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: block;
+  margin: 0 auto 20px;
+}
+
+.hype__card1 img:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.hype__card1 h3 {
+  font-size: 1.5rem;
+  color: #ff8177;
+  margin-bottom: 10px;
+}
+
+.hype__card1 p {
+  font-size: 1rem;
+  color: #b3b3b3;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.hype h3 {
+  font-size: 1.5rem;
+  color: #fdfbfb;
+  margin-bottom: 10px;
+}
+
+/* Responsive article 3 */
+@media screen and (max-width: 960px) {
+  .hype__container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hype__card1 img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .hype__card1 h3 {
+    font-size: 1.25rem;
+  }
+
+  .hype__card1 p {
+    font-size: 0.9rem;
+  }
+}
+
+/* article 4 */
+
+#article4 {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313; 
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center-align all child elements */
+}
+
+.article4 h2 {
+  font-size: 2.5rem;
+  color: #ff8177; 
+  margin-bottom: 30px;
+}
+
+.article4 p {
+  font-size: 1.1rem;
+  color: #b3b3b3; 
+  line-height: 1.6;
+}
+
+.article4 li {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+.article4 img {
+  width: 100%;
+  max-width: 600px;
+  margin: 20px auto;
+  display: block;
+  transition: transform 0.3s ease-in-out;
+}
+
+
+/* Mobile Responsive for Article Section 2 */
+@media screen and (max-width: 960px) {
+  .article4 {
+    padding: 50px 20px;
+  }
+
+  .article4 h2 {
+    font-size: 2rem;
+  }
+}
+
+/* Video Summary Section */
+.video-summary {
+  padding: 100px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  background-color: #131313; /* Same dark background for consistency */
+}
+
+.video-summary h3 {
+  font-size: 2rem;
+  color: #fdfbfb;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.video-summary iframe {
+  width: 100%;
+  max-width: 800px;
+  height: 450px;
+  margin: 20px auto;
+  display: block;
+  border: none;
+  transition: transform 0.3s ease;
+}
+
+.video-summary iframe:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.video-summary p {
+  font-size: 1.1rem;
+  color: #b3b3b3;
+  line-height: 1.6;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.video-summary a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+/* Mobile Responsive for Video Summary Section */
+@media screen and (max-width: 960px) {
+  .video-summary {
+    padding: 50px 20px;
+  }
+
+  .video-summary h3 {
+    font-size: 1.75rem;
+  }
+
+  .video-summary iframe {
+    width: 100%;
+    height: 350px;
+  }
+
+  .video-summary p {
+    font-size: 1rem;
+  }
 }
 
