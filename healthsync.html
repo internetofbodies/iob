@@ -27,7 +27,22 @@
           <img src="logo.png" alt="Logo" class="logo-image">
         </a>
         <ul class="navbar__menu">
+
+            <!-- Dropdown for Research -->
+          <li class="navbar__item dropdown">
+            <a href="#" class="navbar__links dropdown__link">Research</a>
+            <ul class="dropdown__menu">
+              <li><a href="research.html#article1" class="dropdown__item" onclick="closeMenu()">Internet Of Bodies May Lead To Internet Of Brains by 2050</a></li>
+              <li><a href="research.html#article2" class="dropdown__item" onclick="closeMenu()">“Internet Of Bodies” - Turning the Body Into a Wire - Transhumanism & Nano-tech</a></li>
+              <li><a href="research.html#NonVax420" class="dropdown__item" onclick="closeMenu()">NonVaxer420 Source</a></li>
+              <li><a href="research.html#article4" class="dropdown__item" onclick="closeMenu()">Psinergy Source</a></li>
+              <li><a href="research.html#video-summary" class="dropdown__item" onclick="closeMenu()">World Economic Forum</a></li>
+            </ul>
+          </li>
+          
           <li class="navbar__item"><a href="front.html" class="navbar__links">Health Dashboard</a></li>
+            <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Tracker Diseases</a></li>
+            <li class="navbar__item"><a href="prediction.html" class="navbar__links">Prediction</a></li>
           <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
         </ul>
         
@@ -253,5 +268,49 @@
             });
         }
     </script>
-</body>
-</html>
+
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <a href="index.html">
+              <img src="logo.png" alt="NEXT Logo" class="footer-logo">
+            </a>
+          </div>
+          <div class="footer__columns">
+            <div class="footer__column">
+              <h3>About Us</h3>
+              <ul>
+                <li><a href="about.html">Who We are?</a></li>
+                <li><a href="about.html">Our Mission</a></li>
+                <li><a href="about.html">Why choose Us?</a></li>
+                <li><a href="about.html">Information</a></li>
+                <li><a href="about.html">Terms of Service</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h3>Contact Us</h3>
+              <ul>
+                <li><a href="contact.html">Contact</a></li>
+              </ul>
+            </div>
+            <div class="footer__column">
+              <h3>Services</h3>
+              <ul>
+                <li><a href="services.html">Wearable</a></li>
+                <li><a href="services.html">Remote</a></li>
+                <li><a href="services.html">Security</a></li>
+                <li><a href="services.html">Wellness</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer__bottom">
+          <p>Internet of Bodies&copy;Accountable Infrastracture 2024</p>
+        </div>
+      </footer>
+  
+      <script src="app.js"></script>
+  </body>
+  </html> 
