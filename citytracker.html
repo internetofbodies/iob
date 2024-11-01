@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <!-- Heatmap Plugin -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
+
+
+
 
 </head>
 <body>
@@ -54,7 +59,7 @@
       </div>
     </nav>
 
-    <h1 class="dashboard-title">CityBaron Disease Tracker</h1>
+    <h1 class="dashboard-title">CityBaron Tracker Diseases</h1>
 
     <main>
         
@@ -62,6 +67,7 @@
             <h3>CityBaron Diseases</h3>
             <p>Click on a city marker to view COVID-19 cases, Bird Flu cases, and vaccination data. For more details visit a citybaron.ai.</p>
             <p><a href="https://citybaron.ai" target="_blank" class="citybaron-link">CityBaron.ai</a></p>
+
         
             <!-- Map Container -->
             <div id="map"></div>
@@ -71,9 +77,7 @@
                 <label><input type="checkbox" id="toggle-vaccination" checked> Show Vaccination Rates</label>
             </div>
         </section>
-        
-            
-        
+
         <!-- Chatbot Section -->
         <section id="chatbot-section" class="feature-section">
             <h3>Ask the CityBaron Chatbot</h3>
@@ -87,6 +91,32 @@
             </div>
         </section>
 
+        
+        <!-- New Demographics Section -->
+        <section id="demographics-section" class="feature-section">
+            <h3>CityBaron Demographics</h3>
+            <p>Explore the population demographics across different cities.</p>
+            
+            <!-- Dropdown to select city for demographics -->
+            <label for="city-select">Choose a city:</label>
+            <select id="city-select">
+                <option value="">Select a city</option>
+                <option value="Los Angeles">Los Angeles</option>
+                <option value="Chicago">Chicago</option>
+                <option value="Tamara, Florida">Tamara, Florida</option>
+                <option value="East Solano, North Carolina">East Solano, North Carolina</option>
+            </select>
+
+            <!-- Demographics data display area -->
+            <div id="demographics-data" style="display: none;">
+                <p><strong>City:</strong> <span id="demographics-city">N/A</span></p>
+                <p><strong>Children:</strong> <span id="demographics-children">N/A</span>%</p>
+                <p><strong>Adults:</strong> <span id="demographics-adults">N/A</span>%</p>
+                <p><strong>Seniors:</strong> <span id="demographics-seniors">N/A</span>%</p>
+            </div>
+        </section>
+        
+        <!-- City Data Section -->
         <section id="city-data" class="feature-section">
             <h3>CityBaron Disease Statistics</h3>
             <p>Monitor the spread of diseases in real-time across cities in CityBaron.</p>
@@ -99,8 +129,6 @@
         
             <div id="city-data-content" style="display: none;">
                 <div id="city-list">
-                    <p>New York: COVID-19 Cases: <span id="nyc-covid">Loading...</span></p>
-                    <p>New York: Bird Flu Cases: <span id="nyc-birdflu">Loading...</span></p>
                     <p>Los Angeles: COVID-19 Cases: <span id="la-covid">Loading...</span></p>
                     <p>Los Angeles: Bird Flu Cases: <span id="la-birdflu">Loading...</span></p>
                     <p>Chicago: COVID-19 Cases: <span id="chicago-covid">Loading...</span></p>
@@ -135,7 +163,6 @@
             </div>
         </section>
         
-        
         <script>
             // Initialize the map
             var map = L.map('map').setView([37.0902, -95.7129], 4);
@@ -147,7 +174,6 @@
         
             // Define cities with their coordinates, COVID cases, and Bird Flu cases
             var cities = [
-                { name: "New York", coords: [40.7128, -74.0060], covidCases: 8419, birdFluCases: 72 },
                 { name: "Los Angeles", coords: [34.0522, -118.2437], covidCases: 3980, birdFluCases: 50 },
                 { name: "Chicago", coords: [41.8781, -87.6298], covidCases: 2716, birdFluCases: 72 }
             ];
@@ -233,9 +259,9 @@
             toggleCityDataCheckbox.addEventListener('change', function () {
                 cityDataContent.style.display = toggleCityDataCheckbox.checked ? 'block' : 'none';
             });
-        
-            // Chatbot Response Function
-            function getChatbotResponse() {
+
+             // Chatbot Response Function
+             function getChatbotResponse() {
                 const question = document.getElementById('question').value.toLowerCase();
                 const chatbotResponse = document.getElementById('chatbot-response');
         
@@ -334,6 +360,84 @@ function getChatbotResponse() {
         chatbotResponse.innerHTML = `<p>Sorry, I couldn't process your question. Please try again.</p>`;
     }
 }
+        
+            // Demographics Existing cities data without New York
+            var cities = [
+                { name: "Los Angeles", coords: [34.0522, -118.2437], covidCases: 3980, birdFluCases: 50, demographics: { children: 22, adults: 58, seniors: 20 } },
+                { name: "Chicago", coords: [41.8781, -87.6298], covidCases: 2716, birdFluCases: 72, demographics: { children: 18, adults: 62, seniors: 20 } },
+                { name: "Tamara, Florida", coords: [26.2445, -80.2064], covidCases: 1200, birdFluCases: 20, demographics: { children: 20, adults: 60, seniors: 20 } },
+                { name: "East Solano, North Carolina", coords: [35.7596, -79.0193], covidCases: 800, birdFluCases: 15, demographics: { children: 25, adults: 55, seniors: 20 } }
+            ];
+
+            // Function to display demographics data based on selected city
+            const updateDemographicsSection = () => {
+                const selectedCityName = document.getElementById("city-select").value;
+                const demographicsSection = document.getElementById("demographics-data");
+
+                if (!selectedCityName) {
+                    demographicsSection.style.display = "none"; // Hide section if no city is selected
+                    return;
+                }
+
+                // Find the selected city from the cities array
+                const city = cities.find(city => city.name === selectedCityName);
+
+                // Display demographics data if city found
+                if (city && city.demographics) {
+                    document.getElementById("demographics-city").textContent = city.name;
+                    document.getElementById("demographics-children").textContent = city.demographics.children;
+                    document.getElementById("demographics-adults").textContent = city.demographics.adults;
+                    document.getElementById("demographics-seniors").textContent = city.demographics.seniors;
+                    demographicsSection.style.display = "block"; // Show section with data
+                } else {
+                    demographicsSection.style.display = "none"; // Hide section if data not found
+                }
+            };
+
+            // Event listener for the city dropdown selection
+            document.getElementById("city-select").addEventListener("change", updateDemographicsSection);
+
+           // Sample data for heatmap (coordinates with intensity values)
+const heatmapData = [
+    [34.0522, -118.2437, 0.9], // Los Angeles
+    [41.8781, -87.6298, 0.7],  // Chicago
+    [26.2445, -80.2064, 0.5],  // Tamara, Florida
+    [35.7596, -79.0193, 0.3]   // East Solano, North Carolina
+];
+
+// Create the heatmap layer and add it to the map with a single red color gradient
+const heatmapLayer = L.heatLayer(heatmapData, {
+    radius: 25,          // Heatmap point radius
+    blur: 15,            // Blurring to soften the look
+    maxZoom: 10,         // Max zoom level for the heat effect
+    minOpacity: 0.3,     // Minimum opacity for better visibility
+    gradient: {          // Define a single red color for all intensity levels
+        0.3: 'red',      // Low intensity (red)
+        0.6: 'orange',      // Medium intensity (red)
+        0.9: 'red'       // High intensity (red)
+    }
+}).addTo(map);
+
+// Adjust heatmap intensity on zoom for better visibility
+map.on('zoomend', () => {
+    const currentZoom = map.getZoom();
+    const newRadius = currentZoom >= 10 ? 15 : 25; // Adjust radius based on zoom level
+    heatmapLayer.setOptions({ radius: newRadius });
+});
+            // Function to make the heatmap blink
+function blinkHeatmap() {
+    let isVisible = true;
+    setInterval(() => {
+        heatmapLayer.setOptions({
+            minOpacity: isVisible ? 0.2 : 0.8, // Toggle between low and high opacity
+        });
+        isVisible = !isVisible;
+    }, 800); // Blinking interval in milliseconds (adjust as needed)
+}
+
+// Call the blinkHeatmap function after the heatmap layer is initialized
+blinkHeatmap();
+
 
         </script>
 
@@ -374,7 +478,7 @@ function getChatbotResponse() {
       </div>
     </div>
     <div class="footer__bottom">
-      <p>Internet of Bodies&copy;Accountable Infrastracture 2024</p>
+      <p>Internet of Bodies&copy;Accountable Infrastructure 2024</p>
     </div>
   </footer>
 
