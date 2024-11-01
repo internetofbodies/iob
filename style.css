@@ -1327,6 +1327,7 @@ main {
 
 #ask-question button:hover {
   background-color: #e65a54;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
 }
 
 #doctor-response p {
@@ -1436,6 +1437,7 @@ main {
 
 .citybaron-link:hover {
   background-color: #ff665e;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
 }
 
 /* Disease Outbreak Predictor */
@@ -1492,6 +1494,7 @@ main {
 
 .data-input button:hover {
   background-color: #e65d50;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
 }
 
 /* Results Section */
@@ -1560,6 +1563,7 @@ main {
 
 #weather-simulation button:hover {
   background-color: #e65d50;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
 }
 
 /* Weather Results Section */
@@ -1632,6 +1636,7 @@ main {
 
 .input-container button:hover {
   background-color: #e65d50;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
 }
 
 /* Symptom Checker Dashboard */
