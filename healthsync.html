@@ -62,6 +62,7 @@
         <h2>Enter Your Name</h2>
         <input type="text" id="name-input" placeholder="Enter name...">
         <button onclick="loadUserData()">Submit</button>
+        <button onclick="clearUserData()">Clear</button> 
     </div>
 
     <!-- Symptom Checker Dashboard -->
@@ -119,32 +120,72 @@
 
     <!-- JavaScript for handling form and displaying health data -->
     <script>
+        //clear button
+        
+        function clearUserData() {
+    document.getElementById('name-input').value = ''; // Clear input field
+    document.getElementById('symptom-section').style.display = 'none'; // Hide symptom section
+}
+
         let ecgChart; // Variable for storing the chart instance
 
         // Sample data associated with users, including registered city and cause of death
-        const userData = {
-            'Maria James': { 
-                heartRate: 75, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.5, diabetes: 'Non-diabetic', 
-                ecg: [70, 72, 75, 80, 78], majorDiseases: ['Hypertension'], hasSymptoms: { fever: false, cough: true, breathShortness: false, headache: false },
-                registeredCity: 'Los Angeles', causeOfDeath: null  // Still alive
-            },
-            'Alex Ching': { 
-                heartRate: 85, spO2: 97, bodyTemp: 37.8, cholesterol: 250, potassium: 3.8, diabetes: 'Type 2 Diabetic', 
-                ecg: [80, 82, 85, 90, 88], majorDiseases: ['Asthma', 'High Cholesterol'], hasSymptoms: { fever: true, cough: true, breathShortness: true, headache: true },
-                registeredCity: 'New York', causeOfDeath: 'Heart Attack'
-            },
-            'Jacob Ness': { 
-                heartRate: 65, spO2: 99, bodyTemp: 36.7, cholesterol: 150, potassium: 4.1, diabetes: 'Non-diabetic', 
-                ecg: [60, 62, 65, 70, 68], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
-                registeredCity: 'London', causeOfDeath: 'Car Accident'
-            },
-            'John Doe': { 
-                heartRate: 65, spO2: 99, bodyTemp: 36.7, cholesterol: 150, potassium: 4.1, diabetes: 'Non-diabetic', 
-                ecg: [60, 62, 65, 70, 68], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
-                registeredCity: 'London', causeOfDeath: null
-            }
-            
-        };
+       // Updated sample data with added users
+const userData = {
+    'LeBron James': { 
+        heartRate: 75, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.5, diabetes: 'Non-diabetic', 
+        ecg: [70, 72, 75, 80, 78], majorDiseases: ['Hypertension'], hasSymptoms: { fever: false, cough: true, breathShortness: false, headache: false },
+        registeredCity: 'Los Angeles', causeOfDeath: null  // Still alive
+    },
+    'Alex Ching': { 
+        heartRate: 85, spO2: 97, bodyTemp: 37.8, cholesterol: 250, potassium: 3.8, diabetes: 'Type 2 Diabetic', 
+        ecg: [80, 82, 85, 90, 88], majorDiseases: ['Asthma', 'High Cholesterol'], hasSymptoms: { fever: true, cough: true, breathShortness: true, headache: true },
+        registeredCity: 'New York', causeOfDeath: 'Heart Attack'  // Deceased
+    },
+    'Jacob Ness': { 
+        heartRate: 65, spO2: 99, bodyTemp: 36.7, cholesterol: 150, potassium: 4.1, diabetes: 'Non-diabetic', 
+        ecg: [60, 62, 65, 70, 68], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+        registeredCity: 'London', causeOfDeath: 'Car Accident'  // Deceased
+    },
+    'John Doe': { 
+        heartRate: 65, spO2: 99, bodyTemp: 36.7, cholesterol: 150, potassium: 4.1, diabetes: 'Non-diabetic', 
+        ecg: [60, 62, 65, 70, 68], majorDiseases: ['Mild Hypertension'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+        registeredCity: 'San Francisco', causeOfDeath: null  // Alive, with hypertension
+    },
+
+    // Newly added users
+    'Kobe Bryant': { 
+        heartRate: null, spO2: null, bodyTemp: null, cholesterol: null, potassium: null, diabetes: 'N/A', 
+        ecg: [], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+        registeredCity: 'Los Angeles', causeOfDeath: 'Helicopter Crash'  // Deceased
+    },
+    'Selena Gomez': { 
+        heartRate: 72, spO2: 97, bodyTemp: 36.8, cholesterol: 190, potassium: 4.0, diabetes: 'Non-diabetic', 
+        ecg: [70, 74, 72, 75, 73], majorDiseases: ['Lupus'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: true },
+        registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
+    },
+    'Demi Lovato': { 
+        heartRate: 78, spO2: 96, bodyTemp: 37.0, cholesterol: 200, potassium: 3.9, diabetes: 'Non-diabetic', 
+        ecg: [78, 80, 79, 81, 77], majorDiseases: ['Bipolar Disorder', 'Substance Use Disorder'], 
+        hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: true },
+        registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
+    },
+    'Kanye West': { 
+        heartRate: 80, spO2: 97, bodyTemp: 36.9, cholesterol: 195, potassium: 4.3, diabetes: 'Non-diabetic', 
+        ecg: [80, 82, 81, 79, 83], majorDiseases: ['Bipolar Disorder'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+        registeredCity: 'Hidden Hills, CA', causeOfDeath: null  // Alive
+    },
+    'Michael J. Fox': { 
+        heartRate: 70, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.1, diabetes: 'Non-diabetic', 
+        ecg: [70, 72, 73, 74, 71], majorDiseases: ['Parkinson\'s Disease'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+        registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
+    },
+    'Whitney Houston': { 
+        heartRate: null, spO2: null, bodyTemp: null, cholesterol: null, potassium: null, diabetes: 'N/A', 
+        ecg: [], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+        registeredCity: 'Los Angeles', causeOfDeath: 'Accidental Drowning'  // Deceased
+    }
+};
 
         // Function to check for Bird Flu or COVID-19 symptoms
         function detectFluOrCovid(symptoms) {
@@ -161,75 +202,80 @@
 
         // Function to display health data based on name input
         function loadUserData() {
-            const name = document.getElementById('name-input').value.trim();
-            const data = userData[name];
+    const nameInput = document.getElementById('name-input').value.trim().toLowerCase(); // Convert input to lowercase
+    const userKey = Object.keys(userData).find(
+        key => key.toLowerCase() === nameInput // Convert each user key to lowercase for comparison
+    );
+    
+    const data = userData[userKey]; // Retrieve data using matched key
 
-            if (data) {
-                // Display the symptom section and health data
-                document.getElementById('symptom-section').style.display = 'block';
-                document.getElementById('user-greeting').textContent = `Health Data for ${name}`;
-                document.getElementById('heart-rate').textContent = `${data.heartRate} bpm`;
-                document.getElementById('spO2').textContent = `${data.spO2}%`;
-                document.getElementById('body-temp').textContent = `${data.bodyTemp}°C`;
-                document.getElementById('cholesterol').textContent = `${data.cholesterol} mg/dL`;
-                document.getElementById('potassium').textContent = `${data.potassium} mmol/L`;
-                document.getElementById('diabetes').textContent = `${data.diabetes}`;
-                document.getElementById('registered-city').textContent = `Registered City: ${data.registeredCity}`;
+    if (data) {
+        // Display the symptom section and health data
+        document.getElementById('symptom-section').style.display = 'block';
+        document.getElementById('user-greeting').textContent = `Health Data for ${userKey}`;
+        document.getElementById('heart-rate').textContent = `${data.heartRate} bpm`;
+        document.getElementById('spO2').textContent = `${data.spO2}%`;
+        document.getElementById('body-temp').textContent = `${data.bodyTemp}°C`;
+        document.getElementById('cholesterol').textContent = `${data.cholesterol} mg/dL`;
+        document.getElementById('potassium').textContent = `${data.potassium} mmol/L`;
+        document.getElementById('diabetes').textContent = `${data.diabetes}`;
+        document.getElementById('registered-city').textContent = `Registered City: ${data.registeredCity}`;
 
-                // Handle Cause of Death display
-                if (data.causeOfDeath) {
-                    document.getElementById('cause-of-death-card').style.display = 'block';
-                    document.getElementById('cause-of-death').textContent = `Cause of Death: ${data.causeOfDeath}`;
-                } else {
-                    document.getElementById('cause-of-death-card').style.display = 'none'; // Hide if still alive
-                }
-
-                // Display major diseases
-                const diseaseList = document.getElementById('major-diseases');
-                diseaseList.innerHTML = '';  // Clear previous list
-                if (data.majorDiseases.length > 0) {
-                    data.majorDiseases.forEach(disease => {
-                        const li = document.createElement('li');
-                        li.textContent = disease;
-                        diseaseList.appendChild(li);
-                    });
-                } else {
-                    const li = document.createElement('li');
-                    li.textContent = 'None';
-                    diseaseList.appendChild(li);
-                }
-
-                // Detect Bird Flu / COVID-19
-                const fluCovidList = document.getElementById('flu-covid-detection');
-                fluCovidList.innerHTML = '';  // Clear previous list
-                const detectionResults = detectFluOrCovid(data.hasSymptoms);
-                detectionResults.forEach(result => {
-                    const li = document.createElement('li');
-                    li.textContent = result;
-                    fluCovidList.appendChild(li);
-                });
-
-                // Check for high cholesterol and add note for diabetes risk
-                if (data.cholesterol > 200) {
-                    document.getElementById('cholesterol-note').textContent = 'Note: Possible risk of diabetes due to high sugar level.';
-                } else {
-                    document.getElementById('cholesterol-note').textContent = ''; // Clear the note if not applicable
-                }
-
-                // Check for headache and display possible migraine note
-                if (data.hasSymptoms.headache) {
-                    document.getElementById('headache-note-card').style.display = 'block';
-                    document.getElementById('headache-note').textContent = 'Note: Possible migraine due to reported headache.';
-                } else {
-                    document.getElementById('headache-note-card').style.display = 'none'; // Hide if no headache
-                }
-
-                // Update the ECG chart based on whether the person is alive or not
-                updateECGChart(data.ecg, data.causeOfDeath === null);
-            } else {
-                alert('User not found! Please enter a valid name.');
-            }
+        // Handle Cause of Death display
+        if (data.causeOfDeath) {
+            document.getElementById('cause-of-death-card').style.display = 'block';
+            document.getElementById('cause-of-death').textContent = `Cause of Death: ${data.causeOfDeath}`;
+        } else {
+            document.getElementById('cause-of-death-card').style.display = 'none';
         }
+
+        // Display major diseases
+        const diseaseList = document.getElementById('major-diseases');
+        diseaseList.innerHTML = '';  // Clear previous list
+        if (data.majorDiseases.length > 0) {
+            data.majorDiseases.forEach(disease => {
+                const li = document.createElement('li');
+                li.textContent = disease;
+                diseaseList.appendChild(li);
+            });
+        } else {
+            const li = document.createElement('li');
+            li.textContent = 'None';
+            diseaseList.appendChild(li);
+        }
+
+        // Detect Bird Flu / COVID-19
+        const fluCovidList = document.getElementById('flu-covid-detection');
+        fluCovidList.innerHTML = '';  // Clear previous list
+        const detectionResults = detectFluOrCovid(data.hasSymptoms);
+        detectionResults.forEach(result => {
+            const li = document.createElement('li');
+            li.textContent = result;
+            fluCovidList.appendChild(li);
+        });
+
+        // Check for high cholesterol and add note for diabetes risk
+        if (data.cholesterol > 200) {
+            document.getElementById('cholesterol-note').textContent = 'Note: Possible risk of diabetes due to high sugar level.';
+        } else {
+            document.getElementById('cholesterol-note').textContent = ''; // Clear the note if not applicable
+        }
+
+        // Check for headache and display possible migraine note
+        if (data.hasSymptoms.headache) {
+            document.getElementById('headache-note-card').style.display = 'block';
+            document.getElementById('headache-note').textContent = 'Note: Possible migraine due to reported headache.';
+        } else {
+            document.getElementById('headache-note-card').style.display = 'none'; // Hide if no headache
+        }
+
+        // Update the ECG chart based on whether the person is alive or not
+        updateECGChart(data.ecg, data.causeOfDeath === null);
+    } else {
+        alert('User not found! Please enter a valid name.');
+    }
+}
+
 
         // Function to update ECG chart
         function updateECGChart(ecgData, isAlive) {
