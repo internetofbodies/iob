@@ -59,7 +59,7 @@
       </div>
     </nav>
 
-    <h1 class="dashboard-title">CityBaron Tracker Diseases</h1>
+    <h1 class="dashboard-title">CityBaron Diseases Tracker</h1>
 
     <main>
         
@@ -162,6 +162,35 @@
                 </div>
             </div>
         </section>
+
+        <!-- City Comparison Section -->
+<section id="city-comparison" class="feature-section">
+    <h3>Compare Disease Statistics Across Cities</h3>
+    <p>Select multiple cities to compare their disease data side-by-side.</p>
+    
+    <!-- Dropdown to select cities for comparison -->
+    <label for="comparison-select">Choose cities to compare:</label>
+    <select id="comparison-select" multiple>
+        <option value="Los Angeles">Los Angeles</option>
+        <option value="Chicago">Chicago</option>
+        <option value="Tamara, Florida">Tamara, Florida</option>
+        <option value="East Solano, North Carolina">East Solano, North Carolina</option>
+    </select>
+
+    <!-- Comparison Table -->
+    <table id="comparison-table" border="1" style="width:100%; display:none; margin-top: 20px;">
+        <thead>
+            <tr>
+                <th>City</th>
+                <th>COVID-19 Cases</th>
+                <th>Bird Flu Cases</th>
+                <th>Vaccination Rate</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+</section>
+
         
         <script>
             // Initialize the map
@@ -435,8 +464,37 @@ function blinkHeatmap() {
     }, 800); // Blinking interval in milliseconds (adjust as needed)
 }
 
-// Call the blinkHeatmap function after the heatmap layer is initialized
-blinkHeatmap();
+    // Call the blinkHeatmap function after the heatmap layer is initialized
+        blinkHeatmap();
+
+
+        // comparison city tool
+        document.getElementById("comparison-select").addEventListener("change", function () {
+    const selectedCities = Array.from(this.selectedOptions).map(option => option.value);
+    const comparisonTable = document.getElementById("comparison-table");
+    const tbody = comparisonTable.querySelector("tbody");
+    tbody.innerHTML = ""; // Clear previous data
+
+    if (selectedCities.length > 0) {
+        selectedCities.forEach(cityName => {
+            const city = cities.find(c => c.name === cityName);
+            if (city) {
+                const vaccinationRate = Math.floor(Math.random() * 41) + 50; // Random rate for example
+                const row = `<tr>
+                    <td>${city.name}</td>
+                    <td>${city.covidCases}</td>
+                    <td>${city.birdFluCases}</td>
+                    <td>${vaccinationRate}%</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            }
+        });
+        comparisonTable.style.display = "table"; // Show table if cities are selected
+    } else {
+        comparisonTable.style.display = "none"; // Hide table if no cities are selected
+    }
+});
+
 
 
         </script>
@@ -482,6 +540,6 @@ blinkHeatmap();
     </div>
   </footer>
 
-  <script src="app.js"></script>
+
 </body>
 </html> 
