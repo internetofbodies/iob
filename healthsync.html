@@ -41,7 +41,7 @@
           </li>
           
           <li class="navbar__item"><a href="front.html" class="navbar__links">Health Dashboard</a></li>
-            <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Tracker Diseases</a></li>
+            <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Diseases Tracker</a></li>
             <li class="navbar__item"><a href="prediction.html" class="navbar__links">Prediction</a></li>
           <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
         </ul>
@@ -135,7 +135,7 @@ const userData = {
     'LeBron James': { 
         heartRate: 75, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.5, diabetes: 'Non-diabetic', 
         ecg: [70, 72, 75, 80, 78], majorDiseases: ['Hypertension'], hasSymptoms: { fever: false, cough: true, breathShortness: false, headache: false },
-        registeredCity: 'Los Angeles', causeOfDeath: null  // Still alive
+        registeredCity: 'Brentwood, Los Angeles, California', causeOfDeath: null  // Still alive
     },
     'Alex Ching': { 
         heartRate: 85, spO2: 97, bodyTemp: 37.8, cholesterol: 250, potassium: 3.8, diabetes: 'Type 2 Diabetic', 
@@ -154,38 +154,46 @@ const userData = {
     },
 
     // Newly added users
-    'Kobe Bryant': { 
-        heartRate: null, spO2: null, bodyTemp: null, cholesterol: null, potassium: null, diabetes: 'N/A', 
-        ecg: [], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
-        registeredCity: 'Los Angeles', causeOfDeath: 'Helicopter Crash'  // Deceased
-    },
-    'Selena Gomez': { 
-        heartRate: 72, spO2: 97, bodyTemp: 36.8, cholesterol: 190, potassium: 4.0, diabetes: 'Non-diabetic', 
-        ecg: [70, 74, 72, 75, 73], majorDiseases: ['Lupus'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: true },
-        registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
-    },
-    'Demi Lovato': { 
-        heartRate: 78, spO2: 96, bodyTemp: 37.0, cholesterol: 200, potassium: 3.9, diabetes: 'Non-diabetic', 
-        ecg: [78, 80, 79, 81, 77], majorDiseases: ['Bipolar Disorder', 'Substance Use Disorder'], 
-        hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: true },
-        registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
-    },
-    'Kanye West': { 
-        heartRate: 80, spO2: 97, bodyTemp: 36.9, cholesterol: 195, potassium: 4.3, diabetes: 'Non-diabetic', 
-        ecg: [80, 82, 81, 79, 83], majorDiseases: ['Bipolar Disorder'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
-        registeredCity: 'Hidden Hills, CA', causeOfDeath: null  // Alive
-    },
-    'Michael J. Fox': { 
-        heartRate: 70, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.1, diabetes: 'Non-diabetic', 
-        ecg: [70, 72, 73, 74, 71], majorDiseases: ['Parkinson\'s Disease'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
-        registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
-    },
-    'Whitney Houston': { 
-        heartRate: null, spO2: null, bodyTemp: null, cholesterol: null, potassium: null, diabetes: 'N/A', 
-        ecg: [], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
-        registeredCity: 'Los Angeles', causeOfDeath: 'Accidental Drowning'  // Deceased
-    }
+'Kobe Bryant': { 
+    heartRate: null, spO2: null, bodyTemp: null, cholesterol: null, potassium: null, diabetes: 'N/A', 
+    ecg: [], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+    registeredCity: 'Los Angeles', causeOfDeath: 'Helicopter Crash'  // Deceased
+},
+'Selena Gomez': { 
+    heartRate: 72, spO2: 97, bodyTemp: 36.8, cholesterol: 190, potassium: 4.0, diabetes: 'Non-diabetic', 
+    ecg: [70, 74, 72, 75, 73], majorDiseases: ['Lupus'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: true },
+    registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
+},
+'Demi Lovato': { 
+    heartRate: 78, spO2: 96, bodyTemp: 37.0, cholesterol: 200, potassium: 3.9, diabetes: 'Non-diabetic', 
+    ecg: [78, 80, 79, 81, 77], majorDiseases: ['Bipolar Disorder', 'Substance Use Disorder'], 
+    hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: true },
+    registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
+},
+'Kanye West': { 
+    heartRate: 80, spO2: 97, bodyTemp: 36.9, cholesterol: 195, potassium: 4.3, diabetes: 'Non-diabetic', 
+    ecg: [80, 82, 81, 79, 83], majorDiseases: ['Bipolar Disorder'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+    registeredCity: 'Hidden Hills, CA', causeOfDeath: null  // Alive
+},
+'Michael J. Fox': { 
+    heartRate: 70, spO2: 98, bodyTemp: 36.5, cholesterol: 180, potassium: 4.1, diabetes: 'Non-diabetic', 
+    ecg: [70, 72, 73, 74, 71], majorDiseases: ['Parkinson\'s Disease'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+    registeredCity: 'Los Angeles', causeOfDeath: null  // Alive
+},
+'Whitney Houston': { 
+    heartRate: null, spO2: null, bodyTemp: null, cholesterol: null, potassium: null, diabetes: 'N/A', 
+    ecg: [], majorDiseases: [], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+    registeredCity: 'Los Angeles', causeOfDeath: 'Accidental Drowning'  // Deceased
+},
+'Justin Bieber': { 
+    heartRate: 76, spO2: 98, bodyTemp: 36.7, cholesterol: 185, potassium: 4.2, diabetes: 'Non-diabetic', 
+    ecg: [76, 78, 77, 79, 75], majorDiseases: ['Lyme Disease', 'Mental Health', 'Ramsay Hunt Syndrome'], hasSymptoms: { fever: false, cough: false, breathShortness: false, headache: false },
+    registeredCity: 'Beverly Park, Beverly Hills, California', causeOfDeath: null  // Alive
+}
+
 };
+
+
 
         // Function to check for Bird Flu or COVID-19 symptoms
         function detectFluOrCovid(symptoms) {
