@@ -42,7 +42,7 @@
           </li>
           
                 <li class="navbar__item"><a href="front.html" class="navbar__links">Health Dashboard</a></li>
-                <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Tracker Diseases</a></li>
+                <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Diseases Tracker</a></li>
           <li class="navbar__item"><a href="healthsync.html" class="navbar__links">Health Sync Alert</a></li>
                 <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
             </ul>
@@ -77,28 +77,80 @@
             <p id="prediction-text">Enter data to see predictions</p>
         </section>
 
-        <!-- New Section: Future Weather Simulation -->
-        <h1>Future Weather</h1>
-        <section id="weather-simulation">
-            <h2>Ask for Future Weather</h2>
-            <form id="weatherForm">
-                <label for="city">City:</label>
-                <input type="text" id="city" name="city" placeholder="Enter city" required>
 
-                <label for="date">Date (yyyy-mm-dd):</label>
-                <input type="date" id="date" name="date" required>
+  <!-- Population Growth Simulation Section -->
+<div id="population-growth-simulation" class="centered-section">
+    <h1>Population Growth Prediction</h1>
+    <section id="population-growth">
+        <h2>Enter Annual Growth Rate (%)</h2>
+        <form id="populationForm">
+            <input type="number" id="growthRate" name="growthRate" placeholder="Enter annual growth rate" required>
+            <button type="submit">Submit</button>
+            <button type="button" id="clearButton">Clear</button>
+        </form>
+    </section>
+    <section id="growth-results">
+        <h2>Projected Population Growth (Next 10 Years)</h2>
+        <ul id="growth-list"></ul>
+    </section>
+</div>
 
-                <button type="submit">Simulate Weather</button>
-            </form>
-        </section>
+<!-- New Section: Future Weather Simulation -->
+<h1>Future Weather</h1>
+<section id="weather-simulation">
+    <h2>Ask for Future Weather</h2>
+    <form id="weatherForm">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" placeholder="Enter city" required>
 
-        <section id="weather-results">
-            <h2>Weather Simulation Result</h2>
-            <p id="simulation-text">Ask about future weather to see predictions.</p>
-        </section>
-    </div>
+        <label for="date">Date (yyyy-mm-dd):</label>
+        <input type="date" id="date" name="date" required>
 
-    <script>
+        <button type="submit">Simulate Weather</button>
+    </form>
+</section>
+
+<section id="weather-results">
+    <h2>Weather Simulation Result</h2>
+    <p id="simulation-text">Ask about future weather to see predictions.</p>
+</section>
+</div>
+
+<script>
+// Population growth simulation data for each city
+const cities = {
+    "Los Angeles": 3970000,
+    "Tampa Bay, Florida": 65000,
+    "East Solano County": 440000,
+    "North Carolina": 10500000
+};
+
+document.getElementById("populationForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let growthRate = parseFloat(document.getElementById("growthRate").value) / 100;
+    let growthList = document.getElementById("growth-list");
+    growthList.innerHTML = ''; // Clear previous results
+
+    Object.keys(cities).forEach(city => {
+        let initialPopulation = cities[city];
+        let futurePopulation = initialPopulation;
+        let resultText = `<strong>${city}:</strong><br>`;
+        for (let year = 1; year <= 10; year++) {
+            futurePopulation += futurePopulation * growthRate;
+            resultText += `Year ${year}: ${Math.round(futurePopulation).toLocaleString()}<br>`;
+        }
+        let listItem = document.createElement("li");
+        listItem.innerHTML = resultText;
+        growthList.appendChild(listItem);
+    });
+});
+
+// Clear Button Logic
+document.getElementById("clearButton").addEventListener("click", function () {
+    document.getElementById("growthRate").value = ''; // Clear input field
+    document.getElementById("growth-list").innerHTML = ''; // Clear results list
+});
+
         // Disease prediction logic
         document.getElementById("dataForm").addEventListener("submit", function (e) {
             e.preventDefault();
@@ -178,44 +230,9 @@
     </script>
 
 <!-- Footer Section -->
-<footer class="footer">
-  <div class="footer__container">
-    <div class="footer__logo">
-      <a href="index.html">
-        <img src="logo.png" alt="NEXT Logo" class="footer-logo">
-      </a>
-    </div>
-    <div class="footer__columns">
-      <div class="footer__column">
-        <h3>About Us</h3>
-        <ul>
-          <li><a href="about.html">Who We are?</a></li>
-          <li><a href="about.html">Our Mission</a></li>
-          <li><a href="about.html">Why choose Us?</a></li>
-          <li><a href="about.html">Information</a></li>
-          <li><a href="about.html">Terms of Service</a></li>
-        </ul>
-      </div>
-      <div class="footer__column">
-        <h3>Contact Us</h3>
-        <ul>
-          <li><a href="contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div class="footer__column">
-        <h3>Services</h3>
-        <ul>
-          <li><a href="services.html">Wearable</a></li>
-          <li><a href="services.html">Remote</a></li>
-          <li><a href="services.html">Security</a></li>
-          <li><a href="services.html">Wellness</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="footer__bottom">
-    <p>Internet of Bodies&copy;Accountable Infrastracture 2024</p>
-  </div>
+<div class="footer__bottom">
+  <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
+</div>
 </footer>
 
 </body>
