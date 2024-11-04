@@ -81,7 +81,7 @@
         <!-- Chatbot Section -->
         <section id="chatbot-section" class="feature-section">
             <h3>Ask the CityBaron Chatbot</h3>
-            <p>Ask questions about Bird-Flu, Covid-19 and Vaccinatiion rate in the CityBaron.</p>
+            <p>Ask questions about Bird-Flu, Covid-19 and Vaccination rate in the CityBaron.</p>
             
             <div class="chatbot-container">
                 <label for="question">Ask a question:</label>
@@ -138,9 +138,6 @@
                 <!-- Disease Chart as a Pie Chart -->
                 <canvas id="diseaseChart"></canvas>
         
-                <!-- Weekly Summary Bar Chart -->
-                <canvas id="weeklySummaryChart"></canvas>
-        
                 <!-- Population Representation for COVID Positive Rate -->
                 <div id="population-graphic">
                     <p>50% of the population are tested positive for COVID</p>
@@ -165,7 +162,7 @@
 
         <!-- City Comparison Section -->
 <section id="city-comparison" class="feature-section">
-    <h3>Compare Disease Statistics Across Cities</h3>
+    <h3>CityBaron Comparison City Tool</h3>
     <p>Select multiple cities to compare their disease data side-by-side.</p>
     
     <!-- Dropdown to select cities for comparison -->
@@ -178,6 +175,7 @@
     </select>
 
     <!-- Comparison Table -->
+<div class="table-container">
     <table id="comparison-table" border="1" style="width:100%; display:none; margin-top: 20px;">
         <thead>
             <tr>
@@ -189,6 +187,8 @@
         </thead>
         <tbody></tbody>
     </table>
+</div>
+
 </section>
 
         
@@ -496,47 +496,11 @@ function blinkHeatmap() {
 });
 
 
-
         </script>
 
   <!-- Footer Section -->
-  <footer class="footer">
-    <div class="footer__container">
-      <div class="footer__logo">
-        <a href="index.html">
-          <img src="logo.png" alt="NEXT Logo" class="footer-logo">
-        </a>
-      </div>
-      <div class="footer__columns">
-        <div class="footer__column">
-          <h3>About Us</h3>
-          <ul>
-            <li><a href="about.html">Who We are?</a></li>
-            <li><a href="about.html">Our Mission</a></li>
-            <li><a href="about.html">Why choose Us?</a></li>
-            <li><a href="about.html">Information</a></li>
-            <li><a href="about.html">Terms of Service</a></li>
-          </ul>
-        </div>
-        <div class="footer__column">
-          <h3>Contact Us</h3>
-          <ul>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </div>
-        <div class="footer__column">
-          <h3>Services</h3>
-          <ul>
-            <li><a href="services.html">Wearable</a></li>
-            <li><a href="services.html">Remote</a></li>
-            <li><a href="services.html">Security</a></li>
-            <li><a href="services.html">Wellness</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
     <div class="footer__bottom">
-      <p>Internet of Bodies&copy;Accountable Infrastructure 2024</p>
+      <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
     </div>
   </footer>
 
