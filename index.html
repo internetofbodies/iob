@@ -97,16 +97,16 @@
 <section id="toc" class="toc-section">
   <h2>Table of Contents</h2>
   <ul class="toc-list">
-    <li class="section-heading">INTRODUCTION</li>
+    <li class="section-heading">INTRODUCING THE INTERNET OF BODIES (IoB)</li>
     <li><a href="#exploring">Exploring the Internet of Bodies and Wearables</a></li>
     <li><a href="#understanding">Understanding the Internet of Bodies</a></li>
     <li><a href="#rise">The Rise of Wearables</a></li>
     <li><a href="#benefits">Benefits of the Internet of Bodies and Wearables</a></li>
-    <li class="section-heading">STORY AT-A-GLANCE</li>
+    <li class="section-heading">IoB AT-A-GLANCE</li>
     <li><a href="#transhumanism">Transhumanism Requires Depopulation</a></li>
-    <li class="section-heading">How Is It Changing Our World?</li>
+    <li class="section-heading">HOW IS IT CHANGING OUR WORLD?</li>
     <li><a href="#how">Internet of Bodies Devices in Use or Development</a></li>
-    <li class="section-heading">Graphene Oxide is in the mRNA COVID-19 Vaccines</li>
+    <li class="section-heading">GRAPHENE OXIDE, mRNA COVID-19 VACCINES</li>
     <li><a href="#lipid">What are Lipid Nanoparticles?</a></li>
     <li><a href="#graphene">What is Graphene Oxide</a></li>
     <li><a href="#scientist">Scientists discover 'Carbon Nanotech' & 'Radioactive Thulium' in Pfizer & Moderna COVID Vaccines</a></li>
@@ -115,7 +115,7 @@
 </section>
 
 <!-- Exploring Section -->
-<section id="exploring" class="exploring">
+<div id="exploring" class="exploring">
   <h2>Exploring the Internet of Bodies and Wearables</h2>
   <p>The Internet of Bodies (IoB) and wearable technology represent a cutting-edge fusion of digital connectivity and personal health management.
      As we move further into an era where technology becomes increasingly embedded in our daily lives, the IoB extends the principles of the Internet of Things (IoT) to include not just smart devices but also the human body itself. 
@@ -123,24 +123,16 @@
      delving into their benefits, challenges, future trends, and their profound impact on healthcare and personal well-being.
   </p>
   <p><a href="https://thecustomizewindows.com/2024/08/exploring-the-internet-of-bodies-and-wearables/#google_vignette" target="_blank">Read the full article here</a></p>
-</section>
+</div>
 
 <!-- Understanding Section -->
-<section id="understanding" class="understanding">
+<div id="understanding" class="understanding">
   <h2>Understanding the Internet of Bodies</h2>
   <p>The Internet of Bodies (IoB) refers to the network of devices that are either worn on the body or implanted within it, enabling the collection and transmission of biometric data. 
      This concept builds upon the Internet of Things (IoT) by extending connectivity beyond traditional devices to include aspects of human biology. Essentially, IoB merges digital technology with human physiology, 
      creating a sophisticated ecosystem where data about our bodies can be continuously monitored and analyzed.
   </p>
-</section>
-
-<!-- Rise of Wearables Section -->
-<section id="rise" class="rise">
-  <h2>The Rise of Wearables</h2>
-  <p>Wearable technology has rapidly evolved from simple fitness trackers to sophisticated devices that offer a broad spectrum of functionalities.
-     The rise of wearables reflects a growing interest in personal health management and a desire for more immediate and actionable data.
-  </p>
-</section>
+</div>
 
 <!-- Benefits Section -->
 <section id="benefits" class="benefits">
@@ -209,47 +201,29 @@
 <!--Separator to footer-->
 <div class="separator"></div>
 
-    <!-- Footer Section -->
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__logo">
-          <a href="index.html">
-            <img src="logo.png" alt="NEXT Logo" class="footer-logo">
-          </a>
-        </div>
-        <div class="footer__columns">
-          <div class="footer__column">
-            <h3>About Us</h3>
-            <ul>
-              <li><a href="about.html">Who We are?</a></li>
-              <li><a href="about.html">Our Mission</a></li>
-              <li><a href="about.html">Why choose Us?</a></li>
-              <li><a href="about.html">Information</a></li>
-              <li><a href="about.html">Terms of Service</a></li>
-            </ul>
-          </div>
-          <div class="footer__column">
-            <h3>Contact Us</h3>
-            <ul>
-              <li><a href="contact.html">Contact</a></li>
-            </ul>
-          </div>
-          <div class="footer__column">
-            <h3>Services</h3>
-            <ul>
-              <li><a href="services.html">Wearable</a></li>
-              <li><a href="services.html">Remote</a></li>
-              <li><a href="services.html">Security</a></li>
-              <li><a href="services.html">Wellness</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <p>Internet of Bodies&copy;Accountable Infrastracture 2024</p>
-      </div>
-    </footer>
+<script>
+  document.querySelectorAll('.toc-list a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute('href').substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+              targetElement.scrollIntoView({
+                  behavior: 'smooth'
+              });
+          }
+      });
+  });
+</script>
 
-    <script src="app.js"></script>
+
+
+  <!-- Footer Section -->
+  <div class="footer__bottom">
+    <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
+  </div>
+</footer>
+
 </body>
 </html> 
