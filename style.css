@@ -477,7 +477,7 @@ label .close-btn {
   margin-left: auto;
   margin-right: auto;
   background-color: #1a1a1a;
-  border-radius: 10px;
+
 }
 
 /* TOC Heading */
@@ -534,8 +534,6 @@ label .close-btn {
 .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist{
   padding: 20px;
   margin-top: 40px;
-  background-color: #1a1a1a;
-  border-radius: 10px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -606,7 +604,6 @@ label .close-btn {
   .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
     padding: 20px 5%; /* Padding on left and right for mobile view */
     margin: 20px 10px; /* Add margin on left and right for mobile view */
-    border: 1px solid #333; /* Optional: add border for a more defined look */
   }
 
   .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
@@ -617,11 +614,63 @@ label .close-btn {
     font-size: 15px;
   }
 
-  /* Adjust font size and spacing for smaller screens */
+/* Adjust font size and spacing for smaller screens */
   .exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
     font-size: 0.95rem;
     line-height: 1.4;
   }
+}
+
+/* Introducing Section */
+#INTRODUCING\ THE\ INTERNET\ OF\ BODIES\ \(IoB\).introducing {
+  padding: 20px;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center; /* Center-aligns text within the section */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all content in the flex container */
+}
+
+/* IoB AT-A-GLANCE Section */
+#IoB-AT-A-GLANCE {
+  padding: 20px;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all content within the section */
+  text-align: center; /* Centers text within the section */
+}
+
+/* Graphene */
+#grapheneOxide {
+  padding: 20px;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all content within the section */
+  text-align: center; /* Centers text within the section */
+}
+
+/* How Changing our world */
+#howchanging {
+  padding: 20px;
+  margin-top: 40px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centers all content within the section */
+  text-align: center; /* Centers text within the section */
 }
 
 /* How Section table of contents */
