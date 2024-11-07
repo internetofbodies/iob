@@ -85,7 +85,25 @@ body {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
+.cta__button1 {
+  padding: 10px 20px;
+  background-color: #f77062;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center; /* Ensure text is centered */
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+
 .cta__button:hover {
+  background: linear-gradient(90deg, #2979ff, #3f51b5); 
+}
+
+.cta__button1:hover {
   background: linear-gradient(90deg, #2979ff, #3f51b5); 
 }
 
@@ -676,7 +694,7 @@ label .close-btn {
 /* How Section table of contents */
 .how {
   padding: 100px 50px;
-  max-width: 1300px;
+  max-width: 1300px; 
   margin: 0 auto;
   background-color: #131313;
 }
