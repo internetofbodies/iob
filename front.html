@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google tag (gtag.js) -->
+
+     <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZG1L1BRW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -10,10 +11,10 @@
 
   gtag('config', 'G-YMZG1L1BRW');
 </script>
-    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Dashboard</title>
+    <title>Health Dashboard | Internet of Bodies</title>
 
     <!--Favicon-->
     <link rel="icon" href="logo.png" type="image/png">
@@ -117,6 +118,11 @@
                 <!-- Canvas for brainwave chart -->
                 <h4>Live Brainwave Activity</h4>
                 <canvas id="brainwaveChart" width="400" height="200"></canvas>
+
+                <!-- Canvas for live glucose chart -->
+                <h4>Live Glucose Levels</h4>
+                <canvas id="glucoseChart" width="400" height="200"></canvas>
+
             </div>
         </section>
         
@@ -273,6 +279,44 @@
                 doctorResponseDiv.innerHTML = "<p>Please enter a valid question.</p>";
             }
         }
+
+        // 6. Chart.js for the live glucose chart
+const ctxGlucose = document.getElementById('glucoseChart').getContext('2d');
+
+const glucoseChart = new Chart(ctxGlucose, {
+    type: 'line',
+    data: {
+        labels: Array.from({ length: 100 }, (_, i) => i),
+        datasets: [{
+            label: 'Glucose Levels',
+            data: Array.from({ length: 100 }, () => Math.floor(Math.random() * (180 - 70 + 1)) + 70),
+            borderColor: 'rgba(255, 159, 64, 1)',
+            tension: 0.3,
+            fill: false
+        }]
+    },
+    options: {
+        scales: {
+            x: { display: false },
+            y: { 
+                beginAtZero: true,
+                suggestedMax: 200 // Customize max value if needed
+            }
+        }
+    }
+});
+
+// Function to update glucose data every second
+const updateGlucoseData = () => {
+    // Shift the existing data and add a new random glucose value
+    glucoseChart.data.datasets[0].data.shift();
+    glucoseChart.data.datasets[0].data.push(Math.floor(Math.random() * (180 - 70 + 1)) + 70);
+    glucoseChart.update();
+};
+
+// Update the glucose chart data every 1 second
+setInterval(updateGlucoseData, 1000);
+
 
     </script>
 
