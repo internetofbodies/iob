@@ -108,11 +108,10 @@
                 <label for="toggle-health-data">Show Health Data</label>
             </div>
             <div id="health-content" style="display: none;">
-                <p>Analyze your health trends over time. Access your heart rate, steps, sleep patterns, glucose levels, and more with easy-to-read charts.</p>
+                <p>Analyze your health trends over time. Access your heart rate, steps, sleep patterns, and more with easy-to-read charts.</p>
                 <p id="heartRate">Heart Rate: 0 BPM</p>
                 <p id="steps">Steps: 0</p>
-                <p id="sleep">Sleep: 0 hours</p>
-                <p id="glucose">Glucose: 0 mg/dL</p> <!-- Added glucose data -->
+                <p id="sleep">Sleep: 8 hours</p>
                 
                 <!-- Canvas for health chart -->
                 <canvas id="healthChart"></canvas>
@@ -129,8 +128,26 @@
                 <h4>Live Glucose Levels</h4>
                 <canvas id="glucoseChart" width="400" height="200"></canvas>
 
+                <!-- Canvas for live stress level chart -->
+        <h4>Live Stress Level</h4>
+        <canvas id="stressChart" width="400" height="200"></canvas>
+    </div>
+
             </div>
         </section>
+
+        <section id="vaccination-simulation" class="feature-section">
+            <h3>Vaccination Simulation</h3>
+            <p>Search for a vaccine to see its ingredients and possible side effects.</p>
+            
+            <!-- Search Input -->
+            <input type="text" id="vaccineSearch" placeholder="Enter vaccine name..." />
+            <button onclick="searchVaccine()">Search</button>
+            
+            <!-- Display Vaccine Info -->
+            <div id="vaccineInfo"></div>
+        </section>
+        
         
     </main>
 
@@ -157,56 +174,82 @@
       
 
         // 2. Update Health Data every 5 seconds
+        // Simulate health data updates every 5 seconds, including stress level
         const updateHealthData = () => {
-            const heartRate = Math.floor(Math.random() * (100 - 60 + 1)) + 60; // Simulating heart rate between 60 and 100
-            const steps = Math.floor(Math.random() * 10000); // Simulating random steps
-            const sleep = Math.floor(Math.random() * (8 - 4 + 1)) + 4; // Simulating hours of sleep
-            const glucose = Math.floor(Math.random() * (180 - 70 + 1)) + 70; // Simulating glucose levels between 70 and 180 mg/dL
+    const heartRate = Math.floor(Math.random() * (100 - 60 + 1)) + 60; // Simulating heart rate between 60 and 100
+    const steps = Math.floor(Math.random() * 10000); // Simulating random steps
+    const sleep = Math.floor(Math.random() * (8 - 4 + 1)) + 4; // Simulating hours of sleep
+    const stress = Math.floor(Math.random() * 100); // Simulating stress level between 0% and 100%
 
-            document.getElementById("heartRate").textContent = `Heart Rate: ${heartRate} BPM`;
-            document.getElementById("steps").textContent = `Steps: ${steps}`;
-            document.getElementById("sleep").textContent = `Sleep: ${sleep} hours`;
-            document.getElementById("glucose").textContent = `Glucose: ${glucose} mg/dL`;
+    document.getElementById("heartRate").textContent = `Heart Rate: ${heartRate} BPM`;
+    document.getElementById("steps").textContent = `Steps: ${steps}`;
+    document.getElementById("sleep").textContent = `Sleep: ${sleep} hours`;
 
-            // Update the chart
-            healthChart.data.datasets[0].data = [heartRate, steps, sleep, glucose]; // Include glucose data
-            healthChart.update();
-        };
+    // Update the health chart with new data, excluding glucose
+    healthChart.data.datasets[0].data = [heartRate, steps, sleep, stress];
+    healthChart.update();
 
-        setInterval(updateHealthData, 5000); // Update every 5 seconds
+    // Update the stress chart
+    stressChart.data.datasets[0].data.shift();
+    stressChart.data.datasets[0].data.push(stress);
+    stressChart.update();
+};
 
+
+    setInterval(updateHealthData, 5000);
+
+    // Chart for stress level visualization
+    const ctxStress = document.getElementById('stressChart').getContext('2d');
+    const stressChart = new Chart(ctxStress, {
+        type: 'line',
+        data: {
+            labels: Array.from({ length: 100 }, (_, i) => i),
+            datasets: [{
+                label: 'Stress Level (%)',
+                data: Array.from({ length: 100 }, () => Math.floor(Math.random() * 100)),
+                borderColor: 'rgba(255, 99, 132, 1)',
+                tension: 0.3,
+                fill: false
+            }]
+        },
+        options: {
+            scales: {
+                x: { display: false },
+                y: { beginAtZero: true, suggestedMax: 100 }
+            }
+        }
+    });
         // 3. Chart.js for health data visualization
         const ctx = document.getElementById('healthChart').getContext('2d');
-        const healthChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Heart Rate', 'Steps', 'Sleep', 'Glucose'], // Added glucose label
-                datasets: [{
-                    label: 'Health Data',
-                    data: [72, 5000, 7, 100], // Placeholder data including glucose
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(255, 206, 86, 0.2)' // Glucose color
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(255, 206, 86, 1)' // Glucose border color
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
+const healthChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Heart Rate', 'Steps', 'Sleep'], // Only three labels
+        datasets: [{
+            label: 'Health Data',
+            data: [72, 5000, 7], // Placeholder data for heart rate, steps, and sleep
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)', // Heart Rate color
+                'rgba(54, 162, 235, 0.2)', // Steps color
+                'rgba(75, 192, 192, 0.2)'  // Sleep color
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',   // Heart Rate border color
+                'rgba(54, 162, 235, 1)',   // Steps border color
+                'rgba(75, 192, 192, 1)'    // Sleep border color
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
             }
-        });
+        }
+    }
+});
+
 
         // 4. Chart.js for the heartbeat graph
         const ctxHeartbeat = document.getElementById('heartbeatChart').getContext('2d');
@@ -322,6 +365,131 @@ const updateGlucoseData = () => {
 
 // Update the glucose chart data every 1 second
 setInterval(updateGlucoseData, 1000);
+
+// Array of vaccine data
+const vaccines = [
+    {
+        name: "Flu Vaccine",
+        ingredients: ["Egg protein", "Formaldehyde", "Sucrose", "Antibiotics"],
+        common_side_effects: ["Soreness at injection site", "Mild fever", "Headache"],
+        severe_side_effects: ["Allergic reaction", "Difficulty breathing"]
+    },
+    {
+        name: "COVID-19 Vaccine",
+        ingredients: ["mRNA", "Lipids", "Salts", "Sucrose"],
+        common_side_effects: ["Fever", "Fatigue", "Headache", "Muscle pain"],
+        severe_side_effects: ["Anaphylaxis", "Blood clots (rare)"]
+    },
+    {
+        name: "Hepatitis B Vaccine",
+        ingredients: ["Aluminum hydroxide", "Yeast protein", "Sodium chloride"],
+        common_side_effects: ["Pain at injection site", "Mild fever", "Fatigue"],
+        severe_side_effects: ["Severe allergic reaction (rare)"]
+    },
+    {
+        name: "DTaP Vaccine",
+        ingredients: ["Diphtheria toxoid", "Tetanus toxoid", "Acellular pertussis", "Aluminum phosphate"],
+        common_side_effects: ["Soreness at injection site", "Mild fever", "Irritability"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "MMR Vaccine",
+        ingredients: ["Live attenuated measles virus", "Live attenuated mumps virus", "Live attenuated rubella virus", "Gelatin"],
+        common_side_effects: ["Fever", "Mild rash", "Swollen glands"],
+        severe_side_effects: ["Seizures due to fever (rare)", "Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Polio Vaccine (IPV)",
+        ingredients: ["Inactivated poliovirus", "Formaldehyde", "2-Phenoxyethanol"],
+        common_side_effects: ["Pain at injection site", "Fatigue"],
+        severe_side_effects: ["Severe allergic reaction (rare)"]
+    },
+    {
+        name: "Hib Vaccine",
+        ingredients: ["Haemophilus influenzae type b polysaccharide", "Aluminum sulfate"],
+        common_side_effects: ["Redness at injection site", "Fever", "Irritability"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Rotavirus Vaccine",
+        ingredients: ["Live attenuated rotavirus", "Sucrose", "Dulbecco's Modified Eagle Medium (DMEM)"],
+        common_side_effects: ["Irritability", "Diarrhea", "Vomiting"],
+        severe_side_effects: ["Intussusception (rare, intestinal blockage)"]
+    },
+    {
+        name: "Varicella Vaccine",
+        ingredients: ["Live attenuated varicella-zoster virus", "Sucrose", "Gelatin"],
+        common_side_effects: ["Soreness at injection site", "Mild rash", "Fever"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Pneumococcal Vaccine (PCV13)",
+        ingredients: ["Polysaccharide conjugated to diphtheria protein", "Aluminum phosphate"],
+        common_side_effects: ["Redness at injection site", "Fever", "Loss of appetite"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Tetanus Vaccine (Td)",
+        ingredients: ["Tetanus toxoid", "Diphtheria toxoid", "Aluminum phosphate"],
+        common_side_effects: ["Pain at injection site", "Mild fever", "Fatigue"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Human Papillomavirus (HPV) Vaccine",
+        ingredients: ["Recombinant HPV proteins", "Aluminum adjuvant"],
+        common_side_effects: ["Pain at injection site", "Fever", "Dizziness", "Nausea"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Meningococcal Vaccine",
+        ingredients: ["Meningococcal polysaccharide", "Diphtheria toxoid"],
+        common_side_effects: ["Soreness at injection site", "Fatigue", "Headache"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Shingles Vaccine (Shingrix)",
+        ingredients: ["Recombinant glycoprotein E", "AS01B adjuvant"],
+        common_side_effects: ["Pain at injection site", "Muscle pain", "Fatigue"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Japanese Encephalitis Vaccine",
+        ingredients: ["Inactivated JE virus", "Aluminum hydroxide"],
+        common_side_effects: ["Pain at injection site", "Headache", "Muscle aches"],
+        severe_side_effects: ["Severe allergic reaction (very rare)"]
+    },
+    {
+        name: "Yellow Fever Vaccine",
+        ingredients: ["Live attenuated yellow fever virus", "Gelatin", "Lactose"],
+        common_side_effects: ["Fever", "Mild headache", "Muscle pain"],
+        severe_side_effects: ["Severe allergic reaction (rare)", "Neurological effects (very rare)"]
+    }
+];
+
+
+// Function to search for a vaccine and display its information
+function searchVaccine() {
+    const searchQuery = document.getElementById("vaccineSearch").value.toLowerCase();
+    const vaccineInfoDiv = document.getElementById("vaccineInfo");
+
+    // Filter vaccines with names that include the search query
+    const matchedVaccines = vaccines.filter(v => v.name.toLowerCase().includes(searchQuery));
+
+    if (matchedVaccines.length > 0) {
+        // Display all matched vaccines
+        vaccineInfoDiv.innerHTML = matchedVaccines.map(vaccine => `
+            <div>
+                <h4>${vaccine.name}</h4>
+                <p><strong>Ingredients:</strong> ${vaccine.ingredients.join(", ")}</p>
+                <p><strong>Common Side Effects:</strong> ${vaccine.common_side_effects.join(", ")}</p>
+                <p><strong>Severe Side Effects:</strong> ${vaccine.severe_side_effects.join(", ")}</p>
+            </div>
+        `).join("");
+    } else {
+        vaccineInfoDiv.innerHTML = "<p>Vaccine not found. Please try another name.</p>";
+    }
+}
+
 
 
     </script>
