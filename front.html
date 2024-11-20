@@ -21,7 +21,7 @@
       "name": "Accountable Infrastructure",
       "url": "https://internetofbodies.ai/",
       "logo": "https://internetofbodies.ai/logo.jpg"
-    }
+    }   
     </script>
     
     <!-- CSS -->
@@ -74,17 +74,6 @@
 
     
     <main>
-        <section id="devices" class="feature-section">
-            <h3>Your Devices</h3>
-            <p>Manage your connected devices and ensure they're providing accurate and up-to-date information about your health.</p>
-            <ul>
-                <li>Smartwatch: <span id="smartwatch-status">Connected</span></li>
-                <li>Heart Rate Monitor: <span id="monitor-status">Connected</span></li>
-                <li>Blood Pressure Monitor: <span id="bp-status">Connected</span></li> <!-- Added -->
-                <li>ECG Monitor: <span id="ecg-status">Connected</span></li> <!-- Added -->
-                <li>Sleep Monitor: <span id="sleep-monitor-status">Connected</span></li> <!-- Added -->
-            </ul>
-        </section>
 
         <section id="virtual-doctor-simulation" class="feature-section">
             <h3>Virtual Doctor Visits Simulation</h3>
@@ -136,6 +125,7 @@
             </div>
         </section>
 
+        <!--Vaccination-->
         <section id="vaccination-simulation" class="feature-section">
             <h3>Vaccination Simulation</h3>
             <p>Search for a vaccine to see its ingredients and possible side effects.</p>
@@ -147,6 +137,45 @@
             <!-- Display Vaccine Info -->
             <div id="vaccineInfo"></div>
         </section>
+
+
+        <!-- BMI -->
+        <section id="bmi-calculator" class="feature-section">
+            <h3>BMI Calculator</h3>
+            <p>Enter your weight and height to calculate your BMI and check your health status.</p>
+            <div id="bmi-inputs">
+                <input type="number" id="bmi-weight" placeholder="Weight in kg" required>
+                <input type="number" id="bmi-height" placeholder="Height in cm" required>
+                <button onclick="calculateBMI()">Calculate BMI</button>
+            </div>
+            <div id="bmi-result" class="result">
+                <!-- BMI result will be displayed here -->
+            </div>
+        </section>
+
+        <!--Mood Tracker-->
+        <section id="mood-tracker" class="feature-section">
+            <h3>Mood Tracker</h3>
+            <p>Select your current mood:</p>
+            <select id="mood-select">
+                <option value="happy">Happy</option>
+                <option value="stressed">Stressed</option>
+                <option value="anxious">Anxious</option>
+                <option value="calm">Calm</option>
+            </select>
+            <button onclick="suggestActivity()">Get Suggestion</button>
+            <p id="mood-suggestion"></p>
+        </section>
+
+        <!--Breathing Exercise-->
+        <div id="breathing-exercise">
+            <h3>Breathing Exercise</h3>
+            <div class="circle-container">
+                <div class="circle" id="breathing-circle"></div>
+                <p id="breathing-guide">Get Ready...</p>
+            </div>
+            <button onclick="startBreathingExercise()">Start Breathing Exercise</button>
+        </div>
         
         
     </main>
@@ -489,12 +518,111 @@ function searchVaccine() {
         vaccineInfoDiv.innerHTML = "<p>Vaccine not found. Please try another name.</p>";
     }
 }
+ 
+//BMI
+function calculateBMI() {
+        const weight = parseFloat(document.getElementById('bmi-weight').value);
+        const height = parseFloat(document.getElementById('bmi-height').value) / 100; // Convert height to meters
+        const resultDiv = document.getElementById('bmi-result');
 
+        if (!weight || !height) {
+            resultDiv.innerHTML = '<span style="color: red;">Please enter valid values for weight and height.</span>';
+            return;
+        }
+
+        const bmi = (weight / (height * height)).toFixed(2);
+
+        let status;
+        if (bmi < 18.5) {
+            status = 'Unhealthy (Underweight)';
+        } else if (bmi >= 18.5 && bmi <= 24.9) {
+            status = 'Healthy';
+        } else {
+            status = 'Unhealthy (Overweight)';
+        }
+
+        resultDiv.innerHTML = `Your BMI is <strong>${bmi}</strong>: <span style="color: ${
+            status === 'Healthy' ? 'green' : 'red'
+        };">${status}</span>`;
+    }
+ 
+    // Mood Tracker
+    function suggestActivity() {
+    const mood = document.getElementById('mood-select').value;
+    const suggestion = document.getElementById('mood-suggestion');
+
+    const activities = {
+        happy: "Keep enjoying your day! Maybe share the joy with a friend.",
+        stressed: "Take a few deep breaths or a short walk to clear your mind.",
+        anxious: "Try a mindfulness exercise, like focusing on your breath for one minute.",
+        calm: "Maintain this state with soft music or a cozy environment."
+    };
+
+    suggestion.textContent = activities[mood] || "Choose a mood to get a suggestion.";
+}
+
+    //Breathing Exercise
+    function startBreathingExercise() {
+    const guide = document.getElementById("breathing-guide");
+    const circle = document.getElementById("breathing-circle");
+
+    let state = "Inhale"; // Initial state
+    let cycleCount = 0; // Count how many cycles the user has completed
+
+    const updateState = () => {
+        if (state === "Inhale") {
+            guide.textContent = "Hold";
+            circle.style.transform = "scale(1.2)"; // Expand slightly for "Hold"
+            circle.style.borderColor = "#ffeb3b"; // Yellow for hold
+            state = "Hold";
+
+            setTimeout(updateState, 4000); // After 4 seconds, transition to "Exhale"
+        } else if (state === "Hold") {
+            guide.textContent = "Exhale";
+            circle.style.transform = "scale(0.8)"; // Shrink for "Exhale"
+            circle.style.borderColor = "#f44336"; // Red for exhale
+            state = "Exhale";
+
+            setTimeout(updateState, 4000); // After 4 seconds, transition to "Inhale"
+        } else if (state === "Exhale") {
+            guide.textContent = "Inhale";
+            circle.style.transform = "scale(1)"; // Return to original size for "Inhale"
+            circle.style.borderColor = "#4caf50"; // Green for inhale
+            state = "Inhale";
+
+            cycleCount++; // Increment cycle count
+            if (cycleCount === 3) { // Trigger the message after 3 full cycles
+                showEncouragementMessage(); 
+                return; // Stop the breathing cycle until the user decides to continue
+            }
+
+            setTimeout(updateState, 4000); // After 4 seconds, transition to "Hold"
+        }
+    };
+
+    // Start the initial "Inhale" state
+    guide.textContent = "Inhale";
+    circle.style.transform = "scale(1)"; // Reset scale
+    circle.style.borderColor = "#4caf50"; // Green for inhale
+    setTimeout(updateState, 4000); // Begin the cycle
+}
+
+function showEncouragementMessage() {
+    const userResponse = confirm("You're getting better! Would you like to continue?");
+    
+    if (userResponse) {
+        alert("Great! Let's keep going.");
+        startBreathingExercise(); // Restart the breathing exercise
+    } else {
+        alert("That's okay! Take a break and come back when you're ready.");
+    }
+}
 
 
     </script>
 
     <!-- Footer Section -->
+     <footer>
     <div class="footer__bottom">
       <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
     </div>
