@@ -287,10 +287,11 @@ body {
 
 /* Footer Styles */
 .footer {
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 20px 0; /* Adjust as necessary */
-  overflow: hidden; /* Added this line */
+  background-color: #1a1a1a; /* Dark background */
+  color: #ffffff; /* White text color */
+  padding: 20px 0; /* Adjust padding as necessary */
+  overflow: hidden; /* Prevent overflow */
+  text-align: center; /* Center-align the content */
 }
 
 .footer__column ul {
@@ -303,34 +304,29 @@ body {
 }
 
 .footer__column ul li a {
-  color: #fff;
+  color: #ffffff; /* White link color */
   text-decoration: none;
   font-size: 0.9rem;
 }
 
 .footer__column ul li a:hover {
-  color: #ff8177;
+  color: #ff8177; /* Highlight color on hover */
 }
 
+/* Footer Bottom Styles */
 .footer__bottom {
-  text-align: center;
-  padding: 10px 0; /* Reduced padding */
-  border-top: 1px solid #333;
+  background-color: #1a1a1a; /* Dark background */
+  color: #ffffff; /* White text */
+  text-align: center; /* Center the text */
+  padding: 15px 0; /* Adjust vertical spacing */
+  font-size: 0.9rem; /* Adjust font size */
+  margin: 0; /* Reset any default margin */
 }
+
+
 
 .footer__bottom p {
-  margin-bottom: 0; /* Removed additional margin */
-}
-
-.footer__socials a {
-  color: #fff;
-  margin: 0 10px;
-  text-decoration: none;
-  font-size: 1.2rem;
-}
-
-.footer__socials a:hover {
-  color: #ff8177;
+  margin: 0; /* Remove margin for a compact look */
 }
 
 html, body {
@@ -338,13 +334,13 @@ html, body {
   margin: 0;
 }
 
-.main-container { /* Add this to your main wrapper */
+.main-container {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-.content { /* Class for main content section */
+.content {
   flex: 1;
 }
 
@@ -355,17 +351,15 @@ html, body {
 /* Responsive Footer */
 @media screen and (max-width: 960px) {
   .footer__column {
-    width: 45%;
+    width: 100%; /* Full-width columns for smaller screens */
   }
 
-  .footer__logo {
-    margin-bottom: 30px;
-  }
-
-  .footer__socials a {
-    margin: 0 5px;
+  .footer__bottom {
+    padding: 15px 0; /* Increase padding for touch devices */
+    font-size: 0.8rem; /* Slightly smaller font */
   }
 }
+
 
 /* Optional: Remove the separator if not needed */
 .separator {
@@ -1401,113 +1395,271 @@ header {
 /* Center the Health Dashboard Title */
 .dashboard-title {
   text-align: center;
-  font-size: 2.5rem;
-  color: #f77062; 
+  font-size: 2.8rem;
+  color: #f77062;
   margin: 20px 0;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 /* Main Content */
 main {
-  padding: 20px;
+  padding: 20px 40px; /* Add space on the left and right */
   max-width: 1200px;
   margin: 0 auto;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* Feature Section */
 .feature-section {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
+  background: linear-gradient(135deg, #ffffff, #fdfdfd);
+  padding: 25px;
+  border-radius: 12px;
   margin-bottom: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  color: #333;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-section:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 .feature-section h3 {
   color: #f77062;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #f77062;
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+/* Adjust Paragraph Color for Visibility */
+.feature-section p {
+  color: #555; /* Use a darker gray for better readability */
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  header {
-      padding: 15px 20px;
-  }
-
-  .logo-image {
-      width: 80px;
-  }
-
-  .logout-button {
-      padding: 8px 16px;
-      font-size: 0.9rem;
-  }
-
   .dashboard-title {
-      font-size: 2rem;
+    font-size: 2.2rem;
   }
-}
 
+  .feature-section {
+    padding: 15px;
+  }
+
+  main {
+    padding: 20px 15px; /* Add space on left and right */
+    margin: 0 10px; /* Ensure content doesn't touch screen edges */
+    border-radius: 10px; /* Slightly rounded corners for a cleaner look */
+    background: white; /* Ensure a clean background */
+  }
+
+  }
+
+
+/* Virtual Doctor Simulation */
 #virtual-doctor-simulation {
   margin-top: 40px;
 }
 
-#simulation-data p, #ask-question textarea {
-  margin-bottom: 10px;
-}
-
 #ask-question textarea {
   width: 100%;
-  height: 80px;
+  height: 100px;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid #f77062;
+  border-radius: 8px;
   resize: none;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+#ask-question textarea:focus {
+  outline: none;
+  border-color: #3f51b5;
+  box-shadow: 0 0 6px rgba(63, 81, 181, 0.5);
 }
 
 #ask-question button {
-  background-color: #f77062;
+  background: linear-gradient(90deg, #f77062, #ff8a65);
   color: white;
-  padding: 10px 15px;
+  padding: 10px 20px;
   border: none;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 #ask-question button:hover {
-  background-color: #e65a54;
-  background: linear-gradient(90deg, #2979ff, #3f51b5);
+  background: linear-gradient(90deg, #3f51b5, #2979ff);
+  transform: scale(1.05);
 }
 
 #doctor-response p {
   margin-top: 10px;
   font-style: italic;
+  color: #666;
 }
 
-/* vaccination */
-
+/* Vaccination Simulation */
 #vaccination-simulation {
   margin-top: 20px;
 }
 
 #vaccineInfo {
-  background-color: #f4f4f4;
-  padding: 15px;
-  border-radius: 5px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   margin-top: 10px;
 }
 
 #vaccineInfo h4 {
-  color: #333;
+  color: #f77062;
+  margin-bottom: 10px;
 }
 
 #vaccineInfo p {
   margin: 5px 0;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+/* Breathing Exercise Styling */
+.circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 30px auto;
+}
+
+.circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid #4caf50;
+  background: radial-gradient(circle, rgba(76, 175, 80, 0.1), rgba(76, 175, 80, 0.3));
+  transition: transform 4s ease-in-out, border-color 4s ease-in-out;
+}
+
+.circle.inhale {
+  border-color: #4caf50; /* Green */
+  transform: scale(1.1);
+}
+
+.circle.hold {
+  border-color: #ffeb3b; /* Yellow */
+}
+
+.circle.exhale {
+  border-color: #f44336; /* Red */
+  transform: scale(0.9);
+}
+
+#breathing-guide {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: bold;  
+  color: #333;
+}
+
+#breathing-exercise h3 {
+  color: #f77062;
+  margin-bottom: 10px;
+}
+
+/* Textbox Styling */
+input[type="text"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 2px solid #f77062; /* Match your theme color */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  border-color: #3f51b5; /* Change to blue on focus */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Subtle glow */
+  outline: none; /* Remove default outline */
+}
+
+/* Button Styling */
+button,
+input[type="button"] {
+  display: inline-block;
+  background: linear-gradient(90deg, #f77062, #ff8a65); /* Gradient button */
+  color: white; /* White text for contrast */
+  padding: 10px 20px; /* Padding for a button-like appearance */
+  border: none;
+  border-radius: 8px; /* Rounded corners */
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background 0.3s, transform 0.2s;
+}
+
+button:hover,
+input[type="button"]:hover {
+  background: linear-gradient(90deg, #3f51b5, #2979ff); /* Gradient changes on hover */
+  transform: translateY(-2px); /* Slight lift effect */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
+}
+
+button:active,
+input[type="button"]:active {
+  transform: translateY(1px); /* Pressed effect */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Diminished shadow */
+}
+
+/* Placeholder Text Styling */
+input::placeholder,
+textarea::placeholder {
+  color: #aaa; /* Light gray placeholder text */    
+  font-style: italic; /* Italicized for differentiation */
+}
+
+/* Dropdown Styling */
+select {
+  background-color: white; /* White background */
+  color: #333; /* Darker text for contrast */
+  appearance: none; /* Remove default arrow (for customization) */
+  cursor: pointer;
+}
+
+select:focus {
+  outline: none; /* Remove default outline */
+}
+
+/* Button and Input Alignment */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Space between inputs */
+}
+
+button {
+  flex: 0 1 auto; /* Adjust button size relative to input */
 }
 
 
 /* City Tracker */
-
-/* Dashboard Title */
 .dashboard-title {
   text-align: center;
   margin-top: 20px;
@@ -1609,39 +1761,65 @@ main {
   background-color: #ff665e;
   background: linear-gradient(90deg, #2979ff, #3f51b5);
 }
-
+/* Comparison Table Styling */
 #comparison-table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed; /* Enforces fixed layout for even spacing */
+  margin-top: 15px;
+  font-size: 0.95rem;
+  background-color: #ffffff; /* White background for visibility */
+  color: #333; /* Dark text for readability */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-#comparison-table th, #comparison-table td {
-  padding: 8px;
+#comparison-table th,
+#comparison-table td {
+  padding: 12px; /* Adjust padding for a balanced layout */
   text-align: center;
-  border: 1px solid #ddd;
-  white-space: nowrap; /* Keeps content in a single line */
+  border: 1px solid #ddd; /* Light border for separation */
+  word-wrap: break-word; /* Allows long text to wrap */
+  white-space: normal; /* Ensures text wrapping */
 }
 
+/* Table Header Styling */
+#comparison-table th {
+  background-color: #f77062; /* Theme color for header */
+  color: #ffffff; /* White text for contrast */
+  font-weight: bold;
+  padding: 10px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* Table Row Styling */
+#comparison-table tr:nth-child(even) {
+  background-color: #f9f9f9; /* Light gray for alternating rows */
+}
+
+#comparison-table tr:hover {
+  background-color: #fef2f2; /* Slight highlight on hover */
+}
+
+/* Table Cell Styling */
+#comparison-table td {
+  font-size: 0.95rem;
+  padding: 10px;
+  color: #333; /* Dark text for readability */
+}
+
+/* Responsive Design for Mobile */
 @media (max-width: 600px) {
-  #comparison-table th, #comparison-table td {
-      padding: 4px;
-      font-size: 12px;
+  #comparison-table th,
+  #comparison-table td {
+    padding: 6px; /* Reduce padding for smaller screens */
+    font-size: 0.85rem; /* Adjust font size for readability */
+  }
+
+  #comparison-table th {
+    font-size: 0.9rem;
   }
 }
-
-#comparison-table th {
-  white-space: normal; /* Allow text to wrap */
-  word-wrap: break-word;
-  text-align: center;
-  padding: 8px;
-}
-#comparison-table td {
-  word-wrap: break-word;
-  white-space: normal; /* Allow text to wrap within the cell */
-  text-align: center;
-}
-
 
 /* Disease Outbreak Predictor */
 
@@ -1714,6 +1892,10 @@ main {
 
 #results h2 {
   color: #333;
+}
+
+#bmi-result.result {
+color: #555;
 }
 
 #prediction-text {
@@ -1850,7 +2032,7 @@ main {
   padding: 1.5rem;
   width: 80%;
   max-width: 600px;
-  background-color: #fff;
+  background-color: #fff; 
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
