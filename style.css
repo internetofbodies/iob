@@ -543,7 +543,7 @@ label .close-btn {
 }
 
 /* Content Sections Under TOC */
-.exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist{
+.exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid{
   padding: 20px;
   margin-top: 40px;
   max-width: 800px;
@@ -552,7 +552,7 @@ label .close-btn {
 }
 
 /* Section Heading Styles */
-.exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+.exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2, .how h2, .lipid h2 {
   font-size: 2rem;
   color: #fff;
   margin-bottom: 20px;
@@ -565,30 +565,30 @@ label .close-btn {
 }
 
 /* Paragraph Styles */
-.exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
+.exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p, .how p, .lipid p {
   font-size: 1rem;
   color: #b3b3b3;
   line-height: 1.6;
 }
 
 /* Link Styles Inside Sections */
-.exploring a, .understanding a, .rise a, .benefits a, .transhumanism a, .graphene a, .scientist a {
+.exploring a, .understanding a, .rise a, .benefits a, .transhumanism a, .graphene a, .scientist a, .how a, .lipid a {
   color: #f77062;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
-.exploring a:hover, .understanding a:hover, .rise a:hover, .benefits a:hover, .transhumanism a, .scientist a:hover {
+.exploring a:hover, .understanding a:hover, .rise a:hover, .benefits a:hover, .transhumanism a, .scientist a:hover, .how:hover, .lipid:hover {
   color: #ff665e;
 }
 
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
-  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid {
     padding: 30px 6%; /* Added extra padding for better readability */
   }
 
-  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2, .how h2, .lipid h2 {
     font-size: 1.75rem;
   }
 
@@ -598,12 +598,12 @@ label .close-btn {
 }
 
 @media screen and (max-width: 768px) {
-  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid {
     padding: 25px 5%; /* Increased padding for smaller screens */
     margin-top: 30px;
   }
 
-  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2, .how h2, .lipid h2 {
     font-size: 1.5rem;
   }
 
@@ -613,12 +613,12 @@ label .close-btn {
 }
 
 @media screen and (max-width: 480px) {
-  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist {
+  .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid {
     padding: 20px 5%; /* Padding on left and right for mobile view */
     margin: 20px 10px; /* Add margin on left and right for mobile view */
   }
 
-  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2 {
+  .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2, .how h2, .lipid h2 {
     font-size: 1.25rem;
   }
 
@@ -627,7 +627,7 @@ label .close-btn {
   }
 
 /* Adjust font size and spacing for smaller screens */
-  .exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p {
+  .exploring p, .understanding p, .rise p, .benefits p, .transhumanism p, .graphene p, .scientist p, .how p, .lipid p {
     font-size: 0.95rem;
     line-height: 1.4;
   }
@@ -778,33 +778,8 @@ label .close-btn {
   text-align: center; /* Centers text within the section */
 }
 
-/* How Section table of contents */
-.how {
-  padding: 100px 50px;
-  max-width: 1300px; 
-  margin: 0 auto;
-  background-color: #131313;
-}
 
-.how h2 {
-  font-size: 2.5rem;
-  color: #ff8177; 
-  margin-bottom: 30px;
-}
-
-.how p {
-  font-size: 1.1rem;
-  color: #b3b3b3;
-  line-height: 1.6;
-}
-
-.how li {
-  font-size: 1.1rem;
-  color: #b3b3b3; 
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
-
+/* Image of How */
 .how img {
   width: 100%; /* Set to take up full width of the container */
   max-width: 800px; /* Set a larger max-width for larger screens */
@@ -812,44 +787,8 @@ label .close-btn {
   display: block;
 }
 
-/* Mobile Responsive for How Section */
-@media screen and (max-width: 960px) {
-  .how {
-    padding: 50px 20px;
-  }
-
-  .how h2 {
-    font-size: 2rem;
-  }
-}
 
 /*lipid */
-
-.lipid {
-  padding: 100px 50px;
-  max-width: 1300px;
-  margin: 0 auto;
-  background-color: #131313;
-}
-
-.lipid h2 {
-  font-size: 2.5rem;
-  color: #ff8177; 
-  margin-bottom: 30px;
-}
-
-.lipid p {
-  font-size: 1.1rem;
-  color: #b3b3b3;
-  line-height: 1.6;
-}
-
-.lipid li {
-  font-size: 1.1rem;
-  color: #b3b3b3; 
-  line-height: 1.6;
-  margin-bottom: 10px;
-}
 
 .lipid img {
   width: 100%; /* Set to take up full width of the container */
@@ -858,20 +797,7 @@ label .close-btn {
   display: block;
 }
 
-/* Mobile Responsive for How Section */
-@media screen and (max-width: 960px) {
-  .lipid {
-    padding: 50px 20px;
-  }
-
-  .lipid h2 {
-    font-size: 2rem;
-  }
-}
-
-
 /* Research dropdown */
-
 .navbar__menu .dropdown {
   position: relative;
 }
@@ -970,7 +896,7 @@ label .close-btn {
   background-clip: text;
   color: transparent;
 }
-/* Input Box Styling (same as contact form) */
+/* Styling for the Username Input Box */
 .input-box {
   margin-bottom: 20px;
 }
@@ -978,23 +904,27 @@ label .close-btn {
 .input-box input {
   width: 100%;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 8px; /* Rounded corners */
+  border: 2px solid #f77062; /* Light red border */
   font-size: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  transition: background 0.3s, border-color 0.3s;
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  color: #fff; /* White text for readability */
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
-
+/* Hover Effect for the Username Input */
 .input-box input:hover {
-  background: rgba(255, 255, 255, 1);
-  border-color: #0C4F60;
+  background: rgba(255, 255, 255, 0.2); /* Brighter background on hover */
+  border-color: #ff665e; /* Slightly darker red border on hover */
 }
 
+/* Focus Effect for the Username Input */
 .input-box input:focus {
-  border-color: #226A80;
-  outline: none;
+  border-color: #3f51b5; /* Blue border for focus */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Subtle glow effect */
+  outline: none; /* Remove default outline */
 }
+
 
 /* Remember me and forgot password */
 .remember-forgot {
@@ -1009,6 +939,7 @@ label .close-btn {
 .remember-forgot a {
   color: #f77062;
   text-decoration: none;
+  padding: 10px;
 }
 
 .remember-forgot a:hover {
@@ -1025,8 +956,33 @@ label .close-btn {
   color: white;
   font-size: 1.1rem;
   cursor: pointer;
-  transition: background 0.3s, transform 0.3s ease;
 }
+
+/* Styling for the Password Input Box */
+.input-box-pass input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px; /* Rounded corners */
+  border: 2px solid #f77062; /* Light red border */
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+  color: #fff; /* White text for readability */
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+/* Hover Effect for the Password Input */
+.input-box-pass input:hover {
+  background: rgba(255, 255, 255, 0.2); /* Brighter background on hover */
+  border-color: #ff665e; /* Slightly darker red border on hover */
+}
+
+/* Focus Effect for the Password Input */
+.input-box-pass input:focus {
+  border-color: #3f51b5; /* Blue border for focus */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Subtle glow effect */
+  outline: none; /* Remove default outline */
+}
+
 
 .btn:hover {
   background: #ff665e;
@@ -1044,6 +1000,8 @@ label .close-btn {
 .back-btn:hover {
   color: #ff665e;
 }
+
+
 
 /* Responsive Styles Logo */
 @media (max-width: 768px) {
@@ -1081,7 +1039,6 @@ label .close-btn {
       font-size: 0.9rem;
   }
 }
-
   /* About Us Section */
 .main-section {
   padding: 100px 50px;
@@ -1255,28 +1212,33 @@ label .close-btn {
 .input-box input, .input-box textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  border: 2px solid #f77062; /* Light red border */
+  border-radius: 8px; /* Consistent rounded corners */
   font-size: 16px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
   color: white;
-  transition: background 0.3s, border-color 0.3s;
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
 }
 
+/* Hover Effect for Input and Textarea */
 .input-box input:hover, .input-box textarea:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: #0C4F60;
+  background: rgba(255, 255, 255, 0.2); /* Brighter background on hover */
+  border-color: #ff665e; /* Slightly darker red border on hover */
 }
 
+/* Focus Effect for Input and Textarea */
 .input-box input:focus, .input-box textarea:focus {
-  border-color: #226A80; 
-  outline: none;
+  border-color: #3f51b5; /* Blue border for focus */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Subtle glow effect */
+  outline: none; /* Remove default outline */
 }
 
+/* Textarea Styling */
 .input-box textarea {
   resize: vertical;
   height: 100px;
 }
+
 
 .btn {
   width: 100%;
@@ -1833,7 +1795,7 @@ button {
 
 /* Data Input Section */
 .data-input {
-  background-color: #f0f0f0;
+  background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1906,7 +1868,7 @@ color: #555;
 
 /* Weather Simulation Section */
 #weather-simulation {
-  background-color: #f0f0f0;
+  background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -1984,7 +1946,7 @@ color: #555;
 
 /* Population Data Input Section */
 #population-growth {
-  background-color: #f9f9f9;
+  background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -2049,6 +2011,88 @@ color: #555;
 }
 
 
+/* Button Styling */
+button,
+input[type="button"] {
+    display: inline-block;
+    background: linear-gradient(90deg, #f77062, #ff8a65);
+    color: white;
+    padding: 10px 20px;
+    border: 2px solid #f77062;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.2s, border-color 0.3s;
+}
+
+button:hover,
+input[type="button"]:hover {
+    background: linear-gradient(90deg, #3f51b5, #2979ff);
+    transform: translateY(-2px);
+    border-color: #3f51b5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Input Styling */
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border: 2px solid #f77062;
+    border-radius: 8px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+    border-color: #3f51b5;
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
+    outline: none;
+}
+
+/* Specific Style for Population Growth Rate Input */
+#population-growth input#growthRate {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 2px solid #f77062; /* Light red border for theme consistency */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#population-growth input#growthRate:focus {
+  border-color: #3f51b5; /* Focus color matches hover gradient */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Glow effect on focus */
+  outline: none; /* Remove default outline */
+}
+
+/* Styles for Future Weather Section Inputs */
+#weather-simulation input[type="text"],
+#weather-simulation input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    font-size: 1rem;
+    border: 2px solid #f77062; /* Light red border */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#weather-simulation input[type="text"]:focus,
+#weather-simulation input[type="date"]:focus {
+    border-color: #3f51b5; /* Focus color matches hover gradient */
+    box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Glow effect on focus */
+    outline: none; /* Remove default outline */
+}
+
 /* Health Sync Alert Styles */
 
 /* Dashboard Title */
@@ -2061,7 +2105,7 @@ color: #555;
 
 /* Input Container */
 .input-container {
-  background-color: #f0f0f0;
+  background-color: #fff;
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -2119,6 +2163,8 @@ color: #555;
   text-align: center;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #f77062; /* Light red border */
+  margin-bottom: 10px;
 }
 
 .symptom-card h3 {
@@ -2156,6 +2202,22 @@ color: #555;
   text-align: center;
 }
 
+#name-input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 2px solid #f77062; /* Light red border */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#name-input:focus {
+  border-color: #3f51b5; /* Focus color matches hover gradient */
+  box-shadow: 0 0 5px rgba(63, 81, 181, 0.5); /* Glow effect on focus */
+  outline: none; /* Remove default outline */
+}
 /* Responsive Adjustments */
 @media (max-width: 768px) {
   .symptom-card {
