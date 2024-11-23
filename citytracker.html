@@ -157,12 +157,12 @@ optimize resource use, and create a future where cities thrive in harmony with t
         
             <div id="city-data-content" style="display: none;">
                 <div id="city-list">
+
                     <p>Los Angeles: COVID-19 Cases: <span id="la-covid">Loading...</span></p>
                     <p>Los Angeles: Bird Flu Cases: <span id="la-birdflu">Loading...</span></p>
                     <p>Chicago: COVID-19 Cases: <span id="chicago-covid">Loading...</span></p>
                     <p>Chicago: Bird Flu Cases: <span id="chicago-birdflu">Loading...</span></p>
                 </div>
-        
                 <!-- Disease Chart as a Pie Chart -->
                 <canvas id="diseaseChart"></canvas>
         
@@ -229,41 +229,46 @@ optimize resource use, and create a future where cities thrive in harmony with t
                 attribution: '© OpenStreetMap contributors'
             }).addTo(map);
         
-            // Define cities with their coordinates, COVID cases, and Bird Flu cases
-            var cities = [
-                { name: "Los Angeles", coords: [34.0522, -118.2437], covidCases: 3980, birdFluCases: 50 },
-                { name: "Chicago", coords: [41.8781, -87.6298], covidCases: 2716, birdFluCases: 72 }
-            ];
+           // Define cities with their coordinates, COVID cases, and Bird Flu cases
+var cities = [
+    { name: "Los Angeles", coords: [34.0522, -118.2437], covidCases: 3980, birdFluCases: 50 },
+    { name: "Chicago", coords: [41.8781, -87.6298], covidCases: 2716, birdFluCases: 72 },
+    { name: "Tampa Bay, Florida", coords: [27.9506, -82.4572], covidCases: 1200, birdFluCases: 30 },
+    { name: "East Solano County", coords: [38.303, -121.987], covidCases: 800, birdFluCases: 20 },
+    { name: "North Carolina", coords: [35.7596, -79.0193], covidCases: 600, birdFluCases: 15 }
+];
+// Function to dynamically display city disease statistics
+const updateCityStatistics = () => {
+    const cityList = document.getElementById('city-list');
+    cityList.innerHTML = ''; // Clear existing data
+
+    cities.forEach(city => {
+        const cityData = `
+            <p>${city.name}: COVID-19 Cases: <span>${city.covidCases}</span></p>
+            <p>${city.name}: Bird Flu Cases: <span>${city.birdFluCases}</span></p>
+        `;
+        cityList.innerHTML += cityData;
+    });
+};
+
+// Call this function on page load
+updateCityStatistics();
+
+            // Execute updateCityData on page load and at regular intervals
+window.onload = function () {
+    updateCityData();
+    setInterval(updateCityData, 5000); // Update every 5 seconds
+};
         
-            // Function to update city data with bird flu cases, COVID cases, and vaccination data
-            const updateCityData = () => {
-                cities.forEach(city => {
-                    const birdFluElement = document.getElementById(`${city.name.toLowerCase().replace(/\s/g, '')}-birdflu`);
-                    const covidElement = document.getElementById(`${city.name.toLowerCase().replace(/\s/g, '')}-covid`);
-        
-                    if (birdFluElement) {
-                        birdFluElement.textContent = city.birdFluCases;
-                    }
-        
-                    if (covidElement) {
-                        covidElement.textContent = city.covidCases;
-                    }
-        
-                    // Generate random vaccination data
-                    const vaccinationRate = Math.floor(Math.random() * 41) + 50; // Random rate between 50-90%
-                    const vaccineType = Math.random() < 0.5 ? "Moderna" : "Pfizer";
-        
-                    // Display vaccination data in a popup on the map
-                    L.marker(city.coords).bindPopup(
-                        `<b>${city.name}</b><br>COVID-19 Cases: ${city.covidCases}<br>Bird Flu Cases: ${city.birdFluCases}<br>Vaccination Rate: ${vaccinationRate}%<br>Vaccine Type: ${vaccineType}`
-                    ).addTo(map);
-                });
-        
-                // Update the chart with the new COVID data
-                diseaseChart.data.datasets[0].data = cities.map(city => city.covidCases);
-                diseaseChart.update();
-            };
-        
+         // Vaccination data logic (called once or periodically)
+cities.forEach(city => {
+    const vaccinationRate = Math.floor(Math.random() * 41) + 50; // Random rate between 50-90%
+    const vaccineType = Math.random() < 0.5 ? "Moderna" : "Pfizer";
+
+    L.marker(city.coords).bindPopup(
+        `<b>${city.name}</b><br>COVID-19 Cases: ${city.covidCases}<br>Bird Flu Cases: ${city.birdFluCases}<br>Vaccination Rate: ${vaccinationRate}%<br>Vaccine Type: ${vaccineType}`
+    ).addTo(map);
+});
             // Execute updateCityData on page load and at regular intervals
             window.onload = function() {
                 updateCityData();
@@ -271,43 +276,58 @@ optimize resource use, and create a future where cities thrive in harmony with t
             };
         
             // Chart.js for visualizing disease cases as a Pie Chart
-            const ctx = document.getElementById('diseaseChart').getContext('2d');
-            const diseaseChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    labels: cities.map(city => `${city.name} COVID-19`),
-                    datasets: [{
-                        label: 'COVID-19 Cases',
-                        data: cities.map(city => city.covidCases),
-                        backgroundColor: [
-                            'rgba(255, 99, 132, 0.2)',
-                            'rgba(54, 162, 235, 0.2)',
-                            'rgba(255, 206, 86, 0.2)'
-                        ],
-                        borderColor: [
-                            'rgba(255, 99, 132, 1)',
-                            'rgba(54, 162, 235, 1)',
-                            'rgba(255, 206, 86, 1)'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top',
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.label}: ${context.raw} cases`;
-                                }
-                            }
-                        }
+           // Initialize the Pie Chart
+const ctx = document.getElementById('diseaseChart').getContext('2d');
+let diseaseChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: cities.map(city => city.name), // Dynamically get city names
+        datasets: [{
+            label: 'COVID-19 Cases',
+            data: cities.map(city => city.covidCases), // Dynamically get COVID-19 cases
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)', // Los Angeles (Red)
+                'rgba(54, 162, 235, 0.2)', // Chicago (Blue)
+                'rgba(255, 206, 86, 0.2)', // Tampa Bay (Yellow)
+                'rgba(75, 192, 192, 0.2)', // East Solano County (Teal)
+                'rgba(153, 102, 255, 0.2)'  // North Carolina (Purple)
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)', // Los Angeles
+                'rgba(54, 162, 235, 1)', // Chicago
+                'rgba(255, 206, 86, 1)', // Tampa Bay
+                'rgba(75, 192, 192, 1)', // East Solano County
+                'rgba(153, 102, 255, 1)'  // North Carolina
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            tooltip: {
+                callbacks: {
+                    label: function (context) {
+                        return `${context.label}: ${context.raw} cases`;
                     }
                 }
-            });
+            }
+        }
+    }
+});
+
+// Function to update the chart dynamically
+const updatePieChart = () => {
+    diseaseChart.data.labels = cities.map(city => city.name); // Update labels
+    diseaseChart.data.datasets[0].data = cities.map(city => city.covidCases); // Update data
+    diseaseChart.update();
+};
+
+// Call this function on page load
+updatePieChart();
 
             // Toggle city data visibility
             const toggleCityDataCheckbox = document.getElementById('toggle-city-data');
@@ -455,13 +475,14 @@ function getChatbotResponse() {
             document.getElementById("city-select").addEventListener("change", updateDemographicsSection);
 
            // Sample data for heatmap (coordinates with intensity values)
+// Corrected heatmap data
 const heatmapData = [
-    [34.0522, -118.2437, 0.9], // Los Angeles
-    [41.8781, -87.6298, 0.7],  // Chicago
-    [26.2445, -80.2064, 0.5],  // Tampa Bay, Florida
-    [35.7596, -79.0193, 0.3]   // East Solano, North Carolina
+    [34.0522, -118.2437, 0.9],  // Los Angeles
+    [41.8781, -87.6298, 0.7],   // Chicago
+    [27.9506, -82.4572, 0.5],   // Tampa Bay, Florida
+    [38.303, -121.987, 0.4],    // East Solano County
+    [35.7596, -79.0193, 0.3]    // North Carolina
 ];
-
 // Create the heatmap layer and add it to the map with a single red color gradient
 const heatmapLayer = L.heatLayer(heatmapData, {
     radius: 25,          // Heatmap point radius
@@ -527,6 +548,7 @@ function blinkHeatmap() {
         </script>
 
   <!-- Footer Section -->
+   <footer>
     <div class="footer__bottom">
       <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
     </div>
