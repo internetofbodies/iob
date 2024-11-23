@@ -73,7 +73,7 @@ body {
 .button:hover {
   background-color: #ff665e;
   background: linear-gradient(90deg, #2979ff, #3f51b5);
-    transform: scale(1.05); /* Slight scaling effect */
+    transform: scale(1.05);
 }
 
 .cta__button {
@@ -94,7 +94,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center; /* Ensure text is centered */
+  text-align: center; 
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
@@ -156,7 +156,7 @@ body {
   .hero {
     flex-direction: column;
     text-align: center;
-    padding: 50px 20px; /* Adjust padding for smaller screens */
+    padding: 50px 20px;
   }
 
   .hero__content {
@@ -164,11 +164,11 @@ body {
   }
 
   .hero__content h1 {
-    font-size: 3rem; /* Reduce heading size for medium screens */
+    font-size: 3rem; 
   }
 
   .hero__content p {
-    font-size: 1.2rem; /* Adjust paragraph font size */
+    font-size: 1.2rem; 
   }
 
   .hero__image {
@@ -176,43 +176,43 @@ body {
   }
 
   .hero__image img {
-    width: 350px; /* Reduce image size for medium screens */
+    width: 350px; 
   }
 }
 
 @media screen and (max-width: 768px) {
   .hero {
-    padding: 40px 20px; /* Further reduce padding for smaller screens */
+    padding: 40px 20px; 
   }
 
   .hero__content h1 {
-    font-size: 3.5rem; /* Reduce heading size for smaller screens */
+    font-size: 3.5rem; 
   }
 
   .hero__content p {
-    font-size: 1.1rem; /* Smaller font size for paragraph text */
+    font-size: 1.1rem; 
   }
 
   .hero__image img {
-    width: 250px; /* Further reduce image size */
+    width: 250px; 
   }
 }
 
 @media screen and (max-width: 480px) {
   .hero {
-    padding: 30px 15px; /* Minimal padding for extra small screens */
+    padding: 30px 15px; 
   }
 
   .hero__content h1 {
-    font-size: 2rem; /* Further reduce heading size for small mobile devices */
+    font-size: 2rem;
   }
 
   .hero__content p {
-    font-size: 1rem; /* Adjust font size for readability */
+    font-size: 1rem;
   }
 
   .hero__image img {
-    width: 350px; /* Make the image smaller on small mobile devices */
+    width: 350px; 
   }
 }
 
@@ -236,8 +236,8 @@ body {
 /* Hype Container with Grid Layout */
 .hype__container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 columns for larger screens */
-  gap: 20px; /* Space between cards */
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 20px; 
   justify-items: center;
 }
 
@@ -248,7 +248,7 @@ body {
   border-radius: 10px;
   text-align: left;
   width: 100%;
-  max-width: 350px; /* Limit the card width */
+  max-width: 350px; 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -275,23 +275,23 @@ body {
 /* Responsive Design for Cards */
 @media screen and (max-width: 960px) {
   .hype__container {
-    grid-template-columns: repeat(2, 1fr); /* 2 columns for medium screens */
+    grid-template-columns: repeat(2, 1fr); 
   }
 }
 
 @media screen and (max-width: 768px) {
   .hype__container {
-    grid-template-columns: 1fr; /* 1 column for smaller screens */
+    grid-template-columns: 1fr; 
   }
 }
 
 /* Footer Styles */
 .footer {
-  background-color: #1a1a1a; /* Dark background */
-  color: #ffffff; /* White text color */
-  padding: 20px 0; /* Adjust padding as necessary */
-  overflow: hidden; /* Prevent overflow */
-  text-align: center; /* Center-align the content */
+  background-color: #1a1a1a; 
+  color: #ffffff; 
+  padding: 20px 0; 
+  overflow: hidden;
+  text-align: center; 
 }
 
 .footer__column ul {
@@ -304,29 +304,29 @@ body {
 }
 
 .footer__column ul li a {
-  color: #ffffff; /* White link color */
+  color: #ffffff;
   text-decoration: none;
   font-size: 0.9rem;
 }
 
 .footer__column ul li a:hover {
-  color: #ff8177; /* Highlight color on hover */
+  color: #ff8177; 
 }
 
 /* Footer Bottom Styles */
 .footer__bottom {
-  background-color: #1a1a1a; /* Dark background */
-  color: #ffffff; /* White text */
-  text-align: center; /* Center the text */
-  padding: 15px 0; /* Adjust vertical spacing */
-  font-size: 0.9rem; /* Adjust font size */
-  margin: 0; /* Reset any default margin */
+  background-color: #1a1a1a;
+  color: #ffffff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 0.9rem;
+  margin: 0; 
 }
 
 
 
 .footer__bottom p {
-  margin: 0; /* Remove margin for a compact look */
+  margin: 0; 
 }
 
 html, body {
@@ -351,19 +351,19 @@ html, body {
 /* Responsive Footer */
 @media screen and (max-width: 960px) {
   .footer__column {
-    width: 100%; /* Full-width columns for smaller screens */
+    width: 100%; 
   }
 
   .footer__bottom {
-    padding: 15px 0; /* Increase padding for touch devices */
-    font-size: 0.8rem; /* Slightly smaller font */
+    padding: 15px 0; 
+    font-size: 0.8rem; 
   }
 }
 
 
 /* Optional: Remove the separator if not needed */
 .separator {
-  height: 0; /* Removed extra space */
+  height: 0; 
   background: transparent;
 }
 
@@ -417,7 +417,7 @@ label .close-btn {
     align-items: center;
     transition: transform 0.5s ease;
     transform: translateX(100%);
-    padding-top: 80px; /* Adjust top padding to align with the icon */
+    padding-top: 80px; 
   }
 
   /* Show the menu when checkbox is checked */
@@ -437,7 +437,7 @@ label .close-btn {
     padding: 10px 20px;
     text-align: center;
     display: block;
-    width: 100%; /* Full width for easier tapping */
+    width: 100%; 
   }
 
   .navbar__btn .button {
@@ -505,8 +505,8 @@ label .close-btn {
 .toc-list li {
   margin: 10px 0;
   display: flex;
-  align-items: flex-start; /* Align to top for multiline items */
-  padding-left: 30px; /* Ensure uniform padding for all items */
+  align-items: flex-start; 
+  padding-left: 30px; 
   position: relative;
 }
 
@@ -516,8 +516,8 @@ label .close-btn {
   color: #ff8177;
   font-weight: bold;
   position: absolute;
-  left: 0; /* Position bullet point on the left */
-  top: 0; /* Align with the top of multiline items */
+  left: 0; 
+  top: 0; 
 }
 
 /* TOC Links */
@@ -527,7 +527,7 @@ label .close-btn {
   color: #b3b3b3;
   font-weight: 500;
   transition: color 0.3s ease;
-  line-height: 1.4; /* Slightly reduce line height for closer line spacing */
+  line-height: 1.4;
 }
 
 .toc-list li a:hover {
@@ -560,8 +560,8 @@ label .close-btn {
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  margin-top: 20px; /* Adds space above each section heading */
-  margin-bottom: 20px; /* Optional: smaller space below */
+  margin-top: 20px; 
+  margin-bottom: 20px; 
 }
 
 /* Paragraph Styles */
@@ -585,7 +585,7 @@ label .close-btn {
 /* Responsive Design */
 @media screen and (max-width: 1024px) {
   .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid {
-    padding: 30px 6%; /* Added extra padding for better readability */
+    padding: 30px 6%; 
   }
 
   .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2, .how h2, .lipid h2 {
@@ -599,7 +599,7 @@ label .close-btn {
 
 @media screen and (max-width: 768px) {
   .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid {
-    padding: 25px 5%; /* Increased padding for smaller screens */
+    padding: 25px 5%; 
     margin-top: 30px;
   }
 
@@ -614,8 +614,8 @@ label .close-btn {
 
 @media screen and (max-width: 480px) {
   .toc-section, .exploring, .understanding, .rise, .benefits, .transhumanism, .graphene, .scientist, .how, .lipid {
-    padding: 20px 5%; /* Padding on left and right for mobile view */
-    margin: 20px 10px; /* Add margin on left and right for mobile view */
+    padding: 20px 5%; 
+    margin: 20px 10px; 
   }
 
   .toc-section h2, .exploring h2, .understanding h2, .rise h2, .benefits h2, .transhumanism h2, .graphene h2, .scientist h2, .how h2, .lipid h2 {
@@ -635,8 +635,8 @@ label .close-btn {
 
 /* Vaxxed Sections */
 .vaxxed {
-  padding: 20px;
-  margin-top: 40px;
+  padding: 5px;
+  margin-top: 10px;
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
@@ -675,7 +675,7 @@ label .close-btn {
 /* Responsive Design for Vaxxed Sections */
 @media screen and (max-width: 1024px) {
   .vaxxed {
-    padding: 30px 6%; /* Extra padding for readability */
+    padding: 10px 6%; /* Extra padding for readability */
   }
 
   .vaxxed h2 {
@@ -685,7 +685,7 @@ label .close-btn {
 
 @media screen and (max-width: 768px) {
   .vaxxed {
-    padding: 25px 5%;
+    padding: 10px 5%;
     margin-top: 30px;
   }
 
@@ -696,7 +696,7 @@ label .close-btn {
 
 @media screen and (max-width: 480px) {
   .vaxxed {
-    padding: 20px 5%;
+    padding: 10px 5%;
     margin: 20px 10px;
   }
 
@@ -718,10 +718,10 @@ label .close-btn {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
-  text-align: center; /* Center-aligns text within the section */
+  text-align: center; 
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers all content in the flex container */
+  align-items: center; 
 }
 
 /* IoB AT-A-GLANCE Section */
@@ -733,8 +733,8 @@ label .close-btn {
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers all content within the section */
-  text-align: center; /* Centers text within the section */
+  align-items: center; 
+  text-align: center; 
 }
 
 /* Graphene */
@@ -746,8 +746,8 @@ label .close-btn {
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers all content within the section */
-  text-align: center; /* Centers text within the section */
+  align-items: center;
+  text-align: center; 
 }
 
 /* Vax */
@@ -759,8 +759,8 @@ label .close-btn {
   margin-right: auto;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centers all content within the section */
-  text-align: center; /* Centers text within the section */
+  align-items: center; 
+  text-align: center; 
 }
 
 
@@ -1769,6 +1769,13 @@ button {
   padding: 10px;
   color: #333; /* Dark text for readability */
 }
+
+#city-list p {
+  margin-bottom: 5px; /* Adjust spacing between items */
+  padding: 5px;        /* Optional: Add inner spacing */
+ 
+}
+
 
 /* Responsive Design for Mobile */
 @media (max-width: 600px) {
