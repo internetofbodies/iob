@@ -13,6 +13,16 @@ body {
   align-items: center; 
 }
 
+.homepage {
+  background-image: url('landing.jpeg'); /* Replace with your actual image path */
+  background-size: cover; /* Ensures the image covers the full screen */
+  background-position: center; /* Centers the image */
+  background-repeat: no-repeat; /* Prevents tiling */
+  background-color: #131313; /* Fallback background color */
+}
+
+
+
 /* Navbar Styles */
 .navbar {
   background: #131313;
