@@ -1490,6 +1490,66 @@ main {
   color: #444;
 }
 
+.suggestions {
+  position: absolute;
+  background: #ffffff; 
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  width: 100%;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.suggestions div {
+  padding: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: #000; 
+  font-size: 16px; 
+  font-weight: 500; 
+}
+
+.suggestions div:hover {
+  background: #f0f0f0; 
+}
+
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+  .suggestions {
+      max-height: 200px; 
+      width: 90%; 
+      left: 5%; 
+      font-size: 14px; 
+  }
+
+  .suggestions div {
+      padding: 8px; 
+  }
+}
+
+/* Media Query for Extra Small Screens (e.g., phones) */
+@media (max-width: 480px) {
+  .suggestions {
+      max-height: 250px; 
+      width: 100%; 
+      left: 0; 
+      font-size: 13px; 
+  }
+
+  .suggestions div {
+      padding: 6px; 
+  }
+}
+
+/* Prevent suggestions box from breaking on scroll */
+body {
+  overflow-x: hidden; 
+}
+
 /* Breathing Exercise Styling */
 .circle-container {
   display: flex;
@@ -1536,6 +1596,79 @@ main {
   color: #f77062;
   margin-bottom: 10px;
 }
+
+/* Chat Box Container */
+#chat-box {
+  background-color: #ffffff; /* White background for readability */
+  border: 1px solid #e0e0e0; /* Light gray border */
+  border-radius: 8px;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  font-family: Arial, sans-serif;
+}
+
+/* Chat Messages */
+.chat-message {
+  margin: 5px 0;
+  padding: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+  line-height: 1.4;
+  font-size: 14px;
+}
+
+/* User Messages */
+.chat-message.user {
+  background-color: #007BFF; /* Blue background for user messages */
+  color: #ffffff; /* White text for contrast */
+  align-self: flex-end;
+}
+
+/* Bot Messages */
+.chat-message.bot {
+  background-color: #F1F1F1; /* Light gray background for bot messages */
+  color: #333333; /* Dark gray text for better readability */
+  align-self: flex-start;
+}
+
+/* Input Container */
+#chat-input-container {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Chat Input Field */
+#chat-input {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+/* Send Button */
+#chat-input-container button {
+  background-color: #007BFF; /* Blue button */
+  color: #ffffff; /* White text */
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Send Button Hover Effect */
+#chat-input-container button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}
+
+/* Typing Indicator */
+#typing-indicator {
+  font-style: italic;
+  color: #888888; /* Light gray for subtlety */
+}
+
 
 /* Textbox Styling */
 input[type="text"],
@@ -2335,7 +2468,7 @@ input[type="number"]:focus {
 /* article section 3 */
 
 .hype{
-  padding: 20px 20px; /* Reduced padding for top/bottom and sides */
+  padding: 20px 20px;
 }
 
 .hype__card1 {
@@ -2402,13 +2535,13 @@ input[type="number"]:focus {
 /* article 4 */
 
 #article4 {
-  padding: 20px 20px; /* Reduced padding for top/bottom and sides */
+  padding: 20px 20px;
   max-width: 1300px;
   margin: 0 auto;
   background-color: #131313; 
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center-align all child elements */
+  align-items: center;
 }
 
 .article4 h2 {
@@ -2600,4 +2733,161 @@ input[type="number"]:focus {
   }
 }
 
+/* Overview Dashboard */
+/* Dashboard Title */
+.dashboard h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-top: 20px;
+  color: #f77062;
+}
 
+/* Section Styling */
+.dashboard > div {
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* Section Titles */
+.dashboard h2 {
+  text-align: center;
+  color: #333;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+/* Subsection Titles */
+.dashboard h3 {
+  color: #f77062;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* General Text */
+.dashboard p,
+.dashboard ul li {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+/* Population Summary and Breakdown */
+.total-population .population-summary {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2979ff;
+}
+
+.total-population .population-breakdown div {
+  margin-top: 1rem;
+}
+
+.total-population .population-breakdown p {
+  margin: 0.3rem 0;
+}
+
+/* General Health Section */
+.general-health-percentage span {
+  display: block;
+  font-size: 2.5rem;
+  color: #2979ff;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+/* Tables */
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.table-container th,
+.table-container td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table-container th {
+  background-color: #f77062;
+  color: white;
+  text-align: center;
+}
+
+.table-container tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.table-container tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* AI Analysis */
+.ai-analysis {
+  margin-top: 1.5rem;
+}
+
+.ai-analysis h3 {
+  font-size: 1.5rem;
+  color: #2979ff;
+  margin-bottom: 0.5rem;
+}
+
+.ai-analysis ul li {
+  margin: 0.5rem 0;
+  list-style-type: disc;
+  padding-left: 1.5rem;
+}
+
+/* Notes */
+.note {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Buttons */
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #f77062;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #e65d50;
+  background: linear-gradient(90deg, #2979ff, #3f51b5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard > div {
+    padding: 1rem;
+    width: 95%;
+  }
+
+  .table-container table {
+    font-size: 0.9rem;
+  }
+
+  .dashboard h1,
+  .dashboard h2,
+  .dashboard h3 {
+    font-size: 1.5rem;
+  }
+}
