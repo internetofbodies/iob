@@ -130,14 +130,16 @@
             <h3>Vaccination Simulation</h3>
             <p>Search for a vaccine to see its ingredients and possible side effects.</p>
             
-            <!-- Search Input -->
-            <input type="text" id="vaccineSearch" placeholder="Enter vaccine name..." />
+            <div class="autocomplete">
+                <input type="text" id="vaccineSearch" placeholder="Enter vaccine name..." />
+                <div id="suggestion-box" class="suggestions"></div>
+            </div>
             <button onclick="searchVaccine()">Search</button>
             
             <!-- Display Vaccine Info -->
             <div id="vaccineInfo"></div>
         </section>
-
+        
 
         <!-- BMI -->
         <section id="bmi-calculator" class="feature-section">
@@ -165,7 +167,19 @@
             </select>
             <button onclick="suggestActivity()">Get Suggestion</button>
             <p id="mood-suggestion"></p>
-        </section>
+
+            <section id="chatbot-section" class="feature-section">
+                <h3>Chat with Me</h3>
+                <div id="chat-box" class="chat-box">
+                    <!-- Messages will dynamically appear here -->
+                </div>
+                <div id="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Type your message..." />
+                    <button onclick="handleChatInput()">Send</button>
+                </div>
+            </section>
+            
+    
 
         <!--Breathing Exercise-->
         <div id="breathing-exercise">
@@ -518,6 +532,39 @@ function searchVaccine() {
         vaccineInfoDiv.innerHTML = "<p>Vaccine not found. Please try another name.</p>";
     }
 }
+
+document.getElementById("vaccineSearch").addEventListener("input", function () {
+    const query = this.value.toLowerCase();
+    const suggestionBox = document.getElementById("suggestion-box");
+    suggestionBox.innerHTML = ""; // Clear previous suggestions
+    
+    if (query) {
+        const matches = vaccines.filter(v => v.name.toLowerCase().includes(query));
+        if (matches.length > 0) {
+            matches.forEach(match => {
+                const suggestion = document.createElement("div");
+                suggestion.textContent = match.name;
+                suggestion.addEventListener("click", () => {
+                    document.getElementById("vaccineSearch").value = match.name;
+                    suggestionBox.style.display = "none";
+                });
+                suggestionBox.appendChild(suggestion);
+            });
+            suggestionBox.style.display = "block";
+        } else {
+            suggestionBox.style.display = "none";
+        }
+    } else {
+        suggestionBox.style.display = "none";
+    }
+});
+
+document.getElementById("vaccineSearch").addEventListener("blur", function () {
+    setTimeout(() => {
+        document.getElementById("suggestion-box").style.display = "none"; // Hide suggestions when focus is lost
+    }, 200);
+});
+
  
 //BMI
 function calculateBMI() {
@@ -560,6 +607,118 @@ function calculateBMI() {
 
     suggestion.textContent = activities[mood] || "Choose a mood to get a suggestion.";
 }
+let chatHistory = []; // Stores the full conversation history
+
+// Triggered when the user sends a message
+function handleChatInput() {
+    const chatInput = document.getElementById("chat-input");
+    const userMessage = chatInput.value.trim();
+
+    if (userMessage) {
+        addChatMessage("user", userMessage); // Add user's message to the chat
+        chatHistory.push({ sender: "user", message: userMessage }); // Store in chat history
+
+        // Generate and display bot's response
+        generateChatbotResponse(userMessage);
+
+        chatInput.value = ""; // Clear input
+    }
+}
+
+// Display messages in the chat box
+function addChatMessage(sender, message) {
+    const chatBox = document.getElementById("chat-box");
+    const chatMessage = document.createElement("div");
+    chatMessage.className = `chat-message ${sender}`;
+    chatMessage.textContent = message;
+
+    chatBox.appendChild(chatMessage);
+    chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to the latest message
+}
+
+// Generate bot's response based on user's message
+function generateChatbotResponse(userMessage) {
+    addTypingIndicator();
+
+    // Simulate bot thinking for a moment
+    setTimeout(() => {
+        removeTypingIndicator();
+
+        const mood = document.getElementById("mood-select").value;
+        const response = getBotResponse(userMessage, mood);
+
+        addChatMessage("bot", response); // Add bot's message to the chat
+        chatHistory.push({ sender: "bot", message: response }); // Store in chat history
+    }, 1000);
+}
+
+// Generate bot responses dynamically based on mood and context
+function getBotResponse(userMessage, mood) {
+    // Example ongoing conversation context
+    const moodPrompts = {
+        happy: [
+            "I'm glad you're feeling happy! What made your day special?",
+            "That's great to hear! What's keeping you in such a good mood?",
+            "Happiness is contagious! Tell me more about your day."
+        ],
+        stressed: [
+            "I'm here to help. What's been causing your stress lately?",
+            "Take a deep breath. Let’s work through this together—what’s on your mind?",
+            "Stress can be tough. Do you want to talk about what’s making you feel this way?"
+        ],
+        anxious: [
+            "It’s okay to feel anxious sometimes. What’s making you feel this way?",
+            "I’m here for you. Want to share what’s on your mind?",
+            "Anxiety can be overwhelming. Let’s talk it out—what’s been bothering you?"
+        ],
+        calm: [
+            "Calm is a great place to be. How can I help you stay in this state?",
+            "That’s wonderful to hear. What’s been helping you feel so peaceful?",
+            "Being calm is great for your well-being. What’s your secret?"
+        ]
+    };
+
+    // Keyword-based response logic for dynamic conversations
+    const keywords = {
+        stress: "Stress is tough, but talking about it can help. Can I offer some relaxation tips?",
+        happy: "I love that you’re happy! What’s keeping you in such a good mood?",
+        sad: "I’m here for you. Want to share what’s making you feel this way?",
+        tired: "Feeling tired is natural. Have you been sleeping well?",
+        help: "I’m here to help! What do you need assistance with?"
+    };
+
+    // Match user input against keywords
+    for (const keyword in keywords) {
+        if (userMessage.toLowerCase().includes(keyword)) {
+            return keywords[keyword];
+        }
+    }
+
+    // Default mood-based response
+    const randomMoodResponse = moodPrompts[mood]?.[Math.floor(Math.random() * moodPrompts[mood].length)] || "Tell me more about how you're feeling.";
+    return randomMoodResponse;
+}
+
+// Add typing indicator for a more natural feel
+function addTypingIndicator() {
+    const chatBox = document.getElementById("chat-box");
+    const typingIndicator = document.createElement("div");
+    typingIndicator.id = "typing-indicator";
+    typingIndicator.className = "chat-message bot";
+    typingIndicator.textContent = "AI is typing...";
+    chatBox.appendChild(typingIndicator);
+
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// Remove typing indicator
+function removeTypingIndicator() {
+    const typingIndicator = document.getElementById("typing-indicator");
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
 
     //Breathing Exercise
     function startBreathingExercise() {
