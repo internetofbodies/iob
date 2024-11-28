@@ -133,7 +133,7 @@ body {
 .hero__content h1 {
   font-size: 4rem;
   color: white;
-  margin-bottom: 1rem;
+  margin-bottom: 3rem;
   background-image: linear-gradient(to right, #ff0844, #ffb199);
   -webkit-background-clip: text;
   background-clip: text;
@@ -152,12 +152,24 @@ body {
   margin-bottom: 2rem;
 }
 
-/* Hero Image */
-.hero__image img {
+/* Hero Image */  
+.iob__image {
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  height: 100%; /* Make sure the parent has enough height to center vertically */
+  text-align: center; /* Optional: Center text inside */
+  
+}
+
+.iob__image img {
   width: 400px;
   height: auto;
   transition: transform 0.3s ease-in-out; 
+  display: block; /* Ensures no inline spacing issues */
+  margin: 0 auto; /* Center horizontally if flexbox isn't used */
 }
+
 
 /* Responsive Styles */
 @media screen and (max-width: 960px) {
@@ -219,8 +231,10 @@ body {
     font-size: 1rem;
   }
 
-  .hero__image img {
+  .iob__image img {
     width: 350px; 
+    padding: 20px
+    
   }
 }
 
