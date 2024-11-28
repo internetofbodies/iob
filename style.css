@@ -21,8 +21,6 @@ body {
   background-color: #131313; /* Fallback background color */
 }
 
-
-
 /* Navbar Styles */
 .navbar {
   background: #131313;
@@ -295,40 +293,79 @@ body {
   }
 }
 
-/* General Layout */
+/* Footer Styles */
+.footer {
+  background-color: #1a1a1a; 
+  color: #ffffff; 
+  padding: 20px 0; 
+  overflow: hidden;
+  text-align: center; 
+}
+
+.footer__column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer__column ul li {
+  margin-bottom: 10px;
+}
+
+.footer__column ul li a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.footer__column ul li a:hover {
+  color: #ff8177; 
+}
+
+/* Footer Bottom Styles */
+.footer__bottom {
+  background-color: #1a1a1a;
+  color: #ffffff;
+  text-align: center;
+  padding: 15px 0;
+  font-size: 0.9rem;
+  margin: 0; 
+}
+
+
+
+.footer__bottom p {
+  margin: 0; 
+}
+
 html, body {
   height: 100%;
   margin: 0;
-  display: flex;
-  flex-direction: column;
 }
 
 .main-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Ensure full height for the layout */
+  min-height: 100vh;
 }
 
-/* Footer Styles */
+.content {
+  flex: 1;
+}
+
 .footer {
-  color: #f1f1f1; /* Light text color for readability */
-  text-align: center;
-  padding: 20px 10px; /* Spacing for a clean look */
-  font-size: 14px; /* Small but readable font size */
-  font-family: 'Arial', sans-serif; /* Consistent font style */
+  margin-top: auto;
 }
 
-.footer__container p {
-  margin: 0; /* Remove default margins */
-}
+/* Responsive Footer */
+@media screen and (max-width: 960px) {
+  .footer__column {
+    width: 100%; 
+  }
 
-.footer a {
-  color: #f1f1f1; /* Match link color to text color */
-  text-decoration: underline; /* Underline for accessibility */
-}
-
-.footer a:hover {
-  color: #00bcd4; /* Highlight link on hover with a modern accent color */
+  .footer__bottom {
+    padding: 15px 0; 
+    font-size: 0.8rem; 
+  }
 }
 
 
