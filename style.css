@@ -1598,78 +1598,95 @@ body {
 }
 
 /* Chat Box Container */
+/* General chat box styling */
 #chat-box {
-  background-color: #ffffff; /* White background for readability */
-  border: 1px solid #e0e0e0; /* Light gray border */
-  border-radius: 8px;
-  padding: 10px;
-  max-height: 300px;
+  width: 100%;
+  height: 200px;
   overflow-y: auto;
-  font-family: Arial, sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  box-sizing: border-box; /* Ensure padding doesn't break the layout */
 }
 
-/* Chat Messages */
 .chat-message {
   margin: 5px 0;
   padding: 10px;
-  border-radius: 8px;
-  max-width: 80%;
-  line-height: 1.4;
+  border-radius: 5px;
   font-size: 14px;
+  word-wrap: break-word;
 }
 
-/* User Messages */
 .chat-message.user {
-  background-color: #007BFF; /* Blue background for user messages */
-  color: #ffffff; /* White text for contrast */
-  align-self: flex-end;
+  background-color: #d1ecf1;
+  color: #0c5460;
+  text-align: right;
 }
 
-/* Bot Messages */
 .chat-message.bot {
-  background-color: #F1F1F1; /* Light gray background for bot messages */
-  color: #333333; /* Dark gray text for better readability */
-  align-self: flex-start;
+  background-color: #f8d7da;
+  color: #721c24;
+  text-align: left;
 }
 
-/* Input Container */
+/* Input container styling */
 #chat-input-container {
   display: flex;
   gap: 10px;
-  margin-top: 10px;
 }
 
-/* Chat Input Field */
 #chat-input {
-  width: 80%;
+  flex: 1;
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
-/* Send Button */
-#chat-input-container button {
-  background-color: #007BFF; /* Blue button */
-  color: #ffffff; /* White text */
-  border: none;
-  border-radius: 8px;
-  padding: 10px 15px;
-  cursor: pointer;
+
+button {
+  padding: 10px 20px;
   font-size: 14px;
+  background-color: #ff7b54;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-/* Send Button Hover Effect */
-#chat-input-container button:hover {
-  background-color: #0056b3; /* Darker blue on hover */
+button:hover {
+  background-color: #ff5a3c;
 }
 
-/* Typing Indicator */
-#typing-indicator {
-  font-style: italic;
-  color: #888888; /* Light gray for subtlety */
+/* Responsive Design */
+@media only screen and (max-width: 768px) {
+  #chat-box {
+      height: 150px; /* Reduce height for smaller screens */
+  }
+
+  #chat-input-container {
+      flex-direction: column;
+      gap: 5px;
+  }
+
+  #chat-input {
+      width: 100%; /* Ensure input takes up full width */
+      font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  button {
+      width: 100%; /* Button spans full width */
+      font-size: 12px; /* Adjust font size for smaller screens */
+  }
+
+  .chat-message {
+      font-size: 12px; /* Make text more readable on small screens */
+  }
 }
 
 
+/*Textbutton*/
 /* Textbox Styling */
 input[type="text"],
 input[type="number"],
