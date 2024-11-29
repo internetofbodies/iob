@@ -316,24 +316,23 @@ body {
 }
 
 .spotlight__info {
-  padding: 15px;
+  padding: 15px; /* Ensure consistent padding */
+  text-align: left; /* Align text to the left */
 }
 
 .spotlight__category {
-  font-size: 1.2rem;
+  font-size: 1.2rem; /* Maintain font size */
   font-weight: bold;
-  color: #ff5c5c; /* Highlighted color */
-  margin-bottom: 10px;
-  padding: 10px;
+  color: #ff5c5c; /* Your red highlight color */
+  margin-bottom: 5px; /* Reduce space below the category */
 }
 
 .spotlight__description {
   font-size: 1rem;
   line-height: 1.6;
-  color: #ddd;
-  text-decoration: none;
+  margin: 0; /* Remove extra margins */
+  text-align: left; /* Align description text to the left */
 }
-
 .spotlight__header p {
     margin-bottom: 20px; /* Adds space below the paragraph */
   }
