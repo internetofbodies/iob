@@ -19,7 +19,7 @@
 <meta name="description" content="Internet of Bodies Book a Meeting with Us!">
 <meta name="keywords" content="Internet of Bodies Book a Meeting with Us!">
 <meta name="author" content="Accountable Infrastructure">
-<title>Internet of Bodies - Book a Meeting with Us!</title>
+<title>Internet of Bodies - Request Demo!</title>
 
   <!--Favicon-->
   <link rel="icon" href="logo.png" type="image/png">
@@ -36,83 +36,127 @@
 </script>
 <style>
         /* General Styles */
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
 
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background-color: #111;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-            margin: 20px 0;
-        }
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #111;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+}
 
-        h1, h2 {
-            text-align: center;
-            margin-bottom: 20px;
-            color: #fff;
-        }
+h1{
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-        form {
-            display: flex;
-            flex-direction: column;
-        }
+h2 {
+    text-align: left; /* Aligns the text to the left */
+    margin-bottom: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 1.5rem; /* Adjust font size as needed */
+}
 
-        .form-group {
-            margin-bottom: 20px;
-        }
 
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-        }
+form {
+    display: flex;
+    flex-direction: column;
+}
 
-        input,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #444;
-            border-radius: 4px;
-            background-color: #222;
-            color: #fff;
-        }
+.form-group {
+    margin-bottom: 20px;
+}
 
-        input:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #fff;
-        }
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
 
-        .radio-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+    transition: border-color 0.3s, background-color 0.3s;
+}
 
-        .radio-group label {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
+input:hover,
+textarea:hover {
+    border-color: #888;
+}
 
-        hr {
-            margin: 20px 0;
-            border: none;
-            border-top: 1px solid #444;
-        }
-        button, .submit, .redirect-button {
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #fff;
+    background-color: #333;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Radio Buttons and Checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+    width: 20px; /* Adjust size for larger screens */
+    height: 20px;
+    margin-right: 10px; /* Space between input and label */
+    vertical-align: middle; /* Align with label text */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+input[type="radio"]:hover,
+input[type="checkbox"]:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 10px; /* Space between items */
+    align-items: center; /* Center-align inputs with labels */
+}
+
+.radio-group label,
+.checkbox-group label {
+    font-size: 14px; /* Consistent text size */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+button, .submit, .redirect-button {
     padding: 12px;
     background-color: #a7a5a5;
     border: none;
@@ -122,88 +166,162 @@
     cursor: pointer;
     text-align: center;
     text-decoration: none;
-    display: block; /* Ensures consistent behavior */
-    width: 100%; /* Full-width button */
-    margin-top: 10px; /* Space between buttons */
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button:hover, .submit:hover, .redirect-button:hover {
-    background-color: #e65c00;
+    background-color: #f77062;
+    transform: translateY(-2px);
+}
+
+button:active, .submit:active, .redirect-button:active {
+    background-color: #e65c50;
+    transform: translateY(1px);
+}
+
+.acknowledgment {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #bbb;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.company-overview{
+    text-align: left;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    h1, h2 {
+        font-size: 1.5rem;
+    }
+
+    input, textarea {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .acknowledgment {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.2rem;
+    }
+
+    input, textarea {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .acknowledgment {
+        font-size: 11px;
+    }
+}
+/* Radio responsive */
+
+@media (max-width: 768px) {
+    input[type="radio"],
+    input[type="checkbox"] {
+        width: 18px; /* Adjust size for medium screens */
+        height: 18px;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+        font-size: 13px; /* Adjust text size for medium screens */
+    }
+}
+
+@media (max-width: 480px) {
+    input[type="radio"],
+    input[type="checkbox"] {
+        width: 16px; /* Smaller size for smaller screens */
+        height: 16px;
+    }
+
+    .radio-group label,
+    .checkbox-group label {
+        font-size: 12px; /* Smaller text size for smaller screens */
+    }
 }
 
 
-
-        .acknowledgment {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            .container {
-                padding: 15px;
-            }
-
-            h1, h2 {
-                font-size: 1.5rem;
-            }
-
-            input, textarea {
-                font-size: 14px;
-            }
-
-            button {
-                font-size: 14px;
-                padding: 10px;
-            }
-
-            .acknowledgment {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1, h2 {
-                font-size: 1.2rem;
-            }
-
-            input, textarea {
-                font-size: 12px;
-                padding: 8px;
-            }
-
-            button {
-                font-size: 12px;
-                padding: 8px;
-            }
-
-            .acknowledgment {
-                font-size: 11px;
-            }
-        }
+        
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Request Demo Form</h1>
         <form>
+            <section class="company-overview">
+                <h2>ENTITY OVERVIEW</h2>
+                <hr />
             <!-- Original Form Fields -->
             <div class="form-group">
-                <label for="fullName">Full Name *</label>
+                <label for="fullName">Entity Full Name *</label>
                 <input type="text" id="fullName" name="fullName" required>
             </div>
             <div class="form-group">
-                <label for="email">Email Address *</label>
+                <label for="email">Entity Email Address *</label>
                 <input type="email" id="email" name="email" required>
             </div>
             <div class="form-group">
-                <label for="phone">Phone Number *</label>
+                <label for="phone">Entity Phone Number *</label>
                 <input type="tel" id="phone" name="phone" required>
             </div>
+            <div class="form-group">
+                <label for="company-name">Entity Legal Name <span style="color: red;">*</span></label>
+                <input type="text" id="company-name" name="company-name" required />
+              </div>
+              <div class="form-group">
+                <label for="company-address">Entity Address <span style="color: red;">*</span></label>
+                <input type="text" id="company-address" name="company-address" required />
+              </div>
+              <div class="form-group">
+                <label for="official-website">Official Website <span style="color: red;">*</span></label>
+                <input type="text" id="official-website" name="official-website" required />
+                <div>
+                  <input type="checkbox" id="no-website" name="no-website" />
+                  <label for="no-website">No Official Website</label>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="country">Country <span style="color: red;">*</span></label>
+                <select id="country" name="country" required>
+                  <option value="" disabled selected>Select a country</option>
+                  <option value="USA">United States</option>
+                  <option value="Canada">Canada</option>
+                  <option value="UK">United Kingdom</option>
+                  <option value="India">India</option>
+                  <option value="Australia">Australia</option>
+                  <!-- Add more countries as needed -->
+                </select>
+              </div>
+            </section>
             <div class="form-group">
                 <label for="message">Message *</label>
                 <textarea id="message" name="message" rows="5" required></textarea>
@@ -252,7 +370,7 @@ button:hover, .submit:hover, .redirect-button:hover {
                         <input type="radio" name="isoCertified" value="yes" required> YES
                     </label>
                     <label>
-                        <input type="radio" name="isoCertified" value="no" required> NO
+                        <input type="radio" name="isoCertified" value="no" required> NO 
                     </label>
                 </div>
             </div>
