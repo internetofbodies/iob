@@ -36,13 +36,13 @@ body {
 
 .navbar__container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* Aligns logo and button to opposite sides */
+  align-items: center; /* Vertically aligns all items */
   height: 80px;
   width: 100%;
   max-width: 1300px;
   margin: 0 auto;
-  padding: 0 50px;
+  padding: 0 20px; /* Adjust padding for proper spacing */
 }
 
 #navbar__logo {
@@ -58,11 +58,8 @@ body {
 }
 
 .navbar__menu {
-  display: flex;
-  align-items: center;
-  list-style: none;
+  margin-right: auto; /* Keeps menu items to the left */
 }
-
 .navbar__links {
   color: white;
   text-decoration: none;
@@ -75,13 +72,14 @@ body {
   color: white;
   text-decoration: none;
   border-radius: 4px;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 
 .button:hover {
   background-color: #ff665e;
   background: linear-gradient(90deg, #2979ff, #3f51b5);
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .cta__button {
@@ -91,6 +89,7 @@ body {
   text-decoration: none;
   border-radius: 4px;
   transition: background 0.3s ease, transform 0.3s ease;
+  margin-left: auto; /* Pushes the button to the right */
 }
 
 .cta__button1 {
@@ -106,6 +105,32 @@ body {
   transition: background 0.3s ease, transform 0.3s ease;
 }
 
+.cta__button_demo {
+  padding: 10px 20px;
+  background-color: transparent; /* Transparent background */
+  color: white; /* White text color */
+  text-decoration: none;
+  border: 2px solid #f77062; /* Light red border */
+  border-radius: 4px;
+  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  margin-left: auto; /* Pushes the button to the very right */
+}
+
+/* Hover Effect */
+.cta__button_demo:hover {
+  background: linear-gradient(90deg, #2979ff, #3f51b5); 
+  color: white; /* White text on hover */
+  transform: scale(1.05); /* Slight scale effect on hover */
+}
+
+/* Mobile Adjustments */
+@media screen and (max-width: 768px) {
+  .cta__button_demo {
+    padding: 8px 16px; /* Smaller padding for mobile */
+    font-size: 0.9rem; /* Slightly smaller font size */
+  }
+}
+
 
 .cta__button:hover {
   background: linear-gradient(90deg, #2979ff, #3f51b5); 
@@ -115,60 +140,229 @@ body {
   background: linear-gradient(90deg, #2979ff, #3f51b5); 
 }
 
+.navbar__btn {
+  margin-left: auto; /* Pushes the button to the far right */
+  display: flex; /* Ensures proper alignment inside the container */
+  align-items: center; /* Vertically centers the button */
+}
+
+
 
 /* Hero Section */
 .hero {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column; /* Stack elements vertically */
   align-items: center;
-  padding: 100px 50px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-.hero__content {
-  max-width: 50%;
+  text-align: center; /* Center-align text */
+  padding: 50px 20px;
+  color: white;
 }
 
 .hero__content h1 {
-  font-size: 4rem;
-  color: white;
-  margin-bottom: 3rem;
+  font-size: 3.5rem;
+  margin-bottom: 20px;
   background-image: linear-gradient(to right, #ff0844, #ffb199);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.hero__content h1 span {
+.hero__content span {
   background-image: linear-gradient(to right, #00c6ff, #0072ff);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
 
-.hero__content p {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+.cta__button {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-bottom: 30px;
+  background-color: #ff5c5c;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s;
 }
 
-/* Hero Image */  
-.iob__image {
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  height: 100%; /* Make sure the parent has enough height to center vertically */
-  text-align: center; /* Optional: Center text inside */
+.cta__button:hover {
+  background-color: #ff2a2a;
+}
+
+.video__preview iframe {
+  width: 100%;
+  max-width: 800px; /* Limit the width */
+  height: 450px;
+  border-radius: 10px;
+  margin: 20px 0;
+}
+
+/* mission */
+.mission-iob {
+  padding: 30px;
+  max-width: 800px;
+  text-align: center;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.mission-iob h2 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: white;
+  padding: 10px;
+}
+
+.mission-iob p {
+  font-size: 1.5rem; /* Example for larger text */
+  color: #ddd;
+  text-align: center;
+
+}
+
+
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .hero__content h1 {
+    font-size: 2.5rem;
+  }
+
+  .cta__button {
+    font-size: 1rem;
+    padding: 10px 15px;
+  }
+
+  .video__preview iframe {
+    height: 300px;
+  }
+
+  .about-iob {
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero__content h1 {
+    font-size: 2rem;
+  }
+
+  .cta__button {
+    font-size: 0.9rem;
+    padding: 8px 12px;
+  }
+
+  .video__preview iframe {
+    height: 250px;
+  }
+
+  .about-iob p {
+    font-size: 1rem;
+  }
+}
+/* Spotlight Section */
+.spotlight {
+  padding: 40px 20px;
+  background-color: #131313; /* Section background */
+}
+
+.spotlight__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.spotlight__header h2 {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.spotlight__link {
+  font-size: 1rem;
+  color: #007bff; /* Accent color */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.spotlight__link:hover {
+  color: #0056b3; /* Darker accent color */
+}
+
+.spotlight__content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Dynamic grid */
+  gap: 20px;
+}
+
+/* Spotlight Item Styles */
+.spotlight__item {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.spotlight__item:hover {
+  transform: translateY(-5px);
+}
+
+.spotlight__image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  cursor: pointer; /* Interactive feel */
+}
+
+.spotlight__info {
+  padding: 15px;
+}
+
+.spotlight__category {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #ff5c5c; /* Highlighted color */
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.spotlight__description {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+  text-decoration: none;
+}
+
+.spotlight__header p {
+    margin-bottom: 20px; /* Adds space below the paragraph */
+  }
   
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .spotlight__header {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .spotlight__header h2 {
+    font-size: 1.8rem; /* Slightly smaller for mobile */
+  }
+
+  .spotlight__content {
+    grid-template-columns: 1fr; /* Stack items */
+  }
+
+  .spotlight__category {
+    font-size: 1rem; /* Smaller for mobile */
+  }
+
+  .spotlight__description {
+    font-size: 0.9rem; /* Smaller for mobile */
+  }
 }
 
-.iob__image img {
-  width: 400px;
-  height: auto;
-  transition: transform 0.3s ease-in-out; 
-  display: block; /* Ensures no inline spacing issues */
-  margin: 0 auto; /* Center horizontally if flexbox isn't used */
-}
 
 
 /* Responsive Styles */
@@ -2710,13 +2904,11 @@ input[type="number"]:focus {
   }
 }
 
-
 /* Video Summary Section */
 .video-summary {
   padding: 20px 20px; /* Reduced padding for top/bottom and sides */
   max-width: 1300px;
   margin: 0 auto;
-  background-color: #131313;
 }
 
 .video-summary h3 {
@@ -2740,13 +2932,6 @@ input[type="number"]:focus {
   transform: scale(1.05); /* Slight zoom effect on hover */
 }
 
-.video-summary p {
-  font-size: 1.1rem;
-  color: #b3b3b3;
-  line-height: 1.6;
-  text-align: center;
-  margin-bottom: 20px;
-}
 
 .video-summary a:hover {
   text-decoration: underline; /* Underline on hover */
@@ -2765,10 +2950,6 @@ input[type="number"]:focus {
   .video-summary iframe {
       width: 100%;
       height: 350px;
-  }
-
-  .video-summary p {
-      font-size: 1rem;
   }
 }
 
