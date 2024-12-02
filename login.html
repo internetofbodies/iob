@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Internet of Bodies</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: white;
+            color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            color: black;
+            box-sizing: border-box;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .cta {
+            width: 100%;
+            padding: 12px;
+            background-color: black;
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, color 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .cta:hover {
+            background-color: #333;
+            color: #fff;
+            transform: scale(1.05);
+        }
+
+        .forgot-password {
+            display: block;
+            margin: 20px 0;
+            font-size: 12px;
+            color: gray;
+            text-decoration: none;
+        }
+
+        .forgot-password:hover {
+            color: black;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            form {
+                padding: 15px;
+                margin: 0 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .input-field {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .cta {
+                font-size: 13px;
+                padding: 10px;
+            }
+
+            .forgot-password {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="loginForm">
+        <h1>Login</h1>
+        
+        <input type="text" id="username" class="input-field" placeholder="Username">
+        <div id="usernameError" class="error"></div>
+        
+        <input type="password" id="password" class="input-field" placeholder="Password">
+        <div id="passwordError" class="error"></div>
+        
+        <button type="submit" class="cta">Login</button>
+        <a href="#" class="forgot-password">Forgot password?</a>
+    </form>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Fixed username and password
+            const fixedUsername = 'admin';
+            const fixedPassword = 'admin';
+
+            if (username === fixedUsername && password === fixedPassword) {
+                alert('Login successful! Redirecting to home page...');
+                window.location.href = 'home.html'; // Redirect to home page
+            } else {
+                alert('Invalid username or password.');
+            }
+        });
+    </script>
+</body>
+</html>

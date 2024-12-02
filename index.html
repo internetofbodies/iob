@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet of Bodies</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: black;
+            color: white;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+        .navbar .logo img {
+            height: 50px; /* Adjust the size of the logo as needed */
+        }
+
+        .navbar .cta {
+            text-decoration: none;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 20px;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto; /* Ensures it is aligned properly to the right */
+        }
+
+        .navbar .cta:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('landing.jpeg') no-repeat center center/cover;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 3px;
+            color: white;
+      
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 600px;
+            padding: 0 20px; /* Add padding for better readability on smaller devices */
+        }
+
+        .hero .cta {
+            text-decoration: none;
+            color: white;
+            border: 2px solid white;
+            padding: 10px 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .hero .cta:hover {
+            background: white;
+            color: black;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.9);
+            font-size: 12px;
+            color: gray;
+        }
+
+        .footer a {
+            color: gray;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: white;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+                flex-direction: row;
+            }
+
+            .navbar .cta {
+                padding: 8px 16px;
+                font-size: 12px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero p {
+                font-size: 14px;
+            }
+
+            .hero .cta {
+                padding: 8px 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .navbar {
+                padding: 10px 20px;
+            }
+
+            .navbar .logo img {
+                height: 40px; /* Adjust the logo size for small screens */
+            }
+
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero p {
+                font-size: 12px;
+            }
+
+            .hero .cta {
+                padding: 6px 12px;
+                font-size: 12px;
+            }
+        }
+        /* General Section Styling */
+section {
+  padding: 50px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Alternating Background Colors */
+section:nth-child(even) {
+  background-color: rgb(255, 255, 255); /* Background for even sections */
+  color: rgb(0, 0, 0);
+}
+
+section:nth-child(odd) {
+  background-color: rgb(0, 0, 0); /* Background for odd sections */
+  color: rgb(255, 255, 255);
+}
+
+/* Content Wrapper */
+section .content,
+section .health-systems__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Text Block */
+section .text {
+  flex: 1;
+  padding: 20px;
+  text-align: left;
+}
+
+section .text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+section .text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+section .text .cta {
+  display: inline-block;
+  padding: 10px 30px;
+  text-decoration: none;
+  background-color: black; /* Button Background */
+  color: white; /* Button Text */
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+section .text .cta:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+/* Image Block */
+section .image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+section .image img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+/* Mirrored Content (Image on the Right) */
+.health-systems__content {
+  flex-direction: row-reverse;
+}
+
+/* Default Layout (Image on the Left) */
+.content {
+  flex-direction: row;
+}
+/* Responsive Layout */
+@media (max-width: 768px) {
+  section .content,
+  section .health-systems__content {
+    flex-direction: column;
+  }
+
+  section .text h1 {
+    font-size: 2rem;
+  }
+
+  section .text p {
+    font-size: 1rem;
+  }
+
+  section .text .cta {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mirrored Content (Image on the Right) for Global Risk */
+.global-risk__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  flex-direction: row-reverse; /* Reverse layout: image on the right, text on the left */
+}
+
+/* Background Colors for Global Risk */
+section.global-risk:nth-child(even) {
+  background-color: rgb(255, 255, 255); /* Light background for even sections */
+  color: rgb(0, 0, 0); /* Dark text */
+}
+
+section.global-risk:nth-child(odd) {
+  background-color: rgb(0, 0, 0); /* Dark background for odd sections */
+  color: rgb(255, 255, 255); /* Light text */
+}
+
+/* General Content Styling */
+.global-risk .text {
+  flex: 1;
+  padding: 20px;
+  text-align: left;
+}
+
+.global-risk .text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.global-risk .text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.global-risk .text .cta {
+  display: inline-block;
+  padding: 10px 30px;
+  text-decoration: none;
+  background-color: black; /* Button Background */
+  color: white; /* Button Text */
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.global-risk .text .cta:hover {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+}
+
+.global-risk .image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.global-risk .image img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+  .global-risk__content {
+    flex-direction: column; /* Stack text and image vertically */
+  }
+
+  .global-risk .text h1 {
+    font-size: 2rem;
+  }
+
+  .global-risk .text p {
+    font-size: 1rem;
+  }
+
+  .global-risk .text .cta {
+    font-size: 0.9rem;
+  }
+}
+
+.next-section {
+  background-color: #e0f7fa; /* Soft healthcare blue */
+  color: #000; /* Adjust text color */
+  padding: 50px;
+}
+
+/* How Data & Stats Section Styling */
+/* How Data & Stats Section Styling */
+/* How Data & Stats Section */
+section.data-stats {
+    background-color: #ffffff; /* Muted blue background */
+    color: #000; /* Black text color */
+    padding: 50px 20px; /* Consistent padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left; /* Align content consistently */
+}
+
+section.data-stats .data-stats__content {
+    max-width: 1200px; /* Limit section width to match others */
+    width: 100%; /* Ensure it spans the container */
+    display: flex;
+    flex-direction: column; /* Default vertical alignment */
+    gap: 20px; /* Space between text elements */
+}
+
+section.data-stats .text h1 {
+    font-size: 2.5rem; /* Consistent heading size */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+section.data-stats .text p {
+    font-size: 1.2rem; /* Match paragraph font size */
+    line-height: 1.6; /* Improved readability */
+    margin-bottom: 20px;
+}
+
+section.data-stats .text .cta {
+    display: inline-block;
+    padding: 10px 30px;
+    text-decoration: none;
+    background-color: #000; /* Black button */
+    color: #fff; /* White text */
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 25px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+section.data-stats .text .cta:hover {
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+}
+
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <a href="requestdemo.html" class="cta">Request Demo</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Internet of Bodies</h1>
+            <p>We bring together government, businesses and civil society to improve the state of the world</p>
+            <a href="login.html" class="cta">Authorized Manager Portal</a>
+        </div>
+    </section>
+
+    <!-- Health System-->
+    <section class="health-systems">
+      <div class="health-systems__content">
+          <div class="text">
+              <h1>Health and Healthcare Systems</h1>
+              <p>
+                  Explore how technology is transforming healthcare systems by providing advanced tools for monitoring, diagnostics, and patient care. Learn about innovations in health management and their role in improving lives worldwide.
+              </p>
+              <a href="https://www.weforum.org/stories/health-and-healthcare-systems/" class="cta">Learn More</a>
+          </div>
+          <div class="image">
+              <img src="health.png" alt="Health and Healthcare Systems">
+          </div>
+      </div>
+  </section>
+
+   <!-- Mental Health -->
+<section class="mental-health">
+  <div class="content">
+      <div class="text">
+          <h1>Wellbeing and Mental Health</h1>
+          <p>
+              Mental health is a cornerstone of overall wellbeing, influencing how we think, feel, and interact with the world around us. 
+              Advances in technology and healthcare are providing innovative solutions to address mental health challenges, offering tools 
+              for stress management, early detection of mental disorders, and virtual therapy sessions. By fostering awareness and accessibility, 
+              we can create a world where mental health support is within everyone's reach.
+          </p>
+          <a href="https://www.weforum.org/stories/?topics=630" class="cta">Learn More</a>
+      </div>
+      <div class="image">
+          <img src="mentalhealth.jpg" alt="Wellbeing and Mental Healthystems">
+      </div>
+  </div>
+</section>
+
+<!-- Global Risk Section -->
+<section class="global-risk">
+  <div class="global-risk__content">
+    <div class="text">
+      <h1>Global Risk</h1>
+      <p>
+        In an interconnected world, managing global risks is essential to ensure stability and sustainability. 
+        From climate change and economic crises to cybersecurity threats and public health emergencies, 
+        understanding and addressing these risks requires global cooperation and innovation.
+      </p>
+      <a href="https://www.weforum.org/global-risks" class="cta">Learn More</a>
+    </div>
+    <div class="image">
+      <img src="globalrisk.jpg" alt="Global Risk">
+    </div>
+  </div>
+</section>
+
+<!-- How Data & Stats Can Improve Our Health Section -->
+<section class="data-stats">
+  <div class="data-stats__content">
+    <div class="text">
+      <h1>How Data & Stats Can Improve Our Health!</h1>
+      <p>
+        Have you ever thought about how data and statistics can have a positive impact on our health? 
+        Let me tell you a story about how data and statistics are transforming the healthcare industry.
+      </p>
+      <p>
+        Over the years, healthcare providers have been using data and statistics to improve patient outcomes. 
+        By collecting and analyzing data on patients' health, healthcare providers can identify patterns and 
+        trends that help them make informed decisions about their patients' treatment plans.
+      </p>
+      <a href="https://aj-seotools.com/blog/data-stats#google_vignette" class="cta">Read More</a>
+    </div>
+  </div>
+</section>
+
+
+
+  
+  
+  
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
+</body>
+</html>
