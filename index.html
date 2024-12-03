@@ -14,16 +14,17 @@
 
         /* Navbar */
         .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 20px;
-            background: rgba(0, 0, 0, 0.8);
-            position: fixed;
-            width: 100%;
-            z-index: 1000;
-            box-sizing: border-box;
-        }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px;
+    background: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    transition: transform 0.3s ease-in-out; /* Smooth transition for hiding/showing */
+}
 
         .navbar .logo img {
             height: 50px; /* Adjust the size of the logo as needed */
@@ -690,5 +691,22 @@ section.data-stats .text .cta:hover {
     <footer class="footer">
         <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
     </footer>
+
+    <script>
+      let lastScrollY = window.scrollY;
+      const navbar = document.querySelector('.navbar');
+  
+      window.addEventListener('scroll', () => {
+          if (window.scrollY > lastScrollY) {
+              // Scrolling down - hide navbar
+              navbar.style.transform = 'translateY(-100%)';
+          } else {
+              // Scrolling up - show navbar
+              navbar.style.transform = 'translateY(0)';
+          }
+          lastScrollY = window.scrollY;
+      });
+  </script>
+  
 </body>
 </html>
