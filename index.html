@@ -50,46 +50,86 @@
         }
 
         /* Hero Section */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: url('landing.jpeg') no-repeat center center/cover;
-            text-align: center;
-        }
+.hero {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Full viewport height */
+    background: url('landing.jpeg') no-repeat center center/cover;
+    text-align: center;
+    margin: 0; /* Remove default body margins */
+    padding: 0 20px; /* Add padding for small screens */
+}
 
-        .hero h1 {
-            font-size: 50px;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            font-weight: bold;
-            letter-spacing: 3px;
-            color: white;
-      
-        }
+/* Hero Title */
+.hero h1 {
+    font-size: 3em; /* Responsive size for large screens */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: #ffffff;
+    line-height: 1.2;
+}
 
-        .hero p {
-            font-size: 18px;
-            margin-bottom: 40px;
-            max-width: 600px;
-            padding: 0 20px; /* Add padding for better readability on smaller devices */
-        }
+/* Hero Paragraph */
+.hero p {
+    font-size: 1.2em; /* Make text readable on all devices */
+    margin-bottom: 40px;
+    max-width: 600px; /* Restrict paragraph width for readability */
+    padding: 0 20px; /* Add padding for better readability on smaller devices */
+    color: #ffffff;
+}
 
-        .hero .cta {
-            text-decoration: none;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 30px;
-            text-transform: uppercase;
-            font-weight: bold;
-            transition: background 0.3s ease, color 0.3s ease;
-        }
+/* Hero Button */
+.hero .cta {
+    text-decoration: none;
+    color: white;
+    border: 2px solid white;
+    padding: 12px 30px; /* Slightly larger padding for better usability */
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1em;
+    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
 
-        .hero .cta:hover {
-            background: white;
-            color: black;
-        }
+.hero .cta:hover {
+    background: white;
+    color: black;
+    transform: scale(1.05); /* Add slight grow on hover */
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.5em;
+    }
+
+    .hero p {
+        font-size: 1em;
+    }
+
+    .hero .cta {
+        font-size: 0.9em;
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2em;
+    }
+
+    .hero p {
+        font-size: 0.9em;
+    }
+
+    .hero .cta {
+        font-size: 0.8em;
+        padding: 8px 20px;
+    }
+}
 
         /* Footer */
         .footer {
@@ -363,8 +403,6 @@ section.global-risk:nth-child(odd) {
 }
 
 /* How Data & Stats Section Styling */
-/* How Data & Stats Section Styling */
-/* How Data & Stats Section */
 section.data-stats {
     background-color: #ffffff; /* Muted blue background */
     color: #000; /* Black text color */
@@ -413,6 +451,118 @@ section.data-stats .text .cta:hover {
     border: 2px solid #000;
 }
 
+/* Spotlight Section */
+.spotlight {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 50px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-evenly;
+    color: #000000; /* Ensure text contrast */
+    text-align: center;
+
+}
+
+
+.spotlight-header {
+    margin-bottom: 30px;
+}
+
+.spotlight-header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.spotlight-header p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #ccc; /* Slightly muted color for the paragraph */
+}
+
+.spotlight-header .cta {
+    text-decoration: none;
+    color: white;
+    border: 2px solid white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.spotlight-header .cta:hover {
+    background-color: white;
+    color: black;
+}
+
+/* Spotlight item */
+.spotlight__item {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 10px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(50% - 20px); /* Makes each item take 50% of the container */
+    max-width: 580px; /* Optional: restrict max width */
+}
+
+.spotlight__item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Spotlight image */
+.spotlight__image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Spotlight info */
+.spotlight__info {
+    padding: 15px;
+}
+
+.spotlight__category {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.spotlight__description {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .spotlight__item {
+        flex: 1 1 100%; /* Full width on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .spotlight__info {
+        padding: 10px;
+    }
+
+    .spotlight__category {
+        font-size: 1rem;
+    }
+
+    .spotlight__description {
+        font-size: 0.9rem;
+    }
+}
 
     </style>
 </head>
@@ -458,8 +608,7 @@ section.data-stats .text .cta:hover {
           <p>
               Mental health is a cornerstone of overall wellbeing, influencing how we think, feel, and interact with the world around us. 
               Advances in technology and healthcare are providing innovative solutions to address mental health challenges, offering tools 
-              for stress management, early detection of mental disorders, and virtual therapy sessions. By fostering awareness and accessibility, 
-              we can create a world where mental health support is within everyone's reach.
+              for stress management, early detection of mental disorders, and virtual therapy sessions. 
           </p>
           <a href="https://www.weforum.org/stories/?topics=630" class="cta">Learn More</a>
       </div>
@@ -496,20 +645,46 @@ section.data-stats .text .cta:hover {
         Have you ever thought about how data and statistics can have a positive impact on our health? 
         Let me tell you a story about how data and statistics are transforming the healthcare industry.
       </p>
-      <p>
-        Over the years, healthcare providers have been using data and statistics to improve patient outcomes. 
-        By collecting and analyzing data on patients' health, healthcare providers can identify patterns and 
-        trends that help them make informed decisions about their patients' treatment plans.
-      </p>
       <a href="https://aj-seotools.com/blog/data-stats#google_vignette" class="cta">Read More</a>
     </div>
   </div>
 </section>
 
+<!-- Spotlight Section -->
+<section class="spotlight">
+  <div class="spotlight-header">
+      <h1>Spotlight</h1>
+      <p>Latest analysis, insights, and explainers from across the Forum.</p>
+      <a href="https://www.weforum.org/" class="cta">More Stories →</a>
+  </div>
+  </section>
+
+<div class="spotlight">
+  <!-- Spotlight Item 1 -->
+  <a href="https://www.weforum.org/stories/2024/11/nature-positive-cities-blueprint-for-climate-resilience/" class="spotlight__item">
+    <img src="urban.png" alt="Urban Transformation" class="spotlight__image">
+    <div class="spotlight__info">
+      <h4 class="spotlight__category">Urban Transformation</h4>
+      <p class="spotlight__description">
+        These two cities show how nature-based solutions address climate hazards like urban flooding.
+      </p>
+    </div>
+  </a>
+
+  <!-- Spotlight Item 2 -->
+  <a href="https://www.weforum.org/stories/2024/11/cop29-4-key-takeaways/" class="spotlight__item">
+    <img src="climate.png" alt="Climate Action" class="spotlight__image">
+    <div class="spotlight__info">
+      <h4 class="spotlight__category">Climate Action</h4>
+      <p class="spotlight__description">
+        Climate finance, carbon markets, and more: 4 takeaways from COP29.
+      </p>
+    </div>
+  </a>
+</div>
+</section>
 
 
-  
-  
   
     <!-- Footer -->
     <footer class="footer">
