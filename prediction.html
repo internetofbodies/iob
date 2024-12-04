@@ -74,27 +74,30 @@
     </nav>
 
     <main>
-    <!-- Prediction Dashboard -->
+          <!-- Prediction Dashboard -->
+
+    <h1>Future Predictor</h1>
+
+    <!-- Data Input Section -->
     <div id="prediction-dashboard">
-        <h1>Future Disease Outbreak Predictor</h1>
+        <h1>Disease Outbreak Prediction</h1>
+    <section class="data-input">
+        <h2>Enter Current Data</h2>
+        <form id="dataForm">
+            <!-- Labels outside the input fields -->
+            <input type="number" id="cases" name="cases" placeholder="Enter number of cases" required>
+            <input type="number" id="symptoms" name="symptoms" placeholder="Enter number of reported symptoms" required>
+            <input type="number" id="agePopulation" name="agePopulation" placeholder="Enter population age 40-100" required>
+            <button type="submit">Predict</button>
+        </form>
+    </section>
 
-        <section class="data-input">
-            <h2>Enter Current Data</h2>
-            <form id="dataForm">
-                <!-- Labels outside the input fields -->
-                <input type="number" id="cases" name="cases" placeholder="Enter number of cases" required>
-
-                <input type="number" id="symptoms" name="symptoms" placeholder="Enter number of reported symptoms" required>
-                <input type="number" id="agePopulation" name="agePopulation" placeholder="Enter population age 40-100" required>
-
-                <button type="submit">Predict</button>
-            </form>
-        </section>
-
-        <section id="results">
-            <h2>Prediction</h2>
-            <p id="prediction-text">Enter data to see predictions</p>
-        </section>
+    <!-- Results Section -->
+    <section id="results">
+        <h2>Prediction</h2>
+        <p id="prediction-text">Enter data to see predictions</p>
+    </section>
+</div>
 
 
   <!-- Population Growth Simulation Section -->
@@ -115,7 +118,6 @@
 </div>
 
 <!-- New Section: Future Weather Simulation -->
-<h1>Future Weather</h1>
 <section id="weather-simulation">
     <h2>Ask for Future Weather</h2>
     <form id="weatherForm">
@@ -134,8 +136,14 @@
     <p id="simulation-text">Ask about future weather to see predictions.</p>
 </section>
 </div>
-
 </main>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer__bottom">
+          <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
+        </div>
+      </footer>
 
 <script>
 // Population growth simulation data for each city
@@ -249,12 +257,6 @@ document.getElementById("clearButton").addEventListener("click", function () {
 });
 
     </script>
-
-<!-- Footer Section -->
-<div class="footer__bottom">
-  <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
-</div>
-</footer>
 
 <script>
     let lastScrollY = window.scrollY;
