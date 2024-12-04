@@ -86,6 +86,7 @@ main {
   border: 1px solid #000;
 }
 
+
 /* Mobile Navigation Bar */
 label {
   display: none; 
@@ -200,7 +201,7 @@ label .close-btn {
 }
 
   .logo-image {
-      width: 100px; /* Smaller logo on mobile */
+      width: 40px; /* Smaller logo on mobile */
   }
 
   /* Checkbox in Health data */
@@ -234,6 +235,7 @@ input[type="checkbox"] {
   color: #000; /* Black font */
   margin: 20px 0;
   font-weight: bold;
+  border-bottom: 2px solid #000; /* Add a bottom border for emphasis */
 }
 
 @media (max-width: 768px) {
@@ -244,17 +246,24 @@ input[type="checkbox"] {
 
 /* Feature Section */
 .feature-section {
-  background: #f9f9f9; /* Light gray background for sections */
-  padding: 30px;
-  margin-bottom: 20px;
+  background: #fff; /* White background for sections */
+  padding: 20px;
+  margin: 20px auto; /* Center sections */
+  border: 2px solid #000; /* Black border for each section */
+  border-radius: 10px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%; /* Ensure sections stay responsive */
+  box-sizing: border-box;
 }
+
 
 .feature-section h3 {
   color: #000; /* Black font for headings */
   margin-bottom: 15px;
   font-size: 1.5rem;
   text-transform: uppercase;
+  border-bottom: 2px solid #000; /* Black bottom border for headings */
+  padding-bottom: 5px;
 }
 
 .feature-section p {
@@ -286,7 +295,7 @@ button {
   padding: 12px;
   margin: 10px 0;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 2px solid #000; /* Black border for inputs */
   background-color: #fff; /* White input background */
   color: #000; /* Black text */
   font-size: 1rem;
@@ -296,7 +305,7 @@ button {
 input:focus,
 textarea:focus,
 select:focus {
-  border-color: #000;
+  border-color: #333; /* Slightly darker black for focus */
   outline: none;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
@@ -307,7 +316,7 @@ button {
   font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
-  border: none;
+  border: 2px solid #000; /* Black border for buttons */
   padding: 12px 20px;
   border-radius: 5px;
 }
@@ -315,6 +324,7 @@ button {
 button:hover {
   background-color: #555; /* Darker gray on hover */
   color: #fff;
+  border-color: #333; /* Darker border on hover */
 }
 
 @media (max-width: 768px) {
@@ -322,6 +332,7 @@ button:hover {
       font-size: 0.9rem;
   }
 }
+
 
 /* Breathing Exercise Styling */
 .circle-container {
@@ -427,7 +438,7 @@ footer p {
   }
 
   .logo-image {
-      width: 80px; /* Smaller logo for mobile */
+      width: 50px; /* Smaller logo for mobile */
   }
 
   .mobile-menu-icon {
@@ -523,3 +534,133 @@ footer p {
   }
 }
 
+/* Prediction Dashboard */
+#prediction-dashboard {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  border: 1px solid #000; /* Black border */
+  border-radius: 10px;
+}
+
+#prediction-dashboard h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #000; /* Black text */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#prediction-dashboard h2 {
+  font-size: 1.5rem;
+  color: #000; /* Black text */
+  margin-bottom: 10px;
+}
+
+/* Form Styling */
+#prediction-dashboard form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#prediction-dashboard form input,
+#prediction-dashboard form button {
+  width: 90%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 1px solid #000; /* Black border */
+  border-radius: 5px;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+  transition: all 0.3s ease;
+}
+
+#prediction-dashboard form input:focus {
+  border-color: #333; /* Slightly darker black for focus */
+  outline: none;
+  box-shadow: none;
+}
+
+#prediction-dashboard form button {
+  background-color: #000; /* Black button */
+  color: #fff; /* White text */
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+#prediction-dashboard form button:hover {
+  background-color: #333; /* Slightly lighter black */
+}
+
+#prediction-dashboard form button:active {
+  background-color: #444; /* Even lighter black */
+}
+
+/* Results Section */
+#results,
+#growth-results,
+#weather-results {
+  margin: 20px 0;
+  text-align: center;
+  background-color: #fff; /* White background for results */
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #000; /* Black border */
+}
+
+#results h2,
+#growth-results h2,
+#weather-results h2 {
+  font-size: 1.5rem;
+  color: #000; /* Black text */
+}
+
+#results p,
+#growth-results ul,
+#weather-results p {
+  font-size: 1rem;
+  color: #000; /* Black text */
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* Weather Simulation */
+#weather-simulation {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #000; /* Black border */
+  max-width: 800px;
+}
+
+#weather-simulation form label {
+  font-size: 1rem;
+  color: #000;
+  display: block;
+  margin: 10px 0 5px;
+}
+
+/* Population Growth Section */
+#population-growth-simulation {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff; /* White background */
+  border-radius: 10px;
+  border: 1px solid #000; /* Black border */
+  max-width: 800px;
+}
+
+#population-growth-simulation h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #000; /* Black text */
+  margin-bottom: 20px; /* Add a value here */
+}
