@@ -18,191 +18,147 @@ main {
   padding: 20px;
 }
 
-/* Navbar */
-.navbar {
-  background-color: #fff; /* White background for navbar */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 1px solid #ddd;
-}
-
-.navbar__container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.logo-image {
-  width: 120px;
-  height: auto;
-  transition: transform 0.3s ease;
-}
-
-.logo-image:hover {
-  transform: scale(1.1); /* Slight grow on hover */
-}
-
-/* Navbar Menu */
-.navbar__menu {
-  display: flex;
+li {
   list-style: none;
-  gap: 20px;
 }
 
-.navbar__links {
+a {
   text-decoration: none;
-  color: #000; /* Black font */
-  font-weight: 500;
-  transition: color 0.3s ease;
-  text-transform: uppercase;
-  font-size: 0.9rem;
+  color: #000; /* Changed to black */
+  font-size: 1rem;
 }
 
-.navbar__links:hover {
-  color: #555; /* Darker gray on hover */
+a:hover {
+  color: #555; /* Changed to a lighter black (gray) */
 }
 
-.navbar__btn .button {
-  background-color: #000; /* Black button */
-  color: #fff; /* White text */
-  padding: 10px 20px;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  text-decoration: none;
+/* HEADER */
+header {
+  position: relative;
+  padding: 0 2rem;
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo a {
+  font-size: 1.5rem;
   font-weight: bold;
-  transition: all 0.3s ease;
+  color: #000; /* Changed to black */
 }
 
-.navbar__btn .button:hover {
-  background-color: #fff;
-  color: #000;
-  border: 1px solid #000;
+.navbar .links {
+  display: flex;
+  gap: 2rem;
 }
 
-
-/* Mobile Navigation Bar */
-label {
-  display: none; 
-  font-size: 30px;
+.navbar .toggle_btn {
+  color: #000; /* Changed to black */
+  font-size: 1.5rem;
   cursor: pointer;
-  transition: 0.3s;
-  transition-property: color;
-  color: white;
+  display: none;
+}
+
+.action_btn {
+  background-color: #000; /* Changed to black */
+  color: #fff; /* Kept white text for contrast */
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: scale 0.2 ease;
+}
+
+.action_btn:hover {
+  scale: 1.05;
+  color: #fff; /* Kept white text */
+}
+
+.action_btn:active {
+  scale: 0.95;
+}
+
+/* DROPDOWN MENU */
+.dropdown_menu {
+  display: none;
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 2rem;
+  top: 60px;
+  height: 0;
+  width: 300px;
+  background: rgba(0, 0, 0, 0.1); /* Changed to black with transparency */
+  backdrop-filter: blur(15px);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-label .menu-btn {
+.dropdown_menu.open {
+  height: 240px;
+}
+
+.dropdown_menu li {
+  padding: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dropdown_menu li a {
+  color: #000; /* Changed to black */
+}
+
+.dropdown_menu li a:hover {
+  color: #555; /* Changed to a lighter black (gray) */
+}
+
+.dropdown_menu .action_btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #000; /* Changed to black */
+  color: #fff; /* Kept white text */
+}
+
+.logo img {
+  height: 50px;
+  width: auto;
   display: block;
 }
 
-label .close-btn {
-  display: none;
-}
 
-#check:checked ~ header label .menu-btn {
-  display: none;
-}
-
-#check:checked ~ header label .close-btn {
-  display: block;
-}
-/* Hide the checkbox */
-#check {
-  display: none;
-}
-
-
-/* Mobile Menu Styles */
-@media screen and (max-width: 768px) {
-  .navbar__menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: 100%;
-    background-color: #131313;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: transform 0.5s ease;
-    transform: translateX(100%);
-    padding-top: 80px; 
-  }
-
-  /* Show the menu when checkbox is checked */
-  #check:checked ~ nav .navbar__menu {
-    transform: translateX(0);
-  }
-
-  .navbar__menu li {
-    margin: 20px 0;
-    list-style: none;
-  }
-
-  .navbar__links {
-    color: white;
-    font-size: 1.5rem;
-    text-decoration: none;
-    padding: 10px 20px;
-    text-align: center;
-    display: block;
-    width: 100%; 
-  }
-
-  .navbar__btn .button {
-    padding: 10px 25px;
-    background-color: #ffffff;
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-    border-radius: 4px;
-    font-size: 1.5rem;
-    margin-top: 20px;
-    text-align: center;
-    display: inline-block;
-  }
-
-  /* Menu icon for opening/closing */
-  .mobile-menu-icon {
-    display: block;
-    cursor: pointer;
-    font-size: 2rem;
-   color: #000; /* Black color for visibility */
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-  }
-
-  .menu-btn {
-    display: inline;
-  }
-
-  .close-btn {
+/* RESPONSIVE DESIGN */
+@media (max-width: 992px) {
+  .navbar .links,
+  .navbar .action_btn {
     display: none;
   }
 
-  #check:checked ~ nav .menu-btn {
-    display: none;
+  .navbar .toggle_btn {
+    display: block;
   }
 
-  #check:checked ~ nav .close-btn {
-    display: inline;
+  .dropdown_menu{
+    display: block;
   }
 }
 
-  .logo-image {
-      width: 40px; /* Smaller logo on mobile */
+@media (max-width: 576px) {
+  .dropdown_menu {
+    left: 2rem;
+    width: unset;
   }
+}
 
   /* Checkbox in Health data */
 .checkbox-container {
