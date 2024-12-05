@@ -337,6 +337,40 @@ button:hover {
   margin-bottom: 10px;
 }
 
+/* TB detection */
+#tb-detection {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.tb-detection-container {
+  margin-top: 10px;
+}
+
+.tb-detection-container input {
+  margin-right: 10px;
+}
+
+#tb-analysis-result p {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Nutrition tracker */
+#nutrition-warnings {
+  margin-top: 20px;
+}
+
+#nutrition-warnings p {
+  color: red;
+  font-weight: bold;
+}
+
+
 
 /* Footer */
 footer {
@@ -402,92 +436,212 @@ footer p {
   }
 }
 
-
-/* Research dropdown */
-.navbar__menu .dropdown {
-  position: relative;
+/*City Tracker */
+/* H1 Title Styling */
+.dashboard-title {
+  text-align: center; /* Center-align the title */
+  font-size: 3rem; /* Default size for large screens */
+  color: #000; /* Black text */
+  margin: 20px 0; /* Space above and below */
+  font-weight: bold;
+  line-height: 1.2; /* Adjust line height for better readability */
+  border-bottom: 2px solid #000; /* Optional underline for emphasis */
+  padding: 10px;
 }
-
-.dropdown__menu {
-  display: none; /* Hide the dropdown menu by default */
-  position: absolute; /* Position the dropdown relative to its parent */
-  top: 100%; /* Position it just below the parent */
-  left: 0; /* Align it to the left of the parent */
-  background-color: #fff; /* Background color for the dropdown */
-  padding: 10px 0; /* Add some padding */
-  list-style: none; /* Remove bullet points */
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for effect */
-  z-index: 1000; /* Ensure it appears above other elements */
-}
-
-.dropdown__menu li {
-  padding: 8px 20px; /* Padding for the individual items */
-}
-
-.dropdown__menu li a {
-  color: #333; /* Text color */
-  text-decoration: none; /* Remove underlines from links */
-  display: block; /* Make the entire area of the item clickable */
-  font-size: 16px; /* Adjust the font size */
-}
-
-.dropdown__menu li a:hover {
-  background-color: #f0f0f0; /* Change background color on hover */
-  color: #f77062; /* Change text color on hover (matches accent color) */
-}
-
-/* Display the dropdown menu when the parent item is hovered */
-.dropdown:hover .dropdown__menu {
-  display: block; /* Show the menu */
-}
-
-/* Adjust the link color and spacing */
-.dropdown__link {
-  color: #fff; /* Color for the Research link in the navbar */
-  padding: 0 20px; /* Spacing for the link */
-}
-
-/* Mobile styling */
-@media screen and (max-width: 768px) {
-  .dropdown__menu {
-    position: static; /* Remove absolute positioning for mobile view */
-    display: none; /* Hide the dropdown initially */
-    width: 100%; /* Make it full width */
-    background-color: #333; /* Set background for mobile */
+/* Adjustments for medium screens */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2.5rem; /* Slightly smaller font size */
+    margin: 15px 0; /* Adjust spacing */
   }
-  
-  .dropdown:hover .dropdown__menu {
-    display: block; /* Ensure it expands on hover/tap */
-  }
+}
 
-  .dropdown__menu li {
-    padding: 10px; /* Adjust padding for mobile */
+/* Adjustments for small screens */
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 2rem; /* Smaller font size for mobile */
+    margin: 10px 0; /* Reduce spacing for compact view */
   }
+}
 
-  .dropdown__menu li a {
-    color: #fff; /* White text for better contrast on mobile */
-  }
+.citybaron-button {
+  display: inline-block; /* Makes the link behave like a button */
+  text-align: center; /* Centers the text inside the button */
+  padding: 8px 16px; /* Smaller padding for medium size */
+  font-size: 0.9rem; /* Medium font size */
+  font-weight: bold; /* Keeps the text bold */
+  color: #fff; /* White text */
+  background-color: #000; /* Black background */
+  border: 2px solid #000; /* Black border for consistency */
+  border-radius: 4px; /* Slightly rounded corners */
+  text-decoration: none; /* Removes underline */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 auto; /* Centers the button within its parent container */
+  cursor: pointer; /* Changes cursor to pointer for better UX */
+}
 
-  .dropdown__menu li a:hover {
-    background-color: #444; /* Darker hover effect for mobile */
-    color: #f77062; /* Accent color */
-  }
+.citybaron-button:hover {
+  background-color: #555; /* Dark gray background on hover */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.citybaron-button:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+/* Center the button */
+p {
+  text-align: center; /* Ensures the button is horizontally centered */
 }
 
 
 /* Map */
 #map {
-  height: 500px; 
-  width: 100%;
-  position: relative;
-  z-index: 1;
+  height: 500px;
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 20px auto;
 }
 
-/* Map adjustments for mobile devices */
 @media (max-width: 768px) {
   #map {
       height: 300px;
   }
+}
+
+.layer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.layer-controls label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  color: #000;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+input[type="checkbox"]:hover {
+  outline: 2px solid #555;
+}
+.feature-section {
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #000;
+}
+
+#comparison-table th,
+#comparison-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+}
+
+#comparison-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  #comparison-table {
+      font-size: 0.8rem;
+  }
+}
+button {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+input:focus,
+select:focus {
+  border-color: #555;
+  outline: none;
+}
+@media (max-width: 768px) {
+  .feature-section {
+      margin: 10px;
+      padding: 15px;
+  }
+
+  .layer-controls {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  .chatbot-container input {
+      width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #map {
+      height: 250px;
+  }
+
+  .dashboard-title {
+      font-size: 2rem;
+  }
+
+  .chatbot-container button {
+      font-size: 0.9rem;
+  }
+
+  .feature-section h3 {
+      font-size: 1.2rem;
+  }
+}
+
+.population-icons {
+  display: flex; /* Use flexbox for horizontal alignment */
+  flex-wrap: wrap; /* Allows wrapping to a new line if space is insufficient */
+  justify-content: center; /* Centers the items horizontally */
+  gap: 10px; /* Adds spacing between items */
+}
+
+.person {
+  width: 20px;
+  height: 40px;
+  background-color: #ccc;
+  clip-path: polygon(50% 0%, 62% 12%, 75% 25%, 75% 62%, 50% 100%, 25% 62%, 25% 25%, 38% 12%);
+}
+
+.person.positive {
+  background-color: #64b9ff;
 }
 
 /* Prediction Dashboard */
@@ -499,6 +653,14 @@ footer p {
   max-width: 800px;
   border: 1px solid #000; /* Black border */
   border-radius: 10px;
+}
+
+#future-predictor{
+  text-align: center;
+  font-size: 1rem;
+  color: #000; /* Black text */
+  margin-bottom: 20px;
+  font-weight: bold;
 }
 
 #prediction-dashboard h1 {
@@ -619,35 +781,4 @@ footer p {
   font-size: 2rem;
   color: #000; /* Black text */
   margin-bottom: 20px; /* Add a value here */
-}
-
-#tb-detection {
-  margin: 20px 0;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  background-color: #f9f9f9;
-}
-
-.tb-detection-container {
-  margin-top: 10px;
-}
-
-.tb-detection-container input {
-  margin-right: 10px;
-}
-
-#tb-analysis-result p {
-  margin-top: 15px;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-#nutrition-warnings {
-  margin-top: 20px;
-}
-
-#nutrition-warnings p {
-  color: red;
-  font-weight: bold;
 }
