@@ -702,6 +702,106 @@ section.data-stats .text .cta:hover {
     }
 }
 
+/* AI health care */
+/* AI Healthcare Section Styling */
+.ai-healthcare {
+  background-color: #000000 !important; /* Light grey background */
+  padding: 50px 20px;
+  color: #ffffff !important;
+}
+.ai-healthcare__content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  flex-direction: column; /* Default to vertical stack for mobile */
+}
+
+/* Text Block Styling */
+.ai-healthcare .text {
+  flex: 1;
+  padding: 20px;
+  text-align: left;
+  order: 1; /* Ensure text appears before image */
+}
+
+.ai-healthcare .text h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.ai-healthcare .text p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.ai-healthcare .text .cta {
+  display: inline-block;
+  padding: 10px 30px;
+  text-decoration: none;
+  background-color: #000; /* Button background color */
+  color: #fff; /* Button text color */
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.ai-healthcare .text .cta:hover {
+  background-color: #fff;
+  color: #000;
+  border: 2px solid #000;
+}
+
+/* Image Block Styling */
+.ai-healthcare .image {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  order: 2; /* Ensure image appears after text by default */
+}
+
+.ai-healthcare .image img {
+  max-width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+/* Responsive Layout */
+@media (min-width: 768px) {
+  .ai-healthcare__content {
+    flex-direction: row; /* Horizontal layout for desktop */
+  }
+
+  .ai-healthcare .text {
+    order: 1; /* Text first */
+  }
+
+  .ai-healthcare .image {
+    order: 2; /* Image second */
+  }
+}
+
+@media (max-width: 767px) {
+  .ai-healthcare__content {
+    flex-direction: column; /* Stack vertically for mobile */
+  }
+
+  .ai-healthcare .text {
+    order: 1; /* Text first */
+  }
+
+  .ai-healthcare .image {
+    order: 2; /* Image second */
+  }
+}
+
 
     </style>
 </head>
@@ -838,9 +938,24 @@ section.data-stats .text .cta:hover {
   </div>
 </section>
 
+<!-- AI in Healthcare Section -->
+<section class="ai-healthcare">
+  <div class="ai-healthcare__content">
+    <div class="image">
+      <img src="aihealth.webp" alt="AI in Healthcare">
+    </div>
+    <div class="text">
+      <h1>AI is improving healthcare, according to one of the world's largest medical groups</h1>
+      <p>
+        Discover how artificial intelligence is revolutionizing the healthcare industry, from diagnostics and personalized medicine to administrative tasks and patient care. Explore the transformative impact AI is having on global healthcare systems.
+      </p>
+      <a href="https://www.weforum.org/stories/2024/11/four-ways-ai-is-improving-healthcare/" class="cta">Learn More</a>
+    </div>
+  </div>
+</section>
 
 
-  
+
     <!-- Footer -->
     <footer class="footer">
         <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
