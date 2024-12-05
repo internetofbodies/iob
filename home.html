@@ -26,52 +26,47 @@
     
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for the graph -->
 </head>
 <body>
-
-    <div class="container">
-
-    <!-- Add a label describing the checkbox -->
-    <input type="checkbox" id="check" aria-label="Toggle mobile menu">
-    
-    <!-- Navbar --> 
-    <nav class="navbar">
-      <div class="navbar__container">
-        <a href="#" id="navbar__logo">
-          <img src="logo.png" alt="Logo" class="logo-image"> 
-        </a>
-        <ul class="navbar__menu">
-
-          <!-- Dropdown for Research -->
-          <li class="navbar__item dropdown">
-            <a href="#" class="navbar__links dropdown__link">Research</a>
-            <ul class="dropdown__menu">
-              <li><a href="research.html#article1" class="dropdown__item" onclick="closeMenu()">Internet Of Bodies May Lead To Internet Of Brains by 2050</a></li>
-              <li><a href="research.html#article2" class="dropdown__item" onclick="closeMenu()">“Internet Of Bodies” - Turning the Body Into a Wire - Transhumanism & Nano-tech</a></li>
-              <li><a href="research.html#NonVax420" class="dropdown__item" onclick="closeMenu()">NonVaxer420 Source</a></li>
-              <li><a href="research.html#article4" class="dropdown__item" onclick="closeMenu()">Psinergy Source</a></li>
-              <li><a href="research.html#video-summary" class="dropdown__item" onclick="closeMenu()">World Economic Forum</a></li>
-            </ul>
-          </li>
+<header>
+    <div class="navbar">
+        <div class="logo">
+            <a href="#">
+              <img src="logo.png" alt="IOB logo" />
+            </a>
+          </div>
           
-            </li>
-          <li class="navbar__item"><a href="citytracker.html" class="navbar__links">CityBaron Diseases Tracker</a></li>
-          <li class="navbar__item"><a href="prediction.html" class="navbar__links">Prediction</a></li>
-          <li class="navbar__item"><a href="healthsync.html" class="navbar__links">Health Sync Alert</a></li>
-          <li class="navbar__btn"><a href="index.html" class="button">Logout</a></li>
+        <ul class="links">
+          <li><a href="home.html">Health Dashboard</a></li>
+          <li><a href="citytracker.html">CityBaron Tracker</a></li>
+          <li><a href="prediction.html">Prediction</a></li>
+          <li><a href="healthsync.html">HealthSync Alert</a></li>
         </ul>
-        
-        <!-- Mobile Menu Icon -->
-        <label for="check" class="mobile-menu-icon">
-          <i class="fas fa-bars menu-btn"></i>
-          <i class="fas fa-times close-btn"></i>
-        </label>
+        <a href="index.html" class="action_btn">Logout</a>
+        <div class="toggle_btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
       </div>
-    </nav>
-    </div>
+
+      <div class="dropdown_menu">
+        <ul>
+          <li><a href="home.html">Health Dashboard</a></li>
+          <li><a href="citytracker.html">CityBaron Tracker</a></li>
+          <li><a href="prediction.html">Prediction</a></li>
+          <li><a href="healthsync.html">HealthSync Alert</a></li>
+          <li><a href="index.html" class="action_btn">Logout</a></li>
+        </ul>
+      </div>
+    </header>
+
 <main>
   <!-- Health Dashboard Title in the Center -->
   <h1 class="dashboard-title">Health Dashboard</h1>
@@ -908,6 +903,23 @@ function analyzeXRay() {
         lastScrollY = window.scrollY;
     });
 </script>
+
+<script>
+    const toggleBtn = document.querySelector('.toggle_btn');
+    const toggleBtnIcon = document.querySelector('.toggle_btn i');
+    const dropDownMenu = document.querySelector('.dropdown_menu');
+    
+    toggleBtn.onclick = function () {
+      dropDownMenu.classList.toggle('open');
+      const isOpen = dropDownMenu.classList.contains('open');
+    
+      toggleBtnIcon.classList = isOpen
+        ? 'fa-solid fa-xmark'
+        : 'fa-solid fa-bars';
+    };
+    
+    
+        </script>
 
 
     <!-- Footer Section -->
