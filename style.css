@@ -664,3 +664,34 @@ footer p {
   color: #000; /* Black text */
   margin-bottom: 20px; /* Add a value here */
 }
+
+#tb-detection {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.tb-detection-container {
+  margin-top: 10px;
+}
+
+.tb-detection-container input {
+  margin-right: 10px;
+}
+
+#tb-analysis-result p {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+#nutrition-warnings {
+  margin-top: 20px;
+}
+
+#nutrition-warnings p {
+  color: red;
+  font-weight: bold;
+}
