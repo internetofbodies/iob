@@ -31,6 +31,9 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for the graph -->
 </head>
 <body>
+
+    <div class="container">
+
     <!-- Add a label describing the checkbox -->
     <input type="checkbox" id="check" aria-label="Toggle mobile menu">
     
@@ -68,7 +71,8 @@
         </label>
       </div>
     </nav>
-
+    </div>
+<main>
   <!-- Health Dashboard Title in the Center -->
   <h1 class="dashboard-title">Health Dashboard</h1>
 
@@ -175,8 +179,6 @@
                     <button onclick="handleChatInput()">Send</button>
                 </div>
             </section>
-            
-    
 
         <!--Breathing Exercise-->
         <div id="breathing-exercise">
@@ -187,8 +189,61 @@
             </div>
             <button onclick="startBreathingExercise()">Start Breathing Exercise</button>
         </div>
-        
+    </section>
+
+    <section id="tb-detection" class="feature-section">
+        <h3>Detecting Tuberculosis with AI and a Smartphone</h3>
+        <p>Leverage cutting-edge AI technology to detect tuberculosis using just your smartphone. This feature uses AI algorithms to analyze lung images for early and accurate detection of TB.</p>
     
+        <!-- AI Detection Simulation -->
+        <div class="tb-detection-container">
+            <input type="file" id="upload-xray" accept="image/*" aria-label="Upload chest X-ray for TB detection" />
+            <button onclick="analyzeXRay()">Analyze X-ray</button>
+        </div>
+    
+        <!-- Display AI Analysis Result -->
+        <div id="tb-analysis-result">
+            <p>The result of the analysis will appear here.</p>
+        </div>
+    </section>
+
+    <!-- Nutrition Tracker -->
+<section id="nutrition-tracker" class="feature-section">
+    <h3>Nutrition Tracker</h3>
+    <p>Log your daily food intake and monitor your nutritional goals.</p>
+    <div id="nutrition-inputs">
+      <input type="text" id="food-name" placeholder="Food name" required>
+      <button onclick="fetchNutrition()">Get Nutrition Info</button>
+    </div>
+    <div id="nutrition-info" class="result">
+      <h4>Nutrition Information</h4>
+      <p id="nutrition-details"></p>
+    </div>
+    <div id="nutrition-log" class="result">
+      <h4>Daily Food Log</h4>
+      <ul id="food-log-list">
+        <!-- Logged food items will appear here -->
+      </ul>
+    </div>
+    <div id="nutrition-summary">
+      <h4>Daily Nutritional Summary</h4>
+      <p id="total-calories">Total Calories: 0 kcal</p>
+      <p id="total-protein">Total Protein: 0 g</p>
+      <p id="total-carbs">Total Carbohydrates: 0 g</p>
+      <p id="total-fats">Total Fats: 0 g</p>
+    </div>
+    <div id="nutrition-warnings" class="result">
+      <h4>Warnings</h4>
+      <p id="calories-warning"></p>
+      <p id="protein-warning"></p>
+      <p id="carbs-warning"></p>
+      <p id="fats-warning"></p>
+    </div>
+  </section>
+  
+      
+    
+    </main>
     <!-- JavaScript Section -->
     <script>
 
@@ -773,7 +828,70 @@ function showEncouragementMessage() {
 }
 
 
-    </script>
+// Simulate TB detection using uploaded X-ray
+function analyzeXRay() {
+    const uploadXRay = document.getElementById("upload-xray");
+    const tbResultDiv = document.getElementById("tb-analysis-result");
+
+    if (uploadXRay.files.length > 0) {
+        const fileName = uploadXRay.files[0].name;
+
+        // Simulate analysis delay
+        tbResultDiv.innerHTML = `<p>Analyzing the X-ray image "${fileName}"...</p>`;
+        setTimeout(() => {
+            // Simulate random TB detection result
+            const hasTB = Math.random() < 0.3; // 30% chance of TB detected
+            tbResultDiv.innerHTML = hasTB
+                ? `<p style="color: red;">The AI detected signs of tuberculosis. Please consult a medical professional immediately.</p>`
+                : `<p style="color: green;">No signs of tuberculosis detected. Keep monitoring your health!</p>`;
+        }, 2000); // 2-second delay to simulate analysis
+    } else {
+        tbResultDiv.innerHTML = `<p style="color: red;">Please upload a chest X-ray image for analysis.</p>`;
+    }
+}
+
+//Nutrition Tracker
+
+  const API_KEY = '4981edf48bb157fb32d9a8d4b7378f18';
+  const APP_ID = 'b377fc47';
+  const API_URL = 'https://trackapi.nutritionix.com/v2/natural/nutrients';
+
+  async function fetchNutrition() {
+    const foodName = document.getElementById('food-name').value;
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-app-id': APP_ID,
+        'x-app-key': API_KEY
+      },
+      body: JSON.stringify({
+        query: foodName
+      })
+    });
+
+    const data = await response.json();
+    displayNutritionInfo(data);
+  }
+
+  function displayNutritionInfo(data) {
+    const nutritionDetails = document.getElementById('nutrition-details');
+
+    if (data.foods && data.foods.length > 0) {
+      const food = data.foods[0];
+      nutritionDetails.textContent = `
+        Food: ${food.food_name}
+        Calories: ${food.nf_calories} kcal
+        Protein: ${food.nf_protein} g
+        Carbohydrates: ${food.nf_total_carbohydrate} g
+        Fats: ${food.nf_total_fat} g
+        Fiber: ${food.nf_dietary_fiber} g
+      `;
+    } else {
+      nutritionDetails.textContent = 'No nutritional information found.';
+    }
+  }
+</script>
 
 <script>
     let lastScrollY = window.scrollY;
