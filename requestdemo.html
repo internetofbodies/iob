@@ -1,1008 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internet of Bodies</title>
+
+     <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZG1L1BRW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YMZG1L1BRW');
+</script>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="description" content="Internet of Bodies Book a Meeting with Us!">
+<meta name="keywords" content="Internet of Bodies Book a Meeting with Us!">
+<meta name="author" content="Accountable Infrastructure">
+<title>Internet of Bodies - Request Demo!</title>
+
+  <!--Favicon-->
+  <link rel="icon" href="logo.png" type="image/png">
+
+<!-- Organization Structured Data without Social Media -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Accountable Infrastructure",
+  "url": "https://internetofbodies.ai/",
+  "logo": "https://internetofbodies.ai/logo.jpg"
+}
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: black;
-            color: white;
-        }
-
-        /* Navbar */
-        .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 20px;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    box-sizing: border-box;
-    transition: transform 0.3s ease-in-out;
-}
-
-        .navbar .logo img {
-            height: 50px;
-        }
-
-        .navbar .cta {
-            text-decoration: none;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            text-transform: uppercase;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background 0.3s ease, color 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
-        }
-
-        .navbar .cta:hover {
-            background: white;
-            color: black;
-        }
-/* CTA 1 */
-    .cta {
-    text-decoration: none;
-    color: #fff;
+        /* General Styles */
+body {
     font-family: Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-    display: inline-block; 
-    padding: 8px 20px; 
-    margin: 8px 15px; 
-    border: 2px solid #000;
-    border-radius: 5px; 
-    transition: all 0.3s ease;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.cta:hover {
-    background-color: #fff; 
-    color: #000;
-    border-color: #000; 
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3); 
-    cursor: pointer; 
-}
-
-
-        /* Hero Section */
-.hero {
+    background-color: #000;
+    color: #fff;
+    margin: 0;
+    padding: 0;
     display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center;
     justify-content: center;
-    height: 100vh; /* Full viewport height */
-    background: url('landing.jpeg') no-repeat center center/cover;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    background-color: #000000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+}
+
+h1{
     text-align: center;
-    padding: 20px; /* Add padding for small screens */
-}
-
-/* Hero Title */
-.hero h1 {
-    font-size: 2.3rem; /* Consistent font size */
-    margin-bottom: 15px; /* Reduced margin */
+    margin-bottom: 20px;
+    color: #fff;
     text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px; /* Slightly reduced spacing */
-    color: #ffffff;
-    line-height: 1.3; /* Adjusted for better readability */
-}
-/* Hero Paragraph */
-.hero p {
-    font-size: 1.1rem; /* Consistent font size */
-    margin-bottom: 30px; /* Reduced margin */
-    max-width: 600px; /* Restrict paragraph width for readability */
-    color: #ffffff;
+    letter-spacing: 1px;
 }
 
-/* Hero Button */
-.hero .cta {
-    text-decoration: none;
-    color: white;
-    border: 2px solid white;
-    padding: 10px 25px; /* Slightly larger padding for better usability */
+h2 {
+    text-align: left; /* Aligns the text to the left */
+    margin-bottom: 20px;
+    color: #fff;
     text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-.hero .cta:hover {
-    background: white;
-    color: black;
-    transform: scale(1.03); /* Add slight grow on hover */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem; /* Adjusted for smaller screens */
-    }
-
-    .hero p {
-        font-size: 1rem; /* Consistent paragraph size */
-    }
-
-    .hero .cta {
-        font-size: 0.95rem; /* Slightly reduced button font size */
-        padding: 8px 20px; /* Reduced button padding */
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 1.8rem; /* Smaller heading size */
-    }
-
-    .hero p {
-        font-size: 0.9rem; /* Smaller paragraph size */
-    }
-
-    .hero .cta {
-        font-size: 0.85rem; /* Compact button font size */
-        padding: 7px 18px; /* Reduced button padding */
-    }
+    letter-spacing: 1px;
+    font-size: 1.5rem; /* Adjust font size as needed */
 }
 
 
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            font-size: 12px;
-            color: gray;
-        }
-
-        .footer a {
-            color: gray;
-            text-decoration: none;
-        }
-
-        .footer a:hover {
-            color: white;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-                flex-direction: row;
-            }
-
-            .navbar .cta {
-                padding: 8px 16px;
-                font-size: 12px;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .hero .cta {
-                padding: 8px 16px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 10px 20px;
-            }
-
-            .navbar .logo img {
-                height: 40px; /* Adjust the logo size for small screens */
-            }
-
-            .hero h1 {
-                font-size: 28px;
-            }
-
-            .hero p {
-                font-size: 12px;
-            }
-
-            .hero .cta {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
-        }
-        /* General Section Styling */
-section {
-  padding: 30px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Alternating Background Colors */
-section:nth-child(even) {
-  background-color: rgb(255, 255, 255); /* Background for even sections */
-  color: rgb(0, 0, 0);
-}
-
-section:nth-child(odd) {
-  background-color: rgb(0, 0, 0); /* Background for odd sections */
-  color: rgb(255, 255, 255);
-}
-
-/* Content Wrapper */
-section .content,
-section .health-systems__content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* Text Block */
-section .text {
-  flex: 1;
-  padding: 10px;
-  text-align: left;
-}
-
-section .text h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
-  margin-bottom: 15 px;
-}
-
-section .text p {
-  font-size: 1.2rem;
-  line-height: 1.5  ;
-  margin-bottom: 10px;
-}
-
-section .text .cta {
-  display: inline-block;
-  padding: 10px 30px;
-  text-decoration: none;
-  background-color: black; /* Button Background */
-  color: white; /* Button Text */
-  border-color: #ffffff;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 25px;
-  transition: background 0.3s ease, color 0.3s ease;
-  margin-top: 10px; /* Tightened space above button */
-  padding: 8px 20px; /* Adjusted button size */
-}
-
-section .text .cta:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-}
-
-/* Image Block */
-section .image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-section .image img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-/* Mirrored Content (Image on the Right) */
-.health-systems__content {
-  flex-direction: row-reverse;
-}
-
-/* Default Layout (Image on the Left) */
-.content {
-  flex-direction: row;
-}
-/* Responsive Layout */
-@media (max-width: 768px) {
-  section .content,
-  section .health-systems__content {
+form {
+    display: flex;
     flex-direction: column;
-  }
-
-  section .text h1 {
-    font-size: 2rem;
-  }
-
-  section .text p {
-    font-size: 1rem;
-  }
-
-  section .text .cta {
-    font-size: 0.9rem;
-  }
 }
 
-/* Mirrored Content (Image on the Right) for Global Risk */
-.global-risk__content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  flex-direction: row-reverse; /* Reverse layout: image on the right, text on the left */
-  padding: 30px 20px;
-}
-
-/* Background Colors for Global Risk */
-section.global-risk:nth-child(even) {
-  background-color: rgb(255, 255, 255); /* Light background for even sections */
-  color: rgb(0, 0, 0); /* Dark text */
-}
-
-section.global-risk:nth-child(odd) {
-  background-color: rgb(0, 0, 0); /* Dark background for odd sections */
-  color: rgb(255, 255, 255); /* Light text */
-}
-
-/* General Content Styling */
-.global-risk .text {
-  flex: 1;
-  padding: 15px;
-  text-align: left;
-}
-
-.global-risk .text h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.global-risk .text p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  margin-bottom: 15px;
-}
-
-.global-risk .text .cta {
-  display: inline-block;
-  padding: 8px 20px;
-  text-decoration: none;
-  background-color: black; /* Button Background */
-  color: white; /* Button Text */
-  font-size: 0.95rem;
-  font-weight: bold;
-  border-radius: 25px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.global-risk .text .cta:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-}
-
-.global-risk .image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-}
-
-.global-risk .image img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-
-/* Responsive Layout */
-@media (max-width: 768px) {
-  .global-risk__content {
-    flex-direction: column; /* Stack text and image vertically */
-    padding: 20px 10px; 
-  }
-
-  .global-risk .text h1 {
-    font-size: 1.8rem;
-  }
-
-  .global-risk .text {
-    padding: 10px; /* Reduced padding for text */
-  }
-
-  .global-risk .text p {
-    font-size: 1rem; /* Smaller font size for paragraph */
-  }
-
-  .global-risk .text .cta {
-    font-size: 0.85rem;
-  }
-}
-
-.next-section {
-  background-color: #e0f7fa; /* Soft healthcare blue */
-  color: #000; /* Adjust text color */
-  padding: 40px;
-}
-
-/* How Data & Stats Section Styling */
-section.data-stats {
-    background-color: #ffffff; /* Muted blue background */
-    color: #000; /* Black text color */
-    padding: 30px 15px;  /* Consistent padding */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: left; /* Align content consistently */
-}
-
-section.data-stats .data-stats__content {
-    max-width: 1200px; /* Limit section width to match others */
-    width: 100%; /* Ensure it spans the container */
-    display: flex;
-    flex-direction: column; /* Default vertical alignment */
-    gap: 15px; /* Space between text elements */
-}
-
-section.data-stats .text h1 {
-    font-size: 2.3rem; /* Consistent heading size */
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-section.data-stats .text p {
-    font-size: 1.1rem; /* Match paragraph font size */
-    line-height: 1.5; /* Improved readability */
-    margin-bottom: 15px;
-} 
-
-section.data-stats .text .cta {
-    display: inline-block;
-    padding: 8px 25px;
-    text-decoration: none;
-    background-color: #000; /* Black button */
-    color: #fff; /* White text */
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 20px;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-section.data-stats .text .cta:hover {
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #000;
-}
-
-/* Spotlight Section */
-.spotlight {
-    max-width: 1200px;
-    margin: 15px auto; 
-    padding: 30px 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px; 
-    justify-content: space-evenly;
-    color: #000000; /* Ensure text contrast */
-    text-align: center;
-
-}
-
-
-.spotlight-header {
+.form-group {
     margin-bottom: 20px;
 }
 
-.spotlight-header h1 {
-    font-size: 2.3rem;
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
     font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
 }
 
-.spotlight-header p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-bottom: 15px;
-    color: #ccc; /* Slightly muted color for the paragraph */
-}
-
-.spotlight-header .cta {
-    text-decoration: none;
-    color: white;
-    border: 2px solid white;
-    padding: 8px 20px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    border-radius: 20px;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.spotlight-header .cta:hover {
-    background-color: white;
-    color: black;
-}
-
-/* Spotlight item */
-.spotlight__item {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    overflow: hidden;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: calc(50% - 15px); /* Makes each item take 50% of the container */
-    max-width: 580px; /* Optional: restrict max width */
-}
-
-.spotlight__item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Spotlight image */
-.spotlight__image {
+input,
+textarea {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    padding: 12px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+    transition: border-color 0.3s, background-color 0.3s;
 }
 
-/* Spotlight info */
-.spotlight__info {
-    padding: 10px;
+input:hover,
+textarea:hover {
+    border-color: #888;
 }
 
-.spotlight__category {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #fff;
+    background-color: #333;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
 }
 
-.spotlight__description {
-    font-size: 1rem;
-    color: #666;
+/* Radio Buttons and Checkboxes */
+input[type="radio"],
+input[type="checkbox"] {
+    width: 20px; /* Adjust size for larger screens */
+    height: 20px;
+    margin-right: 10px; /* Space between input and label */
+    vertical-align: middle; /* Align with label text */
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-/* Responsive design */
+input[type="radio"]:hover,
+input[type="checkbox"]:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.radio-group,
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    gap: 10px; /* Space between items */
+    align-items: center; /* Center-align inputs with labels */
+}
+
+.radio-group label,
+.checkbox-group label {
+    font-size: 14px; /* Consistent text size */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+hr {
+    margin: 20px 0;
+    border: none;
+    border-top: 1px solid #444;
+}
+
+button, .submit, .redirect-button {
+    padding: 12px;
+    background-color: #a7a5a5;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button:hover, .submit:hover, .redirect-button:hover {
+    background-color: #ebebeb;
+    transform: translateY(-2px);
+}
+
+button:active, .submit:active, .redirect-button:active {
+    background-color: #ebebeb;
+    transform: translateY(1px);
+}
+
+.acknowledgment {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #bbb;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+
+/* Add spacing between form groups */
+.form-group {
+    margin-bottom: 20px; /* Adjust this value as needed */
+}
+
+/* If you want to specifically target Official Website and Country */
+#official-website {
+    margin-bottom: 40px; /* Adds space below the Official Website input field */
+}
+
+/* Optionally, add margin to Country for clarity */
+#country {
+    margin-top: 20px; /* Adds space above the Country field */
+}
+
+/* Country Section Styles */
+.form-group {
+    margin-bottom: 20px; /* Ensures consistent spacing between form fields */
+}
+
+.form-group select {
+    width: 100%; /* Full-width dropdown for better usability */
+    padding: 12px; /* Adds comfortable padding */
+    border: 1px solid #444; /* Border to match the design */
+    border-radius: 4px; /* Rounded edges */
+    background-color: #222; /* Background color matching the form */
+    color: #fff; /* White text for readability */
+    font-size: 16px; /* Adequate font size */
+    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth hover effects */
+}
+
+/*Collaboration label space for radio button*/
+#collaboration-label {
+    display: block; /* Ensure the label takes up the full width */
+    margin-bottom: 30px; /* Adjust spacing as needed */
+}
+
+#business-label{
+    display: block; /* Ensure the label takes up the full width */
+    margin-bottom: 30px; /* Adjust spacing as needed */
+
+}
+
+#organization-label{
+    display: block; /* Ensure the label takes up the full width */
+    margin-bottom: 30px; /* Adjust spacing as needed */
+}
+
+#certified-label{
+    display: block; /* Ensure the label takes up the full width */
+    margin-bottom: 30px; /* Adjust spacing as needed */
+
+}
+
+.radio-vertical label {
+    display: block; /* Ensure each label occupies its own line */
+    margin-bottom: 10px; /* Add space below each radio button */
+}
+
+.radio-vertical label:last-child {
+    margin-bottom: 40px; /* Adds extra space below the last label */
+}
+
+
+
+/* Responsive Adjustments for country */
 @media (max-width: 768px) {
-    .spotlight__item {
-        flex: 1 1 100%; /* Full width on smaller screens */
-    }
-    .spotlight-header {
-        margin-bottom: 15px;
-    }
-    section.data-stats {
-        padding: 20px 10px; /* Reduced padding for smaller screens */
+    .form-group select {
+        font-size: 14px; /* Slightly smaller font for tablets */
+        padding: 10px; /* Adjusted padding for smaller screens */
     }
 }
 
 @media (max-width: 480px) {
-    .spotlight__info {
-        padding: 8px;
-    }
-
-    .spotlight__category {
-        font-size: 1rem;
-    }
-
-    .spotlight__description {
-        font-size: 0.9rem;
+    .form-group select {
+        font-size: 12px; /* Smaller font size for mobile screens */
+        padding: 8px; /* Compact padding for mobile screens */
     }
 }
 
-/* Report Section Styling */
-.report-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 15px;
-    background-color: #ffffff !important; /* Blue background */
-    color: #000000 !important; /* White text */
-}
-
-.report-content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-    gap: 15px; /* Space between text and image */
-}
-
-/* Text Block Styling */
-.report-content .text {
-    flex: 1;
-    padding: 15px; 
-}
-
-.report-content .text .sub-heading {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.report-content .text .publish-date {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    color: #000000; /* Light blue */
-}
-
-.report-content .text h1 {
-    font-size: 2.3rem;
-    font-weight: bold !important;
-    margin-bottom: 15px;
-}
-
-.report-content .text .cta {
-    display: inline-block;
-    padding: 8px 25px;
-    text-decoration: none;
-    background-color: #ffffff; /* White button */
-    color: #000000; /* Blue text */
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.report-content .text .cta {
-    display: inline-block;
-    padding: 10px 30px;
-    text-decoration: none;
-    background-color: black; /* Default background */
-    color: white; /* Default text color */
-    border: 2px solid white; /* Default border */
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 25px;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Ensure border transition works */
-}
-
-.report-content .text .cta:hover {
-    background-color: #676767; /* Hover background */
-    border-color: #ffffff; /* White border on hover */
-    color: #ffffff; /* White text */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Optional shadow for better hover effect */
-}
-
-
-/* Image Block Styling */
-.report-content .image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-}
-
-.report-content .image img {
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    .report-content {
-        flex-direction: column;
-        gap: 10px;
+    body {
+        padding: 10px;
     }
 
-    .report-content .text h1 {
-        font-size: 2rem;
+    .container {
+        padding: 45px;
     }
 
-    .report-content .text .description {
-        font-size: 1rem;
+    h1, h2 {
+        font-size: 1.5rem;
     }
 
-    .report-content .text .cta {
-        font-size: 0.9rem;
+    input, textarea {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .acknowledgment {
+        font-size: 12px;
     }
 }
 
-/* AI health care */
-/* AI Healthcare Section Styling */
-.ai-healthcare {
-  background-color: #000000 !important; /* Light grey background */
-  padding: 30px 15px;
-  color: #ffffff !important;
-}
-.ai-healthcare__content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  flex-direction: column; /* Default to vertical stack for mobile */
-  gap: 15px;
-}
-
-/* Text Block Styling */
-.ai-healthcare .text {
-  flex: 1;
-  padding: 15px; 
-  text-align: left;
-  order: 1; /* Ensure text appears before image */
-}
-
-.ai-healthcare .text h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
-  margin-bottom: 15px; 
-}
-
-.ai-healthcare .text p {
-  font-size: 1.1rem; /* Consistent paragraph font size */
-    line-height: 1.5; /* Adjusted for readability */
-    margin-bottom: 15px; /* Tightened spacing */
-}
-
-.ai-healthcare .text .cta {
-  display: inline-block;
-  padding: 10px 30px;
-  text-decoration: none;
-  background-color: #000; /* Button background color */
-  color: #fff; /* Button text color */
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 20px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.ai-healthcare .text .cta:hover {
-  background-color: #fff;
-  color: #000;
-  border: 2px solid #000;
-}
-
-/* Image Block Styling */
-.ai-healthcare .image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  order: 2; /* Ensure image appears after text by default */
-}
-
-.ai-healthcare .image img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-
-/* Responsive Layout */
-@media (min-width: 768px) {
-  .ai-healthcare__content {
-    flex-direction: row; /* Horizontal layout for desktop */
-    gap: 10px;
-  }
-
-  .ai-healthcare .text {
-    order: 1; /* Text first */
-  }
-  .ai-healthcare .text h1 {
-        font-size: 2rem; /* Adjusted font size */
+@media (max-width: 480px) {
+    h1, h2 {
+        font-size: 1.2rem;
     }
 
-  .ai-healthcare .image {
-    order: 2; /* Image second */
-  }
-}
-
-.ai-healthcare .text p {
-        font-size: 1rem; /* Adjusted paragraph size */
-    }
-    .ai-healthcare .text .cta {
-        font-size: 0.9rem; /* Smaller button font size */
+    input, textarea {
+        font-size: 12px;
+        padding: 8px;
     }
 
+    button {
+        font-size: 12px;
+        padding: 8px;
+    }
 
-@media (max-width: 767px) {
-  .ai-healthcare__content {
-    flex-direction: column; /* Stack vertically for mobile */
-  }
+    .acknowledgment {
+        font-size: 11px;
+    }
+}
+/* Radio responsive */
 
-  .ai-healthcare .text {
-    order: 1; /* Text first */
-  }
+@media (max-width: 768px) {
+    input[type="radio"],
+    input[type="checkbox"] {
+        width: 18px; /* Adjust size for medium screens */
+        height: 18px;
+    }
 
-  .ai-healthcare .image {
-    order: 2; /* Image second */
-  }
+    .radio-group label,
+    .checkbox-group label {
+        font-size: 13px; /* Adjust text size for medium screens */
+    }
 }
 
+@media (max-width: 480px) {
+    input[type="radio"],
+    input[type="checkbox"] {
+        width: 16px; /* Smaller size for smaller screens */
+        height: 16px;
+    }
 
+    .radio-group label,
+    .checkbox-group label {
+        font-size: 12px; /* Smaller text size for smaller screens */
+    }
+}
+
+        
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <div class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-        </div>
-        <a href="requestdemo.html" class="cta">Request Demo</a>
+    <div class="container">
+        <h1>Request Demo Form</h1>
+        <form id="demoForm">
+            <section class="company-overview">
+                <h2>ENTITY OVERVIEW</h2>
+                <hr />
+                <div class="form-group">
+                    <label for="fullName">Entity Full Name <span style="color: red;">*</span></label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Entity Email Address <span style="color: red;">*</span></label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Entity Phone Number <span style="color: red;">*</span></label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="companyName">Entity Legal Name <span style="color: red;">*</span></label>
+                    <input type="text" id="companyName" name="companyName" required />
+                </div>
+                <div class="form-group">
+                    <label for="companyAddress">Entity Address <span style="color: red;">*</span></label>
+                    <input type="text" id="companyAddress" name="companyAddress" required />
+                </div>
+                <div class="form-group">
+                    <label for="officialWebsite">Official Website <span style="color: red;">*</span></label>
+                    <input type="text" id="officialWebsite" name="officialWebsite" required />
+                </div>
+                <div class="form-group">
+                    <label for="no-website">
+                        <input type="checkbox" id="no-website" name="no-website">
+                        No Official Website
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country <span style="color: red;">*</span></label>
+                    <select id="country" name="country" required>
+                        <option value="" disabled selected>Select a country</option>
+                        <option value="Afghanistan">Afghanistan</option>
+                        <option value="Albania">Albania</option>
+                        <option value="Algeria">Algeria</option>
+                        <option value="Andorra">Andorra</option>
+                        <option value="Angola">Angola</option>
+                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Armenia">Armenia</option>
+                        <option value="Australia">Australia</option>
+                        <option value="Austria">Austria</option>
+                        <option value="Azerbaijan">Azerbaijan</option>
+                        <option value="Bahamas">Bahamas</option>
+                        <option value="Bahrain">Bahrain</option>
+                        <option value="Bangladesh">Bangladesh</option>
+                        <option value="Barbados">Barbados</option>
+                        <option value="Belarus">Belarus</option>
+                        <option value="Belgium">Belgium</option>
+                        <option value="Belize">Belize</option>
+                        <option value="Benin">Benin</option>
+                        <option value="Bhutan">Bhutan</option>
+                        <option value="Bolivia">Bolivia</option>
+                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                        <option value="Botswana">Botswana</option>
+                        <option value="Brazil">Brazil</option>
+                        <option value="Brunei">Brunei</option>
+                        <option value="Bulgaria">Bulgaria</option>
+                        <option value="Burkina Faso">Burkina Faso</option>
+                        <option value="Burundi">Burundi</option>
+                        <option value="Cabo Verde">Cabo Verde</option>
+                        <option value="Cambodia">Cambodia</option>
+                        <option value="Cameroon">Cameroon</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Central African Republic">Central African Republic</option>
+                        <option value="Chad">Chad</option>
+                        <option value="Chile">Chile</option>
+                        <option value="China">China</option>
+                        <option value="Colombia">Colombia</option>
+                        <option value="Comoros">Comoros</option>
+                        <option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
+                        <option value="Costa Rica">Costa Rica</option>
+                        <option value="Croatia">Croatia</option>
+                        <option value="Cuba">Cuba</option>
+                        <option value="Cyprus">Cyprus</option>
+                        <option value="Czechia (Czech Republic)">Czechia (Czech Republic)</option>
+                        <option value="Denmark">Denmark</option>
+                        <option value="Djibouti">Djibouti</option>
+                        <option value="Dominica">Dominica</option>
+                        <option value="Dominican Republic">Dominican Republic</option>
+                        <option value="Ecuador">Ecuador</option>
+                        <option value="Egypt">Egypt</option>
+                        <option value="El Salvador">El Salvador</option>
+                        <option value="Equatorial Guinea">Equatorial Guinea</option>
+                        <option value="Eritrea">Eritrea</option>
+                        <option value="Estonia">Estonia</option>
+                        <option value="Eswatini (fmr. Swaziland)">Eswatini (fmr. Swaziland)</option>
+                        <option value="Ethiopia">Ethiopia</option>
+                        <option value="Fiji">Fiji</option>
+                        <option value="Finland">Finland</option>
+                        <option value="France">France</option>
+                        <option value="Gabon">Gabon</option>
+                        <option value="Gambia">Gambia</option>
+                        <option value="Georgia">Georgia</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Ghana">Ghana</option>
+                        <option value="Greece">Greece</option>
+                        <option value="Grenada">Grenada</option>
+                        <option value="Guatemala">Guatemala</option>
+                        <option value="Guinea">Guinea</option>
+                        <option value="Guinea-Bissau">Guinea-Bissau</option>
+                        <option value="Guyana">Guyana</option>
+                        <option value="Haiti">Haiti</option>
+                        <option value="Holy See">Holy See</option>
+                        <option value="Honduras">Honduras</option>
+                        <option value="Hungary">Hungary</option>
+                        <option value="Iceland">Iceland</option>
+                        <option value="India">India</option>
+                        <option value="Indonesia">Indonesia</option>
+                        <option value="Iran">Iran</option>
+                        <option value="Iraq">Iraq</option>
+                        <option value="Ireland">Ireland</option>
+                        <option value="Israel">Israel</option>
+                        <option value="Italy">Italy</option>
+                        <option value="Jamaica">Jamaica</option>
+                        <option value="Japan">Japan</option>
+                        <option value="Jordan">Jordan</option>
+                        <option value="Kazakhstan">Kazakhstan</option>
+                        <option value="Kenya">Kenya</option>
+                        <option value="Kiribati">Kiribati</option>
+                        <option value="Korea (North)">Korea (North)</option>
+                        <option value="Korea (South)">Korea (South)</option>
+                        <option value="Kuwait">Kuwait</option>
+                        <option value="Kyrgyzstan">Kyrgyzstan</option>
+                        <option value="Laos">Laos</option>
+                        <option value="Latvia">Latvia</option>
+                        <option value="Lebanon">Lebanon</option>
+                        <option value="Lesotho">Lesotho</option>
+                        <option value="Liberia">Liberia</option>
+                        <option value="Libya">Libya</option>
+                        <option value="Liechtenstein">Liechtenstein</option>
+                        <option value="Lithuania">Lithuania</option>
+                        <option value="Luxembourg">Luxembourg</option>
+                        <option value="Madagascar">Madagascar</option>
+                        <option value="Malawi">Malawi</option>
+                        <option value="Malaysia">Malaysia</option>
+                        <option value="Maldives">Maldives</option>
+                        <option value="Mali">Mali</option>
+                        <option value="Malta">Malta</option>
+                        <option value="Marshall Islands">Marshall Islands</option>
+                        <option value="Mauritania">Mauritania</option>
+                        <option value="Mauritius">Mauritius</option>
+                        <option value="Mexico">Mexico</option>
+                        <option value="Micronesia">Micronesia</option>
+                        <option value="Moldova">Moldova</option>
+                        <option value="Monaco">Monaco</option>
+                        <option value="Mongolia">Mongolia</option>
+                        <option value="Montenegro">Montenegro</option>
+                        <option value="Morocco">Morocco</option>
+                        <option value="Mozambique">Mozambique</option>
+                        <option value="Myanmar (formerly Burma)">Myanmar (formerly Burma)</option>
+                        <option value="Namibia">Namibia</option>
+                        <option value="Nauru">Nauru</option>
+                        <option value="Nepal">Nepal</option>
+                        <option value="Netherlands">Netherlands</option>
+                        <option value="New Zealand">New Zealand</option>
+                        <option value="Nicaragua">Nicaragua</option>
+                        <option value="Niger">Niger</option>
+                        <option value="Nigeria">Nigeria</option>
+                        <option value="North Macedonia">North Macedonia</option>
+                        <option value="Norway">Norway</option>
+                        <option value="Oman">Oman</option>
+                        <option value="Pakistan">Pakistan</option>
+                        <option value="Palau">Palau</option>
+                        <option value="Palestine State">Palestine State</option>
+                        <option value="Panama">Panama</option>
+                        <option value="Papua New Guinea">Papua New Guinea</option>
+                        <option value="Paraguay">Paraguay</option>
+                        <option value="Peru">Peru</option>
+                        <option value="Philippines">Philippines</option>
+                        <option value="Poland">Poland</option>
+                        <option value="Portugal">Portugal</option>
+                        <option value="Qatar">Qatar</option>
+                        <option value="Romania">Romania</option>
+                        <option value="Russia">Russia</option>
+                        <option value="Rwanda">Rwanda</option>
+                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                        <option value="Saint Lucia">Saint Lucia</option>
+                        <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+                        <option value="Samoa">Samoa</option>
+                        <option value="San Marino">San Marino</option>
+                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                        <option value="Saudi Arabia">Saudi Arabia</option>
+                        <option value="Senegal">Senegal</option>
+                        <option value="Serbia">Serbia</option>
+                        <option value="Seychelles">Seychelles</option>
+                        <option value="Sierra Leone">Sierra Leone</option>
+                        <option value="Singapore">Singapore</option>
+                        <option value="Slovakia">Slovakia</option>
+                        <option value="Slovenia">Slovenia</option>
+                        <option value="Solomon Islands">Solomon Islands</option>
+                        <option value="Somalia">Somalia</option>
+                        <option value="South Africa">South Africa</option>
+                        <option value="South Sudan">South Sudan</option>
+                        <option value="Spain">Spain</option>
+                        <option value="Sri Lanka">Sri Lanka</option>
+                        <option value="Sudan">Sudan</option>
+                        <option value="Suriname">Suriname</option>
+                        <option value="Sweden">Sweden</option>
+                        <option value="Switzerland">Switzerland</option>
+                        <option value="Syria">Syria</option>
+                        <option value="Tajikistan">Tajikistan</option>
+                        <option value="Tanzania">Tanzania</option>
+                        <option value="Thailand">Thailand</option>
+                        <option value="Timor-Leste">Timor-Leste</option>
+                        <option value="Togo">Togo</option>
+                        <option value="Tonga">Tonga</option>
+                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                        <option value="Tunisia">Tunisia</option>
+                        <option value="Turkey">Turkey</option>
+                        <option value="Turkmenistan">Turkmenistan</option>
+                        <option value="Tuvalu">Tuvalu</option>
+                        <option value="Uganda">Uganda</option>
+                        <option value="Ukraine">Ukraine</option>
+                        <option value="United Arab Emirates">United Arab Emirates</option>
+                        <option value="United Kingdom">United Kingdom</option>
+                        <option value="United States of America">United States of America</option>
+                        <option value="Uruguay">Uruguay</option>
+                        <option value="Uzbekistan">Uzbekistan</option>
+                        <option value="Vanuatu">Vanuatu</option>
+                        <option value="Vatican">Vatican</option>
+                        <option value="Venezuela">Venezuela</option>
+                        <option value="Vietnam">Vietnam</option>
+                        <option value="Yemen">Yemen</option>
+                        <option value="Zambia">Zambia</option>
+                        <option value="Zimbabwe">Zimbabwe</option>
+                    </select>
+                </div>
+                </section>
+
+            <section class="collaboration">
+                <h2>COLLABORATION</h2>
+                <hr />
+                <div class="form-group">
+                    <label id="collaboration-label">Are you interested in collaboration? <span style="color: red;">*</span></label>
+                    <div class="radio-vertical">
+                        <label><input type="radio" name="collaboration" value="yes" required> YES</label>
+                        <label><input type="radio" name="collaboration" value="no" required> NO</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label id="business-label">Is your organization a small business? <span style="color: red;">*</span></label>
+                    <div class="radio-vertical">
+                        <label><input type="radio" name="smallBusiness" value="yes" required> YES</label>
+                        <label><input type="radio" name="smallBusiness" value="no" required> NO</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label id="organization-label">
+                        Is your organization a Historically Black College or University, or a Minority Serving Institution? <span style="color: red;">*</span>
+                    </label>
+                    <div class="radio-vertical">
+                        <label><input type="radio" name="hbcus" value="yes" required> YES</label>
+                        <label><input type="radio" name="hbcus" value="no" required> NO</label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="certifications">
+                <h2>CERTIFICATIONS AND CAPABILITIES</h2>
+                <hr />
+                <div class="form-group">
+                    <label>Is your organization ISO-9001 Certified? <span style="color: red;">*</span></label>
+                    <div class="radio-vertical">
+                        <label><input type="radio" name="isoCertified" value="yes" required> YES</label>
+                        <label><input type="radio" name="isoCertified" value="no" required> NO</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Is your organization AS-9100 Certified? <span style="color: red;">*</span></label>
+                    <div class="radio-vertical">
+                        <label><input type="radio" name="asCertified" value="yes" required> YES</label>
+                        <label><input type="radio" name="asCertified" value="no" required> NO</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Do you know your organization's NAICS codes? <span style="color: red;">*</span></label>
+                    <div class="radio-vertical">
+                        <label><input type="radio" name="naicsCodes" value="yes" required> YES</label>
+                        <label><input type="radio" name="naicsCodes" value="no" required> NO</label>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact">
+                <h2>CONTACT INFORMATION</h2>
+                <hr />
+                <div class="form-group">
+                    <label for="jobTitle">Job Title <span style="color: red;">*</span></label>
+                    <input type="text" id="jobTitle" name="jobTitle" required>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name <span style="color: red;">*</span></label>
+                    <input type="text" id="firstName" name="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name <span style="color: red;">*</span></label>
+                    <input type="text" id="lastName" name="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail <span style="color: red;">*</span></label>
+                    <input type="text" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number <span style="color: red;">*</span></label>
+                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                </div>
+                <hr>
+            </section>
+
+            <section class="acknowledgment">
+                <h2>ACKNOWLEDGMENTS</h2>
+                <hr />
+                <div class="form-group acknowledgment">
+                    <p>
+                        By selecting "I CONFIRM", you acknowledge that you have reviewed and verified the accuracy of the information provided in this form. 
+                        <span style="color: red;">*</span>
+                    </p>
+                    <label><input type="checkbox" id="confirmAccuracy" name="confirmAccuracy" required> I Confirm</label>
+                </div>
+            </section>
+
+            <button type="button" onclick="sendMail()">Send</button>
+            <button class="redirect-button" onclick="window.location.href='index.html';">Back to Home</button>
+        </form>
     </div>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div>
-            <h1>Internet of Bodies</h1>
-            <p>We bring together government, businesses and civil society to improve the state of the world.</p>
-            <a href="login.html" class="cta">Authorized Manager Portal</a>
-        </div>
-    </section>
-
-    <!-- Health System-->
-    <section class="health-systems">
-      <div class="health-systems__content">
-          <div class="text">
-              <h1>Health and Healthcare Systems</h1>
-              <p>
-                  Explore how technology is transforming healthcare systems by providing advanced tools for monitoring, diagnostics, and patient care. Learn about innovations in health management and their role in improving lives worldwide.
-              </p>
-              <a href="https://www.weforum.org/stories/health-and-healthcare-systems/" class="cta">Learn More</a>
-          </div>
-          <div class="image">
-              <img src="health.png" alt="Health and Healthcare Systems">
-          </div>
-      </div>
-  </section>
-
-   <!-- Mental Health -->
-<section class="mental-health">
-  <div class="content">
-      <div class="text">
-          <h1>Wellbeing and Mental Health</h1>
-          <p>
-              Mental health is a cornerstone of overall wellbeing, influencing how we think, feel, and interact with the world around us. 
-              Advances in technology and healthcare are providing innovative solutions to address mental health challenges, offering tools 
-              for stress management, early detection of mental disorders, and virtual therapy sessions. 
-          </p>
-          <a href="https://www.weforum.org/stories/?topics=630" class="cta">Learn More</a>
-      </div>
-      <div class="image">
-          <img src="mentalhealth.jpg" alt="Wellbeing and Mental Healthystems">
-      </div>
-  </div>
-</section>
-
-<!-- Global Risk Section -->
-<section class="global-risk">
-  <div class="global-risk__content">
-    <div class="text">
-      <h1>Global Risk</h1>
-      <p>
-        In an interconnected world, managing global risks is essential to ensure stability and sustainability. 
-        From climate change and economic crises to cybersecurity threats and public health emergencies, 
-        understanding and addressing these risks requires global cooperation and innovation.
-      </p>
-      <a href="https://www.weforum.org/global-risks" class="cta">Learn More</a>
-    </div>
-    <div class="image">
-      <img src="globalrisk.jpg" alt="Global Risk">
-    </div>
-  </div>
-</section>
-
-<!-- How Data & Stats Can Improve Our Health Section -->
-<section class="data-stats">
-  <div class="data-stats__content">
-    <div class="text">
-      <h1>How Data & Stats Can Improve Our Health!</h1>
-      <p>
-        Data and statistics are transforming the healthcare industry. By analyzing data, we can identify health risks, prevent diseases, make informed decisions about our health, 
-        measure the effectiveness of healthcare interventions, and understand the social determinants of health. 
-      </p>
-      <a href="https://aj-seotools.com/blog/data-stats#google_vignette" class="cta">Read More</a>
-    </div>
-  </div>
-</section>
-
-<!-- Spotlight Section -->
-<section class="spotlight">
-  <div class="spotlight-header">
-      <h1>Spotlight</h1>
-      <p>Latest analysis, insights, and explainers from across the Forum.</p>
-      <a href="https://www.weforum.org/" class="cta">More Stories →</a>
-  </div>
-  </section>
-
-<div class="spotlight">
-  <!-- Spotlight Item 1 -->
-  <a href="https://www.weforum.org/stories/2024/11/nature-positive-cities-blueprint-for-climate-resilience/" class="spotlight__item">
-    <img src="urban.png" alt="Urban Transformation" class="spotlight__image">
-    <div class="spotlight__info">
-      <h4 class="spotlight__category">Urban Transformation</h4>
-      <p class="spotlight__description">
-        These two cities show how nature-based solutions address climate hazards like urban flooding.
-      </p>
-    </div>
-  </a>
-
-  <!-- Spotlight Item 2 -->
-  <a href="https://www.weforum.org/stories/2024/11/cop29-4-key-takeaways/" class="spotlight__item">
-    <img src="climate.png" alt="Climate Action" class="spotlight__image">
-    <div class="spotlight__info">
-      <h4 class="spotlight__category">Climate Action</h4>
-      <p class="spotlight__description">
-        Climate finance, carbon markets, and more: 4 takeaways from COP29.
-      </p>
-    </div>
-  </a>
-</div>
-</section>
-
-<!-- Internet of Bodies Report Section -->
-<section class="report-section">
-  <div class="report-content">
-      <div class="text">
-          <p class="sub-heading">Reports</p>
-          <p class="publish-date">Published: 6 August 2020</p>
-          <h1>The Internet of Bodies Is Here: Tackling new challenges of technology governance</h1>
-          <a href="https://www3.weforum.org/docs/WEF_IoB_briefing_paper_2020.pdf" class="cta">Download PDF</a>
-          <p class="description">
-              Recent technological advancements have ushered in a new era of the “Internet of Bodies” (IoB), with an unprecedented number of connected devices and sensors being affixed to or even implanted and ingested into the human body.
-          </p>
-
-  </div>
-</section>
-
-<!-- AI in Healthcare Section -->
-<section class="ai-healthcare">
-  <div class="ai-healthcare__content">
-    <div class="image">
-      <img src="aihealth.webp" alt="AI in Healthcare">
-    </div>
-    <div class="text">
-      <h1>AI is improving healthcare, according to one of the world's largest medical groups</h1>
-      <p>
-        Discover how artificial intelligence is revolutionizing the healthcare industry, from diagnostics and personalized medicine to administrative tasks and patient care. Explore the transformative impact AI is having on global healthcare systems.
-      </p>
-      <a href="https://www.weforum.org/stories/2024/11/four-ways-ai-is-improving-healthcare/" class="cta">Learn More</a>
-    </div>
-  </div>
-</section>
-
-
-    <!-- Footer -->
-    <footer class="footer">
-        <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
-    </footer>
 
     <script>
-      let lastScrollY = window.scrollY;
-      const navbar = document.querySelector('.navbar');
-  
-      window.addEventListener('scroll', () => {
-          if (window.scrollY > lastScrollY) {
-              // Scrolling down - hide navbar
-              navbar.style.transform = 'translateY(-100%)';
-          } else {
-              // Scrolling up - show navbar
-              navbar.style.transform = 'translateY(0)';
-          }
-          lastScrollY = window.scrollY;
-      });
-  </script>
-  
+     function sendMail() {
+    emailjs.init("PAYF9MT2F8MBrlojx"); // Replace with your EmailJS public key
+
+    const params = {
+        sendername: document.querySelector("#fullName").value, // Sender's name
+        reply_to: document.querySelector("#email").value,      // Sender's email
+        message: `
+            Entity Full Name: ${document.querySelector("#fullName").value}
+            Entity Email Address: ${document.querySelector("#email").value}
+            Entity Phone Number: ${document.querySelector("#phone").value}
+            Entity Legal Name: ${document.querySelector("#companyName").value}
+            Entity Address: ${document.querySelector("#companyAddress").value}
+            Official Website: ${document.querySelector("#officialWebsite").value}
+            Country: ${document.querySelector("#country").value}
+            Job Title: ${document.querySelector("#jobTitle").value}
+            First Name: ${document.querySelector("#firstName").value}
+            Last Name: ${document.querySelector("#lastName").value}
+            Collaboration: ${document.querySelector('input[name="collaboration"]:checked').value}
+            Small Business: ${document.querySelector('input[name="smallBusiness"]:checked').value}
+            HBCU: ${document.querySelector('input[name="hbcus"]:checked').value}
+            ISO Certified: ${document.querySelector('input[name="isoCertified"]:checked').value}
+            AS Certified: ${document.querySelector('input[name="asCertified"]:checked').value}
+            NAICS Codes: ${document.querySelector('input[name="naicsCodes"]:checked').value}
+        `
+    };
+
+    const serviceID = "service_qufwwvn"; // Your EmailJS service ID
+    const receiverTemplateID = "template_12ke24d"; // Receiver's template ID
+    const senderTemplateID = "template_gwrqaqm"; // Sender's template ID
+
+    // Email to Receiver
+    emailjs.send(serviceID, receiverTemplateID, {
+        to: "admin@accountableinfrastructure.com", // Receiver's email
+        from_name: params.sendername,
+        reply_to: params.reply_to, // Reply-to for the receiver email
+        message: params.message,
+    })
+    .then(() => console.log("Email sent to receiver!"))
+    .catch(err => console.error("Failed to send email to receiver:", err));
+
+    // Email to Sender (Confirmation)
+    emailjs.send(serviceID, senderTemplateID, {
+        to: params.reply_to, // Sender's email
+        from_name: "Internet of Bodies Team", // Static "From" name for sender's email
+        sendername: params.sendername,
+        message: params.message,
+    })
+    .then(() => alert("Confirmation email sent to sender!"))
+    .catch(err => console.error("Failed to send confirmation email to sender:", err));
+}
+
+   </script>
 </body>
 </html>
