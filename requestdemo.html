@@ -682,28 +682,66 @@ button:active, .submit:active, .redirect-button:active {
             </section>
 
             <button type="button" onclick="sendMail()">Send</button>
-            <button class="redirect-button" onclick="window.location.href='index.html';">Back to Home</button>
         </form>
     </div>
 
     <script>
-     function sendMail() {
+function sendMail() {
+    // Initialize EmailJS
     emailjs.init("PAYF9MT2F8MBrlojx"); // Replace with your EmailJS public key
 
+    const form = document.querySelector("#demoForm");
+    if (!form) {
+        console.error("Form with ID 'demoForm' not found");
+        return;
+    }
+
+    const requiredFields = [
+        "#fullName",
+        "#email",
+        "#phone",
+        "#companyName",
+        "#companyAddress",
+        "#officialWebsite",
+        "#country",
+        "#jobTitle",
+        "#firstName",
+        "#lastName",
+        'input[name="collaboration"]:checked',
+        'input[name="smallBusiness"]:checked',
+        'input[name="hbcus"]:checked',
+        'input[name="isoCertified"]:checked',
+        'input[name="asCertified"]:checked',
+        'input[name="naicsCodes"]:checked',
+        "#confirmAccuracy"
+    ];
+
+    for (let selector of requiredFields) {
+        const element = document.querySelector(selector);
+
+        // If required field is missing or empty
+        if (!element || (element.tagName === "INPUT" && !element.value.trim())) {
+            alert(`Please fill out the ${selector.replace("#", "").replaceAll("-", " ")}`);
+            element?.focus(); // Focus on the problematic field (if it exists)
+            return; // Stop execution here
+        }
+    }
+
+    // Prepare email parameters
     const params = {
-        sendername: document.querySelector("#fullName").value, // Sender's name
-        reply_to: document.querySelector("#email").value,      // Sender's email
+        sendername: document.querySelector("#fullName").value.trim(),
+        reply_to: document.querySelector("#email").value.trim(),
         message: `
-            Entity Full Name: ${document.querySelector("#fullName").value}
-            Entity Email Address: ${document.querySelector("#email").value}
-            Entity Phone Number: ${document.querySelector("#phone").value}
-            Entity Legal Name: ${document.querySelector("#companyName").value}
-            Entity Address: ${document.querySelector("#companyAddress").value}
-            Official Website: ${document.querySelector("#officialWebsite").value}
-            Country: ${document.querySelector("#country").value}
-            Job Title: ${document.querySelector("#jobTitle").value}
-            First Name: ${document.querySelector("#firstName").value}
-            Last Name: ${document.querySelector("#lastName").value}
+            Entity Full Name: ${document.querySelector("#fullName").value.trim()}
+            Entity Email Address: ${document.querySelector("#email").value.trim()}
+            Entity Phone Number: ${document.querySelector("#phone").value.trim()}
+            Entity Legal Name: ${document.querySelector("#companyName").value.trim()}
+            Entity Address: ${document.querySelector("#companyAddress").value.trim()}
+            Official Website: ${document.querySelector("#officialWebsite").value.trim()}
+            Country: ${document.querySelector("#country").value.trim()}
+            Job Title: ${document.querySelector("#jobTitle").value.trim()}
+            First Name: ${document.querySelector("#firstName").value.trim()}
+            Last Name: ${document.querySelector("#lastName").value.trim()}
             Collaboration: ${document.querySelector('input[name="collaboration"]:checked').value}
             Small Business: ${document.querySelector('input[name="smallBusiness"]:checked').value}
             HBCU: ${document.querySelector('input[name="hbcus"]:checked').value}
@@ -713,29 +751,40 @@ button:active, .submit:active, .redirect-button:active {
         `
     };
 
-    const serviceID = "service_qufwwvn"; // Your EmailJS service ID
-    const receiverTemplateID = "template_12ke24d"; // Receiver's template ID
-    const senderTemplateID = "template_gwrqaqm"; // Sender's template ID
+    const serviceID = "service_qufwwvn"; // Replace with your actual service ID
+    const receiverTemplateID = "template_12ke24d";
+    const senderTemplateID = "template_gwrqaqm";
 
     // Email to Receiver
-    emailjs.send(serviceID, receiverTemplateID, {
-        to: "admin@accountableinfrastructure.com", // Receiver's email
-        from_name: params.sendername,
-        reply_to: params.reply_to, // Reply-to for the receiver email
-        message: params.message,
-    })
-    .then(() => console.log("Email sent to receiver!"))
-    .catch(err => console.error("Failed to send email to receiver:", err));
+    emailjs
+        .send(serviceID, receiverTemplateID, {
+            to: "admin@accountableinfrastructure.com",
+            from_name: params.sendername,
+            reply_to: params.reply_to,
+            message: params.message
+        })
+        .then(() => {
+            console.log("Email sent to receiver!");
+        })
+        .catch(err => {
+            console.error("Failed to send email to receiver:", err);
+        });
 
     // Email to Sender (Confirmation)
-    emailjs.send(serviceID, senderTemplateID, {
-        to: params.reply_to, // Sender's email
-        from_name: "Internet of Bodies Team", // Static "From" name for sender's email
-        sendername: params.sendername,
-        message: params.message,
-    })
-    .then(() => alert("Confirmation email sent to sender!"))
-    .catch(err => console.error("Failed to send confirmation email to sender:", err));
+    emailjs
+        .send(serviceID, senderTemplateID, {
+            to: params.reply_to,
+            from_name: "Internet of Bodies Team",
+            sendername: params.sendername,
+            message: params.message
+        })
+        .then(() => {
+            alert("Confirmation email sent successfully!");
+            form.reset(); // Clear the form after submission
+        })
+        .catch(err => {
+            console.error("Failed to send confirmation email to sender:", err);
+        });
 }
 
    </script>
