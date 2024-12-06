@@ -23,11 +23,11 @@
     width: 100%;
     z-index: 1000;
     box-sizing: border-box;
-    transition: transform 0.3s ease-in-out; /* Smooth transition for hiding/showing */
+    transition: transform 0.3s ease-in-out;
 }
 
         .navbar .logo img {
-            height: 50px; /* Adjust the size of the logo as needed */
+            height: 50px;
         }
 
         .navbar .cta {
@@ -42,7 +42,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            margin-left: auto; /* Ensures it is aligned properly to the right */
+            margin-left: auto;
         }
 
         .navbar .cta:hover {
@@ -50,27 +50,27 @@
             color: black;
         }
 /* CTA 1 */
-        .cta {
-    text-decoration: none; /* Removes underline */
-    color: #fff; /* White text color */
-    font-family: Arial, sans-serif; /* Clean, modern font */
-    font-size: 14px; /* Standard size for buttons */
-    font-weight: bold; /* Bold text for emphasis */
-    display: inline-block; /* Makes the link behave like a button */
-    padding: 10px 30px; /* Adds spacing around text */
-    margin: 10px 20px; /* Adds margin outside the button */
-    border: 2px solid #000; /* Black border to match background */
-    border-radius: 5px; /* Adds rounded corners */
-    transition: all 0.3s ease; /* Smooth hover effect */
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    .cta {
+    text-decoration: none;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: bold;
+    display: inline-block; 
+    padding: 8px 20px; 
+    margin: 8px 15px; 
+    border: 2px solid #000;
+    border-radius: 5px; 
+    transition: all 0.3s ease;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .cta:hover {
-    background-color: #fff; /* White background on hover */
-    color: #000; /* Black text color on hover */
-    border-color: #000; /* Maintains border on hover */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Enhanced shadow on hover */
-    cursor: pointer; /* Pointer cursor for interactivity */
+    background-color: #fff; 
+    color: #000;
+    border-color: #000; 
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3); 
+    cursor: pointer; 
 }
 
 
@@ -83,27 +83,24 @@
     height: 100vh; /* Full viewport height */
     background: url('landing.jpeg') no-repeat center center/cover;
     text-align: center;
-    margin: 0; /* Remove default body margins */
-    padding: 0 20px; /* Add padding for small screens */
+    padding: 20px; /* Add padding for small screens */
 }
 
 /* Hero Title */
 .hero h1 {
-    font-size: 3em; /* Responsive size for large screens */
-    margin-bottom: 20px;
+    font-size: 2.3rem; /* Consistent font size */
+    margin-bottom: 15px; /* Reduced margin */
     text-transform: uppercase;
     font-weight: bold;
-    letter-spacing: 3px;
+    letter-spacing: 2px; /* Slightly reduced spacing */
     color: #ffffff;
-    line-height: 1.2;
+    line-height: 1.3; /* Adjusted for better readability */
 }
-
 /* Hero Paragraph */
 .hero p {
-    font-size: 1.2em; /* Make text readable on all devices */
-    margin-bottom: 40px;
+    font-size: 1.1rem; /* Consistent font size */
+    margin-bottom: 30px; /* Reduced margin */
     max-width: 600px; /* Restrict paragraph width for readability */
-    padding: 0 20px; /* Add padding for better readability on smaller devices */
     color: #ffffff;
 }
 
@@ -112,49 +109,50 @@
     text-decoration: none;
     color: white;
     border: 2px solid white;
-    padding: 12px 30px; /* Slightly larger padding for better usability */
+    padding: 10px 25px; /* Slightly larger padding for better usability */
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1rem;
     transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
 .hero .cta:hover {
     background: white;
     color: black;
-    transform: scale(1.05); /* Add slight grow on hover */
+    transform: scale(1.03); /* Add slight grow on hover */
 }
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
     .hero h1 {
-        font-size: 2.5em;
+        font-size: 2rem; /* Adjusted for smaller screens */
     }
 
     .hero p {
-        font-size: 1em;
+        font-size: 1rem; /* Consistent paragraph size */
     }
 
     .hero .cta {
-        font-size: 0.9em;
-        padding: 10px 25px;
+        font-size: 0.95rem; /* Slightly reduced button font size */
+        padding: 8px 20px; /* Reduced button padding */
     }
 }
 
 @media (max-width: 480px) {
     .hero h1 {
-        font-size: 2em;
+        font-size: 1.8rem; /* Smaller heading size */
     }
 
     .hero p {
-        font-size: 0.9em;
+        font-size: 0.9rem; /* Smaller paragraph size */
     }
 
     .hero .cta {
-        font-size: 0.8em;
-        padding: 8px 20px;
+        font-size: 0.85rem; /* Compact button font size */
+        padding: 7px 18px; /* Reduced button padding */
     }
 }
+
 
         /* Footer */
         .footer {
@@ -223,7 +221,7 @@
         }
         /* General Section Styling */
 section {
-  padding: 50px 20px;
+  padding: 30px 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -253,20 +251,20 @@ section .health-systems__content {
 /* Text Block */
 section .text {
   flex: 1;
-  padding: 20px;
+  padding: 10px;
   text-align: left;
 }
 
 section .text h1 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15 px;
 }
 
 section .text p {
   font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  line-height: 1.5  ;
+  margin-bottom: 10px;
 }
 
 section .text .cta {
@@ -280,6 +278,8 @@ section .text .cta {
   font-weight: bold;
   border-radius: 25px;
   transition: background 0.3s ease, color 0.3s ease;
+  margin-top: 10px; /* Tightened space above button */
+  padding: 8px 20px; /* Adjusted button size */
 }
 
 section .text .cta:hover {
@@ -294,13 +294,14 @@ section .image {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 10px;
 }
 
 section .image img {
   max-width: 100%;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
 }
 /* Mirrored Content (Image on the Right) */
 .health-systems__content {
@@ -339,6 +340,7 @@ section .image img {
   max-width: 1200px;
   width: 100%;
   flex-direction: row-reverse; /* Reverse layout: image on the right, text on the left */
+  padding: 30px 20px;
 }
 
 /* Background Colors for Global Risk */
@@ -355,29 +357,29 @@ section.global-risk:nth-child(odd) {
 /* General Content Styling */
 .global-risk .text {
   flex: 1;
-  padding: 20px;
+  padding: 15px;
   text-align: left;
 }
 
 .global-risk .text h1 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .global-risk .text p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 15px;
 }
 
 .global-risk .text .cta {
   display: inline-block;
-  padding: 10px 30px;
+  padding: 8px 20px;
   text-decoration: none;
   background-color: black; /* Button Background */
   color: white; /* Button Text */
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: bold;
   border-radius: 25px;
   transition: background 0.3s ease, color 0.3s ease;
@@ -394,7 +396,7 @@ section.global-risk:nth-child(odd) {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
 }
 
 .global-risk .image img {
@@ -407,32 +409,37 @@ section.global-risk:nth-child(odd) {
 @media (max-width: 768px) {
   .global-risk__content {
     flex-direction: column; /* Stack text and image vertically */
+    padding: 20px 10px; 
   }
 
   .global-risk .text h1 {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .global-risk .text {
+    padding: 10px; /* Reduced padding for text */
   }
 
   .global-risk .text p {
-    font-size: 1rem;
+    font-size: 1rem; /* Smaller font size for paragraph */
   }
 
   .global-risk .text .cta {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 }
 
 .next-section {
   background-color: #e0f7fa; /* Soft healthcare blue */
   color: #000; /* Adjust text color */
-  padding: 50px;
+  padding: 40px;
 }
 
 /* How Data & Stats Section Styling */
 section.data-stats {
     background-color: #ffffff; /* Muted blue background */
     color: #000; /* Black text color */
-    padding: 50px 20px; /* Consistent padding */
+    padding: 30px 15px;  /* Consistent padding */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -444,30 +451,30 @@ section.data-stats .data-stats__content {
     width: 100%; /* Ensure it spans the container */
     display: flex;
     flex-direction: column; /* Default vertical alignment */
-    gap: 20px; /* Space between text elements */
+    gap: 15px; /* Space between text elements */
 }
 
 section.data-stats .text h1 {
-    font-size: 2.5rem; /* Consistent heading size */
+    font-size: 2.3rem; /* Consistent heading size */
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 section.data-stats .text p {
-    font-size: 1.2rem; /* Match paragraph font size */
-    line-height: 1.6; /* Improved readability */
-    margin-bottom: 20px;
-}
+    font-size: 1.1rem; /* Match paragraph font size */
+    line-height: 1.5; /* Improved readability */
+    margin-bottom: 15px;
+} 
 
 section.data-stats .text .cta {
     display: inline-block;
-    padding: 10px 30px;
+    padding: 8px 25px;
     text-decoration: none;
     background-color: #000; /* Black button */
     color: #fff; /* White text */
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 25px;
+    border-radius: 20px;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -480,11 +487,11 @@ section.data-stats .text .cta:hover {
 /* Spotlight Section */
 .spotlight {
     max-width: 1200px;
-    margin: 20px auto;
-    padding: 50px 20px;
+    margin: 15px auto; 
+    padding: 30px 15px;
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 15px; 
     justify-content: space-evenly;
     color: #000000; /* Ensure text contrast */
     text-align: center;
@@ -493,20 +500,20 @@ section.data-stats .text .cta:hover {
 
 
 .spotlight-header {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .spotlight-header h1 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 10px;
 }
 
 .spotlight-header p {
-    font-size: 1.2rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
     color: #ccc; /* Slightly muted color for the paragraph */
 }
 
@@ -514,10 +521,10 @@ section.data-stats .text .cta:hover {
     text-decoration: none;
     color: white;
     border: 2px solid white;
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 8px 20px;
+    font-size: 0.95rem;
     font-weight: bold;
-    border-radius: 5px;
+    border-radius: 20px;
     transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -532,16 +539,16 @@ section.data-stats .text .cta:hover {
     flex-direction: column;
     background: #fff;
     border: 1px solid #eaeaea;
-    border-radius: 10px;
+    border-radius: 8px;
     overflow: hidden;
     text-decoration: none;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: calc(50% - 20px); /* Makes each item take 50% of the container */
+    width: calc(50% - 15px); /* Makes each item take 50% of the container */
     max-width: 580px; /* Optional: restrict max width */
 }
 
 .spotlight__item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -554,14 +561,14 @@ section.data-stats .text .cta:hover {
 
 /* Spotlight info */
 .spotlight__info {
-    padding: 15px;
+    padding: 10px;
 }
 
 .spotlight__category {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .spotlight__description {
@@ -574,11 +581,17 @@ section.data-stats .text .cta:hover {
     .spotlight__item {
         flex: 1 1 100%; /* Full width on smaller screens */
     }
+    .spotlight-header {
+        margin-bottom: 15px;
+    }
+    section.data-stats {
+        padding: 20px 10px; /* Reduced padding for smaller screens */
+    }
 }
 
 @media (max-width: 480px) {
     .spotlight__info {
-        padding: 10px;
+        padding: 8px;
     }
 
     .spotlight__category {
@@ -595,7 +608,7 @@ section.data-stats .text .cta:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px 20px;
+    padding: 30px 15px;
     background-color: #ffffff !important; /* Blue background */
     color: #000000 !important; /* White text */
 }
@@ -606,13 +619,13 @@ section.data-stats .text .cta:hover {
     align-items: center;
     max-width: 1200px;
     width: 100%;
-    gap: 20px; /* Space between text and image */
+    gap: 15px; /* Space between text and image */
 }
 
 /* Text Block Styling */
 .report-content .text {
     flex: 1;
-    padding: 20px;
+    padding: 15px; 
 }
 
 .report-content .text .sub-heading {
@@ -620,31 +633,31 @@ section.data-stats .text .cta:hover {
     text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .report-content .text .publish-date {
     font-size: 0.9rem;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     color: #000000; /* Light blue */
 }
 
 .report-content .text h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 2.3rem;
+    font-weight: bold !important;
+    margin-bottom: 15px;
 }
 
 .report-content .text .cta {
     display: inline-block;
-    padding: 10px 30px;
+    padding: 8px 25px;
     text-decoration: none;
     background-color: #ffffff; /* White button */
     color: #000000; /* Blue text */
     font-size: 1rem;
     font-weight: bold;
-    border-radius: 5px;
-    margin-bottom: 20px;
+    border-radius: 20px;
+    margin-bottom: 15px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -675,11 +688,12 @@ section.data-stats .text .cta:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 15px;
 }
 
 .report-content .image img {
     max-width: 100%;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
@@ -687,6 +701,7 @@ section.data-stats .text .cta:hover {
 @media (max-width: 768px) {
     .report-content {
         flex-direction: column;
+        gap: 10px;
     }
 
     .report-content .text h1 {
@@ -706,7 +721,7 @@ section.data-stats .text .cta:hover {
 /* AI Healthcare Section Styling */
 .ai-healthcare {
   background-color: #000000 !important; /* Light grey background */
-  padding: 50px 20px;
+  padding: 30px 15px;
   color: #ffffff !important;
 }
 .ai-healthcare__content {
@@ -717,26 +732,27 @@ section.data-stats .text .cta:hover {
   width: 100%;
   margin: 0 auto;
   flex-direction: column; /* Default to vertical stack for mobile */
+  gap: 15px;
 }
 
 /* Text Block Styling */
 .ai-healthcare .text {
   flex: 1;
-  padding: 20px;
+  padding: 15px; 
   text-align: left;
   order: 1; /* Ensure text appears before image */
 }
 
 .ai-healthcare .text h1 {
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   font-weight: bold;
-  margin-bottom: 20px;
+  margin-bottom: 15px; 
 }
 
 .ai-healthcare .text p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  margin-bottom: 20px;
+  font-size: 1.1rem; /* Consistent paragraph font size */
+    line-height: 1.5; /* Adjusted for readability */
+    margin-bottom: 15px; /* Tightened spacing */
 }
 
 .ai-healthcare .text .cta {
@@ -747,7 +763,7 @@ section.data-stats .text .cta:hover {
   color: #fff; /* Button text color */
   font-size: 1rem;
   font-weight: bold;
-  border-radius: 25px;
+  border-radius: 20px;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -763,13 +779,13 @@ section.data-stats .text .cta:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 15px;
   order: 2; /* Ensure image appears after text by default */
 }
 
 .ai-healthcare .image img {
   max-width: 100%;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
@@ -777,16 +793,28 @@ section.data-stats .text .cta:hover {
 @media (min-width: 768px) {
   .ai-healthcare__content {
     flex-direction: row; /* Horizontal layout for desktop */
+    gap: 10px;
   }
 
   .ai-healthcare .text {
     order: 1; /* Text first */
   }
+  .ai-healthcare .text h1 {
+        font-size: 2rem; /* Adjusted font size */
+    }
 
   .ai-healthcare .image {
     order: 2; /* Image second */
   }
 }
+
+.ai-healthcare .text p {
+        font-size: 1rem; /* Adjusted paragraph size */
+    }
+    .ai-healthcare .text .cta {
+        font-size: 0.9rem; /* Smaller button font size */
+    }
+
 
 @media (max-width: 767px) {
   .ai-healthcare__content {
@@ -818,7 +846,7 @@ section.data-stats .text .cta:hover {
     <section class="hero">
         <div>
             <h1>Internet of Bodies</h1>
-            <p>We bring together government, businesses and civil society to improve the state of the world</p>
+            <p>We bring together government, businesses and civil society to improve the state of the world.</p>
             <a href="login.html" class="cta">Authorized Manager Portal</a>
         </div>
     </section>
@@ -953,7 +981,6 @@ section.data-stats .text .cta:hover {
     </div>
   </div>
 </section>
-
 
 
     <!-- Footer -->
