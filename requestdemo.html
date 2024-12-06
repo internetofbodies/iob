@@ -52,6 +52,20 @@ html {
     scroll-behavior: smooth;
 }
 
+html, body {
+    overscroll-behavior: none;
+    overflow: hidden; /* For non-scrollable elements */
+    height: 100%;
+}
+.scrollable-section {
+    scroll-snap-type: y mandatory; /* Controls snapping while scrolling */
+    overflow-y: scroll;
+}
+.scrollable-section > * {
+    scroll-snap-align: start;
+}
+
+
 
 .container {
     padding: 20px;
