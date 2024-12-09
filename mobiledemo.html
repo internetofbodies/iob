@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Track Multiple Users</title>
+  <title>Map User Location</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     body {
@@ -40,18 +40,38 @@
   </style>
 </head>
 <body>
-  <h1>Track Multiple Users</h1>
+  <h1>Map User Location</h1>
 
   <div id="userForm">
     <input type="text" id="userName" placeholder="Enter your name" />
     <input type="text" id="userID" placeholder="Enter your ID" />
-    <button onclick="addUser()">Add My Location</button>
+    <button onclick="startSharing()">Locate Me</button>
   </div>
 
   <div id="map"></div>
 
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
   <script>
+    // Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCELM2xuqdJmjKZol4q-2jB80T5BrcHLuk",
+      authDomain: "internet-of-bodies.firebaseapp.com",
+      databaseURL: "https://internet-of-bodies-default-rtdb.firebaseio.com/",
+      projectId: "internet-of-bodies",
+      storageBucket: "internet-of-bodies.appspot.com",
+      messagingSenderId: "231474107957",
+      appId: "1:231474107957:web:d9cdf0f6bbb41f4155c37c",
+      measurementId: "G-6C7XDQWE0T"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+
     // Initialize the map
     const map = L.map('map').setView([51.505, -0.09], 5);
 
@@ -61,43 +81,87 @@
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // Store user locations
-    const users = [];
+    // Store markers to prevent duplication
+    const markers = {};
+    let userName = null;
+    let userID = null;
 
-    // Function to add a user's location
-    function addUser() {
-      const userName = document.getElementById('userName').value;
-      const userID = document.getElementById('userID').value;
+    // Function to share the user's location
+    function shareLocation() {
+      if (!userName || !userID) {
+        alert("Please enter your name and ID to start sharing location.");
+        return;
+      }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          const userLat = position.coords.latitude;
+          const userLon = position.coords.longitude;
+
+          // Get the current timestamp
+          const timestamp = new Date().toISOString();
+
+          // Send user data to Firebase
+          database.ref('locations/' + userID).set({
+            name: userName,
+            id: userID,
+            lat: userLat,
+            lon: userLon,
+            timestamp: timestamp
+          });
+        }, (error) => {
+          alert("Unable to retrieve location. Please check your browser settings.");
+        });
+      } else {
+        alert("Geolocation is not supported by your browser.");
+      }
+    }
+
+    // Function to add a marker to the map
+    function addMarker(user) {
+      if (!markers[user.id]) {
+        const marker = L.marker([user.lat, user.lon])
+          .addTo(map)
+          .bindPopup(`<b>Name:</b> ${user.name}<br><b>ID:</b> ${user.id}<br><b>Last Updated:</b> ${new Date(user.timestamp).toLocaleString()}`);
+        markers[user.id] = marker;
+      } else {
+        // Update marker position and popup if it already exists
+        markers[user.id].setLatLng([user.lat, user.lon]);
+        markers[user.id].bindPopup(`<b>Name:</b> ${user.name}<br><b>ID:</b> ${user.id}<br><b>Last Updated:</b> ${new Date(user.timestamp).toLocaleString()}`);
+      }
+    }
+
+    // Listen for changes in the database
+    database.ref('locations').on('value', (snapshot) => {
+      const users = snapshot.val();
+
+      // Remove markers for devices that no longer exist
+      for (const id in markers) {
+        if (!users[id]) {
+          map.removeLayer(markers[id]);
+          delete markers[id];
+        }
+      }
+
+      // Add or update markers for all active users
+      for (const id in users) {
+        addMarker(users[id]);
+      }
+    });
+
+    // Start location sharing
+    function startSharing() {
+      userName = document.getElementById('userName').value;
+      userID = document.getElementById('userID').value;
 
       if (!userName || !userID) {
         alert("Please enter both your name and ID.");
         return;
       }
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const userLat = position.coords.latitude;
-            const userLon = position.coords.longitude;
-
-            // Add user details to the users array
-            users.push({ name: userName, id: userID, lat: userLat, lon: userLon });
-
-            // Display marker on the map
-            L.marker([userLat, userLon])
-              .addTo(map)
-              .bindPopup(`<b>Name:</b> ${userName}<br><b>ID:</b> ${userID}<br><b>You are here!</b>`)
-              .openPopup();
-
-            console.log(users); // Logs all users and their locations
-          },
-          (error) => {
-            alert("Unable to retrieve location. Please check your browser settings.");
-          }
-        );
-      } else {
-        alert("Geolocation is not supported by your browser.");
-      }
+      // Start sharing location every 5 seconds
+      setInterval(shareLocation, 5000);
+      alert("Location sharing started!");
     }
   </script>
 </body>
