@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surveillance Map</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css" />
+    <style>
+        /* General Body Style */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: #333;
+        }
+
+        /* Title Section */
+        h1 {
+            margin: 20px 0;
+            color: #444;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        /* Form Styling */
+        form {
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, button {
+            padding: 12px;
+            width: 100%;
+            max-width: 300px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        button {
+            cursor: pointer;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        /* Map Styling */
+        #map {
+            height: 60vh;
+            width: 80vw;
+            margin: 20px 0;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Details Section */
+        #details {
+            padding: 20px;
+            background: #fff;
+            width: 80vw;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .location-info {
+            margin: 10px 0;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+
+        .location-info strong {
+            color: #007bff;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Surveillance Map</h1>
+<form id="userForm">
+    <input type="text" id="name" placeholder="Enter Name" required />
+    <input type="text" id="id" placeholder="Enter ID" required />
+    <button type="submit">Detect Location</button>
+</form>
+
+<div id="map"></div>
+<div id="details">
+    <h3 style="color: #444; text-align: center;">Detected Person Details</h3>
+    <div class="location-info"><strong>Name:</strong> <span id="detectedName">-</span></div>
+    <div class="location-info"><strong>ID:</strong> <span id="detectedID">-</span></div>
+    <div class="location-info"><strong>City:</strong> <span id="detectedCity">-</span></div>
+    <div class="location-info"><strong>Coordinates:</strong> <span id="detectedCoords">-</span></div>
+</div>
+
+<script>
+    // Initialize the map
+    const map = L.map('map').setView([37.0902, -95.7129], 4); // Center USA
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // OpenCage Geocoder API Key
+    const apiKey = '692914491aec4471ad3cd3b89506e67f';
+
+    // Generate random coordinates in the USA
+    function getRandomCoordinates() {
+        const lat = (Math.random() * (49.3457868 - 24.396308)) + 24.396308; // Between USA latitudes
+        const lng = (Math.random() * (-66.93457 - -125.00165)) + -125.00165; // Between USA longitudes
+        return [lat.toFixed(6), lng.toFixed(6)];
+    }
+
+    // Fetch city details from OpenCage API
+    async function fetchCityDetails(coords) {
+        const [lat, lng] = coords;
+        const response = await fetch(`https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`);
+        const data = await response.json();
+
+        console.log("OpenCage API Response:", data); // Debugging log
+
+        if (data.results && data.results.length > 0) {
+            const components = data.results[0].components;
+            return components.city || components.town || components.state || "Unknown City";
+        } else {
+            return "Unknown City";
+        }
+    }
+
+    // Handle form submission
+    document.getElementById('userForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Get input values
+        const name = document.getElementById('name').value.trim();
+        const id = document.getElementById('id').value.trim();
+
+        if (!name || !id) {
+            alert("Please enter both Name and ID.");
+            return;
+        }
+
+        // Generate random coordinates (for simulation)
+        const coords = getRandomCoordinates();
+
+        // Fetch city details using OpenCage API
+        const city = await fetchCityDetails(coords);
+
+        // Update details section
+        document.getElementById('detectedName').textContent = name;
+        document.getElementById('detectedID').textContent = id;
+        document.getElementById('detectedCity').textContent = city;
+        document.getElementById('detectedCoords').textContent = `${coords[0]}, ${coords[1]}`;
+
+        // Add marker to the map
+        const marker = L.marker(coords).addTo(map);
+        marker.bindPopup(`<strong>${name}</strong><br>ID: ${id}<br>City: ${city}<br>Coordinates: ${coords.join(", ")}`).openPopup();
+        map.setView(coords, 10); // Zoom into user's location
+    });
+</script>
+
+</body>
+</html>
