@@ -7,35 +7,95 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
       padding: 0;
+      background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+      color: #333;
     }
 
     h1 {
       text-align: center;
       margin: 20px 0;
+      font-size: 2rem;
+      color: #444;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
     }
 
     #map {
       height: 70vh;
-      margin: 10px;
-      border: 2px solid #333;
+      margin: 20px auto;
+      width: 90%;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
 
     #userForm {
-      margin: 10px;
+      margin: 20px auto;
       text-align: center;
+      padding: 15px 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
     }
 
     #userForm input {
-      padding: 5px;
-      margin: 5px;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      width: calc(100% - 22px); /* Adjusted to include padding and border */
+      box-sizing: border-box;
     }
 
     #userForm button {
-      padding: 5px 10px;
+      padding: 10px 20px;
+      background: #888;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
       cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background 0.3s ease;
+      display: block;
+      margin: 10px auto; /* Center the button */
+    }
+
+    #userForm button:hover {
+      background: #555;
+    }
+
+    #userForm input:focus,
+    #userForm button:focus {
+      outline: none;
+      box-shadow: 0 0 5px rgba(136, 136, 136, 0.8);
+    }
+
+    @media (max-width: 480px) {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      #map {
+        height: 60vh;
+      }
+
+      #userForm {
+        padding: 10px;
+      }
+
+      #userForm input {
+        font-size: 0.9rem;
+      }
+
+      #userForm button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
     }
   </style>
 </head>
