@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Multiple Users</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    #map {
+      height: 70vh;
+      margin: 10px;
+      border: 2px solid #333;
+    }
+
+    #userForm {
+      margin: 10px;
+      text-align: center;
+    }
+
+    #userForm input {
+      padding: 5px;
+      margin: 5px;
+    }
+
+    #userForm button {
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Track Multiple Users</h1>
+
+  <div id="userForm">
+    <input type="text" id="userName" placeholder="Enter your name" />
+    <input type="text" id="userID" placeholder="Enter your ID" />
+    <button onclick="addUser()">Add My Location</button>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map
+    const map = L.map('map').setView([51.505, -0.09], 5);
+
+    // Add OpenStreetMap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Store user locations
+    const users = [];
+
+    // Function to add a user's location
+    function addUser() {
+      const userName = document.getElementById('userName').value;
+      const userID = document.getElementById('userID').value;
+
+      if (!userName || !userID) {
+        alert("Please enter both your name and ID.");
+        return;
+      }
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const userLat = position.coords.latitude;
+            const userLon = position.coords.longitude;
+
+            // Add user details to the users array
+            users.push({ name: userName, id: userID, lat: userLat, lon: userLon });
+
+            // Display marker on the map
+            L.marker([userLat, userLon])
+              .addTo(map)
+              .bindPopup(`<b>Name:</b> ${userName}<br><b>ID:</b> ${userID}<br><b>You are here!</b>`)
+              .openPopup();
+
+            console.log(users); // Logs all users and their locations
+          },
+          (error) => {
+            alert("Unable to retrieve location. Please check your browser settings.");
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser.");
+      }
+    }
+  </script>
+</body>
+</html>
