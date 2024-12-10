@@ -1,228 +1,251 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Map User Location</title>
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <style>
-    body {
-      font-family: 'Roboto', Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: linear-gradient(to bottom, #ffffff, #e0e0e0);
-      color: #333;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Map User Location</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      body {
+        font-family: "Roboto", Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+        color: #333;
+      }
 
-    h1 {
-      text-align: center;
-      margin: 20px 0;
-      font-size: 2rem;
-      color: #444;
-      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    #map {
-      height: 70vh;
-      margin: 20px auto;
-      width: 90%;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    #userForm {
-      margin: 20px auto;
-      text-align: center;
-      padding: 15px 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 400px;
-    }
-
-    #userForm input {
-      padding: 10px;
-      margin: 10px 0;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      font-size: 1rem;
-      width: calc(100% - 22px); /* Adjusted to include padding and border */
-      box-sizing: border-box;
-    }
-
-    #userForm button {
-      padding: 10px 20px;
-      background: #888;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      transition: background 0.3s ease;
-      display: block;
-      margin: 10px auto; /* Center the button */
-    }
-
-    #userForm button:hover {
-      background: #555;
-    }
-
-    #userForm input:focus,
-    #userForm button:focus {
-      outline: none;
-      box-shadow: 0 0 5px rgba(136, 136, 136, 0.8);
-    }
-
-    @media (max-width: 480px) {
       h1 {
-        font-size: 1.5rem;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 2rem;
+        color: #444;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
       }
 
       #map {
-        height: 60vh;
+        height: 70vh;
+        margin: 20px auto;
+        width: 90%;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
       #userForm {
-        padding: 10px;
+        margin: 20px auto;
+        text-align: center;
+        padding: 15px 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 90%;
+        max-width: 400px;
       }
 
       #userForm input {
-        font-size: 0.9rem;
+        padding: 10px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        width: calc(100% - 22px); /* Adjusted to include padding and border */
+        box-sizing: border-box;
       }
 
       #userForm button {
-        font-size: 0.9rem;
-        padding: 8px 16px;
-      }
-    }
-  </style>
-</head>
-<body>
-  <h1>Map User Location</h1>
-
-  <div id="userForm">
-    <input type="text" id="userName" placeholder="Enter your name" />
-    <input type="text" id="userID" placeholder="Enter your ID" />
-    <button onclick="startSharing()">Locate Me</button>
-  </div>
-
-  <div id="map"></div>
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-  <script>
-    // Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCELM2xuqdJmjKZol4q-2jB80T5BrcHLuk",
-      authDomain: "internet-of-bodies.firebaseapp.com",
-      databaseURL: "https://internet-of-bodies-default-rtdb.firebaseio.com/",
-      projectId: "internet-of-bodies",
-      storageBucket: "internet-of-bodies.appspot.com",
-      messagingSenderId: "231474107957",
-      appId: "1:231474107957:web:d9cdf0f6bbb41f4155c37c",
-      measurementId: "G-6C7XDQWE0T"
-    };
-
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-
-    // Initialize the map
-    const map = L.map('map').setView([51.505, -0.09], 5);
-
-    // Add OpenStreetMap tiles
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Store markers to prevent duplication
-    const markers = {};
-    let userName = null;
-    let userID = null;
-
-    // Function to share the user's location
-    function shareLocation() {
-      if (!userName || !userID) {
-        alert("Please enter your name and ID to start sharing location.");
-        return;
+        padding: 10px 20px;
+        background: #888;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: background 0.3s ease;
+        display: block;
+        margin: 10px auto; /* Center the button */
       }
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          const userLat = position.coords.latitude;
-          const userLon = position.coords.longitude;
-
-          // Get the current timestamp
-          const timestamp = new Date().toISOString();
-
-          // Send user data to Firebase
-          database.ref('locations/' + userID).set({
-            name: userName,
-            id: userID,
-            lat: userLat,
-            lon: userLon,
-            timestamp: timestamp
-          });
-        }, (error) => {
-          alert("Unable to retrieve location. Please check your browser settings.");
-        });
-      } else {
-        alert("Geolocation is not supported by your browser.");
+      #userForm button:hover {
+        background: #555;
       }
-    }
 
-    // Function to add a marker to the map
-    function addMarker(user) {
-      if (!markers[user.id]) {
-        const marker = L.marker([user.lat, user.lon])
-          .addTo(map)
-          .bindPopup(`<b>Name:</b> ${user.name}<br><b>ID:</b> ${user.id}<br><b>Last Updated:</b> ${new Date(user.timestamp).toLocaleString()}`);
-        markers[user.id] = marker;
-      } else {
-        // Update marker position and popup if it already exists
-        markers[user.id].setLatLng([user.lat, user.lon]);
-        markers[user.id].bindPopup(`<b>Name:</b> ${user.name}<br><b>ID:</b> ${user.id}<br><b>Last Updated:</b> ${new Date(user.timestamp).toLocaleString()}`);
+      #userForm input:focus,
+      #userForm button:focus {
+        outline: none;
+        box-shadow: 0 0 5px rgba(136, 136, 136, 0.8);
       }
-    }
 
-    // Listen for changes in the database
-    database.ref('locations').on('value', (snapshot) => {
-      const users = snapshot.val();
+      @media (max-width: 480px) {
+        h1 {
+          font-size: 1.5rem;
+        }
 
-      // Remove markers for devices that no longer exist
-      for (const id in markers) {
-        if (!users[id]) {
-          map.removeLayer(markers[id]);
-          delete markers[id];
+        #map {
+          height: 60vh;
+        }
+
+        #userForm {
+          padding: 10px;
+        }
+
+        #userForm input {
+          font-size: 0.9rem;
+        }
+
+        #userForm button {
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Map User Location</h1>
+
+    <div id="userForm">
+      <input type="text" id="userName" placeholder="Enter your name" />
+      <input type="text" id="userID" placeholder="Enter your ID" />
+      <button onclick="startSharing()">Locate Me</button>
+    </div>
+
+    <div id="map"></div>
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyCELM2xuqdJmjKZol4q-2jB80T5BrcHLuk",
+        authDomain: "internet-of-bodies.firebaseapp.com",
+        databaseURL: "https://internet-of-bodies-default-rtdb.firebaseio.com/",
+        projectId: "internet-of-bodies",
+        storageBucket: "internet-of-bodies.appspot.com",
+        messagingSenderId: "231474107957",
+        appId: "1:231474107957:web:d9cdf0f6bbb41f4155c37c",
+        measurementId: "G-6C7XDQWE0T",
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+
+      // Initialize the map
+      const map = L.map("map").setView([51.505, -0.09], 5);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution:
+          '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      }).addTo(map);
+
+      // Store markers to prevent duplication
+      const markers = {};
+      let userName = null;
+      let userID = null;
+
+      function shareLocation() {
+        if (!userName || !userID) {
+          alert("Please enter your name and ID to start sharing location.");
+          return;
+        }
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              const userLat = position.coords.latitude;
+              const userLon = position.coords.longitude;
+
+              // Get the current timestamp
+              const timestamp = new Date().toISOString();
+
+              // Send user data to Firebase
+              database.ref("locations/" + userID).set({
+                name: userName,
+                id: userID,
+                lat: userLat,
+                lon: userLon,
+                timestamp: timestamp,
+              });
+
+              // Zoom in to the user's location
+              map.setView([userLat, userLon], 15); // Adjust zoom level as needed
+            },
+            (error) => {
+              alert(
+                "Unable to retrieve location. Please check your browser settings."
+              );
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by your browser.");
         }
       }
 
-      // Add or update markers for all active users
-      for (const id in users) {
-        addMarker(users[id]);
+      // Function to add a marker to the map
+      function addMarker(user) {
+        if (!markers[user.id]) {
+          const marker = L.marker([user.lat, user.lon])
+            .addTo(map)
+            .bindPopup(
+              `<b>Name:</b> ${user.name}<br><b>ID:</b> ${
+                user.id
+              }<br><b>Last Updated:</b> ${new Date(
+                user.timestamp
+              ).toLocaleString()}`
+            );
+          markers[user.id] = marker;
+        } else {
+          // Update marker position and popup if it already exists
+          markers[user.id].setLatLng([user.lat, user.lon]);
+          markers[user.id].bindPopup(
+            `<b>Name:</b> ${user.name}<br><b>ID:</b> ${
+              user.id
+            }<br><b>Last Updated:</b> ${new Date(
+              user.timestamp
+            ).toLocaleString()}`
+          );
+        }
       }
-    });
 
-    // Start location sharing
-    function startSharing() {
-      userName = document.getElementById('userName').value;
-      userID = document.getElementById('userID').value;
+      // Listen for changes in the database
+      database.ref("locations").on("value", (snapshot) => {
+        const users = snapshot.val();
 
-      if (!userName || !userID) {
-        alert("Please enter both your name and ID.");
-        return;
+        // Remove markers for devices that no longer exist
+        for (const id in markers) {
+          if (!users[id]) {
+            map.removeLayer(markers[id]);
+            delete markers[id];
+          }
+        }
+
+        // Add or update markers for all active users
+        for (const id in users) {
+          addMarker(users[id]);
+        }
+      });
+
+      // Start location sharing
+      function startSharing() {
+        userName = document.getElementById("userName").value;
+        userID = document.getElementById("userID").value;
+
+        if (!userName || !userID) {
+          alert("Please enter both your name and ID.");
+          return;
+        }
+
+        // Start sharing location every 5 seconds
+        setInterval(shareLocation, 5000);
+        alert("Location sharing started!");
       }
-
-      // Start sharing location every 5 seconds
-      setInterval(shareLocation, 5000);
-      alert("Location sharing started!");
-    }
-  </script>
-</body>
+    </script>
+  </body>
 </html>
