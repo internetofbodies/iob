@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Location Map</title>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f7fa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+      }
+
+      h1 {
+        margin: 20px 0;
+        font-size: 2rem;
+        color: #333;
+      }
+
+      #locate-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #locate-btn:hover {
+        background: #0056b3;
+      }
+
+      #map {
+        height: 60vh;
+        width: 90%;
+        max-width: 1200px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 1.5rem;
+        }
+
+        #locate-btn {
+          font-size: 0.9rem;
+          padding: 8px 16px;
+        }
+
+        #map {
+          height: 50vh;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #map {
+          height: 45vh;
+          width: 95%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Human Location Map</h1>
+    <button id="locate-btn">Locate Me</button>
+    <div id="map"></div>
+    <script>
+      // Initialize the map
+      const map = L.map("map").setView([0, 0], 2);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Function to get device type
+      const getDeviceType = () => {
+        const userAgent = navigator.userAgent.toLowerCase();
+        if (/mobile|android|iphone|ipad/.test(userAgent)) {
+          return "Mobile";
+        } else {
+          return "Desktop";
+        }
+      };
+
+      // Function to get battery status
+      const getBatteryStatus = async () => {
+        if (navigator.getBattery) {
+          const battery = await navigator.getBattery();
+          return {
+            level: `${Math.round(battery.level * 100)}%`,
+            charging: battery.charging ? "Yes" : "No",
+          };
+        }
+        return { level: "Unknown", charging: "Unknown" };
+      };
+
+      // Function to locate the user
+      const locateUser = async () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const { latitude, longitude } = position.coords;
+
+              // Set map view to user's location
+              map.setView([latitude, longitude], 15);
+
+              // Get current timestamp
+              const timestamp = new Date().toLocaleString();
+
+              // Get device type
+              const deviceType = getDeviceType();
+
+              // Get battery status
+              const battery = await getBatteryStatus();
+
+              // Add a marker to user's location
+              L.marker([latitude, longitude])
+                .addTo(map)
+                .bindPopup(
+                  `<b>You are here!</b><br>
+                  Device: ${deviceType}<br>
+                  Timestamp: ${timestamp}<br>
+                  Battery Level: ${battery.level}<br>
+                  Charging: ${battery.charging}`
+                )
+                .openPopup();
+            },
+            () => {
+              alert("Unable to retrieve your location");
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by your browser.");
+        }
+      };
+
+      // Add event listener to the button
+      document
+        .getElementById("locate-btn")
+        .addEventListener("click", locateUser);
+    </script>
+  </body>
+</html>
