@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bird Flu Summary and Map</title>
+    <!-- Leaflet CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <!-- Leaflet Marker Cluster CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
+    />
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f7f8fc;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      h1 {
+        font-size: 2rem;
+        margin: 20px;
+        color: #5a5d60;
+      }
+
+      /* Summary Section */
+      .summary-container {
+        width: 90%;
+        max-width: 1200px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        margin-bottom: 20px;
+      }
+      .summary-header {
+        background-color: #c04646;
+        color: white;
+        padding: 10px 20px;
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      .summary-content {
+        padding: 20px;
+      }
+      .summary-content h2 {
+        font-size: 2.5rem;
+        color: #c04646;
+        margin: 0;
+      }
+      .summary-content p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-top: 10px;
+      }
+      .stats-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+      }
+      .stat-box {
+        background-color: #0078d4;
+        color: white;
+        flex: 1;
+        margin: 0 10px;
+        text-align: center;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      .stat-box h3 {
+        font-size: 2.5rem;
+        margin: 0;
+      }
+      .stat-box p {
+        font-size: 1rem;
+        margin: 5px 0 0;
+      }
+
+      /* Map Section */
+      .map-container {
+        height: 600px;
+        width: 90%;
+        max-width: 1200px;
+        margin-top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .stats-container {
+          flex-direction: column;
+          align-items: center;
+        }
+        .stat-box {
+          margin: 10px 0;
+          width: 80%;
+        }
+      }
+    </style>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- Leaflet Marker Cluster JS -->
+    <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+  </head>
+  <body>
+    <h1>Bird Flu Summary</h1>
+
+    <!-- Summary Section -->
+    <div class="summary-container">
+      <div class="summary-header">Birds Affected</div>
+      <div class="summary-content">
+        <h2>115,247,046</h2>
+        <p>
+          Highly pathogenic avian influenza (HPAI) A(H5) viruses have been
+          detected in U.S. wild aquatic birds, commercial poultry, and backyard
+          or hobbyist flocks beginning in January 2022. These are the first
+          detections of HPAI A(H5) viruses in the U.S. since 2016. Preliminary
+          genetic sequencing and RT-PCR testing on some virus specimens shows
+          these viruses are HPAI A(H5N1) viruses from clade 2.3.4.4.
+        </p>
+      </div>
+    </div>
+    <div class="stats-container">
+      <div class="stat-box">
+        <h3>49</h3>
+        <p>States Affected</p>
+      </div>
+      <div class="stat-box">
+        <h3>551</h3>
+        <p>Counties Affected</p>
+      </div>
+      <div class="stat-box">
+        <h3>1,273</h3>
+        <p>Reported Outbreaks</p>
+      </div>
+    </div>
+
+    <!-- Map Section -->
+    <h1>Counties Affected by Bird Flu</h1>
+    <div id="map" class="map-container"></div>
+
+    <script>
+      // Initialize the map
+      const map = L.map("map").setView([37.0902, -95.7129], 4); // Centered on the USA
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Marker Cluster Group
+      const markers = L.markerClusterGroup();
+
+      // Example data for 50 counties affected
+      const counties = [
+        {
+          name: "Beadle",
+          state: "South Dakota",
+          lat: 44.518,
+          lon: -98.348,
+          flockSize: 686200,
+          outbreaks: 13,
+          flockType: "Commercial Turkey Meat Bird",
+        },
+        {
+          name: "Kent",
+          state: "Delaware",
+          lat: 39.0928,
+          lon: -75.5884,
+          flockSize: 102000,
+          outbreaks: 5,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Clay",
+          state: "Florida",
+          lat: 30.1185,
+          lon: -81.7687,
+          flockSize: 50000,
+          outbreaks: 2,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Duval",
+          state: "Florida",
+          lat: 30.3322,
+          lon: -81.6556,
+          flockSize: 100000,
+          outbreaks: 3,
+          flockType: "Commercial Layer Hen Flock",
+        },
+        {
+          name: "Los Angeles",
+          state: "California",
+          lat: 34.0522,
+          lon: -118.2437,
+          flockSize: 150000,
+          outbreaks: 6,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Cook",
+          state: "Illinois",
+          lat: 41.8781,
+          lon: -87.6298,
+          flockSize: 80000,
+          outbreaks: 4,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "King",
+          state: "Washington",
+          lat: 47.6062,
+          lon: -122.3321,
+          flockSize: 120000,
+          outbreaks: 7,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Harris",
+          state: "Texas",
+          lat: 29.7604,
+          lon: -95.3698,
+          flockSize: 250000,
+          outbreaks: 12,
+          flockType: "Commercial Layer Hen Flock",
+        },
+        {
+          name: "Maricopa",
+          state: "Arizona",
+          lat: 33.4484,
+          lon: -112.074,
+          flockSize: 110000,
+          outbreaks: 8,
+          flockType: "Commercial Turkey Meat Bird",
+        },
+        {
+          name: "Clark",
+          state: "Nevada",
+          lat: 36.1699,
+          lon: -115.1398,
+          flockSize: 95000,
+          outbreaks: 2,
+          flockType: "Backyard Chicken Flock",
+        },
+        // Additional Counties (20 more added below)
+        {
+          name: "Jefferson",
+          state: "Alabama",
+          lat: 33.5207,
+          lon: -86.8025,
+          flockSize: 70000,
+          outbreaks: 3,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Fresno",
+          state: "California",
+          lat: 36.7378,
+          lon: -119.7871,
+          flockSize: 250000,
+          outbreaks: 15,
+          flockType: "Commercial Layer Hen Flock",
+        },
+        {
+          name: "Orange",
+          state: "California",
+          lat: 33.7175,
+          lon: -117.8311,
+          flockSize: 60000,
+          outbreaks: 2,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Travis",
+          state: "Texas",
+          lat: 30.2672,
+          lon: -97.7431,
+          flockSize: 100000,
+          outbreaks: 4,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Davidson",
+          state: "Tennessee",
+          lat: 36.1627,
+          lon: -86.7816,
+          flockSize: 90000,
+          outbreaks: 3,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Wayne",
+          state: "Michigan",
+          lat: 42.3314,
+          lon: -83.0458,
+          flockSize: 85000,
+          outbreaks: 2,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Philadelphia",
+          state: "Pennsylvania",
+          lat: 39.9526,
+          lon: -75.1652,
+          flockSize: 70000,
+          outbreaks: 3,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Franklin",
+          state: "Ohio",
+          lat: 39.9612,
+          lon: -82.9988,
+          flockSize: 95000,
+          outbreaks: 5,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Allegheny",
+          state: "Pennsylvania",
+          lat: 40.4406,
+          lon: -79.9959,
+          flockSize: 80000,
+          outbreaks: 2,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Bexar",
+          state: "Texas",
+          lat: 29.4241,
+          lon: -98.4936,
+          flockSize: 110000,
+          outbreaks: 7,
+          flockType: "Commercial Turkey Meat Bird",
+        },
+        {
+          name: "San Diego",
+          state: "California",
+          lat: 32.7157,
+          lon: -117.1611,
+          flockSize: 125000,
+          outbreaks: 6,
+          flockType: "Commercial Layer Hen Flock",
+        },
+        {
+          name: "King",
+          state: "Washington",
+          lat: 47.6062,
+          lon: -122.3321,
+          flockSize: 130000,
+          outbreaks: 9,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Palm Beach",
+          state: "Florida",
+          lat: 26.7056,
+          lon: -80.0364,
+          flockSize: 100000,
+          outbreaks: 4,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Dade",
+          state: "Florida",
+          lat: 25.7617,
+          lon: -80.1918,
+          flockSize: 90000,
+          outbreaks: 3,
+          flockType: "Commercial Layer Hen Flock",
+        },
+        {
+          name: "Monroe",
+          state: "New York",
+          lat: 43.161,
+          lon: -77.6109,
+          flockSize: 85000,
+          outbreaks: 3,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Erie",
+          state: "New York",
+          lat: 42.8864,
+          lon: -78.8784,
+          flockSize: 75000,
+          outbreaks: 2,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Milwaukee",
+          state: "Wisconsin",
+          lat: 43.0389,
+          lon: -87.9065,
+          flockSize: 70000,
+          outbreaks: 3,
+          flockType: "Backyard Chicken Flock",
+        },
+        {
+          name: "Pima",
+          state: "Arizona",
+          lat: 32.2226,
+          lon: -110.9747,
+          flockSize: 95000,
+          outbreaks: 5,
+          flockType: "Commercial Turkey Meat Bird",
+        },
+        {
+          name: "Salt Lake",
+          state: "Utah",
+          lat: 40.7608,
+          lon: -111.891,
+          flockSize: 120000,
+          outbreaks: 8,
+          flockType: "Commercial Layer Hen Flock",
+        },
+        {
+          name: "Multnomah",
+          state: "Oregon",
+          lat: 45.5152,
+          lon: -122.6784,
+          flockSize: 90000,
+          outbreaks: 3,
+          flockType: "Backyard Chicken Flock",
+        },
+        // Existing Counties
+        {
+          name: "Beadle",
+          state: "South Dakota",
+          lat: 44.518,
+          lon: -98.348,
+          flockSize: 686200,
+          outbreaks: 13,
+          flockType: "Commercial Turkey Meat Bird",
+          cowsAffected: 2000,
+        },
+        {
+          name: "Kent",
+          state: "Delaware",
+          lat: 39.0928,
+          lon: -75.5884,
+          flockSize: 102000,
+          outbreaks: 5,
+          flockType: "Backyard Chicken Flock",
+          cowsAffected: 500,
+        },
+        // Additional Texas Counties
+        {
+          name: "Harris",
+          state: "Texas",
+          lat: 29.7604,
+          lon: -95.3698,
+          flockSize: 250000,
+          outbreaks: 12,
+          flockType: "Commercial Layer Hen Flock",
+          cowsAffected: 1500,
+        },
+        {
+          name: "Dallas",
+          state: "Texas",
+          lat: 32.7767,
+          lon: -96.797,
+          flockSize: 200000,
+          outbreaks: 10,
+          flockType: "Commercial Layer Hen Flock",
+          cowsAffected: 1000,
+        },
+        {
+          name: "Tarrant",
+          state: "Texas",
+          lat: 32.768,
+          lon: -97.3688,
+          flockSize: 180000,
+          outbreaks: 8,
+          flockType: "Backyard Chicken Flock",
+          cowsAffected: 800,
+        },
+        {
+          name: "Travis",
+          state: "Texas",
+          lat: 30.2672,
+          lon: -97.7431,
+          flockSize: 220000,
+          outbreaks: 9,
+          flockType: "Commercial Layer Hen Flock",
+          cowsAffected: 1200,
+        },
+        {
+          name: "Bexar",
+          state: "Texas",
+          lat: 29.4241,
+          lon: -98.4936,
+          flockSize: 110000,
+          outbreaks: 7,
+          flockType: "Commercial Turkey Meat Bird",
+          cowsAffected: 900,
+        },
+      ];
+      // Add markers for counties
+      counties.forEach((county) => {
+        const marker = L.circleMarker([county.lat, county.lon], {
+          color: "purple",
+          fillColor: "purple",
+          fillOpacity: 0.6,
+          radius: 10,
+        }).bindPopup(`
+    <b>Location:</b> ${county.state}<br>
+    <b>County:</b> ${county.name}<br>
+    <b>Chicken Flock Size:</b> ${county.flockSize.toLocaleString()}<br>
+    <b>Cows Affected:</b> ${
+      county.cowsAffected ? county.cowsAffected.toLocaleString() : "N/A"
+    }<br>
+    <b>Outbreaks:</b> ${county.outbreaks}<br>
+    <b>Flock Type:</b> ${county.flockType}
+  `);
+
+        // Add marker to the cluster group
+        markers.addLayer(marker);
+      });
+
+      // Add marker cluster group to the map
+      map.addLayer(markers);
+    </script>
+
+    <!-- HTML -->
+    <h1>Cities Monitoring (Demo)</h1>
+    <div id="california-texas-map" class="map-container"></div>
+
+    <script>
+      // Data for California and Texas chickens with GPS and detailed monitoring info
+      const animalDetails = [
+        {
+          id: "C001",
+          gps: [37.93473, -120.44279],
+          city: "Angels Camp",
+          state: "California",
+          type: "Chicken",
+          vaccine: "Yes",
+          heartRate: "120 bpm",
+          bodyTemp: "41°C",
+          activity: "Normal",
+          status: "Healthy",
+        },
+        {
+          id: "C002",
+          gps: [37.9347, -120.44285],
+          city: "Angels Camp",
+          state: "California",
+          type: "Chicken",
+          vaccine: "Yes",
+          heartRate: "120 bpm",
+          bodyTemp: "41°C",
+          activity: "Normal",
+          status: "Healthy",
+        },
+        {
+          id: "C003",
+          gps: [37.93475, -120.44277],
+          city: "San Diego",
+          state: "California",
+          type: "Chicken",
+          vaccine: "Yes",
+          heartRate: "118 bpm",
+          bodyTemp: "40.5°C",
+          activity: "Low",
+          status: "Suspected Sick [Monitoring]",
+        },
+        {
+          id: "C004",
+          gps: [29.7604, -95.3698], // Houston, Texas
+          city: "Houston",
+          state: "Texas",
+          type: "Chicken",
+          vaccine: "No",
+          heartRate: "110 bpm",
+          bodyTemp: "39.5°C",
+          activity: "Normal",
+          status: "Healthy",
+        },
+        {
+          id: "D001",
+          gps: [32.7767, -96.797], // Dallas, Texas
+          city: "Dallas",
+          state: "Texas",
+          type: "Cow",
+          vaccine: "Yes",
+          heartRate: "117 bpm",
+          bodyTemp: "41°C",
+          activity: "Lethargic",
+          status: "Infected [Isolated]",
+        },
+        {
+          id: "D002",
+          gps: [29.4241, -98.4936],
+          city: "San Antonio",
+          state: "Texas",
+          type: "Cow",
+          vaccine: "Yes",
+          heartRate: "115 bpm",
+          bodyTemp: "40°C",
+          activity: "Normal",
+          status: "Healthy",
+        },
+        {
+          id: "D003",
+          gps: [33.4484, -112.074],
+          city: "Phoenix",
+          state: "Arizona",
+          type: "Cow",
+          vaccine: "No",
+          heartRate: "112 bpm",
+          bodyTemp: "39°C",
+          activity: "Low",
+          status: "Suspected Sick [Monitoring]",
+        },
+        {
+          id: "D004",
+          gps: [31.4638, -100.437],
+          city: "San Angelo",
+          state: "Texas",
+          type: "Cow",
+          vaccine: "No",
+          heartRate: "112 bpm",
+          bodyTemp: "39°C",
+          activity: "Lethargic",
+          status: "Infected [Isolated]",
+        },
+        {
+          id: "C005",
+          gps: [35.678, -119.2293],
+          city: "McFarland",
+          state: "California",
+          type: "Chicken",
+          vaccine: "Yes",
+          heartRate: "117 bpm",
+          bodyTemp: "41°C",
+          activity: "Lethargic",
+          status: "Infected [Isolated]",
+        },
+      ];
+
+      // Initialize the map for California and Texas
+      const caTxMap = L.map("california-texas-map").setView(
+        [34.0522, -118.2437], // Centered near Los Angeles
+        6 // Zoom level
+      );
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(caTxMap);
+
+      // Add markers with detailed popups
+      animalDetails.forEach((animal) => {
+        if (!animal.gps || animal.gps.length !== 2) return; // Ensure GPS data exists
+
+        L.circleMarker(animal.gps, {
+          color: animal.status.includes("Infected") ? "red" : "green",
+          fillColor: animal.status.includes("Infected") ? "red" : "green",
+          fillOpacity: 0.6,
+          radius: 10,
+        })
+          .bindPopup(
+            `
+        <b>ID:</b> ${animal.id || "Unknown"}<br>
+        <b>City:</b> ${animal.city || "Unknown"}<br>
+        <b>State:</b> ${animal.state || "Unknown"}<br>
+        <b>Animal Type:</b> ${animal.type || "Unknown"}<br>
+        <b>Vaccine:</b> ${animal.vaccine || "Unknown"}<br>
+        <b>Heart Rate:</b> ${animal.heartRate || "Unknown"}<br>
+        <b>Body Temperature:</b> ${animal.bodyTemp || "Unknown"}<br>
+        <b>Activity Level:</b> ${animal.activity || "Unknown"}<br>
+        <b>Status:</b> ${animal.status || "Unknown"}
+      `
+          )
+          .addTo(caTxMap);
+      });
+    </script>
+  </body>
+</html>
