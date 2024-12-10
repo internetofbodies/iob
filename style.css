@@ -104,7 +104,7 @@ header {
 }
 
 .dropdown_menu.open {
-  height: 320px;
+  height: 420px;
 }
 
 .dropdown_menu li {
@@ -782,3 +782,108 @@ select:focus {
   color: #000; /* Black text */
   margin-bottom: 20px; /* Add a value here */
 }
+
+/* Mega Menu Container */
+.mega-menu-container {
+  position: relative; /* Required for absolute positioning of the mega menu */
+}
+
+/* Mega Menu Link */
+.mega-menu-link {
+  position: relative;
+  color: #000; /* Black text */
+  font-weight: normal;
+  transition: color 0.3s ease;
+}
+
+.mega-menu-link:hover {
+  color: #555; /* Light gray on hover */
+}
+
+/* Mega Menu Content */
+.mega-menu {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position below the parent link */
+  left: 0;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+  width: 200px; /* Adjust width as needed */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #000; /* Black border */
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.mega-menu-container:hover .mega-menu {
+  display: block; /* Show on hover */
+}
+
+.mega-menu h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #000; /* Black heading */
+}
+
+.mega-menu a {
+  display: block;
+  padding: 5px 0;
+  font-size: 1rem;
+  color: #000; /* Black links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mega-menu a:hover {
+  color: #555; /* Light gray on hover */
+}
+
+/* Dropdown Menu */
+.dropdown {
+  position: relative;
+}
+
+.dropdown__menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border: 1px solid #ddd;
+  z-index: 1000;
+  list-style: none;
+  min-width: 250px;
+}
+
+.dropdown__menu li {
+  margin: 5px 0;
+}
+
+.dropdown__menu a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 15px;
+  display: block;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.dropdown__menu a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Hover to show dropdown */
+.dropdown:hover .dropdown__menu {
+  display: block;
+}
+
+/* Accessibility focus */
+.dropdown__menu a:focus {
+  outline: 2px solid #007BFF;
+  background-color: #e9f5ff;
+}
+
