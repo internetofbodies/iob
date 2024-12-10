@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Human Location Map</title>
+    <title>Human Location Map with Persistent Timeline</title>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link
       rel="stylesheet"
@@ -55,34 +55,30 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      /* Responsive Adjustments */
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 1.5rem;
-        }
-
-        #locate-btn {
-          font-size: 0.9rem;
-          padding: 8px 16px;
-        }
-
-        #map {
-          height: 50vh;
-        }
+      #timeline {
+        margin-top: 20px;
+        width: 90%;
+        max-width: 1200px;
+        font-size: 0.9rem;
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
       }
 
-      @media (max-width: 480px) {
-        #map {
-          height: 45vh;
-          width: 95%;
-        }
+      .location-item {
+        margin: 5px 0;
+        padding: 5px;
+        background: #f9f9f9;
+        border-left: 4px solid #007bff;
       }
     </style>
   </head>
   <body>
-    <h1>Human Location Map</h1>
+    <h1>Human Location Map with Persistent Timeline</h1>
     <button id="locate-btn">Locate Me</button>
     <div id="map"></div>
+    <div id="timeline"></div>
     <script>
       // Initialize the map
       const map = L.map("map").setView([0, 0], 2);
@@ -93,14 +89,63 @@
         attribution: "© OpenStreetMap",
       }).addTo(map);
 
+      // Load locations from local storage
+      let visitedLocations =
+        JSON.parse(localStorage.getItem("visitedLocations")) || [];
+
+      // Function to save locations to local storage
+      const saveLocations = () => {
+        localStorage.setItem(
+          "visitedLocations",
+          JSON.stringify(visitedLocations)
+        );
+      };
+
+      // Function to render timeline
+      const renderTimeline = () => {
+        const timelineDiv = document.getElementById("timeline");
+        timelineDiv.innerHTML = "<h3>Visited Locations:</h3>";
+        visitedLocations.forEach((location, index) => {
+          const div = document.createElement("div");
+          div.className = "location-item";
+          div.innerHTML = `
+            <strong>${index + 1}.</strong> Lat: ${location.lat}, Lng: ${
+            location.lng
+          }<br>
+            Timestamp: ${location.timestamp}<br>
+            Device: ${location.device}<br>
+            Battery Level: ${location.battery.level}<br>
+            Charging: ${location.battery.charging}`;
+          timelineDiv.appendChild(div);
+        });
+      };
+
+      // Function to add markers to the map
+      const renderMarkers = () => {
+        visitedLocations.forEach((location, index) => {
+          const marker = L.marker([location.lat, location.lng], {
+            title: `Location ${index + 1}`,
+          });
+          marker.addTo(map).bindPopup(
+            `<b>Visited Location</b><br>
+              Lat: ${location.lat}, Lng: ${location.lng}<br>
+              Timestamp: ${location.timestamp}<br>
+              Device: ${location.device}<br>
+              Battery Level: ${location.battery.level}<br>
+              Charging: ${location.battery.charging}`
+          );
+        });
+      };
+
+      // Marker for current location
+      let currentLocationMarker = null;
+
       // Function to get device type
       const getDeviceType = () => {
         const userAgent = navigator.userAgent.toLowerCase();
-        if (/mobile|android|iphone|ipad/.test(userAgent)) {
-          return "Mobile";
-        } else {
-          return "Desktop";
-        }
+        return /mobile|android|iphone|ipad/.test(userAgent)
+          ? "Mobile"
+          : "Desktop";
       };
 
       // Function to get battery status
@@ -122,9 +167,6 @@
             async (position) => {
               const { latitude, longitude } = position.coords;
 
-              // Set map view to user's location
-              map.setView([latitude, longitude], 15);
-
               // Get current timestamp
               const timestamp = new Date().toLocaleString();
 
@@ -134,17 +176,37 @@
               // Get battery status
               const battery = await getBatteryStatus();
 
-              // Add a marker to user's location
-              L.marker([latitude, longitude])
-                .addTo(map)
-                .bindPopup(
-                  `<b>You are here!</b><br>
-                  Device: ${deviceType}<br>
-                  Timestamp: ${timestamp}<br>
-                  Battery Level: ${battery.level}<br>
-                  Charging: ${battery.charging}`
-                )
-                .openPopup();
+              // Save the current location
+              const currentLocation = {
+                lat: latitude,
+                lng: longitude,
+                timestamp,
+                device: deviceType,
+                battery,
+              };
+              visitedLocations.push(currentLocation);
+              saveLocations();
+
+              // Update timeline
+              renderTimeline();
+
+              // Add a red marker to the timeline location
+              renderMarkers();
+
+              // Set current location marker
+              if (currentLocationMarker) {
+                map.removeLayer(currentLocationMarker);
+              }
+              currentLocationMarker = L.marker([latitude, longitude], {
+                title: "Current Location",
+                icon: L.divIcon({
+                  className: "current-location-icon",
+                  html: `<div style="width: 12px; height: 12px; background-color: blue; border-radius: 50%;"></div>`,
+                }),
+              }).addTo(map);
+
+              // Center the map to current location
+              map.setView([latitude, longitude], 15);
             },
             () => {
               alert("Unable to retrieve your location");
@@ -159,6 +221,10 @@
       document
         .getElementById("locate-btn")
         .addEventListener("click", locateUser);
+
+      // Render markers and timeline on page load
+      renderMarkers();
+      renderTimeline();
     </script>
   </body>
 </html>
