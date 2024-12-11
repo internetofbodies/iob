@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Location Map with Persistent Timeline</title>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!--Nav bar-->
+    <div class="navbar">
+      <div class="logo">
+        <a href="#">
+          <img src="logo.png" alt="IOB logo" />
+        </a>
+      </div>
+
+      <!--Menu links-->
+      <ul class="links">
+        <li><a href="home.html">Health Dashboard</a></li>
+
+        <!-- Mega Menu -->
+        <li class="mega-menu-container">
+          <a href="#" class="mega-menu-link">Features Section</a>
+          <div class="mega-menu">
+            <h4>Features Section</h4>
+            <a href="citytracker.html">City Tracker</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="healthsync.html">HealthSync Alert</a>
+            <a href="mobiledemo.html">Location and ID</a>
+            <a href="humanlocation.html">Human Location Map</a>
+            <a href="animalvaccination.html">Animals Track Location</a>
+          </div>
+        </li>
+      </ul>
+
+      <a href="index.html" class="action_btn">Logout</a>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <div class="dropdown_menu">
+      <ul>
+        <li><a href="home.html">Health Dashboard</a></li>
+        <li><a href="citytracker.html">CityBaron Tracker</a></li>
+        <li><a href="prediction.html">Prediction</a></li>
+        <li><a href="healthsync.html">HealthSync Alert</a></li>
+        <li><a href="mobiledemo.html">Location and ID</a></li>
+        <li><a href="humanlocation.html">Human Location Map</a></li>
+        <li><a href="animalvaccination.html">Animals Track Location</a></li>
+        <li><a href="index.html" class="action_btn">Logout</a></li>
+      </ul>
+    </div>
+
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: #f4f7fa;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        min-height: 100vh;
+      }
+
+      h1 {
+        margin: 20px 0;
+        font-size: 2rem;
+        color: #333;
+      }
+
+      #locate-btn {
+        padding: 10px 20px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #locate-btn:hover {
+        background: #0056b3;
+      }
+
+      #map {
+        height: 60vh;
+        width: 90%;
+        max-width: 1200px;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1px solid #ccc;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      #timeline {
+        margin-top: 20px;
+        width: 90%;
+        max-width: 1200px;
+        font-size: 0.9rem;
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .location-item {
+        margin: 5px 0;
+        padding: 5px;
+        background: #f9f9f9;
+        border-left: 4px solid #007bff;
+      }
+      /* Mega Menu Container */
+      .mega-menu-container {
+        position: relative; /* Required for absolute positioning of the mega menu */
+      }
+
+      /* Mega Menu Link */
+      .mega-menu-link {
+        position: relative;
+        color: #000; /* Black text */
+        font-weight: normal;
+        transition: color 0.3s ease;
+      }
+
+      .mega-menu-link:hover {
+        color: #555; /* Light gray on hover */
+      }
+
+      /* Mega Menu Content */
+      .mega-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the parent link */
+        left: 0;
+        background-color: #fff; /* White background */
+        color: #000; /* Black text */
+        width: 200px; /* Adjust width as needed */
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #000; /* Black border */
+        border-radius: 5px;
+        z-index: 1000;
+      }
+
+      .mega-menu-container:hover .mega-menu {
+        display: block; /* Show on hover */
+      }
+
+      .mega-menu h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #000; /* Black heading */
+      }
+
+      .mega-menu a {
+        display: block;
+        padding: 5px 0;
+        font-size: 1rem;
+        color: #000; /* Black links */
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .mega-menu a:hover {
+        color: #555; /* Light gray on hover */
+      }
+
+      li {
+        list-style: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000; /* Changed to black */
+        font-size: 1rem;
+      }
+
+      a:hover {
+        color: #555; /* Changed to a lighter black (gray) */
+      }
+
+      /* HEADER */
+      header {
+        position: relative;
+        padding: 0 2rem;
+      }
+
+      .navbar {
+        width: 100%;
+        height: 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar .logo a {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000; /* Changed to black */
+      }
+
+      .navbar .links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .navbar .toggle_btn {
+        color: #000; /* Changed to black */
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+      }
+
+      .action_btn {
+        background-color: #000; /* Changed to black */
+        color: #fff; /* Kept white text for contrast */
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: scale 0.2 ease;
+      }
+
+      .action_btn:hover {
+        scale: 1.05;
+        color: #fff; /* Kept white text */
+      }
+
+      .action_btn:active {
+        scale: 0.95;
+      }
+
+      /* DROPDOWN MENU */
+      .dropdown_menu {
+        display: none;
+        position: absolute;
+        right: 2rem;
+        top: 60px;
+        height: 0;
+        width: 300px;
+        background: rgba(0, 0, 0, 0.1); /* Black with transparency */
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 10000; /* Higher z-index to overlay on the map */
+        pointer-events: auto; /* Ensure dropdown is clickable */
+      }
+      .dropdown_menu.open {
+        height: 370px;
+      }
+
+      .dropdown_menu li {
+        padding: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dropdown_menu li a {
+        color: #000; /* Changed to black */
+      }
+
+      .dropdown_menu li a:hover {
+        color: #555; /* Changed to a lighter black (gray) */
+      }
+
+      .dropdown_menu .action_btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: #000; /* Changed to black */
+        color: #fff; /* Kept white text */
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+        display: block;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn {
+          display: none;
+        }
+
+        .navbar .toggle_btn {
+          display: block;
+        }
+
+        .dropdown_menu {
+          display: block;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .dropdown_menu {
+          left: 2rem;
+          width: unset;
+        }
+      }
+
+      .fa-bars,
+      .fa-navicon {
+        padding: 20px;
+      }
+      .fa-close,
+      .fa-multiply,
+      .fa-remove,
+      .fa-times,
+      .fa-xmark {
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Human Location Map</h1>
+    <button id="locate-btn">Locate Me</button>
+    <div id="map"></div>
+    <div id="timeline"></div>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer__bottom">
+        <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
+      </div>
+    </footer>
+    <script>
+      // Initialize the map
+      const map = L.map("map").setView([0, 0], 2);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Load locations from local storage
+      let visitedLocations =
+        JSON.parse(localStorage.getItem("visitedLocations")) || [];
+
+      // Function to save locations to local storage
+      const saveLocations = () => {
+        localStorage.setItem(
+          "visitedLocations",
+          JSON.stringify(visitedLocations)
+        );
+      };
+
+      // Function to render timeline
+      const renderTimeline = () => {
+        const timelineDiv = document.getElementById("timeline");
+        timelineDiv.innerHTML = "<h3>Visited Locations:</h3>";
+        visitedLocations.forEach((location, index) => {
+          const div = document.createElement("div");
+          div.className = "location-item";
+          div.innerHTML = `
+            <strong>${index + 1}.</strong> Lat: ${location.lat}, Lng: ${
+            location.lng
+          }<br>
+            Timestamp: ${location.timestamp}<br>
+            Device: ${location.device}<br>
+            Battery Level: ${location.battery.level}<br>
+            Charging: ${location.battery.charging}`;
+          timelineDiv.appendChild(div);
+        });
+      };
+
+      // Function to add markers to the map
+      const renderMarkers = () => {
+        visitedLocations.forEach((location, index) => {
+          const marker = L.marker([location.lat, location.lng], {
+            title: `Location ${index + 1}`,
+          });
+          marker.addTo(map).bindPopup(
+            `<b>Visited Location</b><br>
+              Lat: ${location.lat}, Lng: ${location.lng}<br>
+              Timestamp: ${location.timestamp}<br>
+              Device: ${location.device}<br>
+              Battery Level: ${location.battery.level}<br>
+              Charging: ${location.battery.charging}`
+          );
+        });
+      };
+
+      // Marker for current location
+      let currentLocationMarker = null;
+
+      // Function to get device type
+      const getDeviceType = () => {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return /mobile|android|iphone|ipad/.test(userAgent)
+          ? "Mobile"
+          : "Desktop";
+      };
+
+      // Function to get battery status
+      const getBatteryStatus = async () => {
+        if (navigator.getBattery) {
+          const battery = await navigator.getBattery();
+          return {
+            level: `${Math.round(battery.level * 100)}%`,
+            charging: battery.charging ? "Yes" : "No",
+          };
+        }
+        return { level: "Unknown", charging: "Unknown" };
+      };
+
+      // Function to locate the user
+      const locateUser = async () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const { latitude, longitude } = position.coords;
+
+              // Get current timestamp
+              const timestamp = new Date().toLocaleString();
+
+              // Get device type
+              const deviceType = getDeviceType();
+
+              // Get battery status
+              const battery = await getBatteryStatus();
+
+              // Save the current location
+              const currentLocation = {
+                lat: latitude,
+                lng: longitude,
+                timestamp,
+                device: deviceType,
+                battery,
+              };
+              visitedLocations.push(currentLocation);
+              saveLocations();
+
+              // Update timeline
+              renderTimeline();
+
+              // Add a red marker to the timeline location
+              renderMarkers();
+
+              // Set current location marker
+              if (currentLocationMarker) {
+                map.removeLayer(currentLocationMarker);
+              }
+              currentLocationMarker = L.marker([latitude, longitude], {
+                title: "Current Location",
+                icon: L.divIcon({
+                  className: "current-location-icon",
+                  html: `<div style="width: 12px; height: 12px; background-color: blue; border-radius: 50%;"></div>`,
+                }),
+              }).addTo(map);
+
+              // Center the map to current location
+              map.setView([latitude, longitude], 15);
+            },
+            () => {
+              alert("Unable to retrieve your location");
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by your browser.");
+        }
+      };
+
+      // Add event listener to the button
+      document
+        .getElementById("locate-btn")
+        .addEventListener("click", locateUser);
+
+      // Render markers and timeline on page load
+      renderMarkers();
+      renderTimeline();
+    </script>
+    <script>
+      const toggleBtn = document.querySelector(".toggle_btn");
+      const toggleBtnIcon = document.querySelector(".toggle_btn i");
+      const dropDownMenu = document.querySelector(".dropdown_menu");
+
+      toggleBtn.onclick = function () {
+        dropDownMenu.classList.toggle("open");
+        const isOpen = dropDownMenu.classList.contains("open");
+
+        toggleBtnIcon.classList = isOpen
+          ? "fa-solid fa-xmark"
+          : "fa-solid fa-bars";
+      };
+    </script>
+  </body>
+</html>
