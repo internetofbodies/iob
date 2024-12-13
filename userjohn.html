@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Profile Layout</title>
     <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
       body {
         margin: 0;
         padding: 0;
@@ -298,11 +304,22 @@
 
       .header-container {
         display: flex;
-        justify-content: space-between;
+        justify-content: center; /* Center the title */
         align-items: center;
+        flex-direction: column; /* Stack title and filters */
         padding: 20px 40px;
         border-bottom: 1px solid #ddd;
         background-color: #fff;
+      }
+
+      .filters-container {
+        display: flex;
+        justify-content: flex-end; /* Align filters to the right */
+        align-items: center;
+        gap: 10px;
+        font-size: 0.9em;
+        width: 100%; /* Ensure the filters span the full width */
+        margin-top: 10px;
       }
 
       .header-title {
@@ -363,25 +380,34 @@
         align-items: center;
         gap: 10px;
         font-size: 0.9em;
+        width: 100%; /* Ensure the container spans full width */
+        margin-top: 10px;
+        justify-content: center; /* Center-align content */
+      }
+
+      .filters-container label {
+        margin-right: 10px; /* Add spacing between label and inputs */
       }
 
       .filters-container input {
-        padding: 5px 10px;
+        padding: 5px 10px; /* Adjust padding for standard size */
         border: 1px solid #ccc;
         border-radius: 8px;
-        font-size: 0.9em;
+        font-size: 0.9em; /* Standard font size */
         outline: none;
+        width: 200px; /* Fixed width for desktop view */
       }
 
       .filters-container button {
         background-color: #eee;
         border: none;
-        padding: 5px 10px;
+        padding: 5px 15px; /* Adjust padding for button */
         border-radius: 8px;
         display: flex;
         align-items: center;
         cursor: pointer;
-        font-size: 0.9em;
+        font-size: 0.9em; /* Standard font size */
+        justify-content: center; /* Center text inside the button */
       }
 
       .filters-container button svg {
@@ -397,13 +423,26 @@
           gap: 15px;
           padding: 20px;
         }
+      }
 
-        .header-title {
-          font-size: 1.2em;
+      .header-title {
+        font-size: 1.2em;
+      }
+      @media (max-width: 768px) {
+        .filters-container {
+          flex-direction: column; /* Stack items vertically */
+          align-items: center; /* Center-align items */
+          gap: 10px; /* Adjust gap between items */
         }
 
-        .filters-container {
-          flex-wrap: wrap;
+        .filters-container input,
+        .filters-container button {
+          width: 100%; /* Make inputs and buttons full-width */
+          max-width: none; /* Remove the max-width constraint */
+        }
+
+        .filters-container label {
+          margin-bottom: 5px; /* Add spacing below the label */
         }
       }
     </style>
@@ -412,25 +451,6 @@
     <header class="header-container">
       <!-- Title -->
       <div class="header-title">REALTIME HEALTH DATA</div>
-
-      <!-- Right Section -->
-      <div class="header-right">
-        <!-- Search Bar -->
-        <div class="search-bar">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path
-              d="M10 2a8 8 0 0 1 6.32 12.901l5.387 5.388-1.414 1.414-5.388-5.387a8 8 0 1 1-4.905-14.316zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12z"
-            />
-          </svg>
-          <input type="text" placeholder="Search..." />
-        </div>
-
-        <!-- Admin Info -->
-        <div class="admin-info">
-          <span>IoB Administrator</span>
-          <img src="logo.png" alt="Administrator Avatar" />
-        </div>
-      </div>
     </header>
 
     <!-- Filters -->
@@ -478,7 +498,7 @@
             d="M12 2c-4.418 0-8 3.582-8 8 0 7.005 8 12 8 12s8-4.995 8-12c0-4.418-3.582-8-8-8zm0 10.5c-1.378 0-2.5-1.122-2.5-2.5s1.122-2.5 2.5-2.5 2.5 1.122 2.5 2.5-1.122 2.5-2.5 2.5z"
           />
         </svg>
-        1st Street, Anytown, California, USA 90210
+        125 Main St, New York, NY
       </div>
       <div class="info">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
