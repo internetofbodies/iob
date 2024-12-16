@@ -310,6 +310,44 @@
         outline: 2px solid #007bff;
         background-color: #e9f5ff;
       }
+      /* Styling remains unchanged */
+      footer {
+        background-color: #f8f9fa;
+        padding: 20px 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #333;
+        border-top: 1px solid #e7e7e7;
+      }
+
+      .footer__links {
+        margin: 10px 0;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .footer__links a {
+        text-decoration: none;
+        color: #007bff;
+        transition: color 0.3s ease;
+      }
+
+      .footer__links a:hover {
+        color: #0056b3;
+      }
+
+      @media (max-width: 576px) {
+        footer {
+          font-size: 12px;
+        }
+
+        .footer__links {
+          flex-direction: column;
+          gap: 10px;
+        }
+      }
     </style>
 
     <!--Nav bar-->
@@ -377,33 +415,72 @@
         // Sample data of individuals
         const peopleData = [
           {
+            id: 1,
             name: "Anderson, David",
             age: 35,
             address: "123 Main St, New York, NY",
             healthData: "userdavid.html",
-            financialData: "https://internetofbodies.ai/financialdata.html",
-            coordinates: [40.7128, -74.006], // New York
+            financialData: "financedavid.html",
+            coordinates: [40.7128, -74.006],
           },
           {
+            id: 2,
             name: "Miller, Jane",
             age: 28,
             address: "124 Main St, New York, NY",
             healthData: "userjane.html",
-            financialData: "https://internetofbodies.ai/financialdata.html",
-            coordinates: [40.713, -74.0062], // Neighbor of John
+            financialData: "financejane.html",
+            coordinates: [40.713, -74.0062],
           },
           {
+            id: 3,
             name: "Taylor, John",
             age: 44,
             address: "125 Main St, New York, NY",
-            healthData: "userjohn.html", //john taylor
+            healthData: "userjohn.html",
             financialData: "financejohn.html",
-            coordinates: [40.7129, -74.0058], // Neighbor of John and Jane
+            coordinates: [40.7129, -74.0058],
+          },
+          // New people in California and Texas with no health or finance data
+          {
+            id: 4,
+            name: "Brown, Sarah",
+            age: 30,
+            address: "200 Market St, San Francisco, CA",
+            coordinates: [37.7749, -122.4194],
+          },
+          {
+            id: 5,
+            name: "Davis, Michael",
+            age: 40,
+            address: "300 Main St, Los Angeles, CA",
+            coordinates: [34.0522, -118.2437],
+          },
+          {
+            id: 6,
+            name: "Wilson, Emma",
+            age: 29,
+            address: "400 Elm St, Austin, TX",
+            coordinates: [30.2672, -97.7431],
+          },
+          {
+            id: 7,
+            name: "Johnson, Robert",
+            age: 50,
+            address: "500 Congress Ave, Houston, TX",
+            coordinates: [29.7604, -95.3698],
+          },
+          {
+            id: 8,
+            name: "Clark, Emily",
+            age: 35,
+            address: "600 Dallas Rd, Dallas, TX",
+            coordinates: [32.7767, -96.797],
           },
         ];
 
         // Initialize the map
-        const map = L.map("map").setView([40.7128, -74.006], 16); // Center of the neighborhood
+        const map = L.map("map").setView([37.7749, -122.4194], 5);
 
         // Add OpenStreetMap tiles
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -427,20 +504,27 @@
           const marker = L.marker(person.coordinates, { icon: personIcon });
 
           // Add a popup with the person's details
-          marker.bindPopup(`
-        <div class="info-popup">
-          <strong>${person.name}</strong><br>
-          Age: ${person.age}<br>
-          Address: ${person.address}<br>
-          Health: <a href="${person.healthData}" target="_blank">Health Data</a><br>
-          Financial: <a href="${person.financialData}" target="_blank">Financial Data</a>
-        </div>
-      `);
+          let popupContent = `
+          <div class="info-popup">
+            <strong>ID: ${person.id}</strong><br>
+            <strong>${person.name}</strong><br>
+            Age: ${person.age}<br>
+            Address: ${person.address}<br>
+        `;
 
+          if (person.healthData && person.financialData) {
+            popupContent += `
+            Health: <a href="${person.healthData}" target="_blank">Health Data</a><br>
+            Financial: <a href="${person.financialData}" target="_blank">Financial Data</a>
+          `;
+          }
+
+          popupContent += `</div>`;
+          marker.bindPopup(popupContent);
           markers.addLayer(marker);
         }
 
-        // Add existing markers
+        // Add markers to the map
         peopleData.forEach((person) => addMarker(person));
 
         // Add the marker cluster group to the map
