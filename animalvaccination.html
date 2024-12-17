@@ -31,7 +31,7 @@
         font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f7f8fc;
+        background-color: #fff;
         color: #333;
         display: flex;
         flex-direction: column;
@@ -40,7 +40,7 @@
       h1 {
         font-size: 2rem;
         margin: 20px;
-        color: #5a5d60;
+        color: #000;
       }
 
       /* Summary Section */
@@ -54,7 +54,7 @@
         margin-bottom: 20px;
       }
       .summary-header {
-        background-color: #c04646;
+        background-color: #000;
         color: white;
         padding: 10px 20px;
         font-size: 1.2rem;
@@ -62,10 +62,12 @@
       }
       .summary-content {
         padding: 20px;
+        border: 2px solid black; /* Black border for key elements */
+        box-sizing: border-box; /
       }
       .summary-content h2 {
         font-size: 2.5rem;
-        color: #c04646;
+        color: #000;
         margin: 0;
       }
       .summary-content p {
@@ -79,7 +81,7 @@
         margin-top: 20px;
       }
       .stat-box {
-        background-color: #0078d4;
+        background-color: #000;
         color: white;
         flex: 1;
         margin: 0 10px;
@@ -105,6 +107,8 @@
         border-radius: 8px;
         overflow: hidden;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 2px solid black; /* Black border for key elements */
+        box-sizing: border-box; /
       }
 
       /* Responsive Design */
@@ -263,7 +267,7 @@
         pointer-events: auto; /* Ensure dropdown is clickable */
       }
       .dropdown_menu.open {
-        height: 370px;
+        height: 480px;
       }
 
       .dropdown_menu li {
@@ -403,6 +407,8 @@
           <a href="humanlocation.html">Human Location Map</a>
           <a href="animalvaccination.html">Animals Track Location</a>
           <a href="iobmap.html">Internet of Bodies Map</a>
+          <a href="location.html">Location Surveillance Map</a>
+          <a href="livegps.html">Live ID Map</a>
         </div>
       </li>
     </ul>
@@ -422,7 +428,9 @@
       <li><a href="mobiledemo.html">Location and ID</a></li>
       <li><a href="humanlocation.html">Human Location Map</a></li>
       <li><a href="animalvaccination.html">Animals Track Location</a></li>
-      <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+      <li><a href="iobmap.html">Location Surveillance Map</a></li>
+      <li><a href="location.html">Internet of Bodies Map</a></li>
+      <li><a href="livegps.html">Live ID Map</a></li>
       <li><a href="index.html" class="action_btn">Logout</a></li>
     </ul>
   </div>
@@ -436,7 +444,7 @@
       </div>
     </div>
 
-    <h1>Animals Track Location</h1>
+    <h1>Animals Locator Map</h1>
 
     <!-- Summary Section -->
     <div class="summary-container">
