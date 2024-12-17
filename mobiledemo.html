@@ -412,9 +412,9 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
       }
       .password-box input {
-        padding: 8px;
+        padding: 10px 0;
         font-size: 1rem;
-        margin: 10px 0;
+        margin: 8px 0;
         width: 100%;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -434,6 +434,33 @@
 
       button:hover {
         background-color: #333;
+      }
+      .password-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000; /* Solid black */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .password-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+        padding: 10px 0;
+        font-size: 1rem;
+        margin: 8px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
       }
     </style>
   </head>
