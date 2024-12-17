@@ -65,6 +65,8 @@
             <a href="humanlocation.html">Human Location Map</a>
             <a href="animalvaccination.html">Animals Track Location</a>
             <a href="iobmap.html">Internet of Bodies Map</a>
+            <a href="location.html">Location Surveillance Map</a>
+            <a href="livegps.html">Live ID Map</a>
           </div>
         </li>
       </ul>
@@ -84,26 +86,27 @@
         <li><a href="mobiledemo.html">Location and ID</a></li>
         <li><a href="humanlocation.html">Human Location Map</a></li>
         <li><a href="animalvaccination.html">Animals Track Location</a></li>
-        <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+        <li><a href="iobmap.html">Location Surveillance Map</a></li>
+        <li><a href="location.html">Internet of Bodies Map</a></li>
+        <li><a href="livegps.html">Live ID Map</a></li>
         <li><a href="index.html" class="action_btn">Logout</a></li>
       </ul>
     </div>
 
     <style>
       body {
-        font-family: "Roboto", Arial, sans-serif;
+        font-family: Arial, sans-serif;
+        text-align: center;
         margin: 0;
         padding: 0;
-        background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+        background-color: #fff;
         color: #333;
       }
-
       h1 {
         text-align: center;
         margin: 20px 0;
         font-size: 2rem;
-        color: #444;
-        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+        color: #000;
       }
 
       #map {
@@ -112,6 +115,14 @@
         width: 90%;
         border-radius: 10px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Responsive adjustments for mobile view */
+      @media (max-width: 768px) {
+        #map {
+          width: 90vw; /* Full width for map */
+          height: 90vw; /* Square height */
+        }
       }
 
       #userForm {
@@ -137,7 +148,7 @@
 
       #userForm button {
         padding: 10px 20px;
-        background: #888;
+        background: #000;
         color: #fff;
         border: none;
         border-radius: 5px;
@@ -150,7 +161,7 @@
       }
 
       #userForm button:hover {
-        background: #555;
+        background: #000;
       }
 
       #userForm input:focus,
@@ -195,47 +206,47 @@
       }
 
       .mega-menu-link:hover {
-        color: #555; /* Light gray on hover */
+        color: #555;
       }
 
       /* Mega Menu Content */
       .mega-menu {
-        display: none; /* Hidden by default */
+        display: none;
         position: absolute;
-        top: 100%; /* Position below the parent link */
+        top: 100%;
         left: 0;
-        background-color: #fff; /* White background */
-        color: #000; /* Black text */
-        width: 200px; /* Adjust width as needed */
+        background-color: #fff;
+        color: #000;
+        width: 200px;
         padding: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border: 1px solid #000; /* Black border */
+        border: 1px solid #000;
         border-radius: 5px;
         z-index: 1000;
       }
 
       .mega-menu-container:hover .mega-menu {
-        display: block; /* Show on hover */
+        display: block;
       }
 
       .mega-menu h4 {
         font-size: 1.2rem;
         margin-bottom: 10px;
         font-weight: bold;
-        color: #000; /* Black heading */
+        color: #000;
       }
 
       .mega-menu a {
         display: block;
         padding: 5px 0;
         font-size: 1rem;
-        color: #000; /* Black links */
+        color: #000;
         text-decoration: none;
         transition: color 0.3s ease;
       }
 
       .mega-menu a:hover {
-        color: #555; /* Light gray on hover */
+        color: #555;
       }
 
       li {
@@ -244,12 +255,12 @@
 
       a {
         text-decoration: none;
-        color: #000; /* Changed to black */
+        color: #000;
         font-size: 1rem;
       }
 
       a:hover {
-        color: #555; /* Changed to a lighter black (gray) */
+        color: #555;
       }
 
       /* HEADER */
@@ -325,7 +336,7 @@
         pointer-events: auto; /* Ensure dropdown is clickable */
       }
       .dropdown_menu.open {
-        height: 400px;
+        height: 480px;
       }
 
       .dropdown_menu li {
@@ -433,7 +444,7 @@
       }
 
       button:hover {
-        background-color: #333;
+        background-color: #000000;
       }
       .password-container {
         position: fixed;
@@ -462,6 +473,12 @@
         border: 1px solid #ccc;
         border-radius: 5px;
       }
+
+      #userForm,
+      #map {
+        border: 2px solid black; /* Black border for key elements */
+        box-sizing: border-box; /* Keeps border inside the element's dimensions */
+      }
     </style>
   </head>
   <body>
@@ -473,12 +490,12 @@
       </div>
     </div>
 
-    <h1>Map User Location</h1>
+    <h1>Multi - Location Map</h1>
 
     <div id="userForm">
       <input type="text" id="userName" placeholder="Enter your name" />
       <input type="text" id="userID" placeholder="Enter your ID" />
-      <button onclick="startSharing()">Locate Me</button>
+      <button onclick="startSharing()">Locate</button>
     </div>
 
     <div id="map"></div>
