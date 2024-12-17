@@ -9,13 +9,20 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <style>
       body {
         font-family: Arial, sans-serif;
         text-align: center;
         margin: 0;
         padding: 0;
-        background-color: #f0f0f0;
+        background-color: #fff;
         color: #333;
       }
       h1 {
@@ -38,6 +45,8 @@
         border: 1px solid #ccc;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         border-radius: 8px;
+        border: 2px solid black; /* Black border */
+        box-sizing: border-box; /* Ensures border doesn't affect layout */
       }
 
       label {
@@ -92,20 +101,23 @@
         height: 400px;
         position: relative;
         margin: 20px auto;
-        border: 2px solid #555;
         background-color: #ddd;
+        border: 2px solid black; /* Black border */
+        box-sizing: border-box; /* Ensures border doesn't affect layout */
       }
-
       .details-box {
         background-color: #fff;
-        padding: 15px;
+        padding: 20px;
         margin: 20px auto;
-        border: 1px solid #aaa;
+        border: 2px solid black; /* Black border */
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         text-align: left;
-        max-width: 400px;
         border-radius: 8px;
+        width: 90%; /* Adjust width for spacing */
+        max-width: 400px; /* Keeps box size reasonable on larger screens */
+        box-sizing: border-box;
       }
+
       .details-box img {
         max-width: 80px;
         border-radius: 50%;
@@ -168,10 +180,273 @@
         border: 1px solid #ccc;
         border-radius: 5px;
       }
+
+      /* Mega Menu Container */
+      .mega-menu-container {
+        position: relative; /* Required for absolute positioning of the mega menu */
+      }
+
+      /* Mega Menu Link */
+      .mega-menu-link {
+        position: relative;
+        color: #000; /* Black text */
+        font-weight: normal;
+        transition: color 0.3s ease;
+      }
+
+      .mega-menu-link:hover {
+        color: #555; /* Light gray on hover */
+      }
+
+      /* Mega Menu Content */
+      .mega-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the parent link */
+        left: 0;
+        background-color: #fff; /* White background */
+        color: #000; /* Black text */
+        width: 200px; /* Adjust width as needed */
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #000; /* Black border */
+        border-radius: 5px;
+        z-index: 1000;
+      }
+
+      .mega-menu-container:hover .mega-menu {
+        display: block; /* Show on hover */
+      }
+
+      .mega-menu h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #000; /* Black heading */
+      }
+
+      .mega-menu a {
+        display: block;
+        padding: 5px 0;
+        font-size: 1rem;
+        color: #000; /* Black links */
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .mega-menu a:hover {
+        color: #555; /* Light gray on hover */
+      }
+
+      li {
+        list-style: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000; /* Changed to black */
+        font-size: 1rem;
+      }
+
+      a:hover {
+        color: #555; /* Changed to a lighter black (gray) */
+      }
+
+      /* HEADER */
+      header {
+        position: relative;
+        padding: 0 2rem;
+      }
+
+      .navbar {
+        width: 100%;
+        height: 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar .logo a {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #000; /* Changed to black */
+      }
+
+      .navbar .links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .navbar .toggle_btn {
+        color: #000; /* Changed to black */
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+      }
+
+      .action_btn {
+        background-color: #000; /* Changed to black */
+        color: #fff; /* Kept white text for contrast */
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: scale 0.2 ease;
+      }
+
+      .action_btn:hover {
+        scale: 1.05;
+        color: #fff; /* Kept white text */
+      }
+
+      .action_btn:active {
+        scale: 0.95;
+      }
+
+      /* DROPDOWN MENU */
+      .dropdown_menu {
+        display: none;
+        position: absolute;
+        right: 2rem;
+        top: 60px;
+        height: 0;
+        width: 300px;
+        background: rgba(0, 0, 0, 0.1); /* Black with transparency */
+        backdrop-filter: blur(15px);
+        border-radius: 10px;
+        overflow: hidden;
+        transition: height 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 10000; /* Higher z-index to overlay on the map */
+        pointer-events: auto; /* Ensure dropdown is clickable */
+      }
+      .dropdown_menu.open {
+        height: 480px;
+      }
+
+      .dropdown_menu li {
+        padding: 0.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .dropdown_menu li a {
+        color: #000; /* Changed to black */
+      }
+
+      .dropdown_menu li a:hover {
+        color: #555; /* Changed to a lighter black (gray) */
+      }
+
+      .dropdown_menu .action_btn {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: #000; /* Changed to black */
+        color: #fff; /* Kept white text */
+      }
+
+      .logo img {
+        height: 50px;
+        width: auto;
+        display: block;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn {
+          display: none;
+        }
+
+        .navbar .toggle_btn {
+          display: block;
+        }
+
+        .dropdown_menu {
+          display: block;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .dropdown_menu {
+          left: 2rem;
+          width: unset;
+        }
+      }
+
+      .fa-bars,
+      .fa-navicon {
+        padding: 20px;
+      }
+      .fa-close,
+      .fa-multiply,
+      .fa-remove,
+      .fa-times,
+      .fa-xmark {
+        padding: 20px;
+      }
     </style>
   </head>
+  <!--Nav bar-->
+  <div class="navbar">
+    <div class="logo">
+      <a href="#">
+        <img src="logo.png" alt="IOB logo" />
+      </a>
+    </div>
+
+    <!--Menu links-->
+    <ul class="links">
+      <li><a href="home.html">Health Dashboard</a></li>
+
+      <!-- Mega Menu -->
+      <li class="mega-menu-container">
+        <a href="#" class="mega-menu-link">Features Section</a>
+        <div class="mega-menu">
+          <h4>Features Section</h4>
+          <a href="citytracker.html">City Tracker</a>
+          <a href="prediction.html">Prediction</a>
+          <a href="healthsync.html">HealthSync Alert</a>
+          <a href="mobiledemo.html">Location and ID</a>
+          <a href="humanlocation.html">Human Location Map</a>
+          <a href="animalvaccination.html">Animals Track Location</a>
+          <a href="iobmap.html">Internet of Bodies Map</a>
+          <a href="location.html">Location Surveillance Map</a>
+          <a href="livegps.html">Live ID Map</a>
+        </div>
+      </li>
+    </ul>
+
+    <a href="index.html" class="action_btn">Logout</a>
+    <div class="toggle_btn">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+
+  <div class="dropdown_menu">
+    <ul>
+      <li><a href="home.html">Health Dashboard</a></li>
+      <li><a href="citytracker.html">CityBaron Tracker</a></li>
+      <li><a href="prediction.html">Prediction</a></li>
+      <li><a href="healthsync.html">HealthSync Alert</a></li>
+      <li><a href="mobiledemo.html">Location and ID</a></li>
+      <li><a href="humanlocation.html">Human Location Map</a></li>
+      <li><a href="animalvaccination.html">Animals Track Location</a></li>
+      <li><a href="iobmap.html">Location Surveillance Map</a></li>
+      <li><a href="location.html">Internet of Bodies Map</a></li>
+      <li><a href="livegps.html">Live ID Map</a></li>
+      <li><a href="index.html" class="action_btn">Logout</a></li>
+    </ul>
+  </div>
+
   <body>
-    <h1>Demolid</h1>
+    <h1>Live ID Map</h1>
 
     <div class="password-container" id="passwordContainer">
       <div class="password-box">
@@ -186,7 +461,7 @@
       <label for="faceUpload">Upload Face ID:</label>
       <input type="file" id="faceUpload" accept="image/*" />
 
-      <label for="phoneNumber">Enter your phone number to locate:</label>
+      <label for="phoneNumber">Enter phone number to locate:</label>
       <input type="tel" id="phoneNumber" placeholder="Enter phone number" />
 
       <button onclick="showResult()">Locate</button>
@@ -318,6 +593,21 @@
           alert("Incorrect password. Please try again.");
         }
       }
+    </script>
+
+    <script>
+      const toggleBtn = document.querySelector(".toggle_btn");
+      const toggleBtnIcon = document.querySelector(".toggle_btn i");
+      const dropDownMenu = document.querySelector(".dropdown_menu");
+
+      toggleBtn.onclick = function () {
+        dropDownMenu.classList.toggle("open");
+        const isOpen = dropDownMenu.classList.contains("open");
+
+        toggleBtnIcon.classList = isOpen
+          ? "fa-solid fa-xmark"
+          : "fa-solid fa-bars";
+      };
     </script>
   </body>
 </html>
