@@ -391,9 +391,61 @@
       .fa-xmark {
         padding: 20px;
       }
+
+      .password-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000; /* Solid black */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .password-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+        padding: 8px;
+        font-size: 1rem;
+        margin: 10px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #333;
+      }
     </style>
   </head>
   <body>
+    <div class="password-container" id="passwordContainer">
+      <div class="password-box">
+        <h2>Enter Password</h2>
+        <input type="password" id="pagePassword" placeholder="Enter password" />
+        <button onclick="validatePassword()">Submit</button>
+      </div>
+    </div>
+
     <h1>Map User Location</h1>
 
     <div id="userForm">
@@ -552,6 +604,21 @@
           ? "fa-solid fa-xmark"
           : "fa-solid fa-bars";
       };
+    </script>
+    <script>
+      const correctPassword = "admin";
+      const passwordContainer = document.getElementById("passwordContainer");
+      const mainContent = document.getElementById("mainContent");
+
+      function validatePassword() {
+        const enteredPassword = document.getElementById("pagePassword").value;
+        if (enteredPassword === correctPassword) {
+          passwordContainer.style.display = "none";
+          mainContent.style.display = "block";
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
     </script>
   </body>
 </html>
