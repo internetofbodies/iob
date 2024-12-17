@@ -137,8 +137,8 @@
           </div>
           <div id="health-content" style="display: none">
             <p>
-              Analyze your health trends over time. Access your heart rate,
-              steps, sleep patterns, and more with easy-to-read charts.
+              Analyze health trends over time. Access heart rate, steps, sleep
+              patterns, and more with easy-to-read charts.
             </p>
             <p id="heartRate">Heart Rate: 0 BPM</p>
             <p id="steps">Steps: 0</p>
@@ -214,46 +214,34 @@
           </div>
         </section>
 
-        <!--Mood Tracker-->
-        <section id="mood-tracker" class="feature-section">
-          <h3>Mood Tracker</h3>
-          <p>Select your current mood:</p>
-          <select id="mood-select">
-            <option value="happy">Happy</option>
-            <option value="stressed">Stressed</option>
-            <option value="anxious">Anxious</option>
-            <option value="calm">Calm</option>
-          </select>
-          <button onclick="suggestActivity()">Get Suggestion</button>
-          <p id="mood-suggestion"></p>
+        <!--Digital twin-->
 
-          <section id="chatbot-section" class="feature-section">
-            <h3>Chat with Me</h3>
-            <div id="chat-box" class="chat-box">
-              <!-- Messages will dynamically appear here -->
-            </div>
-            <div id="chat-input-container">
-              <input
-                type="text"
-                id="chat-input"
-                placeholder="Type your message..."
-              />
-              <button onclick="handleChatInput()">Send</button>
-            </div>
-          </section>
-
-          <!--Breathing Exercise-->
-          <div id="breathing-exercise">
-            <h3>Breathing Exercise</h3>
-            <div class="circle-container">
-              <div class="circle" id="breathing-circle"></div>
-              <p id="breathing-guide">Get Ready...</p>
-            </div>
-            <button onclick="startBreathingExercise()">
-              Start Breathing Exercise
-            </button>
+        <section id="chatbot-section" class="feature-section">
+          <h3>Chat with Digital Twin</h3>
+          <div id="chat-box" class="chat-box">
+            <!-- Messages will dynamically appear here -->
+          </div>
+          <div id="chat-input-container">
+            <input
+              type="text"
+              id="chat-input"
+              placeholder="Type your message..."
+            />
+            <button onclick="handleChatInput()">Send</button>
           </div>
         </section>
+
+        <!--Breathing Exercise-->
+        <div id="breathing-exercise">
+          <h3>Breathing Exercise</h3>
+          <div class="circle-container">
+            <div class="circle" id="breathing-circle"></div>
+            <p id="breathing-guide">Get Ready...</p>
+          </div>
+          <button onclick="startBreathingExercise()">
+            Start Breathing Exercise
+          </button>
+        </div>
 
         <section id="tb-detection" class="feature-section">
           <h3>Detecting Tuberculosis with AI and a Smartphone</h3>
