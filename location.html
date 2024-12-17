@@ -25,14 +25,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        background: #fff;
         color: #333;
       }
 
       /* Title Section */
       h1 {
         margin: 20px 0;
-        color: #444;
+        color: #000;
         font-size: 2rem;
         text-align: center;
       }
@@ -64,28 +64,31 @@
 
       input:focus {
         outline: none;
-        border-color: #007bff;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        border-color: #000;
       }
 
       button {
-        cursor: pointer;
-        background: #007bff;
+        background-color: #000;
         color: #fff;
         border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
         font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
       }
 
       button:hover {
-        background: #0056b3;
+        background-color: #333;
       }
 
       #clearHistory {
-        background: #dc3545;
+        background: #000;
       }
 
       #clearHistory:hover {
-        background: #b02a37;
+        background: #000;
       }
 
       /* Map Styling */
@@ -97,17 +100,32 @@
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
+      /* Make the map square in mobile view */
+      @media (max-width: 768px) {
+        #map {
+          width: 90vw; /* Adjust width to 90% of the viewport width */
+          height: 90vw; /* Make the height equal to the width for a square shape */
+          border-radius: 5px; /* Optional: small border-radius for aesthetics */
+        }
+      }
 
       /* Details Section */
       #details {
         padding: 20px;
         background: #fff;
         width: 80vw;
-        border: 1px solid #ddd;
+        border: 2px solid #eee;
         border-radius: 10px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         text-align: left;
         margin-bottom: 20px;
+      }
+      @media (max-width: 768px) {
+        #details {
+          width: 90vw; /* Adjust width to 90% of the viewport width */
+          height: 90vw; /* Make the height equal to the width for a square shape */
+          border-radius: 5px; /* Optional: small border-radius for aesthetics */
+        }
       }
 
       .location-info {
@@ -264,7 +282,7 @@
         pointer-events: auto; /* Ensure dropdown is clickable */
       }
       .dropdown_menu.open {
-        height: 370px;
+        height: 480px;
       }
 
       .dropdown_menu li {
@@ -330,6 +348,58 @@
       .fa-xmark {
         padding: 20px;
       }
+      #userForm,
+      #map,
+      #details {
+        border: 2px solid black; /* Black border */
+        box-sizing: border-box; /* Ensures border doesn't affect layout */
+      }
+      #userForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center inputs horizontally */
+        justify-content: center; /* Align content inside the form */
+        gap: 15px; /* Space between form elements */
+        background: #fff;
+        padding: 20px;
+        border: 2px solid black; /* Add black border as requested */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      @media (max-width: 768px) {
+        #userForm {
+          width: 90vw; /* Adjust width to 90% of the viewport width */
+          height: 90vw; /* Make the height equal to the width for a square shape */
+          border-radius: 5px; /* Optional: small border-radius for aesthetics */
+        }
+      }
+      .password-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000; /* Solid black */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .password-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+        padding: 10px 0;
+        font-size: 1rem;
+        margin: 8px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
     </style>
   </head>
 
@@ -356,6 +426,9 @@
           <a href="mobiledemo.html">Location and ID</a>
           <a href="humanlocation.html">Human Location Map</a>
           <a href="animalvaccination.html">Animals Track Location</a>
+          <a href="iobmap.html">Internet of Bodies Map</a>
+          <a href="location.html">Location Surveillance Map</a>
+          <a href="livegps.html">Live ID Map</a>
         </div>
       </li>
     </ul>
@@ -375,12 +448,23 @@
       <li><a href="mobiledemo.html">Location and ID</a></li>
       <li><a href="humanlocation.html">Human Location Map</a></li>
       <li><a href="animalvaccination.html">Animals Track Location</a></li>
+      <li><a href="iobmap.html">Location Surveillance Map</a></li>
+      <li><a href="location.html">Internet of Bodies Map</a></li>
+      <li><a href="livegps.html">Live ID Map</a></li>
       <li><a href="index.html" class="action_btn">Logout</a></li>
     </ul>
   </div>
 
   <body>
-    <h1>Surveillance Map</h1>
+    <div class="password-container" id="passwordContainer">
+      <div class="password-box">
+        <h2>Enter Password</h2>
+        <input type="password" id="pagePassword" placeholder="Enter password" />
+        <button onclick="validatePassword()">Submit</button>
+      </div>
+    </div>
+
+    <h1>Location Surveillance Map</h1>
     <form id="userForm">
       <input type="text" id="name" placeholder="Enter Name" required />
       <input type="text" id="id" placeholder="Enter ID" required />
@@ -536,6 +620,22 @@
           ? "fa-solid fa-xmark"
           : "fa-solid fa-bars";
       };
+    </script>
+
+    <script>
+      const correctPassword = "admin";
+      const passwordContainer = document.getElementById("passwordContainer");
+      const mainContent = document.getElementById("mainContent");
+
+      function validatePassword() {
+        const enteredPassword = document.getElementById("pagePassword").value;
+        if (enteredPassword === correctPassword) {
+          passwordContainer.style.display = "none";
+          mainContent.style.display = "block";
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
     </script>
   </body>
 </html>
