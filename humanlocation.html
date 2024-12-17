@@ -41,6 +41,8 @@
             <a href="humanlocation.html">Human Location Map</a>
             <a href="animalvaccination.html">Animals Track Location</a>
             <a href="iobmap.html">Internet of Bodies Map</a>
+            <a href="location.html">Location Surveillance Map</a>
+            <a href="livegps.html">Live ID Map</a>
           </div>
         </li>
       </ul>
@@ -60,7 +62,9 @@
         <li><a href="mobiledemo.html">Location and ID</a></li>
         <li><a href="humanlocation.html">Human Location Map</a></li>
         <li><a href="animalvaccination.html">Animals Track Location</a></li>
-        <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+        <li><a href="iobmap.html">Location Surveillance Map</a></li>
+        <li><a href="location.html">Internet of Bodies Map</a></li>
+        <li><a href="livegps.html">Live ID Map</a></li>
         <li><a href="index.html" class="action_btn">Logout</a></li>
       </ul>
     </div>
@@ -70,7 +74,7 @@
         font-family: "Arial", sans-serif;
         margin: 0;
         padding: 0;
-        background: #f4f7fa;
+        background: #fff;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -81,7 +85,7 @@
       h1 {
         margin: 20px 0;
         font-size: 2rem;
-        color: #333;
+        color: #000;
       }
       /* Submit */
       button {
@@ -125,6 +129,8 @@
         overflow: hidden;
         border: 1px solid #ccc;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 2px solid black; /* Black border for key elements */
+        box-sizing: border-box; /
       }
 
       #timeline {
@@ -134,15 +140,15 @@
         font-size: 0.9rem;
         background: #fff;
         padding: 10px;
-        border-radius: 10px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border: 2px solid black; /* Black border for key elements */
+        box-sizing: border-box; /
       }
 
       .location-item {
         margin: 5px 0;
         padding: 5px;
         background: #f9f9f9;
-        border-left: 4px solid #007bff;
+        border-left: 4px solid #000;
       }
       /* Mega Menu Container */
       .mega-menu-container {
@@ -288,7 +294,7 @@
         pointer-events: auto; /* Ensure dropdown is clickable */
       }
       .dropdown_menu.open {
-        height: 370px;
+        height: 480px;
       }
 
       .dropdown_menu li {
@@ -393,8 +399,8 @@
       </div>
     </div>
 
-    <h1>Human Location Map</h1>
-    <button id="locate-btn">Locate Me</button>
+    <h1>Human Locator Map</h1>
+    <button id="locate-btn">Locate</button>
     <div id="map"></div>
     <div id="timeline"></div>
 
