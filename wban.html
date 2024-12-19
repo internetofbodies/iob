@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WBAN Area Monitor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      /* General Reset for Overflow Prevention */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: #f9f9f9;
+        overflow-x: hidden; /* Prevent horizontal scrolling */
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: inherit;
+      }
+
+      /* Header Styling */
+
+      h1 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+        padding: 1rem;
+      }
+
+      /* Dashboard Layout */
+      .dashboard {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        grid-gap: 1.5rem;
+        padding: 1.5rem;
+        max-width: 1200px;
+        margin: auto;
+        width: 100%; /* Ensure the grid doesn't exceed the viewport */
+      }
+
+      /* Map Section */
+      .map-section {
+        grid-column: span 2;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        width: 100%; /* Prevent overflow */
+      }
+
+      .map-section h2 {
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        color: #333;
+        font-weight: bold;
+      }
+
+      #map {
+        height: 400px;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+
+      /* Panels */
+      .panel {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+        width: 100%; /* Prevent overflow */
+      }
+
+      .panel h3 {
+        margin: 0 0 1rem;
+        font-size: 1.25rem;
+        font-weight: bold;
+        color: #333;
+      }
+
+      /* Responsive Images */
+      .activity-tracker img {
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      /* Alerts */
+      .alerts-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .alert {
+        padding: 0.75rem;
+        border-radius: 5px;
+        background-color: #fffbee;
+        border: 1px solid #ffc107;
+        width: 100%; /* Prevent overflow */
+      }
+
+      /* Device Status */
+      .devices-status-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .devices-status-list {
+        flex: 1;
+      }
+
+      .devices-status-list p {
+        margin: 0.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .devices-status-list .status-label {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .status-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+      }
+
+      /* Ensure Canvas Doesn't Overflow */
+      canvas {
+        max-width: 150px;
+        max-height: 150px;
+      }
+
+      /* Media Queries */
+      @media (max-width: 1024px) {
+        .dashboard {
+          grid-template-columns: 1.5fr 1fr;
+          padding: 1rem;
+        }
+
+        #map {
+          height: 350px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .dashboard {
+          grid-template-columns: 1fr;
+        }
+
+        .map-section {
+          grid-column: span 1;
+        }
+
+        #map {
+          height: 300px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        header h1 {
+          font-size: 1.5rem;
+        }
+
+        .map-section h2,
+        .panel h3 {
+          font-size: 1rem;
+        }
+
+        .dashboard {
+          padding: 0.5rem;
+          grid-gap: 1rem;
+        }
+
+        #map {
+          height: 250px;
+        }
+
+        .alert {
+          font-size: 0.9rem;
+          padding: 0.5rem;
+        }
+
+        .devices-status-list p {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.25rem;
+        }
+      }
+
+      /* Extra Small Screens */
+      @media (max-width: 320px) {
+        header h1 {
+          font-size: 1.25rem;
+        }
+
+        .map-section h2,
+        .panel h3 {
+          font-size: 0.9rem;
+        }
+
+        .dashboard {
+          grid-gap: 0.5rem;
+          padding: 0.25rem;
+        }
+
+        #map {
+          height: 200px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WBAN Area Monitor</h1>
+    <div class="dashboard">
+      <div class="map-section">
+        <h2>Current Area: USA - Mexico Border</h2>
+        <div id="map"></div>
+      </div>
+      <div class="panel activity-tracker">
+        <h3>Device Live Activity Tracker</h3>
+        <img src="track.png" alt="Live activity heat map" />
+        <p><strong>Location:</strong> Janos Municipality, Chihuahua, Mexico</p>
+        <p><strong>Coordinates:</strong> 31.329038, -108.756436</p>
+        <p><strong>Devices Detected:</strong> 4</p>
+        <p>
+          <span class="status-label"
+            ><span class="status-dot status-active"></span> Active: 1</span
+          >
+        </p>
+        <p>
+          <span class="status-label"
+            ><span class="status-dot status-malfunctioning"></span>
+            Malfunctioning: 2</span
+          >
+        </p>
+        <p>
+          <span class="status-label"
+            ><span class="status-dot status-inactive"></span> Inactive: 1</span
+          >
+        </p>
+      </div>
+      <div class="panel">
+        <h3>Area Devices Status</h3>
+        <div class="devices-status-container">
+          <div class="devices-status-list">
+            <p>
+              <span class="status-label"
+                ><span class="status-dot status-active"></span> Active</span
+              >
+              <strong>920,000</strong>
+            </p>
+            <p>
+              <span class="status-label"
+                ><span class="status-dot status-malfunctioning"></span>
+                Malfunctioning</span
+              >
+              <strong>50,000</strong>
+            </p>
+            <p>
+              <span class="status-label"
+                ><span class="status-dot status-inactive"></span> Inactive</span
+              >
+              <strong>30,000</strong>
+            </p>
+          </div>
+          <canvas id="devicePieChart"></canvas>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>Area Live Alerts</h3>
+        <div class="alerts-container">
+          <div class="alert">
+            Monitor sudden increase in Malfunctioning (1.01%) and Inactive
+            (1.69%) devices over the past hour.
+          </div>
+          <div class="alert">
+            System has detected multiple device disconnections and malfunctions
+            in a weak signal area.
+          </div>
+          <div class="alert">
+            Detected activity from an inactive device in Janos Municipality 24.4
+            kilometers from the US-Mexico border.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Initialize Map
+      const map = L.map("map").setView([31.329038, -108.756436], 6);
+
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+      }).addTo(map);
+
+      // Add markers
+      L.marker([31.329038, -108.756436]).addTo(map).bindPopup("Sample Marker");
+
+      // Pie Chart
+      const ctx = document.getElementById("devicePieChart").getContext("2d");
+      new Chart(ctx, {
+        type: "doughnut",
+        data: {
+          labels: ["Active", "Malfunctioning", "Inactive"],
+          datasets: [
+            {
+              data: [92, 5, 3],
+              backgroundColor: ["#4CAF50", "#FFC107", "#F44336"],
+            },
+          ],
+        },
+        options: {
+          plugins: {
+            legend: {
+              display: false,
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
