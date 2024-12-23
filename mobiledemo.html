@@ -541,6 +541,21 @@
         border: 2px solid black; /* Black border for key elements */
         box-sizing: border-box; /* Keeps border inside the element's dimensions */
       }
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 768px) {
+        footer {
+          font-size: 16px;
+        }
+      }
     </style>
   </head>
   <body>
@@ -561,6 +576,11 @@
     </div>
 
     <div id="map"></div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
 
     <!-- Firebase -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
