@@ -568,65 +568,161 @@
         const faceUpload = document.getElementById("faceUpload").files[0];
         const phoneDetails = document.getElementById("phoneDetails");
         const faceDetails = document.getElementById("faceDetails");
+        const faceImage = document.getElementById("faceImage");
 
+        // Fixed location for LeBron James
+        const fixedLatitude = 34.0522; // Los Angeles latitude
+        const fixedLongitude = -118.2437; // Los Angeles longitude
+        const lebronPhoneNumber = "+3104158290";
+
+        // Display the details section
         document.getElementById("details").style.display = "block";
 
         if (phoneNumber) {
-          document.getElementById("deviceType").innerText = getDeviceType();
           phoneDetails.style.display = "block";
+          document.getElementById("deviceType").innerText = getDeviceType();
+
+          if (phoneNumber === lebronPhoneNumber) {
+            // Show fixed location for LeBron James
+            const tooltipDetails = `
+              <strong>WBAN Details:</strong><br>
+              Device: WBAN (Body)<br>
+              Mobile Device: Cellphone<br>
+              Corresponding I.D: ✓<br>
+              On Body: ✓
+            `;
+            updateMap(fixedLatitude, fixedLongitude, tooltipDetails);
+            alert(
+              "Location set to LeBron James' fixed location: Los Angeles, CA."
+            );
+          } else {
+            // Use exact location for other numbers
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  const latitude = position.coords.latitude;
+                  const longitude = position.coords.longitude;
+                  const tooltipDetails = `
+                    <strong>WBAN Details:</strong><br>
+                    Device: WBAN (Body)<br>
+                    Mobile Device: Cellphone<br>
+                    Corresponding I.D: ✓<br>
+                    On Body: ✓
+                  `;
+                  updateMap(latitude, longitude, tooltipDetails);
+                  alert("Location detected and set on the map.");
+                },
+                (error) => {
+                  showError(error);
+                }
+              );
+            } else {
+              alert("Geolocation is not supported by this browser.");
+            }
+          }
         } else {
           phoneDetails.style.display = "none";
         }
 
+        // Face Upload Logic
         if (faceUpload) {
-          const faceImage = document.getElementById("faceImage");
-          faceImage.src = URL.createObjectURL(faceUpload);
-          faceImage.style.display = "block";
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            faceImage.src = e.target.result;
+            faceImage.style.display = "block";
+          };
+          reader.readAsDataURL(faceUpload);
+
           faceDetails.style.display = "block";
+
+          const tooltipDetails = `
+            <strong>Face ID Detected:</strong><br>
+            Name: LeBron James<br>
+            Location: Los Angeles, CA<br>
+            ID: P0001
+          `;
+          updateMap(fixedLatitude, fixedLongitude, tooltipDetails);
+          alert("Face ID detected. Location set to Los Angeles, CA.");
         } else {
           faceDetails.style.display = "none";
         }
-
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(showPosition, showError);
-        }
       }
 
-      function showPosition(position) {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-
+      function updateMap(latitude, longitude, tooltipDetails) {
         if (!map) {
           map = L.map("map").setView([latitude, longitude], 13);
           L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
             attribution: "© OpenStreetMap contributors",
           }).addTo(map);
-          marker = L.marker([latitude, longitude]).addTo(map);
+          marker = L.marker([latitude, longitude])
+            .addTo(map)
+            .bindTooltip(tooltipDetails, {
+              permanent: false,
+              direction: "top",
+            })
+            .openTooltip();
         } else {
           map.setView([latitude, longitude], 13);
-          marker.setLatLng([latitude, longitude]);
+          marker
+            .setLatLng([latitude, longitude])
+            .bindTooltip(tooltipDetails, {
+              permanent: false,
+              direction: "top",
+            })
+            .openTooltip();
         }
       }
 
       function showWBANDetails() {
+        const phoneNumber = document.getElementById("phoneNumber").value;
         const wbanDetails = document.getElementById("wbanDetails");
         wbanDetails.style.display = "block";
 
-        const newLat = marker.getLatLng().lat + 0.001;
-        const newLng = marker.getLatLng().lng + 0.001;
+        const fixedLatitude = 34.0522 + 0.001; // Slightly offset from main marker
+        const fixedLongitude = -118.2437 + 0.001; // Offset for WBAN marker
 
+        const wbanTooltip = `
+          <strong>WBAN Details:</strong><br>
+          Device: WBAN (Body)<br>
+          Mobile Device: Cellphone<br>
+          Corresponding I.D: ✓<br>
+          On Body: ✓
+        `;
+
+        // Add or update the WBAN marker on the map
         if (!wbanMarker) {
-          wbanMarker = L.marker([newLat, newLng], {
-            title: "WBAN Device",
-          }).addTo(map);
+          wbanMarker = L.marker([fixedLatitude, fixedLongitude])
+            .addTo(map)
+            .bindTooltip(wbanTooltip, { permanent: false, direction: "top" })
+            .openTooltip();
         } else {
-          wbanMarker.setLatLng([newLat, newLng]);
+          wbanMarker
+            .setLatLng([fixedLatitude, fixedLongitude])
+            .bindTooltip(wbanTooltip, { permanent: false, direction: "top" })
+            .openTooltip();
         }
-        map.setView([newLat, newLng], 13);
+
+        // Center the map on the WBAN marker
+        map.setView([fixedLatitude, fixedLongitude], 14);
+
+        alert("WBAN Details displayed on the map.");
       }
 
-      function navigateToCellphone() {
-        alert("Navigating to cellphone details...");
+      function showError(error) {
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            alert("User denied the request for Geolocation.");
+            break;
+          case error.POSITION_UNAVAILABLE:
+            alert("Location information is unavailable.");
+            break;
+          case error.TIMEOUT:
+            alert("The request to get user location timed out.");
+            break;
+          case error.UNKNOWN_ERROR:
+            alert("An unknown error occurred.");
+            break;
+        }
       }
 
       function getDeviceType() {
