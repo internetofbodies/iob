@@ -446,6 +446,21 @@
         border: 1px solid #ccc;
         border-radius: 5px;
       }
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 768px) {
+        footer {
+          font-size: 16px;
+        }
+      }
     </style>
   </head>
 
@@ -541,11 +556,9 @@
       <button id="clearHistory">Clear History</button>
     </div>
 
-    <!-- Footer Section -->
+    <!-- Footer -->
     <footer>
-      <div class="footer__bottom">
-        <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
-      </div>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
     </footer>
 
     <script>
