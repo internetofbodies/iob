@@ -1,792 +1,967 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-YMZG1L1BRW"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YMZG1L1BRW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+      gtag("config", "G-YMZG1L1BRW");
+    </script>
 
-  gtag('config', 'G-YMZG1L1BRW');
-</script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+      name="description"
+      content="Internet of Bodies Book a Meeting with Us!"
+    />
+    <meta
+      name="keywords"
+      content="Internet of Bodies Book a Meeting with Us!"
+    />
+    <meta name="author" content="Accountable Infrastructure" />
+    <title>Internet of Bodies - Request Demo!</title>
 
-<meta name="description" content="Internet of Bodies Book a Meeting with Us!">
-<meta name="keywords" content="Internet of Bodies Book a Meeting with Us!">
-<meta name="author" content="Accountable Infrastructure">
-<title>Internet of Bodies - Request Demo!</title>
+    <!--Favicon-->
+    <link rel="icon" href="logo.png" type="image/png" />
 
-  <!--Favicon-->
-  <link rel="icon" href="logo.png" type="image/png">
-
-<!-- Organization Structured Data without Social Media -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Accountable Infrastructure",
-  "url": "https://internetofbodies.ai/",
-  "logo": "https://internetofbodies.ai/logo.jpg"
-}
-</script>
+    <!-- Organization Structured Data without Social Media -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Accountable Infrastructure",
+        "url": "https://internetofbodies.ai/",
+        "logo": "https://internetofbodies.ai/logo.jpg"
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <style>
-        /* General Styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #000;
-    color: #fff;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
 
-.container {
-    width: 90%;
-    max-width: 800px;
-    background-color: #000000;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-    margin: 20px 0;
-}
+      .container {
+        width: 90%;
+        max-width: 800px;
+        background-color: #000000;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        margin: 20px 0;
+      }
 
-h1{
-    text-align: center;
-    margin-bottom: 20px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
 
-h2 {
-    text-align: left; /* Aligns the text to the left */
-    margin-bottom: 20px;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 1.5rem; /* Adjust font size as needed */
-}
+      h2 {
+        text-align: left; /* Aligns the text to the left */
+        margin-bottom: 20px;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.5rem; /* Adjust font size as needed */
+      }
 
+      form {
+        display: flex;
+        flex-direction: column;
+      }
 
-form {
-    display: flex;
-    flex-direction: column;
-}
+      .form-group {
+        margin-bottom: 20px;
+      }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    font-weight: bold;
-}
-
-input,
-textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #444;
-    border-radius: 4px;
-    background-color: #222;
-    color: #fff;
-    transition: border-color 0.3s, background-color 0.3s;
-}
-
-input:hover,
-textarea:hover {
-    border-color: #888;
-}
-
-input:focus,
-textarea:focus {
-    outline: none;
-    border-color: #fff;
-    background-color: #333;
-    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-}
-
-/* Radio Buttons and Checkboxes */
-input[type="radio"],
-input[type="checkbox"] {
-    width: 20px; /* Adjust size for larger screens */
-    height: 20px;
-    margin-right: 10px; /* Space between input and label */
-    vertical-align: middle; /* Align with label text */
-    cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-input[type="radio"]:hover,
-input[type="checkbox"]:hover {
-    transform: scale(1.1); /* Slightly enlarge on hover */
-}
-
-.radio-group,
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    gap: 10px; /* Space between items */
-    align-items: center; /* Center-align inputs with labels */
-}
-
-.radio-group label,
-.checkbox-group label {
-    font-size: 14px; /* Consistent text size */
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    cursor: pointer;
-}
-
-hr {
-    margin: 20px 0;
-    border: none;
-    border-top: 1px solid #444;
-}
-
-button, .submit, .redirect-button {
-    padding: 12px;
-    background-color: #a7a5a5;
-    border: none;
-    border-radius: 4px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    display: block;
-    width: 100%;
-    margin-top: 10px;
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-button:hover, .submit:hover, .redirect-button:hover {
-    background-color: #ebebeb;
-    transform: translateY(-2px);
-}
-
-button:active, .submit:active, .redirect-button:active {
-    background-color: #ebebeb;
-    transform: translateY(1px);
-}
-
-.acknowledgment {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #bbb;
-    line-height: 1.5;
-    text-align: justify;
-}
-
-
-/* Add spacing between form groups */
-.form-group {
-    margin-bottom: 20px; /* Adjust this value as needed */
-}
-
-/* If you want to specifically target Official Website and Country */
-#official-website {
-    margin-bottom: 40px; /* Adds space below the Official Website input field */
-}
-
-/* Optionally, add margin to Country for clarity */
-#country {
-    margin-top: 20px; /* Adds space above the Country field */
-}
-
-/* Country Section Styles */
-.form-group {
-    margin-bottom: 20px; /* Ensures consistent spacing between form fields */
-}
-
-.form-group select {
-    width: 100%; /* Full-width dropdown for better usability */
-    padding: 12px; /* Adds comfortable padding */
-    border: 1px solid #444; /* Border to match the design */
-    border-radius: 4px; /* Rounded edges */
-    background-color: #222; /* Background color matching the form */
-    color: #fff; /* White text for readability */
-    font-size: 16px; /* Adequate font size */
-    transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth hover effects */
-}
-
-/*Collaboration label space for radio button*/
-#collaboration-label {
-    display: block; /* Ensure the label takes up the full width */
-    margin-bottom: 30px; /* Adjust spacing as needed */
-}
-
-#business-label{
-    display: block; /* Ensure the label takes up the full width */
-    margin-bottom: 30px; /* Adjust spacing as needed */
-
-}
-
-#organization-label{
-    display: block; /* Ensure the label takes up the full width */
-    margin-bottom: 30px; /* Adjust spacing as needed */
-}
-
-#certified-label{
-    display: block; /* Ensure the label takes up the full width */
-    margin-bottom: 30px; /* Adjust spacing as needed */
-
-}
-
-.radio-vertical label {
-    display: block; /* Ensure each label occupies its own line */
-    margin-bottom: 10px; /* Add space below each radio button */
-}
-
-.radio-vertical label:last-child {
-    margin-bottom: 40px; /* Adds extra space below the last label */
-}
-
-
-
-/* Responsive Adjustments for country */
-@media (max-width: 768px) {
-    .form-group select {
-        font-size: 14px; /* Slightly smaller font for tablets */
-        padding: 10px; /* Adjusted padding for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .form-group select {
-        font-size: 12px; /* Smaller font size for mobile screens */
-        padding: 8px; /* Compact padding for mobile screens */
-    }
-}
-
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    body {
-        padding: 10px;
-    }
-
-    .container {
-        padding: 45px;
-    }
-
-    h1, h2 {
-        font-size: 1.5rem;
-    }
-
-    input, textarea {
+      label {
+        display: block;
+        margin-bottom: 5px;
         font-size: 14px;
-    }
+        font-weight: bold;
+      }
 
-    button {
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: #222;
+        color: #fff;
+        transition: border-color 0.3s, background-color 0.3s;
+      }
+
+      input:hover,
+      textarea:hover {
+        border-color: #888;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #fff;
+        background-color: #333;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      }
+
+      /* Radio Buttons and Checkboxes */
+      input[type="radio"],
+      input[type="checkbox"] {
+        width: 20px; /* Adjust size for larger screens */
+        height: 20px;
+        margin-right: 10px; /* Space between input and label */
+        vertical-align: middle; /* Align with label text */
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      input[type="radio"]:hover,
+      input[type="checkbox"]:hover {
+        transform: scale(1.1); /* Slightly enlarge on hover */
+      }
+
+      .radio-group,
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap; /* Allow wrapping for smaller screens */
+        gap: 10px; /* Space between items */
+        align-items: center; /* Center-align inputs with labels */
+      }
+
+      .radio-group label,
+      .checkbox-group label {
+        font-size: 14px; /* Consistent text size */
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 20px 0;
+        border: none;
+        border-top: 1px solid #444;
+      }
+
+      button,
+      .submit,
+      .redirect-button {
+        padding: 12px;
+        background-color: #a7a5a5;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      button:hover,
+      .submit:hover,
+      .redirect-button:hover {
+        background-color: #ebebeb;
+        transform: translateY(-2px);
+      }
+
+      button:active,
+      .submit:active,
+      .redirect-button:active {
+        background-color: #ebebeb;
+        transform: translateY(1px);
+      }
+
+      .acknowledgment {
         font-size: 14px;
-        padding: 10px;
-    }
+        margin-bottom: 10px;
+        color: #bbb;
+        line-height: 1.5;
+        text-align: justify;
+      }
 
-    .acknowledgment {
-        font-size: 12px;
-    }
-}
+      /* Add spacing between form groups */
+      .form-group {
+        margin-bottom: 20px; /* Adjust this value as needed */
+      }
 
-@media (max-width: 480px) {
-    h1, h2 {
-        font-size: 1.2rem;
-    }
+      /* If you want to specifically target Official Website and Country */
+      #official-website {
+        margin-bottom: 40px; /* Adds space below the Official Website input field */
+      }
 
-    input, textarea {
-        font-size: 12px;
-        padding: 8px;
-    }
+      /* Optionally, add margin to Country for clarity */
+      #country {
+        margin-top: 20px; /* Adds space above the Country field */
+      }
 
-    button {
-        font-size: 12px;
-        padding: 8px;
-    }
+      /* Country Section Styles */
+      .form-group {
+        margin-bottom: 20px; /* Ensures consistent spacing between form fields */
+      }
 
-    .acknowledgment {
-        font-size: 11px;
-    }
-}
-/* Radio responsive */
+      .form-group select {
+        width: 100%; /* Full-width dropdown for better usability */
+        padding: 12px; /* Adds comfortable padding */
+        border: 1px solid #444; /* Border to match the design */
+        border-radius: 4px; /* Rounded edges */
+        background-color: #222; /* Background color matching the form */
+        color: #fff; /* White text for readability */
+        font-size: 16px; /* Adequate font size */
+        transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth hover effects */
+      }
 
-@media (max-width: 768px) {
-    input[type="radio"],
-    input[type="checkbox"] {
-        width: 18px; /* Adjust size for medium screens */
-        height: 18px;
-    }
+      /*Collaboration label space for radio button*/
+      #collaboration-label {
+        display: block; /* Ensure the label takes up the full width */
+        margin-bottom: 30px; /* Adjust spacing as needed */
+      }
 
-    .radio-group label,
-    .checkbox-group label {
-        font-size: 13px; /* Adjust text size for medium screens */
-    }
-}
+      #business-label {
+        display: block; /* Ensure the label takes up the full width */
+        margin-bottom: 30px; /* Adjust spacing as needed */
+      }
 
-@media (max-width: 480px) {
-    input[type="radio"],
-    input[type="checkbox"] {
-        width: 16px; /* Smaller size for smaller screens */
-        height: 16px;
-    }
+      #organization-label {
+        display: block; /* Ensure the label takes up the full width */
+        margin-bottom: 30px; /* Adjust spacing as needed */
+      }
 
-    .radio-group label,
-    .checkbox-group label {
-        font-size: 12px; /* Smaller text size for smaller screens */
-    }
-}
+      #certified-label {
+        display: block; /* Ensure the label takes up the full width */
+        margin-bottom: 30px; /* Adjust spacing as needed */
+      }
 
-        
+      .radio-vertical label {
+        display: block; /* Ensure each label occupies its own line */
+        margin-bottom: 10px; /* Add space below each radio button */
+      }
+
+      .radio-vertical label:last-child {
+        margin-bottom: 40px; /* Adds extra space below the last label */
+      }
+
+      /* Responsive Adjustments for country */
+      @media (max-width: 768px) {
+        .form-group select {
+          font-size: 14px; /* Slightly smaller font for tablets */
+          padding: 10px; /* Adjusted padding for smaller screens */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .form-group select {
+          font-size: 12px; /* Smaller font size for mobile screens */
+          padding: 8px; /* Compact padding for mobile screens */
+        }
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          padding: 45px;
+        }
+
+        h1,
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        input,
+        textarea {
+          font-size: 14px;
+        }
+
+        button {
+          font-size: 14px;
+          padding: 10px;
+        }
+
+        .acknowledgment {
+          font-size: 12px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1,
+        h2 {
+          font-size: 1.2rem;
+        }
+
+        input,
+        textarea {
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        button {
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        .acknowledgment {
+          font-size: 11px;
+        }
+      }
+      /* Radio responsive */
+
+      @media (max-width: 768px) {
+        input[type="radio"],
+        input[type="checkbox"] {
+          width: 18px; /* Adjust size for medium screens */
+          height: 18px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+          font-size: 13px; /* Adjust text size for medium screens */
+        }
+      }
+
+      @media (max-width: 480px) {
+        input[type="radio"],
+        input[type="checkbox"] {
+          width: 16px; /* Smaller size for smaller screens */
+          height: 16px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+          font-size: 12px; /* Smaller text size for smaller screens */
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <h1>Request Demo Form</h1>
-        <form id="demoForm">
-            <section class="company-overview">
-                <h2>ENTITY OVERVIEW</h2>
-                <hr />
-                <div class="form-group">
-                    <label for="fullName">Entity Full Name <span style="color: red;">*</span></label>
-                    <input type="text" id="fullName" name="fullName" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Entity Email Address <span style="color: red;">*</span></label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Entity Phone Number <span style="color: red;">*</span></label>
-                    <input type="tel" id="phone" name="phone" required>
-                </div>
-                <div class="form-group">
-                    <label for="companyName">Entity Legal Name <span style="color: red;">*</span></label>
-                    <input type="text" id="companyName" name="companyName" required />
-                </div>
-                <div class="form-group">
-                    <label for="companyAddress">Entity Address <span style="color: red;">*</span></label>
-                    <input type="text" id="companyAddress" name="companyAddress" required />
-                </div>
-                <div class="form-group">
-                    <label for="officialWebsite">Official Website <span style="color: red;">*</span></label>
-                    <input type="text" id="officialWebsite" name="officialWebsite" required />
-                </div>
-                <div class="form-group">
-                    <label for="no-website">
-                        <input type="checkbox" id="no-website" name="no-website">
-                        No Official Website
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label for="country">Country <span style="color: red;">*</span></label>
-                    <select id="country" name="country" required>
-                        <option value="" disabled selected>Select a country</option>
-                        <option value="Afghanistan">Afghanistan</option>
-                        <option value="Albania">Albania</option>
-                        <option value="Algeria">Algeria</option>
-                        <option value="Andorra">Andorra</option>
-                        <option value="Angola">Angola</option>
-                        <option value="Antigua and Barbuda">Antigua and Barbuda</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Armenia">Armenia</option>
-                        <option value="Australia">Australia</option>
-                        <option value="Austria">Austria</option>
-                        <option value="Azerbaijan">Azerbaijan</option>
-                        <option value="Bahamas">Bahamas</option>
-                        <option value="Bahrain">Bahrain</option>
-                        <option value="Bangladesh">Bangladesh</option>
-                        <option value="Barbados">Barbados</option>
-                        <option value="Belarus">Belarus</option>
-                        <option value="Belgium">Belgium</option>
-                        <option value="Belize">Belize</option>
-                        <option value="Benin">Benin</option>
-                        <option value="Bhutan">Bhutan</option>
-                        <option value="Bolivia">Bolivia</option>
-                        <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
-                        <option value="Botswana">Botswana</option>
-                        <option value="Brazil">Brazil</option>
-                        <option value="Brunei">Brunei</option>
-                        <option value="Bulgaria">Bulgaria</option>
-                        <option value="Burkina Faso">Burkina Faso</option>
-                        <option value="Burundi">Burundi</option>
-                        <option value="Cabo Verde">Cabo Verde</option>
-                        <option value="Cambodia">Cambodia</option>
-                        <option value="Cameroon">Cameroon</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Central African Republic">Central African Republic</option>
-                        <option value="Chad">Chad</option>
-                        <option value="Chile">Chile</option>
-                        <option value="China">China</option>
-                        <option value="Colombia">Colombia</option>
-                        <option value="Comoros">Comoros</option>
-                        <option value="Congo (Congo-Brazzaville)">Congo (Congo-Brazzaville)</option>
-                        <option value="Costa Rica">Costa Rica</option>
-                        <option value="Croatia">Croatia</option>
-                        <option value="Cuba">Cuba</option>
-                        <option value="Cyprus">Cyprus</option>
-                        <option value="Czechia (Czech Republic)">Czechia (Czech Republic)</option>
-                        <option value="Denmark">Denmark</option>
-                        <option value="Djibouti">Djibouti</option>
-                        <option value="Dominica">Dominica</option>
-                        <option value="Dominican Republic">Dominican Republic</option>
-                        <option value="Ecuador">Ecuador</option>
-                        <option value="Egypt">Egypt</option>
-                        <option value="El Salvador">El Salvador</option>
-                        <option value="Equatorial Guinea">Equatorial Guinea</option>
-                        <option value="Eritrea">Eritrea</option>
-                        <option value="Estonia">Estonia</option>
-                        <option value="Eswatini (fmr. Swaziland)">Eswatini (fmr. Swaziland)</option>
-                        <option value="Ethiopia">Ethiopia</option>
-                        <option value="Fiji">Fiji</option>
-                        <option value="Finland">Finland</option>
-                        <option value="France">France</option>
-                        <option value="Gabon">Gabon</option>
-                        <option value="Gambia">Gambia</option>
-                        <option value="Georgia">Georgia</option>
-                        <option value="Germany">Germany</option>
-                        <option value="Ghana">Ghana</option>
-                        <option value="Greece">Greece</option>
-                        <option value="Grenada">Grenada</option>
-                        <option value="Guatemala">Guatemala</option>
-                        <option value="Guinea">Guinea</option>
-                        <option value="Guinea-Bissau">Guinea-Bissau</option>
-                        <option value="Guyana">Guyana</option>
-                        <option value="Haiti">Haiti</option>
-                        <option value="Holy See">Holy See</option>
-                        <option value="Honduras">Honduras</option>
-                        <option value="Hungary">Hungary</option>
-                        <option value="Iceland">Iceland</option>
-                        <option value="India">India</option>
-                        <option value="Indonesia">Indonesia</option>
-                        <option value="Iran">Iran</option>
-                        <option value="Iraq">Iraq</option>
-                        <option value="Ireland">Ireland</option>
-                        <option value="Israel">Israel</option>
-                        <option value="Italy">Italy</option>
-                        <option value="Jamaica">Jamaica</option>
-                        <option value="Japan">Japan</option>
-                        <option value="Jordan">Jordan</option>
-                        <option value="Kazakhstan">Kazakhstan</option>
-                        <option value="Kenya">Kenya</option>
-                        <option value="Kiribati">Kiribati</option>
-                        <option value="Korea (North)">Korea (North)</option>
-                        <option value="Korea (South)">Korea (South)</option>
-                        <option value="Kuwait">Kuwait</option>
-                        <option value="Kyrgyzstan">Kyrgyzstan</option>
-                        <option value="Laos">Laos</option>
-                        <option value="Latvia">Latvia</option>
-                        <option value="Lebanon">Lebanon</option>
-                        <option value="Lesotho">Lesotho</option>
-                        <option value="Liberia">Liberia</option>
-                        <option value="Libya">Libya</option>
-                        <option value="Liechtenstein">Liechtenstein</option>
-                        <option value="Lithuania">Lithuania</option>
-                        <option value="Luxembourg">Luxembourg</option>
-                        <option value="Madagascar">Madagascar</option>
-                        <option value="Malawi">Malawi</option>
-                        <option value="Malaysia">Malaysia</option>
-                        <option value="Maldives">Maldives</option>
-                        <option value="Mali">Mali</option>
-                        <option value="Malta">Malta</option>
-                        <option value="Marshall Islands">Marshall Islands</option>
-                        <option value="Mauritania">Mauritania</option>
-                        <option value="Mauritius">Mauritius</option>
-                        <option value="Mexico">Mexico</option>
-                        <option value="Micronesia">Micronesia</option>
-                        <option value="Moldova">Moldova</option>
-                        <option value="Monaco">Monaco</option>
-                        <option value="Mongolia">Mongolia</option>
-                        <option value="Montenegro">Montenegro</option>
-                        <option value="Morocco">Morocco</option>
-                        <option value="Mozambique">Mozambique</option>
-                        <option value="Myanmar (formerly Burma)">Myanmar (formerly Burma)</option>
-                        <option value="Namibia">Namibia</option>
-                        <option value="Nauru">Nauru</option>
-                        <option value="Nepal">Nepal</option>
-                        <option value="Netherlands">Netherlands</option>
-                        <option value="New Zealand">New Zealand</option>
-                        <option value="Nicaragua">Nicaragua</option>
-                        <option value="Niger">Niger</option>
-                        <option value="Nigeria">Nigeria</option>
-                        <option value="North Macedonia">North Macedonia</option>
-                        <option value="Norway">Norway</option>
-                        <option value="Oman">Oman</option>
-                        <option value="Pakistan">Pakistan</option>
-                        <option value="Palau">Palau</option>
-                        <option value="Palestine State">Palestine State</option>
-                        <option value="Panama">Panama</option>
-                        <option value="Papua New Guinea">Papua New Guinea</option>
-                        <option value="Paraguay">Paraguay</option>
-                        <option value="Peru">Peru</option>
-                        <option value="Philippines">Philippines</option>
-                        <option value="Poland">Poland</option>
-                        <option value="Portugal">Portugal</option>
-                        <option value="Qatar">Qatar</option>
-                        <option value="Romania">Romania</option>
-                        <option value="Russia">Russia</option>
-                        <option value="Rwanda">Rwanda</option>
-                        <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
-                        <option value="Saint Lucia">Saint Lucia</option>
-                        <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
-                        <option value="Samoa">Samoa</option>
-                        <option value="San Marino">San Marino</option>
-                        <option value="Sao Tome and Principe">Sao Tome and Principe</option>
-                        <option value="Saudi Arabia">Saudi Arabia</option>
-                        <option value="Senegal">Senegal</option>
-                        <option value="Serbia">Serbia</option>
-                        <option value="Seychelles">Seychelles</option>
-                        <option value="Sierra Leone">Sierra Leone</option>
-                        <option value="Singapore">Singapore</option>
-                        <option value="Slovakia">Slovakia</option>
-                        <option value="Slovenia">Slovenia</option>
-                        <option value="Solomon Islands">Solomon Islands</option>
-                        <option value="Somalia">Somalia</option>
-                        <option value="South Africa">South Africa</option>
-                        <option value="South Sudan">South Sudan</option>
-                        <option value="Spain">Spain</option>
-                        <option value="Sri Lanka">Sri Lanka</option>
-                        <option value="Sudan">Sudan</option>
-                        <option value="Suriname">Suriname</option>
-                        <option value="Sweden">Sweden</option>
-                        <option value="Switzerland">Switzerland</option>
-                        <option value="Syria">Syria</option>
-                        <option value="Tajikistan">Tajikistan</option>
-                        <option value="Tanzania">Tanzania</option>
-                        <option value="Thailand">Thailand</option>
-                        <option value="Timor-Leste">Timor-Leste</option>
-                        <option value="Togo">Togo</option>
-                        <option value="Tonga">Tonga</option>
-                        <option value="Trinidad and Tobago">Trinidad and Tobago</option>
-                        <option value="Tunisia">Tunisia</option>
-                        <option value="Turkey">Turkey</option>
-                        <option value="Turkmenistan">Turkmenistan</option>
-                        <option value="Tuvalu">Tuvalu</option>
-                        <option value="Uganda">Uganda</option>
-                        <option value="Ukraine">Ukraine</option>
-                        <option value="United Arab Emirates">United Arab Emirates</option>
-                        <option value="United Kingdom">United Kingdom</option>
-                        <option value="United States of America">United States of America</option>
-                        <option value="Uruguay">Uruguay</option>
-                        <option value="Uzbekistan">Uzbekistan</option>
-                        <option value="Vanuatu">Vanuatu</option>
-                        <option value="Vatican">Vatican</option>
-                        <option value="Venezuela">Venezuela</option>
-                        <option value="Vietnam">Vietnam</option>
-                        <option value="Yemen">Yemen</option>
-                        <option value="Zambia">Zambia</option>
-                        <option value="Zimbabwe">Zimbabwe</option>
-                    </select>
-                </div>
-                </section>
+      <h1>Request Demo Form</h1>
+      <form id="demoForm">
+        <section class="company-overview">
+          <h2>ENTITY OVERVIEW</h2>
+          <hr />
+          <div class="form-group">
+            <label for="fullName"
+              >Entity Full Name <span style="color: red">*</span></label
+            >
+            <input type="text" id="fullName" name="fullName" required />
+          </div>
+          <div class="form-group">
+            <label for="email"
+              >Entity Email Address <span style="color: red">*</span></label
+            >
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone"
+              >Entity Phone Number <span style="color: red">*</span></label
+            >
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="companyName"
+              >Entity Legal Name <span style="color: red">*</span></label
+            >
+            <input type="text" id="companyName" name="companyName" required />
+          </div>
+          <div class="form-group">
+            <label for="companyAddress"
+              >Entity Address <span style="color: red">*</span></label
+            >
+            <input
+              type="text"
+              id="companyAddress"
+              name="companyAddress"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="officialWebsite"
+              >Official Website <span style="color: red">*</span></label
+            >
+            <input
+              type="text"
+              id="officialWebsite"
+              name="officialWebsite"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="no-website">
+              <input type="checkbox" id="no-website" name="no-website" />
+              No Official Website
+            </label>
+          </div>
+          <div class="form-group">
+            <label for="country"
+              >Country <span style="color: red">*</span></label
+            >
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select a country</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+              <option value="Andorra">Andorra</option>
+              <option value="Angola">Angola</option>
+              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Armenia">Armenia</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Azerbaijan">Azerbaijan</option>
+              <option value="Bahamas">Bahamas</option>
+              <option value="Bahrain">Bahrain</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Barbados">Barbados</option>
+              <option value="Belarus">Belarus</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Belize">Belize</option>
+              <option value="Benin">Benin</option>
+              <option value="Bhutan">Bhutan</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Bosnia and Herzegovina">
+                Bosnia and Herzegovina
+              </option>
+              <option value="Botswana">Botswana</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Brunei">Brunei</option>
+              <option value="Bulgaria">Bulgaria</option>
+              <option value="Burkina Faso">Burkina Faso</option>
+              <option value="Burundi">Burundi</option>
+              <option value="Cabo Verde">Cabo Verde</option>
+              <option value="Cambodia">Cambodia</option>
+              <option value="Cameroon">Cameroon</option>
+              <option value="Canada">Canada</option>
+              <option value="Central African Republic">
+                Central African Republic
+              </option>
+              <option value="Chad">Chad</option>
+              <option value="Chile">Chile</option>
+              <option value="China">China</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Comoros">Comoros</option>
+              <option value="Congo (Congo-Brazzaville)">
+                Congo (Congo-Brazzaville)
+              </option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="Croatia">Croatia</option>
+              <option value="Cuba">Cuba</option>
+              <option value="Cyprus">Cyprus</option>
+              <option value="Czechia (Czech Republic)">
+                Czechia (Czech Republic)
+              </option>
+              <option value="Denmark">Denmark</option>
+              <option value="Djibouti">Djibouti</option>
+              <option value="Dominica">Dominica</option>
+              <option value="Dominican Republic">Dominican Republic</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Egypt">Egypt</option>
+              <option value="El Salvador">El Salvador</option>
+              <option value="Equatorial Guinea">Equatorial Guinea</option>
+              <option value="Eritrea">Eritrea</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Eswatini (fmr. Swaziland)">
+                Eswatini (fmr. Swaziland)
+              </option>
+              <option value="Ethiopia">Ethiopia</option>
+              <option value="Fiji">Fiji</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Gabon">Gabon</option>
+              <option value="Gambia">Gambia</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Germany">Germany</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Greece">Greece</option>
+              <option value="Grenada">Grenada</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Guinea">Guinea</option>
+              <option value="Guinea-Bissau">Guinea-Bissau</option>
+              <option value="Guyana">Guyana</option>
+              <option value="Haiti">Haiti</option>
+              <option value="Holy See">Holy See</option>
+              <option value="Honduras">Honduras</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Iceland">Iceland</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Iran">Iran</option>
+              <option value="Iraq">Iraq</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Israel">Israel</option>
+              <option value="Italy">Italy</option>
+              <option value="Jamaica">Jamaica</option>
+              <option value="Japan">Japan</option>
+              <option value="Jordan">Jordan</option>
+              <option value="Kazakhstan">Kazakhstan</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Kiribati">Kiribati</option>
+              <option value="Korea (North)">Korea (North)</option>
+              <option value="Korea (South)">Korea (South)</option>
+              <option value="Kuwait">Kuwait</option>
+              <option value="Kyrgyzstan">Kyrgyzstan</option>
+              <option value="Laos">Laos</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lebanon">Lebanon</option>
+              <option value="Lesotho">Lesotho</option>
+              <option value="Liberia">Liberia</option>
+              <option value="Libya">Libya</option>
+              <option value="Liechtenstein">Liechtenstein</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Luxembourg">Luxembourg</option>
+              <option value="Madagascar">Madagascar</option>
+              <option value="Malawi">Malawi</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Mali">Mali</option>
+              <option value="Malta">Malta</option>
+              <option value="Marshall Islands">Marshall Islands</option>
+              <option value="Mauritania">Mauritania</option>
+              <option value="Mauritius">Mauritius</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Micronesia">Micronesia</option>
+              <option value="Moldova">Moldova</option>
+              <option value="Monaco">Monaco</option>
+              <option value="Mongolia">Mongolia</option>
+              <option value="Montenegro">Montenegro</option>
+              <option value="Morocco">Morocco</option>
+              <option value="Mozambique">Mozambique</option>
+              <option value="Myanmar (formerly Burma)">
+                Myanmar (formerly Burma)
+              </option>
+              <option value="Namibia">Namibia</option>
+              <option value="Nauru">Nauru</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Niger">Niger</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="North Macedonia">North Macedonia</option>
+              <option value="Norway">Norway</option>
+              <option value="Oman">Oman</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Palau">Palau</option>
+              <option value="Palestine State">Palestine State</option>
+              <option value="Panama">Panama</option>
+              <option value="Papua New Guinea">Papua New Guinea</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Peru">Peru</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Qatar">Qatar</option>
+              <option value="Romania">Romania</option>
+              <option value="Russia">Russia</option>
+              <option value="Rwanda">Rwanda</option>
+              <option value="Saint Kitts and Nevis">
+                Saint Kitts and Nevis
+              </option>
+              <option value="Saint Lucia">Saint Lucia</option>
+              <option value="Saint Vincent and the Grenadines">
+                Saint Vincent and the Grenadines
+              </option>
+              <option value="Samoa">Samoa</option>
+              <option value="San Marino">San Marino</option>
+              <option value="Sao Tome and Principe">
+                Sao Tome and Principe
+              </option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Senegal">Senegal</option>
+              <option value="Serbia">Serbia</option>
+              <option value="Seychelles">Seychelles</option>
+              <option value="Sierra Leone">Sierra Leone</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Slovakia">Slovakia</option>
+              <option value="Slovenia">Slovenia</option>
+              <option value="Solomon Islands">Solomon Islands</option>
+              <option value="Somalia">Somalia</option>
+              <option value="South Africa">South Africa</option>
+              <option value="South Sudan">South Sudan</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Sudan">Sudan</option>
+              <option value="Suriname">Suriname</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Syria">Syria</option>
+              <option value="Tajikistan">Tajikistan</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Timor-Leste">Timor-Leste</option>
+              <option value="Togo">Togo</option>
+              <option value="Tonga">Tonga</option>
+              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+              <option value="Tunisia">Tunisia</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Turkmenistan">Turkmenistan</option>
+              <option value="Tuvalu">Tuvalu</option>
+              <option value="Uganda">Uganda</option>
+              <option value="Ukraine">Ukraine</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States of America">
+                United States of America
+              </option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Uzbekistan">Uzbekistan</option>
+              <option value="Vanuatu">Vanuatu</option>
+              <option value="Vatican">Vatican</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Yemen">Yemen</option>
+              <option value="Zambia">Zambia</option>
+              <option value="Zimbabwe">Zimbabwe</option>
+            </select>
+          </div>
+        </section>
 
-            <section class="collaboration">
-                <h2>COLLABORATION</h2>
-                <hr />
-                <div class="form-group">
-                    <label id="collaboration-label">Are you interested in collaboration? <span style="color: red;">*</span></label>
-                    <div class="radio-vertical">
-                        <label><input type="radio" name="collaboration" value="yes" required> YES</label>
-                        <label><input type="radio" name="collaboration" value="no" required> NO</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label id="business-label">Is your organization a small business? <span style="color: red;">*</span></label>
-                    <div class="radio-vertical">
-                        <label><input type="radio" name="smallBusiness" value="yes" required> YES</label>
-                        <label><input type="radio" name="smallBusiness" value="no" required> NO</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label id="organization-label">
-                        Is your organization a Historically Black College or University, or a Minority Serving Institution? <span style="color: red;">*</span>
-                    </label>
-                    <div class="radio-vertical">
-                        <label><input type="radio" name="hbcus" value="yes" required> YES</label>
-                        <label><input type="radio" name="hbcus" value="no" required> NO</label>
-                    </div>
-                </div>
-            </section>
+        <section class="collaboration">
+          <h2>COLLABORATION</h2>
+          <hr />
+          <div class="form-group">
+            <label id="collaboration-label"
+              >Are you interested in collaboration?
+              <span style="color: red">*</span></label
+            >
+            <div class="radio-vertical">
+              <label
+                ><input
+                  type="radio"
+                  name="collaboration"
+                  value="yes"
+                  required
+                />
+                YES</label
+              >
+              <label
+                ><input type="radio" name="collaboration" value="no" required />
+                NO</label
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label id="business-label"
+              >Is your organization a small business?
+              <span style="color: red">*</span></label
+            >
+            <div class="radio-vertical">
+              <label
+                ><input
+                  type="radio"
+                  name="smallBusiness"
+                  value="yes"
+                  required
+                />
+                YES</label
+              >
+              <label
+                ><input type="radio" name="smallBusiness" value="no" required />
+                NO</label
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label id="organization-label">
+              Is your organization a Historically Black College or University,
+              or a Minority Serving Institution?
+              <span style="color: red">*</span>
+            </label>
+            <div class="radio-vertical">
+              <label
+                ><input type="radio" name="hbcus" value="yes" required />
+                YES</label
+              >
+              <label
+                ><input type="radio" name="hbcus" value="no" required />
+                NO</label
+              >
+            </div>
+          </div>
+        </section>
 
-            <section class="certifications">
-                <h2>CERTIFICATIONS AND CAPABILITIES</h2>
-                <hr />
-                <div class="form-group">
-                    <label>Is your organization ISO-9001 Certified? <span style="color: red;">*</span></label>
-                    <div class="radio-vertical">
-                        <label><input type="radio" name="isoCertified" value="yes" required> YES</label>
-                        <label><input type="radio" name="isoCertified" value="no" required> NO</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Is your organization AS-9100 Certified? <span style="color: red;">*</span></label>
-                    <div class="radio-vertical">
-                        <label><input type="radio" name="asCertified" value="yes" required> YES</label>
-                        <label><input type="radio" name="asCertified" value="no" required> NO</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label>Do you know your organization's NAICS codes? <span style="color: red;">*</span></label>
-                    <div class="radio-vertical">
-                        <label><input type="radio" name="naicsCodes" value="yes" required> YES</label>
-                        <label><input type="radio" name="naicsCodes" value="no" required> NO</label>
-                    </div>
-                </div>
-            </section>
+        <section class="certifications">
+          <h2>CERTIFICATIONS AND CAPABILITIES</h2>
+          <hr />
+          <div class="form-group">
+            <label
+              >Is your organization ISO-9001 Certified?
+              <span style="color: red">*</span></label
+            >
+            <div class="radio-vertical">
+              <label
+                ><input type="radio" name="isoCertified" value="yes" required />
+                YES</label
+              >
+              <label
+                ><input type="radio" name="isoCertified" value="no" required />
+                NO</label
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label
+              >Is your organization AS-9100 Certified?
+              <span style="color: red">*</span></label
+            >
+            <div class="radio-vertical">
+              <label
+                ><input type="radio" name="asCertified" value="yes" required />
+                YES</label
+              >
+              <label
+                ><input type="radio" name="asCertified" value="no" required />
+                NO</label
+              >
+            </div>
+          </div>
+          <div class="form-group">
+            <label
+              >Do you know your organization's NAICS codes?
+              <span style="color: red">*</span></label
+            >
+            <div class="radio-vertical">
+              <label
+                ><input type="radio" name="naicsCodes" value="yes" required />
+                YES</label
+              >
+              <label
+                ><input type="radio" name="naicsCodes" value="no" required />
+                NO</label
+              >
+            </div>
+          </div>
+        </section>
 
-            <section class="contact">
-                <h2>CONTACT INFORMATION</h2>
-                <hr />
-                <div class="form-group">
-                    <label for="jobTitle">Job Title <span style="color: red;">*</span></label>
-                    <input type="text" id="jobTitle" name="jobTitle" required>
-                </div>
-                <div class="form-group">
-                    <label for="firstName">First Name <span style="color: red;">*</span></label>
-                    <input type="text" id="firstName" name="firstName" required>
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name <span style="color: red;">*</span></label>
-                    <input type="text" id="lastName" name="lastName" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail <span style="color: red;">*</span></label>
-                    <input type="text" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number <span style="color: red;">*</span></label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber" required>
-                </div>
-                <hr>
-            </section>
+        <section class="contact">
+          <h2>CONTACT INFORMATION</h2>
+          <hr />
+          <div class="form-group">
+            <label for="jobTitle"
+              >Job Title <span style="color: red">*</span></label
+            >
+            <input type="text" id="jobTitle" name="jobTitle" required />
+          </div>
+          <div class="form-group">
+            <label for="firstName"
+              >First Name <span style="color: red">*</span></label
+            >
+            <input type="text" id="firstName" name="firstName" required />
+          </div>
+          <div class="form-group">
+            <label for="lastName"
+              >Last Name <span style="color: red">*</span></label
+            >
+            <input type="text" id="lastName" name="lastName" required />
+          </div>
+          <div class="form-group">
+            <label for="email">E-mail <span style="color: red">*</span></label>
+            <input type="text" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber"
+              >Phone Number <span style="color: red">*</span></label
+            >
+            <input type="tel" id="phoneNumber" name="phoneNumber" required />
+          </div>
+          <hr />
+        </section>
 
-            <section class="acknowledgment">
-                <h2>ACKNOWLEDGMENTS</h2>
-                <hr />
-                <div class="form-group acknowledgment">
-                    <p>
-                        By selecting "I CONFIRM", you acknowledge that you have reviewed and verified the accuracy of the information provided in this form. 
-                        <span style="color: red;">*</span>
-                    </p>
-                    <label><input type="checkbox" id="confirmAccuracy" name="confirmAccuracy" required> I Confirm</label>
-                </div>
-            </section>
+        <section class="acknowledgment">
+          <h2>ACKNOWLEDGMENTS</h2>
+          <hr />
+          <div class="form-group acknowledgment">
+            <p>
+              By selecting "I CONFIRM", you acknowledge that you have reviewed
+              and verified the accuracy of the information provided in this
+              form.
+              <span style="color: red">*</span>
+            </p>
+            <label
+              ><input
+                type="checkbox"
+                id="confirmAccuracy"
+                name="confirmAccuracy"
+                required
+              />
+              I Confirm</label
+            >
+          </div>
+        </section>
 
-            <button type="button" onclick="sendMail()">Send</button>
-        </form>
+        <button type="button" onclick="sendMail()">Send</button>
+      </form>
     </div>
 
     <script>
-function sendMail() {
-    // Initialize EmailJS
-    emailjs.init("PAYF9MT2F8MBrlojx"); // Replace with your EmailJS public key
+      function sendMail() {
+        // Initialize EmailJS
+        emailjs.init("PAYF9MT2F8MBrlojx"); // Replace with your EmailJS public key
 
-    const form = document.querySelector("#demoForm");
-    if (!form) {
-        console.error("Form with ID 'demoForm' not found");
-        return;
-    }
+        const form = document.querySelector("#demoForm");
+        if (!form) {
+          console.error("Form with ID 'demoForm' not found");
+          return;
+        }
 
-    const requiredFields = [
-        "#fullName",
-        "#email",
-        "#phone",
-        "#companyName",
-        "#companyAddress",
-        "#officialWebsite",
-        "#country",
-        "#jobTitle",
-        "#firstName",
-        "#lastName",
-        'input[name="collaboration"]:checked',
-        'input[name="smallBusiness"]:checked',
-        'input[name="hbcus"]:checked',
-        'input[name="isoCertified"]:checked',
-        'input[name="asCertified"]:checked',
-        'input[name="naicsCodes"]:checked',
-        "#confirmAccuracy"
-    ];
+        const requiredFields = [
+          "#fullName",
+          "#email",
+          "#phone",
+          "#companyName",
+          "#companyAddress",
+          "#officialWebsite",
+          "#country",
+          "#jobTitle",
+          "#firstName",
+          "#lastName",
+          'input[name="collaboration"]:checked',
+          'input[name="smallBusiness"]:checked',
+          'input[name="hbcus"]:checked',
+          'input[name="isoCertified"]:checked',
+          'input[name="asCertified"]:checked',
+          'input[name="naicsCodes"]:checked',
+          "#confirmAccuracy",
+        ];
 
-    for (let selector of requiredFields) {
-        const element = document.querySelector(selector);
+        for (let selector of requiredFields) {
+          const element = document.querySelector(selector);
 
-        // If required field is missing or empty
-        if (!element || (element.tagName === "INPUT" && !element.value.trim())) {
-            alert(`Please fill out the ${selector.replace("#", "").replaceAll("-", " ")}`);
+          // If required field is missing or empty
+          if (
+            !element ||
+            (element.tagName === "INPUT" && !element.value.trim())
+          ) {
+            alert(
+              `Please fill out the ${selector
+                .replace("#", "")
+                .replaceAll("-", " ")}`
+            );
             element?.focus(); // Focus on the problematic field (if it exists)
             return; // Stop execution here
+          }
         }
-    }
 
-    // Prepare email parameters
-    const params = {
-        sendername: document.querySelector("#fullName").value.trim(),
-        reply_to: document.querySelector("#email").value.trim(),
-        message: `
-            Entity Full Name: ${document.querySelector("#fullName").value.trim()}
-            Entity Email Address: ${document.querySelector("#email").value.trim()}
-            Entity Phone Number: ${document.querySelector("#phone").value.trim()}
-            Entity Legal Name: ${document.querySelector("#companyName").value.trim()}
-            Entity Address: ${document.querySelector("#companyAddress").value.trim()}
-            Official Website: ${document.querySelector("#officialWebsite").value.trim()}
-            Country: ${document.querySelector("#country").value.trim()}
-            Job Title: ${document.querySelector("#jobTitle").value.trim()}
-            First Name: ${document.querySelector("#firstName").value.trim()}
-            Last Name: ${document.querySelector("#lastName").value.trim()}
-            Collaboration: ${document.querySelector('input[name="collaboration"]:checked').value}
-            Small Business: ${document.querySelector('input[name="smallBusiness"]:checked').value}
-            HBCU: ${document.querySelector('input[name="hbcus"]:checked').value}
-            ISO Certified: ${document.querySelector('input[name="isoCertified"]:checked').value}
-            AS Certified: ${document.querySelector('input[name="asCertified"]:checked').value}
-            NAICS Codes: ${document.querySelector('input[name="naicsCodes"]:checked').value}
-        `
-    };
+        // Prepare email parameters
+        const params = {
+          sendername: document.querySelector("#fullName").value.trim(),
+          reply_to: document.querySelector("#email").value.trim(),
+          message: `
+                  Entity Full Name: ${document
+                    .querySelector("#fullName")
+                    .value.trim()}
+                  Entity Email Address: ${document
+                    .querySelector("#email")
+                    .value.trim()}
+                  Entity Phone Number: ${document
+                    .querySelector("#phone")
+                    .value.trim()}
+                  Entity Legal Name: ${document
+                    .querySelector("#companyName")
+                    .value.trim()}
+                  Entity Address: ${document
+                    .querySelector("#companyAddress")
+                    .value.trim()}
+                  Official Website: ${document
+                    .querySelector("#officialWebsite")
+                    .value.trim()}
+                  Country: ${document.querySelector("#country").value.trim()}
+                  Job Title: ${document.querySelector("#jobTitle").value.trim()}
+                  First Name: ${document
+                    .querySelector("#firstName")
+                    .value.trim()}
+                  Last Name: ${document.querySelector("#lastName").value.trim()}
+                  Collaboration: ${
+                    document.querySelector(
+                      'input[name="collaboration"]:checked'
+                    ).value
+                  }
+                  Small Business: ${
+                    document.querySelector(
+                      'input[name="smallBusiness"]:checked'
+                    ).value
+                  }
+                  HBCU: ${
+                    document.querySelector('input[name="hbcus"]:checked').value
+                  }
+                  ISO Certified: ${
+                    document.querySelector('input[name="isoCertified"]:checked')
+                      .value
+                  }
+                  AS Certified: ${
+                    document.querySelector('input[name="asCertified"]:checked')
+                      .value
+                  }
+                  NAICS Codes: ${
+                    document.querySelector('input[name="naicsCodes"]:checked')
+                      .value
+                  }
+              `,
+        };
 
-    const serviceID = "service_qufwwvn"; // Replace with your actual service ID
-    const receiverTemplateID = "template_12ke24d";
-    const senderTemplateID = "template_gwrqaqm";
+        const serviceID = "service_qufwwvn"; // Replace with your actual service ID
+        const receiverTemplateID = "template_12ke24d";
+        const senderTemplateID = "template_gwrqaqm";
 
-    // Email to Receiver
-    emailjs
-        .send(serviceID, receiverTemplateID, {
+        // Email to Receiver
+        emailjs
+          .send(serviceID, receiverTemplateID, {
             to: "admin@accountableinfrastructure.com",
             from_name: params.sendername,
             reply_to: params.reply_to,
-            message: params.message
-        })
-        .then(() => {
+            message: params.message,
+          })
+          .then(() => {
             console.log("Email sent to receiver!");
-        })
-        .catch(err => {
+          })
+          .catch((err) => {
             console.error("Failed to send email to receiver:", err);
-        });
+          });
 
-    // Email to Sender (Confirmation)
-    emailjs
-        .send(serviceID, senderTemplateID, {
+        // Email to Sender (Confirmation)
+        emailjs
+          .send(serviceID, senderTemplateID, {
             to: params.reply_to,
             from_name: "Internet of Bodies Team",
             sendername: params.sendername,
-            message: params.message
-        })
-        .then(() => {
-            alert("Confirmation email sent successfully!");
+            message: params.message,
+          })
+          .then(() => {
+            alert("Your request has been sent.");
             form.reset(); // Clear the form after submission
-        })
-        .catch(err => {
+          })
+          .catch((err) => {
             console.error("Failed to send confirmation email to sender:", err);
-        });
-}
-
-   </script>
-</body>
+          });
+      }
+    </script>
+  </body>
 </html>
