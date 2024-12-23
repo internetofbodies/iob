@@ -24,387 +24,379 @@
       referrerpolicy="no-referrer"
     />
     <style>
-            body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            padding: 10px;
-            box-sizing: border-box;
-            }
-            #map {
-            height: 50vh;
-            width: 100%;
-            max-width: 1200px;
-            margin-bottom: 20px;
-            border: 2px solid black; /* Black border for key elements */
-            box-sizing: border-box; /
-            }
-            .info-popup {
-            font-size: 14px;
-            }
-            .info-popup strong {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 16px;
-            }
-            .custom-icon {
-            background-color: transparent;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: black;
-            font-weight: bold;
-            font-size: 24px;
-            }
-            .h1 {
-            align-items: center;
-            }
+      body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      box-sizing: border-box;
+      }
+      #map {
+      height: 50vh;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 20px;
+      border: 2px solid black; /* Black border for key elements */
+      box-sizing: border-box; /
+      }
+      .info-popup {
+      font-size: 14px;
+      }
+      .info-popup strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      }
+      .custom-icon {
+      background-color: transparent;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      font-weight: bold;
+      font-size: 24px;
+      }
+      .h1 {
+      align-items: center;
+      }
 
-            /* Mobile Menu Bar */
+      /* Mobile Menu Bar */
 
-            li {
-            list-style: none;
-            }
+      li {
+      list-style: none;
+      }
 
-            a {
-            text-decoration: none;
-            color: #000; /* Changed to black */
-            font-size: 1rem;
-            }
+      a {
+      text-decoration: none;
+      color: #000; /* Changed to black */
+      font-size: 1rem;
+      }
 
-            a:hover {
-            color: #555; /* Changed to a lighter black (gray) */
-            }
+      a:hover {
+      color: #555; /* Changed to a lighter black (gray) */
+      }
 
-            /* HEADER */
-            header {
-            position: relative;
-            padding: 0 2rem;
-            }
+      /* HEADER */
+      header {
+      position: relative;
+      padding: 0 2rem;
+      }
 
-            .navbar {
-            width: 100%;
-            height: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            }
+      .navbar {
+      width: 100%;
+      height: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      }
 
-            .navbar .logo a {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #000; /* Changed to black */
-            }
+      .navbar .logo a {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #000; /* Changed to black */
+      }
 
-            .navbar .links {
-            display: flex;
-            gap: 2rem;
-            }
+      .navbar .links {
+      display: flex;
+      gap: 2rem;
+      }
 
-            .navbar .toggle_btn {
-            color: #000; /* Changed to black */
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: none;
-            }
+      .navbar .toggle_btn {
+      color: #000; /* Changed to black */
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      }
 
-            .action_btn {
-            background-color: #000000; /* Changed to black */
-            color: #ffffff; /* Kept white text for contrast */
-            padding: 0.5rem 1rem;
-            border: none;
-            outline: none;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: scale 0.2 ease;
-            }
+      .action_btn {
+      background-color: #000000; /* Changed to black */
+      color: #ffffff; /* Kept white text for contrast */
+      padding: 0.5rem 1rem;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: scale 0.2 ease;
+      }
 
-            .action_btn:hover {
-            scale: 1.05;
-            color: #000000; /* Kept white text */
-            }
+      .action_btn:hover {
+      scale: 1.05;
+      color: #000000; /* Kept white text */
+      }
 
-            .action_btn:active {
-            scale: 0.95;
-            }
+      .action_btn:active {
+      scale: 0.95;
+      }
 
-            a.action_btn{
-            background-color: #000000; /* Changed to black */
-            color: #ffffff !important; /* Kept white text for contrast */
-            padding: 0.5rem 1rem;
-            border: none;
-            outline: none;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: scale 0.2 ease;
-            }
+      a.action_btn{
+      background-color: #000000; /* Changed to black */
+      color: #ffffff !important; /* Kept white text for contrast */
+      padding: 0.5rem 1rem;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: scale 0.2 ease;
+      }
 
 
-            .logo img {
-            height: 50px;
-            width: auto;
-            display: block;
-            }
+      .logo img {
+      height: 50px;
+      width: auto;
+      display: block;
+      }
 
-            /* RESPONSIVE DESIGN */
-            @media (max-width: 992px) {
-            .navbar .links,
-            .navbar .action_btn {
-            display: none;
-            }
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+      .navbar .links,
+      .navbar .action_btn {
+      display: none;
+      }
 
-            .navbar .toggle_btn {
-            display: block;
-            }
+      .navbar .toggle_btn {
+      display: block;
+      }
 
-            .dropdown_menu {
-            display: block;
-            }
-            }
-
-            @media (max-width: 576px) {
-            .dropdown_menu {
-            left: 2rem;
-            width: unset;
-            }
-            }
-            /* Mega Menu Container */
-            .mega-menu-container {
-            position: relative; /* Required for absolute positioning of the mega menu */
-            }
-
-            /* Mega Menu Link */
-            .mega-menu-link {
-            position: relative;
-            color: #000; /* Black text */
-            font-weight: normal;
-            transition: color 0.3s ease;
-            }
-
-            .mega-menu-link:hover {
-            color: #555; /* Light gray on hover */
-            }
-
-            /* Mega Menu Content */
-            .mega-menu {
-            display: none; /* Hidden by default */
-            position: absolute;
-            top: 100%; /* Position below the parent link */
-            left: 0;
-            background-color: #fff; /* White background */
-            color: #000; /* Black text */
-            width: 200px; /* Adjust width as needed */
-            padding: 15px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border: 1px solid #000; /* Black border */
-            border-radius: 5px;
-            z-index: 1000;
-            }
-
-            .mega-menu-container:hover .mega-menu {
-            display: block; /* Show on hover */
-            }
-
-            .mega-menu h4 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #000; /* Black heading */
-            }
-
-            .mega-menu a {
-            display: block;
-            padding: 5px 0;
-            font-size: 1rem;
-            color: #000; /* Black links */
-            text-decoration: none;
-            transition: color 0.3s ease;
-            }
-
-            .mega-menu a:hover {
-            color: #555; /* Light gray on hover */
-            }
-           /* Dropdown Menu */
       .dropdown_menu {
-        display: none;
-        position: absolute;
-        top: 60px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 90%;
-        max-width: 400px;
-        background: rgba(255, 255, 255, 0.981);
-        backdrop-filter: blur(15px);
-        border: 1px solid black; /* Add black border */
-        border-radius: 10px;
-        z-index: 10000;
-        overflow-y: auto;
-        max-height: 90vh;
+      display: block;
+      }
+      }
+
+      @media (max-width: 576px) {
+      .dropdown_menu {
+      left: 2rem;
+      width: unset;
+      }
+      }
+      /* Mega Menu Container */
+      .mega-menu-container {
+      position: relative; /* Required for absolute positioning of the mega menu */
+      }
+
+      /* Mega Menu Link */
+      .mega-menu-link {
+      position: relative;
+      color: #000; /* Black text */
+      font-weight: normal;
+      transition: color 0.3s ease;
+      }
+
+      .mega-menu-link:hover {
+      color: #555; /* Light gray on hover */
+      }
+
+      /* Mega Menu Content */
+      .mega-menu {
+      display: none; /* Hidden by default */
+      position: absolute;
+      top: 100%; /* Position below the parent link */
+      left: 0;
+      background-color: #fff; /* White background */
+      color: #000; /* Black text */
+      width: 200px; /* Adjust width as needed */
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid #000; /* Black border */
+      border-radius: 5px;
+      z-index: 1000;
+      }
+
+      .mega-menu-container:hover .mega-menu {
+      display: block; /* Show on hover */
+      }
+
+      .mega-menu h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #000; /* Black heading */
+      }
+
+      .mega-menu a {
+      display: block;
+      padding: 5px 0;
+      font-size: 1rem;
+      color: #000; /* Black links */
+      text-decoration: none;
+      transition: color 0.3s ease;
+      }
+
+      .mega-menu a:hover {
+      color: #555; /* Light gray on hover */
+      }
+      /* Dropdown Menu */
+      .dropdown_menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.981);
+      backdrop-filter: blur(15px);
+      border: 1px solid black; /* Add black border */
+      border-radius: 10px;
+      z-index: 10000;
+      overflow-y: auto;
+      max-height: 90vh;
       }
 
       .dropdown_menu.open {
-        display: block;
+      display: block;
       }
 
       .dropdown_menu li {
-        text-align: center;
-        padding: 0.7rem;
+      text-align: center;
+      padding: 0.7rem;
       }
 
       .dropdown_menu li a {
-        color: #000;
-        text-decoration: none;
-        display: block;
+      color: #000;
+      text-decoration: none;
+      display: block;
       }
 
       .dropdown_menu li a:hover {
-        color: #000;
+      color: #000;
       }
 
       /* Centered Submenu with Transparent Background */
       .dropdown {
-        position: relative;
+      position: relative;
       }
 
       .dropdown__menu {
-        display: none;
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%); /* Center Submenu */
-        background: rgba(255, 255, 255, 0.981);
-        backdrop-filter: blur(15px);
-        border-radius: 5px;
-        margin-top: 0.5rem;
-        width: 90%; /* Responsive width */
-        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.981);
+      display: none;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%); /* Center Submenu */
+      background: rgba(255, 255, 255, 0.981);
+      backdrop-filter: blur(15px);
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      width: 90%; /* Responsive width */
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.981);
       }
 
       .dropdown.open .dropdown__menu {
-        display: block;
+      display: block;
       }
 
       .dropdown__menu li {
-        padding: 0.5rem 1rem;
-        text-align: center;
+      padding: 0.5rem 1rem;
+      text-align: center;
       }
 
       .dropdown__menu li a {
-        color: #000;
-        font-size: 14px;
-        text-decoration: none;
+      color: #000;
+      font-size: 14px;
+      text-decoration: none;
       }
 
       .dropdown__menu li a:hover {
-        background-color: rgba(0, 0, 0, 0.05);
-        color: #000;
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #000;
       }
 
       /* Responsive Fix */
       @media (max-width: 768px) {
-        .dropdown_menu {
-          width: 95%;
-          left: 50%;
-          transform: translateX(-50%);
-          border: 1px solid black; /* Ensure border remains for small screens */
-        }
-
-        .dropdown__menu {
-          width: 90%; /* Submenu stays within parent */
-        }
+      .dropdown_menu {
+      width: 95%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid black; /* Ensure border remains for small screens */
       }
 
-            /* Styling remains unchanged */
-            footer {
-            background-color: #f8f9fa;
-            padding: 20px 10px;
-            text-align: center;
-            font-size: 14px;
-            color: #333;
-            border-top: 1px solid #e7e7e7;
-            }
+      .dropdown__menu {
+      width: 90%; /* Submenu stays within parent */
+      }
+      }
 
-            .footer__links {
-            margin: 10px 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
-            }
+      .password-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000; /* Solid black */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      }
+      .password-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+      padding: 10px 0;
+      font-size: 1rem;
+      margin: 8px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      }
+      button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      }
 
-            .footer__links a {
-            text-decoration: none;
-            color: #007bff;
-            transition: color 0.3s ease;
-            }
+      button:hover {
+      background-color: #333;
+      }
+      /* Footer Make sure the HTML and body elements take full height */
+      html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      }
 
-            .footer__links a:hover {
-            color: #0056b3;
-            }
+      /*Footer Main content should grow to fill the space */
+      #main-content {
+      flex: 1; /* This allows the main content to take up remaining space */
+      width: 100%;
+      }
 
-            @media (max-width: 576px) {
-            footer {
-            font-size: 12px;
-            }
+      /* Footer styles */
+      footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: auto;
+      }
 
-            .footer__links {
-            flex-direction: column;
-            gap: 10px;
-            }
-            }
-
-            .password-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000; /* Solid black */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            }
-            .password-box {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            }
-            .password-box input {
-            padding: 10px 0;
-            font-size: 1rem;
-            margin: 8px 0;
-            width: 100%;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            }
-            button {
-            background-color: #000;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            }
-
-            button:hover {
-            background-color: #333;
-            }
+      @media (min-width: 768px) {
+      footer {
+      font-size: 16px;
+      }
+      }
     </style>
 
     <!--Nav bar-->
@@ -490,12 +482,9 @@
       </div>
       <h1>Internet of Bodies Map</h1>
       <div id="map"></div>
-
-      <!-- Footer Section -->
+      <!-- Footer -->
       <footer>
-        <div class="footer__bottom">
-          <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
-        </div>
+        <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
       </footer>
 
       <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
@@ -568,8 +557,8 @@
           },
         ];
 
-        // Initialize the map
-        const map = L.map("map").setView([37.7749, -122.4194], 5);
+        // Initialize the map with a temporary center
+        const map = L.map("map");
 
         // Add OpenStreetMap tiles
         L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -594,18 +583,18 @@
 
           // Add a popup with the person's details
           let popupContent = `
-<div class="info-popup">
-<strong>ID: ${person.id}</strong><br>
-<strong>${person.name}</strong><br>
-Age: ${person.age}<br>
-Address: ${person.address}<br>
-`;
+    <div class="info-popup">
+      <strong>ID: ${person.id}</strong><br>
+      <strong>${person.name}</strong><br>
+      Age: ${person.age}<br>
+      Address: ${person.address}<br>
+  `;
 
           if (person.healthData && person.financialData) {
             popupContent += `
-Health: <a href="${person.healthData}" target="_blank">Health Data</a><br>
-Financial: <a href="${person.financialData}" target="_blank">Financial Data</a>
-`;
+      Health: <a href="${person.healthData}" target="_blank">Health Data</a><br>
+      Financial: <a href="${person.financialData}" target="_blank">Financial Data</a>
+    `;
           }
 
           popupContent += `</div>`;
@@ -618,6 +607,11 @@ Financial: <a href="${person.financialData}" target="_blank">Financial Data</a>
 
         // Add the marker cluster group to the map
         map.addLayer(markers);
+
+        // Adjust the map's view to fit all markers
+        const allCoordinates = peopleData.map((person) => person.coordinates);
+        const bounds = L.latLngBounds(allCoordinates);
+        map.fitBounds(bounds);
       </script>
 
       <script>
