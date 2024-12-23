@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manager Access Portal</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #ece9e6, #ffffff);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 3vw;
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 5vw;
+        }
+      }
+
+      .search-bar {
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        padding: 20px;
+      }
+
+      .card {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        background-color: #f5f5f5;
+      }
+
+      .icon {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .card-description {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 15px;
+      }
+
+      .button {
+        text-decoration: none;
+        font-size: 14px;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #333;
+        border-radius: 20px;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #555;
+      }
+
+      @media (hover: none) {
+        .button:hover {
+          background-color: #333;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .button {
+          width: 80%;
+        }
+      }
+      .container {
+        flex: 1; /* Pushes the footer to the bottom */
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 768px) {
+        footer {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Manager Access Portal</h1>
+    <input type="text" class="search-bar" placeholder="Search..." />
+
+    <div class="container">
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <div class="card-title">Multi-Location Map</div>
+        <div class="card-description">
+          Explore multiple locations simultaneously.
+        </div>
+        <a href="https://internetofbodies.ai/mobiledemo.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <div class="card-title">Location Surveillance Map</div>
+        <div class="card-description">
+          Monitor areas with advanced surveillance.
+        </div>
+        <a href="https://internetofbodies.ai/location.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="card-title">Human Locator Map</div>
+        <div class="card-description">
+          Track and locate individuals efficiently.
+        </div>
+        <a href="https://internetofbodies.ai/humanlocation.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-paw"></i>
+        </div>
+        <div class="card-title">Animals Locator Map</div>
+        <div class="card-description">
+          Locate and monitor animals with precision.
+        </div>
+        <a
+          href="https://internetofbodies.ai/animalvaccination.html"
+          class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="card-title">Internet of Bodies Map</div>
+        <div class="card-description">
+          Access health and financial data visualizations.
+        </div>
+        <a href="https://internetofbodies.ai/iobmap.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-id-card"></i>
+        </div>
+        <div class="card-title">Live I.D Map</div>
+        <div class="card-description">
+          Get real-time identification details.
+        </div>
+        <a href="https://internetofbodies.ai/livegps.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <div class="card-title">WBAN Map</div>
+        <div class="card-description">
+          Visualize wireless body area network data.
+        </div>
+        <a href="wban.html" class="button">Visit</a>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <div class="card-title">Health Dashboard</div>
+        <div class="card-description">
+          Access and manage health data efficiently.
+        </div>
+        <a href="https://internetofbodies.ai/home.html" class="button">Visit</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
+  </body>
+</html>
