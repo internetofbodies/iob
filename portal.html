@@ -152,11 +152,27 @@
         font-size: 14px;
         width: 100%;
         box-sizing: border-box;
+        position: relative; /* Prevents overlap */
+      }
+
+      @media (min-width: 576px) {
+        footer {
+          font-size: 15px; /* Slightly larger font for small devices */
+          padding: 20px 30px; /* Adjust padding */
+        }
       }
 
       @media (min-width: 768px) {
         footer {
-          font-size: 16px;
+          font-size: 16px; /* Standard font size for tablets and larger */
+          padding: 20px 40px; /* Balanced padding for tablets */
+        }
+      }
+
+      @media (min-width: 1200px) {
+        footer {
+          font-size: 18px; /* Larger font for desktops and large screens */
+          padding: 25px 50px; /* Generous padding for larger screens */
         }
       }
     </style>
