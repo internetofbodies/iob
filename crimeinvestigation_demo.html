@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Government Criminal Investigation Organizations</title>
+
+    <!-- External Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+    />
+
+    <!-- Favicon -->
+    <link rel="icon" href="path/to/favicon.ico" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: white;
+        color: black;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        font-family: "Poppins", Arial, sans-serif;
+        font-size: 1.8em;
+        font-weight: 700;
+        color: #333;
+        margin-top: 100px; /* Adds more space above the <h1> */
+        text-align: center;
+        letter-spacing: 1px;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #ddd; /* Subtle border for professional look */
+      }
+
+      h2 {
+        margin-top: 30px;
+        font-size: 2.5em;
+        text-align: center;
+      }
+
+      .container {
+        margin: 50px auto;
+        width: 90%;
+        max-width: 800px;
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: column; /* Change to column for stacking buttons vertically */
+        align-items: center;
+        margin-top: 30px;
+      }
+
+      .button {
+        display: block;
+        margin: 10px;
+        padding: 15px 30px;
+        font-size: 1em;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+      }
+
+      .button:hover {
+        background-color: #333333;
+      }
+
+      #register-form,
+      #detect-form,
+      #video-surveillance,
+      #map-container {
+        display: none;
+        text-align: left;
+        margin: 50px auto;
+        width: 90%;
+        max-width: 800px;
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 20px;
+      }
+
+      #register-form h2,
+      #detect-form h2,
+      #video-surveillance h2 {
+        text-align: center;
+        font-size: 1.8em;
+      }
+
+      #register-form label,
+      #detect-form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-weight: bold;
+      }
+
+      #register-form input,
+      #detect-form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid black;
+        border-radius: 5px;
+        box-sizing: border-box;
+      }
+
+      .button,
+      #back-button {
+        display: block;
+        margin: 10px auto; /* Center buttons horizontally */
+        padding: 10px 20px; /* Ensure uniform padding */
+        font-size: 1em;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center; /* Align text inside the buttons */
+        width: 100%; /* Make the buttons the same width */
+        max-width: 300px; /* Set a consistent max width */
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover,
+      #back-button:hover {
+        background-color: #333333;
+      }
+
+      .details {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1em;
+        line-height: 1.5;
+        border-top: 1px solid black;
+        padding-top: 15px;
+      }
+
+      .image-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center; /* Ensure text is centered inside */
+        margin-bottom: 20px; /* Add spacing below the section */
+      }
+
+      .image-section img {
+        width: 150px;
+        height: 150px;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin-bottom: 10px;
+      }
+
+      .image-section button {
+        margin: 5px;
+        padding: 10px 20px;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      .image-section button:hover {
+        background-color: #333333;
+      }
+
+      #map {
+        height: 400px;
+        border-radius: 8px;
+        margin-top: 20px;
+      }
+      #map-container {
+        text-align: center;
+      }
+
+      #map-container .input-container {
+        display: flex;
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        gap: 10px; /* Add space between items */
+        margin-bottom: 20px; /* Add spacing below the input section */
+      }
+
+      #map-container input[type="text"] {
+        width: 80%; /* Make the input box consistent in width */
+        max-width: 300px; /* Set a max width for input */
+        padding: 10px; /* Add padding for better appearance */
+        border: 1px solid black; /* Keep borders uniform */
+        border-radius: 5px; /* Add rounded corners */
+      }
+
+      #map-container button {
+        width: 80%; /* Match the button width with the input */
+        max-width: 300px; /* Set a consistent max width */
+        padding: 10px; /* Add padding for better appearance */
+      }
+
+      video {
+        display: block;
+        margin: 20px auto;
+        width: 100%;
+        max-width: 600px;
+        border: 1px solid black;
+        border-radius: 8px;
+      }
+
+      input[type="text"] {
+        text-align: left; /* Align text to the left */
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 600px) {
+        body {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+
+        .button {
+          padding: 10px 20px;
+          font-size: 0.9em;
+        }
+
+        #register-form input,
+        #detect-form input {
+          padding: 8px;
+        }
+
+        video {
+          max-width: 100%;
+        }
+      }
+      /* Button in Upload Video, Searc location and Enter */
+      button {
+        display: block; /* Ensure the button behaves as a block-level element */
+        padding: 10px 20px;
+        font-size: 1em;
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 10px auto; /* Center horizontally and add vertical spacing */
+        text-align: center;
+        width: 100%; /* Uniform width for buttons */
+        max-width: 300px; /* Consistent max width */
+      }
+
+      button:hover {
+        background-color: #333333;
+      }
+      .card {
+        background-color: white;
+        border: 1px solid black;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        margin: 20px 0; /* Maglagay ng vertical spacing (top and bottom) */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      }
+
+      .card-icon {
+        font-size: 3em;
+        margin-bottom: 10px;
+        color: black;
+      }
+
+      .card-title {
+        font-size: 1.2em;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .card-description {
+        font-size: 0.9em;
+        color: #555;
+      }
+      footer {
+        margin-top: 50px;
+        background-color: #2f2f2f;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        font-size: 0.9em;
+        color: #cfcfcf;
+        border-top: 1px solid #ddd;
+      }
+      .password-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000; /* Solid black */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .password-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+        padding: 10px 0;
+        font-size: 1rem;
+        margin: 8px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="password-container" id="passwordContainer">
+      <div class="password-box">
+        <h2>Enter Password</h2>
+        <input type="password" id="pagePassword" placeholder="Enter password" />
+        <button onclick="validatePassword()">Submit</button>
+      </div>
+    </div>
+    <h1>Government Criminal Investigation Organizations Intro</h1>
+    <div class="container">
+      <div class="card" onclick="showRegisterForm()">
+        <div class="card-icon">👤</div>
+        <div class="card-title">Register Criminal</div>
+        <div class="card-description">
+          Add criminal details to the database.
+        </div>
+      </div>
+      <div class="card" onclick="showDetectForm()">
+        <div class="card-icon">🔍</div>
+        <div class="card-title">Detect Criminal</div>
+        <div class="card-description">Search and identify criminals.</div>
+      </div>
+      <div class="card" onclick="showVideoSurveillance()">
+        <div class="card-icon">🎥</div>
+        <div class="card-title">Video Surveillance</div>
+        <div class="card-description">
+          Monitor activities via video uploads.
+        </div>
+      </div>
+      <div class="card" onclick="showMap()">
+        <div class="card-icon">📍</div>
+        <div class="card-title">Locate Criminals</div>
+        <div class="card-description">
+          Track criminals' locations on the map.
+        </div>
+      </div>
+    </div>
+
+    <div id="register-form">
+      <h2>Register Criminal</h2>
+      <div class="image-section">
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Criminal Image"
+          id="criminal-image"
+        />
+        <div>
+          <input
+            type="file"
+            id="image-upload"
+            accept="image/*"
+            style="display: none"
+            onchange="previewImage(event)"
+          />
+          <button onclick="document.getElementById('image-upload').click()">
+            Select Image
+          </button>
+        </div>
+      </div>
+
+      <label for="name">Name *</label>
+      <input type="text" id="name" />
+
+      <label for="gender">Gender *</label>
+      <input type="text" id="gender" />
+
+      <label for="location">Location *</label>
+      <input type="text" id="location" />
+
+      <label for="identification-mark">Identification Mark *</label>
+      <input type="text" id="identification-mark" />
+
+      <label for="nationality">Nationality *</label>
+      <input type="text" id="nationality" />
+
+      <label for="crimes">Crimes Committed *</label>
+      <input type="text" id="crimes" />
+
+      <button class="button" onclick="registerCriminal()">Register</button>
+      <button id="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="detect-form">
+      <h2>Detect Criminal</h2>
+      <div class="image-section">
+        <img
+          src="https://via.placeholder.com/150"
+          alt="Uploaded Criminal Image"
+          id="uploaded-image"
+        />
+        <div>
+          <input
+            type="file"
+            id="detect-image-upload"
+            accept="image/*"
+            style="display: none"
+            onchange="detectByImage(event)"
+          />
+          <button
+            onclick="document.getElementById('detect-image-upload').click()"
+          >
+            Select Image
+          </button>
+        </div>
+      </div>
+
+      <div class="details" id="detected-details">
+        <!-- Criminal details will be shown here -->
+      </div>
+
+      <button id="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="video-surveillance">
+      <h2>Video Surveillance</h2>
+      <input
+        type="file"
+        id="video-upload"
+        accept="video/*"
+        style="display: none"
+        onchange="analyzeVideo(event)"
+      />
+      <button onclick="document.getElementById('video-upload').click()">
+        Upload Video
+      </button>
+      <video id="video-player" controls></video>
+      <div class="details" id="video-detected-details">
+        <!-- Detected details will appear here -->
+      </div>
+      <button id="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <div id="map-container">
+      <h2>Criminal Locations</h2>
+      <input
+        type="text"
+        id="criminal-search"
+        placeholder="Enter Criminal Name"
+      />
+      <button onclick="searchCriminalLocation()">Search Location</button>
+      <div id="map"></div>
+      <button id="back-button" onclick="goBack()">Back</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
+
+    <script>
+      const criminals = [];
+
+      function showRegisterForm() {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("register-form").style.display = "block";
+      }
+
+      function showDetectForm() {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("detect-form").style.display = "block";
+      }
+
+      function showVideoSurveillance() {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("video-surveillance").style.display = "block";
+      }
+
+      function showMap() {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("map-container").style.display = "block";
+        initializeMap();
+      }
+
+      function goBack() {
+        document.querySelector(".container").style.display = "block";
+        document.getElementById("register-form").style.display = "none";
+        document.getElementById("detect-form").style.display = "none";
+        document.getElementById("video-surveillance").style.display = "none";
+        document.getElementById("map-container").style.display = "none";
+        document.getElementById("detected-details").innerHTML = "";
+      }
+
+      function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          document.getElementById("criminal-image").src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+
+      function registerCriminal() {
+        const name = document.getElementById("name").value.trim();
+        const gender = document.getElementById("gender").value.trim();
+        const location = document.getElementById("location").value.trim();
+        const identificationMark = document
+          .getElementById("identification-mark")
+          .value.trim();
+        const nationality = document.getElementById("nationality").value.trim();
+        const crimes = document.getElementById("crimes").value.trim();
+        const image = document.getElementById("criminal-image").src;
+
+        if (
+          !name ||
+          !gender ||
+          !location ||
+          !identificationMark ||
+          !nationality ||
+          !crimes
+        ) {
+          alert("Please fill out all required fields.");
+          return;
+        }
+
+        const [latitude, longitude] = location
+          .split(",")
+          .map((coord) => parseFloat(coord.trim()));
+        if (isNaN(latitude) || isNaN(longitude)) {
+          alert('Invalid location format. Please use "Latitude, Longitude".');
+          return;
+        }
+
+        criminals.push({
+          name,
+          gender,
+          location: { latitude, longitude },
+          identificationMark,
+          nationality,
+          crimes,
+          image,
+        });
+
+        alert(`Criminal ${name} registered successfully!`);
+        goBack();
+      }
+
+      function detectByImage(event) {
+        const reader = new FileReader();
+        reader.onload = function () {
+          const uploadedImageSrc = reader.result;
+          document.getElementById("uploaded-image").src = uploadedImageSrc;
+
+          const criminal = criminals.find((c) => c.image === uploadedImageSrc);
+
+          const detailsDiv = document.getElementById("detected-details");
+          if (criminal) {
+            detailsDiv.innerHTML = `<strong>Criminal Found:</strong><br>
+                  Name: ${criminal.name}<br>
+                  Gender: ${criminal.gender}<br>
+                  Nationality: ${criminal.nationality}<br>
+                  Crimes: ${criminal.crimes}<br>
+                  Identification Mark: ${criminal.identificationMark}`;
+          } else {
+            detailsDiv.innerHTML = "<strong>Criminal not found!</strong>";
+          }
+        };
+        reader.readAsDataURL(event.target.files[0]);
+      }
+
+      //Location Criminal
+
+      let map; // Declare the map globally
+      let mapInitialized = false; // Track whether the map has been initialized
+
+      function initializeMap() {
+        if (!mapInitialized) {
+          map = L.map("map").setView([0, 0], 2); // Set default view to world map
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "© OpenStreetMap contributors",
+          }).addTo(map);
+          mapInitialized = true; // Mark map as initialized
+        }
+      }
+
+      function showMap() {
+        document.querySelector(".container").style.display = "none";
+        document.getElementById("map-container").style.display = "block";
+        initializeMap(); // Ensure the map is initialized when showing the map container
+      }
+
+      function searchCriminalLocation() {
+        const criminalName = document
+          .getElementById("criminal-search")
+          .value.trim();
+
+        // Check if the map is initialized
+        if (!map) {
+          alert("Map is not initialized!");
+          return;
+        }
+
+        const criminal = criminals.find(
+          (c) => c.name.toLowerCase() === criminalName.toLowerCase()
+        );
+
+        if (criminal) {
+          const { latitude, longitude } = criminal.location;
+          L.marker([latitude, longitude])
+            .addTo(map)
+            .bindPopup(
+              `<strong>${criminal.name}</strong><br>Gender: ${criminal.gender}<br>Nationality: ${criminal.nationality}<br>Crimes: ${criminal.crimes}<br>Identification Mark: ${criminal.identificationMark}`
+            )
+            .openPopup();
+
+          map.setView([latitude, longitude], 10); // Center map on the criminal's location
+        } else {
+          alert("Criminal not found!");
+        }
+      }
+
+      function analyzeVideo(event) {
+        const videoFile = event.target.files[0];
+        if (!videoFile) return;
+
+        const videoPlayer = document.getElementById("video-player");
+        videoPlayer.src = URL.createObjectURL(videoFile);
+
+        // Simulate frame analysis after video starts playing
+        videoPlayer.addEventListener("play", () => {
+          const interval = setInterval(() => {
+            const detectedCriminals = criminals.slice(0, 2); // Simulate detection of first 2 criminals
+            const detailsDiv = document.getElementById(
+              "video-detected-details"
+            );
+            if (detectedCriminals.length > 0) {
+              detailsDiv.innerHTML =
+                "<strong>Detected Criminals:</strong><br>" +
+                detectedCriminals
+                  .map(
+                    (c) => `
+                Name: ${c.name}<br>
+                Gender: ${c.gender}<br>
+                Nationality: ${c.nationality}<br>
+                Crimes: ${c.crimes}<br>
+                Identification Mark: ${c.identificationMark}<br><br>`
+                  )
+                  .join("");
+            } else {
+              detailsDiv.innerHTML =
+                "<strong>No criminals detected in the video.</strong>";
+            }
+          }, 3000); // Simulate frame analysis every 3 seconds
+
+          videoPlayer.addEventListener("ended", () => {
+            clearInterval(interval);
+          });
+        });
+      }
+    </script>
+    <script>
+      const correctPassword = "admin";
+      const passwordContainer = document.getElementById("passwordContainer");
+      const mainContent = document.getElementById("mainContent");
+
+      function validatePassword() {
+        const enteredPassword = document.getElementById("pagePassword").value;
+        if (enteredPassword === correctPassword) {
+          passwordContainer.style.display = "none";
+          mainContent.style.display = "block";
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
+    </script>
+  </body>
+</html>
