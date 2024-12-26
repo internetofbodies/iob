@@ -50,7 +50,7 @@
 
       h2 {
         margin-top: 30px;
-        font-size: 2.5em;
+        font-size: 1.5em;
         text-align: center;
       }
 
@@ -328,20 +328,52 @@
         align-items: center;
         z-index: 9999;
       }
+
       .password-box {
         background: #fff;
+        width: 400px; /* Standard width for the box */
         padding: 20px;
-        border-radius: 8px;
+        border-radius: 10px;
         text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        display: flex;
+        flex-direction: column; /* Stack elements vertically */
+        gap: 15px; /* Adds consistent spacing between elements */
       }
+
+      .password-box h2 {
+        font-size: 1.5rem;
+        color: #333;
+        margin: 0;
+      }
+
       .password-box input {
-        padding: 10px 0;
+        width: 90%; /* Input field width relative to the box */
+        max-width: 300px; /* Limit maximum width for input */
+        padding: 10px;
         font-size: 1rem;
-        margin: 8px 0;
-        width: 100%;
         border: 1px solid #ccc;
         border-radius: 5px;
+        box-sizing: border-box;
+        margin: 0 auto;
+      }
+
+      .password-box button {
+        width: 90%; /* Button width relative to the box */
+        max-width: 300px; /* Limit maximum width for button */
+        padding: 10px;
+        font-size: 1rem;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin: 0 auto;
+      }
+
+      .password-box button:hover {
+        background-color: #333; /* Darker background on hover */
       }
     </style>
   </head>
