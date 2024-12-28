@@ -1,1005 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Internet of Bodies</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: black;
-            color: white;
-        }
+      body {
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        background-color: black;
+        color: white;
+      }
 
-        /* Navbar */
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .navbar .logo img {
+        height: 50px;
+      }
+
+      .navbar .cta {
+        text-decoration: none;
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      .navbar .cta:hover {
+        background: white;
+        color: black;
+      }
+
+      /* Hero Section */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background: url("landing.jpeg") no-repeat center center/cover;
+        text-align: center;
+        padding: 20px;
+      }
+
+      .hero h1 {
+        font-size: 2.3rem;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        font-weight: bold;
+        letter-spacing: 2px;
+        color: #ffffff;
+        line-height: 1.3;
+      }
+
+      .hero p {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        max-width: 600px;
+        color: #ffffff;
+      }
+
+      .hero .cta {
+        text-decoration: none;
+        color: white;
+        border: 2px solid white;
+        padding: 10px 25px;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 1rem;
+        transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+      }
+
+      .hero .cta:hover {
+        background: white;
+        color: black;
+        transform: scale(1.03);
+      }
+
+      /* Footer */
+      .footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: rgba(0, 0, 0, 0.9);
+        font-size: 12px;
+        color: gray;
+      }
+
+      .footer a {
+        color: gray;
+        text-decoration: none;
+      }
+
+      .footer a:hover {
+        color: white;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
         .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 20px;
-    background: rgba(0, 0, 0, 0.8);
-    position: fixed;
-    width: 100%;
-    z-index: 1000;
-    box-sizing: border-box;
-    transition: transform 0.3s ease-in-out;
-}
-
-        .navbar .logo img {
-            height: 50px;
+          padding: 15px 20px;
+          flex-direction: row;
         }
 
         .navbar .cta {
-            text-decoration: none;
-            color: white;
-            border: 2px solid white;
-            padding: 10px 20px;
-            text-transform: uppercase;
-            font-size: 14px;
-            font-weight: bold;
-            transition: background 0.3s ease, color 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            margin-left: auto;
+          padding: 8px 16px;
+          font-size: 12px;
         }
 
-        .navbar .cta:hover {
-            background: white;
-            color: black;
-        }
-/* CTA 1 */
-    .cta {
-    text-decoration: none;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: bold;
-    display: inline-block;
-    padding: 8px 20px;
-    margin: 8px 15px;
-    border: 2px solid #000;
-    border-radius: 5px;
-    transition: all 0.3s ease;
-    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.cta:hover {
-    background-color: #fff;
-    color: #000;
-    border-color: #000;
-    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-}
-
-
-        /* Hero Section */
-.hero {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    align-items: center;
-    justify-content: center;
-    height: 100vh; /* Full viewport height */
-    background: url('landing.jpeg') no-repeat center center/cover;
-    text-align: center;
-    padding: 20px; /* Add padding for small screens */
-}
-
-/* Hero Title */
-.hero h1 {
-    font-size: 2.3rem; /* Consistent font size */
-    margin-bottom: 15px; /* Reduced margin */
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 2px; /* Slightly reduced spacing */
-    color: #ffffff;
-    line-height: 1.3; /* Adjusted for better readability */
-}
-/* Hero Paragraph */
-.hero p {
-    font-size: 1.1rem; /* Consistent font size */
-    margin-bottom: 30px; /* Reduced margin */
-    max-width: 600px; /* Restrict paragraph width for readability */
-    color: #ffffff;
-}
-
-/* Hero Button */
-.hero .cta {
-    text-decoration: none;
-    color: white;
-    border: 2px solid white;
-    padding: 10px 25px; /* Slightly larger padding for better usability */
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1rem;
-    transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
-}
-
-.hero .cta:hover {
-    background: white;
-    color: black;
-    transform: scale(1.03); /* Add slight grow on hover */
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 768px) {
-    .hero h1 {
-        font-size: 2rem; /* Adjusted for smaller screens */
-    }
-
-    .hero p {
-        font-size: 1rem; /* Consistent paragraph size */
-    }
-
-    .hero .cta {
-        font-size: 0.95rem; /* Slightly reduced button font size */
-        padding: 8px 20px; /* Reduced button padding */
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 1.8rem; /* Smaller heading size */
-    }
-
-    .hero p {
-        font-size: 0.9rem; /* Smaller paragraph size */
-    }
-
-    .hero .cta {
-        font-size: 0.85rem; /* Compact button font size */
-        padding: 7px 18px; /* Reduced button padding */
-    }
-}
-
-
-        /* Footer */
-        .footer {
-            text-align: center;
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.9);
-            font-size: 12px;
-            color: gray;
+        .hero h1 {
+          font-size: 36px;
         }
 
-        .footer a {
-            color: gray;
-            text-decoration: none;
+        .hero p {
+          font-size: 14px;
         }
 
-        .footer a:hover {
-            color: white;
+        .hero .cta {
+          padding: 8px 16px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .navbar {
+          padding: 10px 20px;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar {
-                padding: 15px 20px;
-                flex-direction: row;
-            }
-
-            .navbar .cta {
-                padding: 8px 16px;
-                font-size: 12px;
-            }
-
-            .hero h1 {
-                font-size: 36px;
-            }
-
-            .hero p {
-                font-size: 14px;
-            }
-
-            .hero .cta {
-                padding: 8px 16px;
-            }
+        .navbar .logo img {
+          height: 40px;
         }
 
-        @media (max-width: 480px) {
-            .navbar {
-                padding: 10px 20px;
-            }
-
-            .navbar .logo img {
-                height: 40px; /* Adjust the logo size for small screens */
-            }
-
-            .hero h1 {
-                font-size: 28px;
-            }
-
-            .hero p {
-                font-size: 12px;
-            }
-
-            .hero .cta {
-                padding: 6px 12px;
-                font-size: 12px;
-            }
+        .hero h1 {
+          font-size: 28px;
         }
-        /* General Section Styling */
-section {
-  padding: 30px 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
-/* Alternating Background Colors */
-section:nth-child(even) {
-  background-color: rgb(255, 255, 255); /* Background for even sections */
-  color: rgb(0, 0, 0);
-}
-
-section:nth-child(odd) {
-  background-color: rgb(0, 0, 0); /* Background for odd sections */
-  color: rgb(255, 255, 255);
-}
-
-/* Content Wrapper */
-section .content,
-section .health-systems__content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-}
-
-/* Text Block */
-section .text {
-  flex: 1;
-  padding: 10px;
-  text-align: left;
-}
-
-section .text h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
-  margin-bottom: 15 px;
-}
-
-section .text p {
-  font-size: 1.2rem;
-  line-height: 1.5  ;
-  margin-bottom: 10px;
-}
-
-section .text .cta {
-  display: inline-block;
-  padding: 10px 30px;
-  text-decoration: none;
-  background-color: black; /* Button Background */
-  color: white; /* Button Text */
-  border-color: #ffffff;
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 25px;
-  transition: background 0.3s ease, color 0.3s ease;
-  margin-top: 10px; /* Tightened space above button */
-  padding: 8px 20px; /* Adjusted button size */
-}
-
-section .text .cta:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-}
-
-/* Image Block */
-section .image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}
-
-section .image img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-}
-/* Mirrored Content (Image on the Right) */
-.health-systems__content {
-  flex-direction: row-reverse;
-}
-
-/* Default Layout (Image on the Left) */
-.content {
-  flex-direction: row;
-}
-/* Responsive Layout */
-@media (max-width: 768px) {
-  section .content,
-  section .health-systems__content {
-    flex-direction: column;
-  }
-
-  section .text h1 {
-    font-size: 2rem;
-  }
-
-  section .text p {
-    font-size: 1rem;
-  }
-
-  section .text .cta {
-    font-size: 0.9rem;
-  }
-}
-
-/* Mirrored Content (Image on the Right) for Global Risk */
-.global-risk__content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  flex-direction: row-reverse; /* Reverse layout: image on the right, text on the left */
-  padding: 30px 20px;
-}
-
-/* Background Colors for Global Risk */
-section.global-risk:nth-child(even) {
-  background-color: rgb(255, 255, 255); /* Light background for even sections */
-  color: rgb(0, 0, 0); /* Dark text */
-}
-
-section.global-risk:nth-child(odd) {
-  background-color: rgb(0, 0, 0); /* Dark background for odd sections */
-  color: rgb(255, 255, 255); /* Light text */
-}
-
-/* General Content Styling */
-.global-risk .text {
-  flex: 1;
-  padding: 15px;
-  text-align: left;
-}
-
-.global-risk .text h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.global-risk .text p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  margin-bottom: 15px;
-}
-
-.global-risk .text .cta {
-  display: inline-block;
-  padding: 8px 20px;
-  text-decoration: none;
-  background-color: black; /* Button Background */
-  color: white; /* Button Text */
-  font-size: 0.95rem;
-  font-weight: bold;
-  border-radius: 25px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.global-risk .text .cta:hover {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
-}
-
-.global-risk .image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-}
-
-.global-risk .image img {
-  max-width: 100%;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-
-/* Responsive Layout */
-@media (max-width: 768px) {
-  .global-risk__content {
-    flex-direction: column; /* Stack text and image vertically */
-    padding: 20px 10px;
-  }
-
-  .global-risk .text h1 {
-    font-size: 1.8rem;
-  }
-
-  .global-risk .text {
-    padding: 10px; /* Reduced padding for text */
-  }
-
-  .global-risk .text p {
-    font-size: 1rem; /* Smaller font size for paragraph */
-  }
-
-  .global-risk .text .cta {
-    font-size: 0.85rem;
-  }
-}
-
-.next-section {
-  background-color: #e0f7fa; /* Soft healthcare blue */
-  color: #000; /* Adjust text color */
-  padding: 40px;
-}
-
-/* How Data & Stats Section Styling */
-section.data-stats {
-    background-color: #ffffff; /* Muted blue background */
-    color: #000; /* Black text color */
-    padding: 30px 15px;  /* Consistent padding */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: left; /* Align content consistently */
-}
-
-section.data-stats .data-stats__content {
-    max-width: 1200px; /* Limit section width to match others */
-    width: 100%; /* Ensure it spans the container */
-    display: flex;
-    flex-direction: column; /* Default vertical alignment */
-    gap: 15px; /* Space between text elements */
-}
-
-section.data-stats .text h1 {
-    font-size: 2.3rem; /* Consistent heading size */
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-section.data-stats .text p {
-    font-size: 1.1rem; /* Match paragraph font size */
-    line-height: 1.5; /* Improved readability */
-    margin-bottom: 15px;
-}
-
-section.data-stats .text .cta {
-    display: inline-block;
-    padding: 8px 25px;
-    text-decoration: none;
-    background-color: #000; /* Black button */
-    color: #fff; /* White text */
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 20px;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-section.data-stats .text .cta:hover {
-    background-color: #fff;
-    color: #000;
-    border: 2px solid #000;
-}
-
-/* Spotlight Section */
-.spotlight {
-    max-width: 1200px;
-    margin: 15px auto;
-    padding: 30px 15px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: space-evenly;
-    color: #000000; /* Ensure text contrast */
-    text-align: center;
-
-}
-
-
-.spotlight-header {
-    margin-bottom: 20px;
-}
-
-.spotlight-header h1 {
-    font-size: 2.3rem;
-    font-weight: bold;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-.spotlight-header p {
-    font-size: 1.1rem;
-    line-height: 1.5;
-    margin-bottom: 15px;
-    color: #ccc; /* Slightly muted color for the paragraph */
-}
-
-.spotlight-header .cta {
-    text-decoration: none;
-    color: white;
-    border: 2px solid white;
-    padding: 8px 20px;
-    font-size: 0.95rem;
-    font-weight: bold;
-    border-radius: 20px;
-    transition: background 0.3s ease, color 0.3s ease;
-}
-
-.spotlight-header .cta:hover {
-    background-color: white;
-    color: black;
-}
-
-/* Spotlight item */
-.spotlight__item {
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border: 1px solid #eaeaea;
-    border-radius: 8px;
-    overflow: hidden;
-    text-decoration: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: calc(50% - 15px); /* Makes each item take 50% of the container */
-    max-width: 580px; /* Optional: restrict max width */
-}
-
-.spotlight__item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Spotlight image */
-.spotlight__image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-}
-
-/* Spotlight info */
-.spotlight__info {
-    padding: 10px;
-}
-
-.spotlight__category {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 8px;
-}
-
-.spotlight__description {
-    font-size: 1rem;
-    color: #666;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-    .spotlight__item {
-        flex: 1 1 100%; /* Full width on smaller screens */
-    }
-    .spotlight-header {
-        margin-bottom: 15px;
-    }
-    section.data-stats {
-        padding: 20px 10px; /* Reduced padding for smaller screens */
-    }
-}
-
-@media (max-width: 480px) {
-    .spotlight__info {
-        padding: 8px;
-    }
-
-    .spotlight__category {
-        font-size: 1rem;
-    }
-
-    .spotlight__description {
-        font-size: 0.9rem;
-    }
-}
-
-/* Report Section Styling */
-.report-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 30px 15px;
-    background-color: #ffffff !important; /* Blue background */
-    color: #000000 !important; /* White text */
-}
-
-.report-content {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    max-width: 1200px;
-    width: 100%;
-    gap: 15px; /* Space between text and image */
-}
-
-/* Text Block Styling */
-.report-content .text {
-    flex: 1;
-    padding: 15px;
-}
-
-.report-content .text .sub-heading {
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.report-content .text .publish-date {
-    font-size: 0.9rem;
-    margin-bottom: 15px;
-    color: #000000; /* Light blue */
-}
-
-.report-content .text h1 {
-    font-size: 2.3rem;
-    font-weight: bold !important;
-    margin-bottom: 15px;
-}
-
-.report-content .text .cta {
-    display: inline-block;
-    padding: 8px 25px;
-    text-decoration: none;
-    background-color: #ffffff; /* White button */
-    color: #000000; /* Blue text */
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 20px;
-    margin-bottom: 15px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.report-content .text .cta {
-    display: inline-block;
-    padding: 10px 30px;
-    text-decoration: none;
-    background-color: black; /* Default background */
-    color: white; /* Default text color */
-    border: 2px solid white; /* Default border */
-    font-size: 1rem;
-    font-weight: bold;
-    border-radius: 25px;
-    transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; /* Ensure border transition works */
-}
-
-.report-content .text .cta:hover {
-    background-color: #676767; /* Hover background */
-    border-color: #ffffff; /* White border on hover */
-    color: #ffffff; /* White text */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Optional shadow for better hover effect */
-}
-
-
-/* Image Block Styling */
-.report-content .image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 15px;
-}
-
-.report-content .image img {
-    max-width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .report-content {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .report-content .text h1 {
-        font-size: 2rem;
-    }
-
-    .report-content .text .description {
-        font-size: 1rem;
-    }
-
-    .report-content .text .cta {
-        font-size: 0.9rem;
-    }
-}
-
-/* AI health care */
-/* AI Healthcare Section Styling */
-.ai-healthcare {
-  background-color: #000000 !important; /* Light grey background */
-  padding: 30px 15px;
-  color: #ffffff !important;
-}
-.ai-healthcare__content {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  max-width: 1200px;
-  width: 100%;
-  margin: 0 auto;
-  flex-direction: column; /* Default to vertical stack for mobile */
-  gap: 15px;
-}
-
-/* Text Block Styling */
-.ai-healthcare .text {
-  flex: 1;
-  padding: 15px;
-  text-align: left;
-  order: 1; /* Ensure text appears before image */
-}
-
-.ai-healthcare .text h1 {
-  font-size: 2.3rem;
-  font-weight: bold;
-  margin-bottom: 15px;
-}
-
-.ai-healthcare .text p {
-  font-size: 1.1rem; /* Consistent paragraph font size */
-    line-height: 1.5; /* Adjusted for readability */
-    margin-bottom: 15px; /* Tightened spacing */
-}
-
-.ai-healthcare .text .cta {
-  display: inline-block;
-  padding: 10px 30px;
-  text-decoration: none;
-  background-color: #000; /* Button background color */
-  color: #fff; /* Button text color */
-  font-size: 1rem;
-  font-weight: bold;
-  border-radius: 20px;
-  transition: background 0.3s ease, color 0.3s ease;
-}
-
-.ai-healthcare .text .cta:hover {
-  background-color: #fff;
-  color: #000;
-  border: 2px solid #000;
-}
-
-/* Image Block Styling */
-.ai-healthcare .image {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 15px;
-  order: 2; /* Ensure image appears after text by default */
-}
-
-.ai-healthcare .image img {
-  max-width: 100%;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-}
-
-/* Responsive Layout */
-@media (min-width: 768px) {
-  .ai-healthcare__content {
-    flex-direction: row; /* Horizontal layout for desktop */
-    gap: 10px;
-  }
-
-  .ai-healthcare .text {
-    order: 1; /* Text first */
-  }
-  .ai-healthcare .text h1 {
-        font-size: 2rem; /* Adjusted font size */
-    }
-
-  .ai-healthcare .image {
-    order: 2; /* Image second */
-  }
-}
-
-.ai-healthcare .text p {
-        font-size: 1rem; /* Adjusted paragraph size */
-    }
-    .ai-healthcare .text .cta {
-        font-size: 0.9rem; /* Smaller button font size */
-    }
-
-
-@media (max-width: 767px) {
-  .ai-healthcare__content {
-    flex-direction: column; /* Stack vertically for mobile */
-  }
-
-  .ai-healthcare .text {
-    order: 1; /* Text first */
-  }
-
-  .ai-healthcare .image {
-    order: 2; /* Image second */
-  }
-}
-
+        .hero p {
+          font-size: 12px;
+        }
+
+        .hero .cta {
+          padding: 6px 12px;
+          font-size: 12px;
+        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <!-- Navbar -->
     <div class="navbar">
-        <div class="logo">
-            <img src="logo.png" alt="Logo">
-        </div>
-        <a href="requestdemo.html" class="cta">Request Demo</a>
+      <div class="logo">
+        <img src="logo.png" alt="Logo" />
+      </div>
+      <a href="requestdemo.html" class="cta">Request Demo</a>
     </div>
 
     <!-- Hero Section -->
     <section class="hero">
-        <div>
-            <h1>Internet of Bodies</h1>
-            <p>We bring together government, businesses and civil society to improve the state of the world.</p>
-            <a href="login.html" class="cta">Authorized Manager Portal</a>
-        </div>
+      <div>
+        <h1>Internet of Bodies</h1>
+        <p>Authorized Manager</p>
+        <a href="login.html" class="cta">Start Demo</a>
+      </div>
     </section>
-
-    <!-- Health System-->
-    <section class="health-systems">
-      <div class="health-systems__content">
-          <div class="text">
-              <h1>Health and Healthcare Systems</h1>
-              <p>
-                  Explore how technology is transforming healthcare systems by providing advanced tools for monitoring, diagnostics, and patient care. Learn about innovations in health management and their role in improving lives worldwide.
-              </p>
-              <a href="https://www.weforum.org/stories/health-and-healthcare-systems/" class="cta">Learn More</a>
-          </div>
-          <div class="image">
-              <img src="health.png" alt="Health and Healthcare Systems">
-          </div>
-      </div>
-  </section>
-
-   <!-- Mental Health -->
-<section class="mental-health">
-  <div class="content">
-      <div class="text">
-          <h1>Wellbeing and Mental Health</h1>
-          <p>
-              Mental health is a cornerstone of overall wellbeing, influencing how we think, feel, and interact with the world around us.
-              Advances in technology and healthcare are providing innovative solutions to address mental health challenges, offering tools
-              for stress management, early detection of mental disorders, and virtual therapy sessions.
-          </p>
-          <a href="https://www.weforum.org/stories/?topics=630" class="cta">Learn More</a>
-      </div>
-      <div class="image">
-          <img src="mentalhealth.jpg" alt="Wellbeing and Mental Healthystems">
-      </div>
-  </div>
-</section>
-
-<!-- Global Risk Section -->
-<section class="global-risk">
-  <div class="global-risk__content">
-    <div class="text">
-      <h1>Global Risk</h1>
-      <p>
-        In an interconnected world, managing global risks is essential to ensure stability and sustainability.
-        From climate change and economic crises to cybersecurity threats and public health emergencies,
-        understanding and addressing these risks requires global cooperation and innovation.
-      </p>
-      <a href="https://www.weforum.org/global-risks" class="cta">Learn More</a>
-    </div>
-    <div class="image">
-      <img src="globalrisk.jpg" alt="Global Risk">
-    </div>
-  </div>
-</section>
-
-<!-- How Data & Stats Can Improve Our Health Section -->
-<section class="data-stats">
-  <div class="data-stats__content">
-    <div class="text">
-      <h1>How Data & Stats Can Improve Our Health!</h1>
-      <p>
-        Data and statistics are transforming the healthcare industry. By analyzing data, we can identify health risks, prevent diseases, make informed decisions about our health,
-        measure the effectiveness of healthcare interventions, and understand the social determinants of health.
-      </p>
-      <a href="https://aj-seotools.com/blog/data-stats#google_vignette" class="cta">Read More</a>
-    </div>
-  </div>
-</section>
-
-<!-- Spotlight Section -->
-<section class="spotlight">
-  <div class="spotlight-header">
-      <h1>Spotlight</h1>
-      <p>Latest analysis, insights, and explainers from across the Forum.</p>
-      <a href="https://www.weforum.org/" class="cta">More Stories →</a>
-  </div>
-  </section>
-
-<div class="spotlight">
-  <!-- Spotlight Item 1 -->
-  <a href="https://www.weforum.org/stories/2024/11/nature-positive-cities-blueprint-for-climate-resilience/" class="spotlight__item">
-    <img src="urban.png" alt="Urban Transformation" class="spotlight__image">
-    <div class="spotlight__info">
-      <h4 class="spotlight__category">Urban Transformation</h4>
-      <p class="spotlight__description">
-        These two cities show how nature-based solutions address climate hazards like urban flooding.
-      </p>
-    </div>
-  </a>
-
-  <!-- Spotlight Item 2 -->
-  <a href="https://www.weforum.org/stories/2024/11/cop29-4-key-takeaways/" class="spotlight__item">
-    <img src="climate.png" alt="Climate Action" class="spotlight__image">
-    <div class="spotlight__info">
-      <h4 class="spotlight__category">Climate Action</h4>
-      <p class="spotlight__description">
-        Climate finance, carbon markets, and more: 4 takeaways from COP29.
-      </p>
-    </div>
-  </a>
-</div>
-
-<!-- Internet of Bodies Report Section -->
-<section class="report-section">
-  <div class="report-content">
-      <div class="text">
-          <p class="sub-heading">Reports</p>
-          <p class="publish-date">Published: 6 August 2020</p>
-          <h1>The Internet of Bodies Is Here: Tackling new challenges of technology governance</h1>
-          <a href="https://www3.weforum.org/docs/WEF_IoB_briefing_paper_2020.pdf" class="cta">Download PDF</a>
-          <p class="description">
-              Recent technological advancements have ushered in a new era of the “Internet of Bodies” (IoB), with an unprecedented number of connected devices and sensors being affixed to or even implanted and ingested into the human body.
-          </p>
-  </div>
-</section>
-
-<!-- AI in Healthcare Section -->
-<section class="ai-healthcare">
-  <div class="ai-healthcare__content">
-    <div class="image">
-      <img src="aihealth.webp" alt="AI in Healthcare">
-    </div>
-    <div class="text">
-      <h1>AI is improving healthcare, according to one of the world's largest medical groups</h1>
-      <p>
-        Discover how artificial intelligence is revolutionizing the healthcare industry, from diagnostics and personalized medicine to administrative tasks and patient care. Explore the transformative impact AI is having on global healthcare systems.
-      </p>
-      <a href="https://www.weforum.org/stories/2024/11/four-ways-ai-is-improving-healthcare/" class="cta">Learn More</a>
-    </div>
-  </div>
-</section>
-
 
     <!-- Footer -->
     <footer class="footer">
-        <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
     </footer>
 
     <script>
       let lastScrollY = window.scrollY;
-      const navbar = document.querySelector('.navbar');
+      const navbar = document.querySelector(".navbar");
 
-      window.addEventListener('scroll', () => {
-          if (window.scrollY > lastScrollY) {
-              // Scrolling down - hide navbar
-              navbar.style.transform = 'translateY(-100%)';
-          } else {
-              // Scrolling up - show navbar
-              navbar.style.transform = 'translateY(0)';
-          }
-          lastScrollY = window.scrollY;
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > lastScrollY) {
+          // Scrolling down - hide navbar
+          navbar.style.transform = "translateY(-100%)";
+        } else {
+          // Scrolling up - show navbar
+          navbar.style.transform = "translateY(0)";
+        }
+        lastScrollY = window.scrollY;
       });
-  </script>
-
-</body>
+    </script>
+  </body>
 </html>
