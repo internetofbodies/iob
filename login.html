@@ -1,144 +1,269 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login - Internet of Bodies</title>
     <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: white;
-            color: black;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
+      body {
+        margin: 0;
+        font-family: "Arial", sans-serif;
+        background-color: white;
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        text-align: center;
+      }
+
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background: white;
+        border-bottom: 2px solid black;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .navbar .logo img {
+        height: 50px;
+      }
+
+      .navbar .cta {
+        text-decoration: none;
+        color: black;
+        border: 2px solid black;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .navbar .cta:hover {
+        background: black;
+        color: white;
+        transform: scale(1.05);
+      }
+
+      main {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .input-field {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px;
+        margin-bottom: 20px;
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        color: black;
+        box-sizing: border-box;
+      }
+
+      .input-field:focus {
+        outline: none;
+        border-color: #007bff;
+      }
+
+      .cta {
+        width: 100%;
+        max-width: 300px;
+        padding: 12px;
+        background-color: black;
+        color: white;
+        font-size: 14px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease;
+        box-sizing: border-box;
+      }
+
+      .cta:hover {
+        background-color: #333;
+        color: #fff;
+        transform: scale(1.05);
+      }
+      .cta_demo {
+        text-decoration: none;
+        color: rgb(3, 3, 3);
+        border: 2px solid rgb(14, 14, 14);
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      .cta_demo:hover {
+        background: rgb(2, 2, 2);
+        color: rgb(255, 255, 255);
+      }
+      p {
+        font-size: 14px;
+        color: black;
+        margin-top: 10px;
+      }
+
+      .forgot-password {
+        color: #000;
+        text-decoration: underline;
+        font-weight: bold;
+        transition: color 0.3s ease, text-shadow 0.3s ease;
+      }
+
+      .forgot-password:hover {
+        color: #0056b3;
+      }
+
+      .error {
+        color: red;
+        font-size: 12px;
+        margin-top: -15px;
+        margin-bottom: 15px;
+        display: none;
+      }
+
+      @media (max-width: 768px) {
+        .navbar {
+          padding: 10px 15px;
+        }
+
+        .navbar .logo img {
+          height: 40px;
+        }
+
+        .navbar .cta {
+          padding: 8px 16px;
+          font-size: 12px;
         }
 
         h1 {
-            font-size: 24px;
-            font-weight: bold;
-            margin-bottom: 10px;
+          font-size: 20px;
         }
 
         .input-field {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            background: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            font-size: 14px;
-            color: black;
-            box-sizing: border-box;
-        }
-
-        .input-field:focus {
-            outline: none;
-            border-color: #007bff;
+          font-size: 13px;
+          padding: 10px;
         }
 
         .cta {
-            width: 100%;
-            padding: 12px;
-            background-color: black;
-            color: white;
-            font-size: 14px;
-            font-weight: bold;
-            text-transform: uppercase;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background 0.3s ease, color 0.3s ease;
-            box-sizing: border-box;
-        }
-
-        .cta:hover {
-            background-color: #333;
-            color: #fff;
-            transform: scale(1.05);
+          font-size: 13px;
+          padding: 10px;
         }
 
         .forgot-password {
-            display: block;
-            margin: 20px 0;
-            font-size: 12px;
-            color: gray;
-            text-decoration: none;
+          font-size: 11px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 10px;
         }
 
-        .forgot-password:hover {
-            color: black;
+        .navbar {
+          padding: 8px 10px;
         }
 
-        .error {
-            color: red;
-            font-size: 12px;
-            margin-top: -15px;
-            margin-bottom: 15px;
-            display: none;
+        .navbar .logo img {
+          height: 40px;
         }
 
-        @media (max-width: 480px) {
-            form {
-                padding: 15px;
-                margin: 0 15px;
-            }
-
-            h1 {
-                font-size: 20px;
-            }
-
-            .input-field {
-                font-size: 13px;
-                padding: 10px;
-            }
-
-            .cta {
-                font-size: 13px;
-                padding: 10px;
-            }
-
-            .forgot-password {
-                font-size: 11px;
-            }
+        .navbar .cta {
+          padding: 6px 10px;
+          font-size: 10px;
         }
+
+        .input-field {
+          width: 90%;
+          padding: 8px;
+        }
+
+        .cta {
+          width: 90%;
+          padding: 8px;
+        }
+      }
     </style>
-</head>
-<body>
-    <form id="loginForm">
-        <h1>Login</h1>
-        
-        <input type="text" id="username" class="input-field" placeholder="Username">
-        <div id="usernameError" class="error"></div>
-        
-        <input type="password" id="password" class="input-field" placeholder="Password">
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo" />
+      </div>
+      <a href="requestdemo.html" class="cta_demo">Request Demo</a>
+    </div>
+
+    <main>
+      <form id="loginForm">
+        <h1>Demo</h1>
+
+        <input
+          type="password"
+          id="password"
+          class="input-field"
+          placeholder="Authorization Key"
+        />
         <div id="passwordError" class="error"></div>
-        
-        <button type="submit" class="cta">Login</button>
-        <a href="#" class="forgot-password">Forgot password?</a>
-    </form>
+
+        <button type="submit" class="cta">Start</button>
+        <p>
+          Don't have a key?
+          <a href="requestdemo.html" class="forgot-password"
+            >Request one here</a
+          >
+        </p>
+      </form>
+    </main>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent the default form submission
+          const password = document.getElementById("password").value;
 
-            // Fixed username and password
-            const fixedUsername = 'admin';
-            const fixedPassword = 'admin';
+          // Fixed authorization key
+          const fixedPassword = "218";
 
-            if (username === fixedUsername && password === fixedPassword) {
-                alert('Login successful! Redirecting to portal page...');
-                window.location.href = 'portal.html'; // Redirect to home page
-            } else {
-                alert('Invalid username or password.');
-            }
+          if (password === fixedPassword) {
+            alert("Authorization successful! Redirecting to portal page...");
+            window.location.href = "portal.html"; // Redirect to home page
+          } else {
+            alert("Invalid authorization key.");
+          }
         });
     </script>
-</body>
+  </body>
 </html>
