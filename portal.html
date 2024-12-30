@@ -20,6 +20,122 @@
         align-items: center;
         min-height: 100vh;
         -webkit-font-smoothing: antialiased; /* Better font rendering for Safari */
+        /* General styling for slideshow container */
+        .slideshow-container {
+          position: relative;
+          width: 80%; /* Reduce width further for a minimalist look */
+          max-width: 900px; /* Adjust maximum width to make it smaller */
+          margin: 20px auto;
+          margin-top: 70px;
+          overflow: hidden;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+          padding: 20px;
+        }
+
+        /* Style for each slide */
+        .slides {
+          display: none;
+          width: 100%;
+        }
+
+        .slides img {
+          width: 100%;
+          height: auto;
+          display: block;
+          padding: 0 10px; /* Reduce padding for smaller spacing */
+          box-sizing: border-box; /* Ensure padding doesn’t affect total width */
+          border-radius: 12px; /* Slightly smaller rounded corners */
+        }
+
+        /* Active slide display */
+        .slides.active {
+          display: block;
+          animation: fade 1.5s;
+        }
+
+        /* Fade animation */
+        @keyframes fade {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        /* Navigation buttons container */
+        .nav-buttons-container {
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          transform: translateY(-50%);
+          z-index: 1000;
+        }
+
+        /* Navigation button styling */
+        .nav-button {
+          background-color: rgba(
+            0,
+            0,
+            0,
+            0.4
+          ); /* Semi-transparent background */
+          color: white;
+          border: none;
+          width: 40px; /* Fixed width */
+          height: 40px; /* Fixed height */
+          display: flex;
+          justify-content: center; /* Center icon horizontally */
+          align-items: center; /* Center icon vertically */
+          font-size: 18px; /* Font size for the arrow */
+          border-radius: 50%; /* Circular buttons */
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        }
+
+        .nav-button:hover {
+          background-color: rgba(0, 0, 0, 0.6); /* Darker on hover */
+        }
+
+        .nav-button:focus {
+          outline: none;
+        }
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .slideshow-container {
+            width: 90%; /* Slightly wider for tablets */
+            max-width: 600px;
+          }
+          .slides img {
+            height: auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .slideshow-container {
+            width: 95%; /* Full-width for mobile */
+            max-width: 100%;
+          }
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-button {
+          width: 30px;
+          height: 30px;
+          font-size: 14px; /* Smaller font size */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-button {
+          width: 25px;
+          height: 25px;
+          font-size: 12px; /* Further reduced for mobile devices */
+        }
       }
 
       h1 {
@@ -157,14 +273,14 @@
 
       @media (min-width: 576px) {
         footer {
-          font-size: 15px; /* Slightly larger font for small devices */
-          padding: 20px 30px; /* Adjust padding */
+          font-size: 15px;
+          padding: 20px 30px;
         }
       }
 
       @media (min-width: 768px) {
         footer {
-          font-size: 16px; /* Standard font size for tablets and larger */
+          font-size: 16px;
           padding: 20px 40px; /* Balanced padding for tablets */
         }
       }
@@ -175,9 +291,81 @@
           padding: 25px 50px; /* Generous padding for larger screens */
         }
       }
+
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
+        transition: transform 0.3s ease-in-out;
+        height: 70px; /* Define a fixed height for the navbar */
+      }
+
+      .navbar .logo img {
+        height: 50px;
+      }
+
+      .navbar .cta {
+        text-decoration: none;
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      .navbar .cta:hover {
+        background: white;
+        color: black;
+      }
     </style>
   </head>
   <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="logo">
+        <img src="logo.png" alt="Logo" />
+      </div>
+      <a href="requestdemo.html" class="cta">Request Demo</a>
+    </div>
+    <div class="slideshow-container">
+      <div class="slides active">
+        <img src="iobpro.png" alt="Slide 1" />
+      </div>
+      <div class="slides">
+        <img src="iobproCB.png" alt="Slide 2" />
+      </div>
+      <div class="slides">
+        <img src="iobpropredict.png" alt="Slide 3" />
+      </div>
+      <div class="slides">
+        <img src="iobproAI.png" alt="Slide 4" />
+      </div>
+      <div class="slides">
+        <img src="iobproboard.png" alt="Slide 5" />
+      </div>
+      <div class="slides">
+        <img src="iobproall.png" alt="Slide 6" />
+      </div>
+
+      <div class="nav-buttons-container">
+        <button class="nav-button" id="prev">&lt;</button>
+        <button class="nav-button" id="next">&gt;</button>
+      </div>
+    </div>
+
     <h1>Manager Access Portal</h1>
     <input type="text" class="search-bar" placeholder="Search..." />
 
@@ -281,5 +469,33 @@
     <footer>
       <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
     </footer>
+    <script>
+      // Select all slides and navigation buttons
+      const slides = document.querySelectorAll(".slides");
+      const prevButton = document.getElementById("prev");
+      const nextButton = document.getElementById("next");
+      let currentIndex = 0;
+
+      // Function to display the current slide
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+      }
+
+      // Add event listeners for navigation buttons
+      prevButton.addEventListener("click", () => {
+        currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+        showSlide(currentIndex);
+      });
+
+      nextButton.addEventListener("click", () => {
+        currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+        showSlide(currentIndex);
+      });
+
+      // Initial display
+      showSlide(currentIndex);
+    </script>
   </body>
 </html>
