@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Human Location Map with Persistent Timeline</title>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!--Favicon-->
+    <link rel="icon" href="iob logo_BLACK.png" type="image/png" />
+
+    <!--Nav bar-->
+    <div class="navbar">
+      <div class="logo">
+        <a href="portal.html">
+          <img src="iob logo_BLACK.png" alt="IOB logo" />
+        </a>
+      </div>
+
+      <!--Menu links-->
+      <ul class="links">
+        <li><a href="home.html">Health Dashboard</a></li>
+
+        <!-- Mega Menu -->
+        <li class="mega-menu-container">
+          <a href="#" class="mega-menu-link">Features Section</a>
+          <div class="mega-menu">
+            <h4>Features Section</h4>
+            <a href="citytracker.html">City Tracker</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="healthsync.html">HealthSync Alert</a>
+          </div>
+        </li>
+        <!-- Mega Menu -->
+        <li class="mega-menu-container">
+          <a href="#" class="mega-menu-link">Map Tools</a>
+          <div class="mega-menu">
+            <h4>Map Tools</h4>
+            <a href="mobiledemo.html">Multi-Location Map</a>
+            <a href="humanlocation.html">Human Locator Map</a>
+            <a href="animalvaccination.html">Animals Locator Map</a>
+            <a href="iobmap.html">Internet of Bodies Map</a>
+            <a href="location.html">Location Surveillance Map</a>
+            <a href="livegps.html">Live ID Map</a>
+            <a href="wban.html">WBAN Monitoring Map</a>
+          </div>
+        </li>
+      </ul>
+
+      <a href="index.html" class="action_btn">Logout</a>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <!--Dropdown Mobile-->
+    <div class="dropdown_menu">
+      <ul>
+        <li><a href="home.html">Health Dashboard</a></li>
+        <li><a href="citytracker.html">CityBaron Tracker</a></li>
+        <li><a href="prediction.html">Prediction</a></li>
+        <li><a href="healthsync.html">HealthSync Alert</a></li>
+        <!-- Dropdown for Maps -->
+        <li class="dropdown">
+          <a href="#">Maps ▼</a>
+          <ul class="dropdown__menu">
+            <li><a href="mobiledemo.html">Multi-Location Map</a></li>
+            <li><a href="humanlocation.html">Human Locator Map</a></li>
+            <li><a href="animalvaccination.html">Animals Locator Map</a></li>
+            <li><a href="location.html">Location Surveillance Map</a></li>
+            <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+            <li><a href="livegps.html">Live ID Map</a></li>
+            <li><a href="wban.html">WBAN Monitoring Map</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="index.html" class="action_btn">Logout</a>
+        </li>
+      </ul>
+    </div>
+
+    <style>
+            body {
+              font-family: "Arial", sans-serif;
+              margin: 0;
+              padding: 0;
+              background: #fff;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: flex-start;
+              min-height: 100vh;
+            }
+
+            h1 {
+              margin: 20px 0;
+              font-size: 2rem;
+              color: #000;
+            }
+            /* Submit */
+            button {
+              background-color: #000;
+              color: #fff;
+              border: none;
+              padding: 10px 20px;
+              font-size: 1rem;
+              font-weight: bold;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+            }
+
+            button:hover {
+              background-color: #333;
+            }
+
+            #locate-btn {
+              padding: 10px 20px;
+              font-size: 1rem;
+              border: none;
+              border-radius: 5px;
+              background: #000000;
+              color: white;
+              cursor: pointer;
+              transition: background 0.3s ease;
+              margin-bottom: 15px;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+            #locate-btn:hover {
+              background: #000000;
+            }
+
+            #map {
+              height: 60vh;
+              width: 90%;
+              max-width: 1200px;
+              border-radius: 10px;
+              overflow: hidden;
+              border: 1px solid #ccc;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+              border: 2px solid black; /* Black border for key elements */
+              box-sizing: border-box; /
+            }
+
+            #timeline {
+              margin-top: 20px;
+              width: 90%;
+              max-width: 1200px;
+              font-size: 0.9rem;
+              background: #fff;
+              padding: 10px;
+              border: 2px solid black; /* Black border for key elements */
+              box-sizing: border-box; /
+            }
+
+            .location-item {
+              margin: 5px 0;
+              padding: 5px;
+              background: #f9f9f9;
+              border-left: 4px solid #000;
+            }
+            /* Mega Menu Container */
+            .mega-menu-container {
+              position: relative; /* Required for absolute positioning of the mega menu */
+            }
+
+            /* Mega Menu Link */
+            .mega-menu-link {
+              position: relative;
+              color: #000; /* Black text */
+              font-weight: normal;
+              transition: color 0.3s ease;
+            }
+
+            .mega-menu-link:hover {
+              color: #555; /* Light gray on hover */
+            }
+
+            /* Mega Menu Content */
+            .mega-menu {
+              display: none; /* Hidden by default */
+              position: absolute;
+              top: 100%; /* Position below the parent link */
+              left: 0;
+              background-color: #fff; /* White background */
+              color: #000; /* Black text */
+              width: 200px; /* Adjust width as needed */
+              padding: 15px;
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+              border: 1px solid #000; /* Black border */
+              border-radius: 5px;
+              z-index: 1000;
+            }
+
+            .mega-menu-container:hover .mega-menu {
+              display: block; /* Show on hover */
+            }
+
+            .mega-menu h4 {
+              font-size: 1.2rem;
+              margin-bottom: 10px;
+              font-weight: bold;
+              color: #000; /* Black heading */
+            }
+
+            .mega-menu a {
+              display: block;
+              padding: 5px 0;
+              font-size: 1rem;
+              color: #000; /* Black links */
+              text-decoration: none;
+              transition: color 0.3s ease;
+            }
+
+            .mega-menu a:hover {
+              color: #555; /* Light gray on hover */
+            }
+
+            li {
+              list-style: none;
+            }
+
+            a {
+              text-decoration: none;
+              color: #000; /* Changed to black */
+              font-size: 1rem;
+            }
+
+            a:hover {
+              color: #555; /* Changed to a lighter black (gray) */
+            }
+
+            /* HEADER */
+            header {
+              position: relative;
+              padding: 0 2rem;
+            }
+
+            .navbar {
+              width: 100%;
+              height: 60px;
+              max-width: 1200px;
+              margin: 0 auto;
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+            }
+
+            .navbar .logo a {
+              font-size: 1.5rem;
+              font-weight: bold;
+              color: #000; /* Changed to black */
+            }
+
+            .navbar .links {
+              display: flex;
+              gap: 2rem;
+            }
+
+            .navbar .toggle_btn {
+              color: #000; /* Changed to black */
+              font-size: 1.5rem;
+              cursor: pointer;
+              display: none;
+            }
+
+            .action_btn {
+              background-color: #000; /* Changed to black */
+              color: #fff; /* Kept white text for contrast */
+              padding: 0.5rem 1rem;
+              border: none;
+              outline: none;
+              border-radius: 20px;
+              font-size: 0.8rem;
+              font-weight: bold;
+              cursor: pointer;
+              transition: scale 0.2 ease;
+            }
+
+            .action_btn:hover {
+              scale: 1.05;
+              color: #fff; /* Kept white text */
+            }
+
+            .action_btn:active {
+              scale: 0.95;
+            }
+            a.action_btn {
+              background-color: #000; /* Changed to black */
+              color: #fff !important; /* Kept white text for contrast */
+              padding: 0.5rem 1rem;
+              border: none;
+              outline: none;
+              border-radius: 20px;
+              font-size: 0.8rem;
+              font-weight: bold;
+              cursor: pointer;
+              transition: scale 0.2 ease;
+            }
+            .logo img {
+              height: 50px;
+              width: auto;
+              display: block;
+            }
+
+            /* RESPONSIVE DESIGN */
+            @media (max-width: 992px) {
+              .navbar .links,
+              .navbar .action_btn {
+                display: none;
+              }
+
+              .navbar .toggle_btn {
+                display: block;
+              }
+
+            }
+          /* Dropdown Menu */
+      .dropdown_menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.981);
+        backdrop-filter: blur(15px);
+        border: 1px solid black; /* Add black border */
+        border-radius: 10px;
+        z-index: 10000;
+        overflow-y: auto;
+        max-height: 90vh;
+      }
+
+      .dropdown_menu.open {
+        display: block;
+      }
+
+      .dropdown_menu li {
+        text-align: center;
+        padding: 0.7rem;
+      }
+
+      .dropdown_menu li a {
+        color: #000;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown_menu li a:hover {
+        color: #000;
+      }
+
+      /* Centered Submenu with Transparent Background */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown__menu {
+        display: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%); /* Center Submenu */
+        background: rgba(255, 255, 255, 0.981);
+        backdrop-filter: blur(15px);
+        border-radius: 5px;
+        margin-top: 0.5rem;
+        width: 90%; /* Responsive width */
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.981);
+      }
+
+      .dropdown.open .dropdown__menu {
+        display: block;
+      }
+
+      .dropdown__menu li {
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+
+      .dropdown__menu li a {
+        color: #000;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .dropdown__menu li a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #000;
+      }
+
+      /* Responsive Fix */
+      @media (max-width: 768px) {
+        .dropdown_menu {
+          width: 95%;
+          left: 50%;
+          transform: translateX(-50%);
+          border: 1px solid black; /* Ensure border remains for small screens */
+        }
+
+        .dropdown__menu {
+          width: 90%; /* Submenu stays within parent */
+        }
+      }
+
+            .fa-bars,
+            .fa-navicon {
+              padding: 20px;
+            }
+            .fa-close,
+            .fa-multiply,
+            .fa-remove,
+            .fa-times,
+            .fa-xmark {
+              padding: 20px;
+            }
+
+            .password-container {
+              position: fixed;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              background: #000; /* Solid black */
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              z-index: 9999;
+            }
+            .password-box {
+              background: #fff;
+              padding: 20px;
+              border-radius: 8px;
+              text-align: center;
+              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            }
+            .password-box input {
+              padding: 10px 0;
+              font-size: 1rem;
+              margin: 8px 0;
+              width: 100%;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+            }
+            footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 768px) {
+        footer {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="password-container" id="passwordContainer">
+      <div class="password-box">
+        <h2>Enter Password</h2>
+        <input type="password" id="pagePassword" placeholder="Enter password" />
+        <button onclick="validatePassword()">Submit</button>
+      </div>
+    </div>
+
+    <h1>Human Locator Map</h1>
+    <button id="locate-btn">Locate</button>
+    <div id="map"></div>
+    <div id="timeline"></div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
+    <script>
+      // Initialize the map
+      const map = L.map("map").setView([0, 0], 2);
+
+      // Add OpenStreetMap tiles
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "© OpenStreetMap",
+      }).addTo(map);
+
+      // Load locations from local storage
+      let visitedLocations =
+        JSON.parse(localStorage.getItem("visitedLocations")) || [];
+
+      // Function to save locations to local storage
+      const saveLocations = () => {
+        localStorage.setItem(
+          "visitedLocations",
+          JSON.stringify(visitedLocations)
+        );
+      };
+
+      // Function to render timeline
+      const renderTimeline = () => {
+        const timelineDiv = document.getElementById("timeline");
+        timelineDiv.innerHTML = "<h3>Visited Locations:</h3>";
+        visitedLocations.forEach((location, index) => {
+          const div = document.createElement("div");
+          div.className = "location-item";
+          div.innerHTML = `
+              <strong>${index + 1}.</strong> Lat: ${location.lat}, Lng: ${
+            location.lng
+          }<br>
+              Timestamp: ${location.timestamp}<br>
+              Device: ${location.device}<br>
+              Battery Level: ${location.battery.level}<br>
+              Charging: ${location.battery.charging}`;
+          timelineDiv.appendChild(div);
+        });
+      };
+
+      // Function to add markers to the map
+      const renderMarkers = () => {
+        visitedLocations.forEach((location, index) => {
+          const marker = L.marker([location.lat, location.lng], {
+            title: `Location ${index + 1}`,
+          });
+          marker.addTo(map).bindPopup(
+            `<b>Visited Location</b><br>
+                Lat: ${location.lat}, Lng: ${location.lng}<br>
+                Timestamp: ${location.timestamp}<br>
+                Device: ${location.device}<br>
+                Battery Level: ${location.battery.level}<br>
+                Charging: ${location.battery.charging}`
+          );
+        });
+      };
+
+      // Marker for current location
+      let currentLocationMarker = null;
+
+      // Function to get device type
+      const getDeviceType = () => {
+        const userAgent = navigator.userAgent.toLowerCase();
+        return /mobile|android|iphone|ipad/.test(userAgent)
+          ? "Mobile"
+          : "Desktop";
+      };
+
+      // Function to get battery status
+      const getBatteryStatus = async () => {
+        if (navigator.getBattery) {
+          const battery = await navigator.getBattery();
+          return {
+            level: `${Math.round(battery.level * 100)}%`,
+            charging: battery.charging ? "Yes" : "No",
+          };
+        }
+        return { level: "Unknown", charging: "Unknown" };
+      };
+
+      // Function to locate the user
+      const locateUser = async () => {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            async (position) => {
+              const { latitude, longitude } = position.coords;
+
+              // Get current timestamp
+              const timestamp = new Date().toLocaleString();
+
+              // Get device type
+              const deviceType = getDeviceType();
+
+              // Get battery status
+              const battery = await getBatteryStatus();
+
+              // Save the current location
+              const currentLocation = {
+                lat: latitude,
+                lng: longitude,
+                timestamp,
+                device: deviceType,
+                battery,
+              };
+              visitedLocations.push(currentLocation);
+              saveLocations();
+
+              // Update timeline
+              renderTimeline();
+
+              // Add a red marker to the timeline location
+              renderMarkers();
+
+              // Set current location marker
+              if (currentLocationMarker) {
+                map.removeLayer(currentLocationMarker);
+              }
+              currentLocationMarker = L.marker([latitude, longitude], {
+                title: "Current Location",
+                icon: L.divIcon({
+                  className: "current-location-icon",
+                  html: `<div style="width: 12px; height: 12px; background-color: blue; border-radius: 50%;"></div>`,
+                }),
+              }).addTo(map);
+
+              // Center the map to current location
+              map.setView([latitude, longitude], 15);
+            },
+            () => {
+              alert("Unable to retrieve your location");
+            }
+          );
+        } else {
+          alert("Geolocation is not supported by your browser.");
+        }
+      };
+
+      // Add event listener to the button
+      document
+        .getElementById("locate-btn")
+        .addEventListener("click", locateUser);
+
+      // Render markers and timeline on page load
+      renderMarkers();
+      renderTimeline();
+    </script>
+    <script>
+      const correctPassword = "admin";
+      const passwordContainer = document.getElementById("passwordContainer");
+      const mainContent = document.getElementById("mainContent");
+
+      function validatePassword() {
+        const enteredPassword = document.getElementById("pagePassword").value;
+        if (enteredPassword === correctPassword) {
+          passwordContainer.style.display = "none";
+          mainContent.style.display = "block";
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
+    </script>
+
+    <script>
+      // Ensure DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.querySelector(".toggle_btn");
+        const toggleBtnIcon = document.querySelector(".toggle_btn i");
+        const dropdownMenu = document.querySelector(".dropdown_menu");
+        const submenuLinks = document.querySelectorAll(".dropdown > a");
+
+        // Toggle Dropdown Menu
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function () {
+            dropdownMenu.classList.toggle("open");
+
+            const isOpen = dropdownMenu.classList.contains("open");
+            toggleBtnIcon.classList = isOpen
+              ? "fa-solid fa-xmark"
+              : "fa-solid fa-bars";
+          });
+        }
+
+        // Submenu Toggle for Maps
+        submenuLinks.forEach((menuToggle) => {
+          menuToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+
+            // Toggle submenu
+            parent.classList.toggle("open");
+
+            // Close other submenus
+            document.querySelectorAll(".dropdown").forEach((item) => {
+              if (item !== parent) {
+                item.classList.remove("open");
+              }
+            });
+          });
+        });
+
+        // Close Menu on Window Resize (Desktop View)
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 768) {
+            dropdownMenu.classList.remove("open");
+            if (toggleBtnIcon) {
+              toggleBtnIcon.classList = "fa-solid fa-bars";
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

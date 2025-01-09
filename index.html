@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-YMZG1L1BRW"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-YMZG1L1BRW");
+    </script>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="Internet of Bodies Book a Meeting with Us!"
+    />
+    <meta
+      name="keywords"
+      content="Internet of Bodies Book a Meeting with Us!"
+    />
+    <meta name="author" content="Accountable Infrastructure" />
+    <title>Internet of Bodies - Request Demo!</title>
+
+    <!--Favicon-->
+    <link rel="icon" href="iob logo_BLACK.png" type="image/png" />
+
+    <!-- Organization Structured Data without Social Media -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Accountable Infrastructure",
+        "url": "https://internetofbodies.ai/",
+        "logo": "https://internetofbodies.ai/logo.jpg"
+      }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #000;
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 800px;
+        background-color: #000000;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        margin: 20px 0;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      header img {
+        max-width: 180px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      h2 {
+        text-align: left; /* Aligns the text to the left */
+        margin-bottom: 20px;
+        color: #fff;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 1.5rem; /* Adjust font size as needed */
+      }
+
+      p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #ccc;
+        margin-bottom: 20px;
+        text-align: justify;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      input,
+      textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #444;
+        border-radius: 4px;
+        background-color: #222;
+        color: #fff;
+        transition: border-color 0.3s, background-color 0.3s;
+      }
+
+      input:hover,
+      textarea:hover {
+        border-color: #888;
+      }
+
+      input:focus,
+      textarea:focus {
+        outline: none;
+        border-color: #fff;
+        background-color: #333;
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+      }
+
+      button,
+      .submit,
+      .redirect-button {
+        padding: 12px;
+        background-color: #a7a5a5;
+        border: none;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+
+      button:hover,
+      .submit:hover,
+      .redirect-button:hover {
+        background-color: #ebebeb;
+        transform: translateY(-2px);
+      }
+
+      button:active,
+      .submit:active,
+      .redirect-button:active {
+        background-color: #ebebeb;
+        transform: translateY(1px);
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .container {
+          padding: 45px;
+        }
+
+        h1,
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        input,
+        textarea {
+          font-size: 14px;
+        }
+
+        button {
+          font-size: 14px;
+          padding: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        h1,
+        h2 {
+          font-size: 1.2rem;
+        }
+
+        input,
+        textarea {
+          font-size: 12px;
+          padding: 8px;
+        }
+
+        button {
+          font-size: 12px;
+          padding: 8px;
+        }
+        p {
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <img src="iob logo_WHITE.png" alt="IOB Logo" />
+      </header>
+      <h1>Request Demo Form</h1>
+      <p>
+        Complete the form to book your personalized live demo and explore our
+        features of internet of bodies in real-time.
+      </p>
+      <form id="demoForm">
+        <section class="company-overview">
+          <h2>ENTITY OVERVIEW</h2>
+          <hr />
+          <div class="form-group">
+            <label for="fullName"
+              >Entity Full Name <span style="color: red">*</span></label
+            >
+            <input type="text" id="fullName" name="fullName" required />
+          </div>
+          <div class="form-group">
+            <label for="email"
+              >Entity Email Address <span style="color: red">*</span></label
+            >
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="phone"
+              >Entity Phone Number <span style="color: red">*</span></label
+            >
+            <input type="tel" id="phone" name="phone" required />
+          </div>
+          <div class="form-group">
+            <label for="companyName"
+              >Entity Legal Name <span style="color: red">*</span></label
+            >
+            <input type="text" id="companyName" name="companyName" required />
+          </div>
+
+          <div class="form-group">
+            <label for="message"
+              >Message <span style="color: red">*</span></label
+            >
+            <textarea id="message" name="message" rows="4" required></textarea>
+          </div>
+          ...
+
+          <button type="button" onclick="sendMail()">Send</button>
+
+          <script>
+            // Initialize EmailJS
+            emailjs.init("PAYF9MT2F8MBrlojx"); // Replace with your EmailJS public key
+
+            function sendMail() {
+              const form = document.querySelector("#demoForm");
+              if (!form) {
+                console.error("Form with ID 'demoForm' not found");
+                return;
+              }
+
+              // Validate required fields
+              const requiredFields = [
+                "#fullName",
+                "#email",
+                "#phone",
+                "#companyName",
+                "#message",
+              ];
+              for (let selector of requiredFields) {
+                const element = document.querySelector(selector);
+                if (!element || !element.value.trim()) {
+                  alert(
+                    `Please fill out the ${selector
+                      .replace("#", "")
+                      .replace(/([A-Z])/g, " $1")}`
+                  );
+                  element?.focus();
+                  return; // Stop execution if validation fails
+                }
+              }
+
+              // Prepare email parameters
+              const params = {
+                fullName: document.querySelector("#fullName").value.trim(),
+                email: document.querySelector("#email").value.trim(),
+                phone: document.querySelector("#phone").value.trim(),
+                companyName: document
+                  .querySelector("#companyName")
+                  .value.trim(),
+                message: document.querySelector("#message").value.trim(),
+              };
+
+              const serviceID = "service_qufwwvn"; // Replace with your actual service ID
+              const receiverTemplateID = "template_12ke24d";
+              const senderTemplateID = "template_gwrqaqm";
+
+              // Email to Receiver
+              emailjs
+                .send(serviceID, receiverTemplateID, {
+                  to: "admin@accountableinfrastructure.com",
+                  from_name: params.fullName,
+                  reply_to: params.email,
+                  message: `
+                    Entity Full Name: ${params.fullName}
+                    Entity Email Address: ${params.email}
+                    Entity Phone Number: ${params.phone}
+                    Entity Legal Name: ${params.companyName}
+                    Message: ${params.message}
+                  `,
+                })
+                .then(() => {
+                  console.log("Email sent to receiver!");
+                })
+                .catch((err) => {
+                  console.error("Failed to send email to receiver:", err);
+                });
+
+              // Email to Sender (Confirmation)
+              emailjs
+                .send(serviceID, senderTemplateID, {
+                  to: params.email,
+                  from_name: "Internet of Bodies Team",
+                  sendername: params.fullName,
+                  message: `
+                    Entity Full Name: ${params.fullName}
+                    Entity Email Address: ${params.email}
+                    Entity Phone Number: ${params.phone}
+                    Entity Legal Name: ${params.companyName}
+                    Message: ${params.message}
+                  `,
+                })
+                .then(() => {
+                  alert("Your request has been sent.");
+                  form.reset(); // Clear the form after submission
+                })
+                .catch((err) => {
+                  console.error(
+                    "Failed to send confirmation email to sender:",
+                    err
+                  );
+                });
+            }
+          </script>
+        </section>
+      </form>
+    </div>
+  </body>
+</html>

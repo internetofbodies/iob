@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta
+      name="description"
+      content="HealthSync Alert is a cutting-edge feature within the Internet of Bodies ecosystem that provides real-time health monitoring and instant notifications for enhanced personal and public health safety. Designed for wearable and implantable medical devices, HealthSync Alert continuously tracks vital signs, including heart rate, blood pressure, blood oxygen, and more, offering a comprehensive health view. "
+    />
+    <meta
+      name="keywords"
+      content="Internet of Bodies Healthsync Alert, Internet of Bodies Health Monitoring, Internet of Bodies Data analytics, Internet of Bodies Wearable technology solutions"
+    />
+    <meta name="author" content="Accountable Infrastructure" />
+    <title>Internet of Bodies - Healthsync Alert</title>
+
+    <!--Favicon-->
+    <link rel="icon" href="iob logo_BLACK.png" type="image/png" />
+
+    <!-- Organization Structured Data without Social Media -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Accountable Infrastructure",
+        "url": "https://internetofbodies.ai/",
+        "logo": "https://internetofbodies.ai/logo.jpg"
+      }
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- Linking external CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo">
+          <a href="portal.html">
+            <img src="iob logo_BLACK.png" alt="IOB logo" />
+          </a>
+        </div>
+
+        <!--Menu links-->
+        <ul class="links">
+          <li><a href="home.html">Health Dashboard</a></li>
+
+          <!-- Mega Menu -->
+          <li class="mega-menu-container">
+            <a href="#" class="mega-menu-link">Features Section</a>
+            <div class="mega-menu">
+              <h4>Features Section</h4>
+              <a href="citytracker.html">City Tracker</a>
+              <a href="prediction.html">Prediction</a>
+              <a href="healthsync.html">HealthSync Alert</a>
+            </div>
+          </li>
+          <!-- Mega Menu -->
+          <li class="mega-menu-container">
+            <a href="#" class="mega-menu-link">Map Tools</a>
+            <div class="mega-menu">
+              <h4>Map Tools</h4>
+              <a href="mobiledemo.html">Multi-Location Map</a>
+              <a href="humanlocation.html">Human Locator Map</a>
+              <a href="animalvaccination.html">Animals Locator Map</a>
+              <a href="iobmap.html">Internet of Bodies Map</a>
+              <a href="location.html">Location Surveillance Map</a>
+              <a href="livegps.html">Live ID Map</a>
+              <a href="wban.html">WBAN Monitoring Map</a>
+            </div>
+          </li>
+        </ul>
+
+        <a href="index.html" class="action_btn">Logout</a>
+        <div class="toggle_btn">
+          <i class="fa-solid fa-bars"></i>
+        </div>
+      </div>
+
+      <!--Dropdown Mobile-->
+      <div class="dropdown_menu">
+        <ul>
+          <li><a href="home.html">Health Dashboard</a></li>
+          <li><a href="citytracker.html">CityBaron Tracker</a></li>
+          <li><a href="prediction.html">Prediction</a></li>
+          <li><a href="healthsync.html">HealthSync Alert</a></li>
+          <!-- Dropdown for Maps -->
+          <li class="dropdown">
+            <a href="#">Maps ▼</a>
+            <ul class="dropdown__menu">
+              <li><a href="mobiledemo.html">Multi-Location Map</a></li>
+              <li><a href="humanlocation.html">Human Locator Map</a></li>
+              <li><a href="animalvaccination.html">Animals Locator Map</a></li>
+              <li><a href="location.html">Location Surveillance Map</a></li>
+              <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+              <li><a href="livegps.html">Live ID Map</a></li>
+              <li><a href="wban.html">WBAN Monitoring Map</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="index.html" class="action_btn">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </header>
+
+    <h1 class="dashboard-title">Health Sync Alert</h1>
+    <main>
+      <!-- User Input Form -->
+      <div class="input-container">
+        <h2>Enter Your Name</h2>
+        <input type="text" id="name-input" placeholder="Enter name..." />
+        <button onclick="loadUserData()">Submit</button>
+        <button onclick="clearUserData()">Clear</button>
+      </div>
+
+      <!-- Symptom Checker Dashboard -->
+      <div class="symptom-container" id="symptom-section" style="display: none">
+        <h2 id="user-greeting">Health Data for</h2>
+        <div class="symptom-card">
+          <h3>Heart Rate</h3>
+          <p id="heart-rate">Loading...</p>
+        </div>
+        <div class="symptom-card">
+          <h3>SpO2</h3>
+          <p id="spO2">Loading...</p>
+        </div>
+        <div class="symptom-card">
+          <h3>Body Temperature</h3>
+          <p id="body-temp">Loading...</p>
+        </div>
+        <div class="symptom-card">
+          <h3>Cholesterol Level</h3>
+          <p id="cholesterol">Loading...</p>
+          <p id="cholesterol-note" style="color: red"></p>
+          <!-- Diabetes risk note -->
+        </div>
+        <div class="symptom-card">
+          <h3>Potassium Level</h3>
+          <p id="potassium">Loading...</p>
+        </div>
+        <div class="symptom-card">
+          <h3>Diabetes Status</h3>
+          <p id="diabetes">Loading...</p>
+        </div>
+        <div class="symptom-card">
+          <h3>ECG Monitor</h3>
+          <canvas id="ecgChart"></canvas>
+        </div>
+        <div class="symptom-card">
+          <h3>Other Major Diseases</h3>
+          <ul id="major-diseases">
+            Loading...
+          </ul>
+        </div>
+        <div class="symptom-card">
+          <h3>Bird Flu / COVID-19 Detection</h3>
+          <ul id="flu-covid-detection">
+            Loading...
+          </ul>
+        </div>
+        <div class="symptom-card">
+          <h3>Registered City</h3>
+          <p id="registered-city">Loading...</p>
+        </div>
+        <div
+          class="symptom-card"
+          id="cause-of-death-card"
+          style="display: none"
+        >
+          <h3>Cause of Death</h3>
+          <p id="cause-of-death"></p>
+        </div>
+        <div class="symptom-card" id="headache-note-card" style="display: none">
+          <p style="color: red" id="headache-note"></p>
+          <!-- Migraine note -->
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer Section -->
+    <footer>
+      <div class="footer__bottom">
+        <p>Internet of Bodies &copy; Accountable Infrastructure 2024</p>
+      </div>
+    </footer>
+
+    <!-- JavaScript for handling form and displaying health data -->
+    <script>
+      //clear button
+
+      function clearUserData() {
+        document.getElementById("name-input").value = ""; // Clear input field
+        document.getElementById("symptom-section").style.display = "none"; // Hide symptom section
+      }
+
+      let ecgChart; // Variable for storing the chart instance
+
+      // Sample data associated with users, including registered city and cause of death
+      // Updated sample data with added users
+      const userData = {
+        "LeBron James": {
+          heartRate: 75,
+          spO2: 98,
+          bodyTemp: 36.5,
+          cholesterol: 180,
+          potassium: 4.5,
+          diabetes: "Non-diabetic",
+          ecg: [70, 72, 75, 80, 78],
+          majorDiseases: ["Hypertension"],
+          hasSymptoms: {
+            fever: false,
+            cough: true,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Brentwood, Los Angeles, California",
+          causeOfDeath: null, // Still alive
+        },
+        "Alex Ching": {
+          heartRate: 85,
+          spO2: 97,
+          bodyTemp: 37.8,
+          cholesterol: 250,
+          potassium: 3.8,
+          diabetes: "Type 2 Diabetic",
+          ecg: [80, 82, 85, 90, 88],
+          majorDiseases: ["Asthma", "High Cholesterol"],
+          hasSymptoms: {
+            fever: true,
+            cough: true,
+            breathShortness: true,
+            headache: true,
+          },
+          registeredCity: "New York",
+          causeOfDeath: "Heart Attack", // Deceased
+        },
+        "Jacob Ness": {
+          heartRate: 65,
+          spO2: 99,
+          bodyTemp: 36.7,
+          cholesterol: 150,
+          potassium: 4.1,
+          diabetes: "Non-diabetic",
+          ecg: [60, 62, 65, 70, 68],
+          majorDiseases: [],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "London",
+          causeOfDeath: "Car Accident", // Deceased
+        },
+        "John Doe": {
+          heartRate: 65,
+          spO2: 99,
+          bodyTemp: 36.7,
+          cholesterol: 150,
+          potassium: 4.1,
+          diabetes: "Non-diabetic",
+          ecg: [60, 62, 65, 70, 68],
+          majorDiseases: ["Mild Hypertension"],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "San Francisco",
+          causeOfDeath: null, // Alive, with hypertension
+        },
+
+        // Newly added users
+        "Kobe Bryant": {
+          heartRate: null,
+          spO2: null,
+          bodyTemp: null,
+          cholesterol: null,
+          potassium: null,
+          diabetes: "N/A",
+          ecg: [],
+          majorDiseases: [],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Los Angeles",
+          causeOfDeath: "Helicopter Crash", // Deceased
+        },
+        "Selena Gomez": {
+          heartRate: 72,
+          spO2: 97,
+          bodyTemp: 36.8,
+          cholesterol: 190,
+          potassium: 4.0,
+          diabetes: "Non-diabetic",
+          ecg: [70, 74, 72, 75, 73],
+          majorDiseases: ["Lupus"],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: true,
+          },
+          registeredCity: "Los Angeles",
+          causeOfDeath: null, // Alive
+        },
+        "Demi Lovato": {
+          heartRate: 78,
+          spO2: 96,
+          bodyTemp: 37.0,
+          cholesterol: 200,
+          potassium: 3.9,
+          diabetes: "Non-diabetic",
+          ecg: [78, 80, 79, 81, 77],
+          majorDiseases: ["Bipolar Disorder", "Substance Use Disorder"],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: true,
+          },
+          registeredCity: "Los Angeles",
+          causeOfDeath: null, // Alive
+        },
+        "Kanye West": {
+          heartRate: 80,
+          spO2: 97,
+          bodyTemp: 36.9,
+          cholesterol: 195,
+          potassium: 4.3,
+          diabetes: "Non-diabetic",
+          ecg: [80, 82, 81, 79, 83],
+          majorDiseases: ["Bipolar Disorder"],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Hidden Hills, CA",
+          causeOfDeath: null, // Alive
+        },
+        "Michael J. Fox": {
+          heartRate: 70,
+          spO2: 98,
+          bodyTemp: 36.5,
+          cholesterol: 180,
+          potassium: 4.1,
+          diabetes: "Non-diabetic",
+          ecg: [70, 72, 73, 74, 71],
+          majorDiseases: ["Parkinson's Disease"],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Los Angeles",
+          causeOfDeath: null, // Alive
+        },
+        "Whitney Houston": {
+          heartRate: null,
+          spO2: null,
+          bodyTemp: null,
+          cholesterol: null,
+          potassium: null,
+          diabetes: "N/A",
+          ecg: [],
+          majorDiseases: [],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Los Angeles",
+          causeOfDeath: "Accidental Drowning", // Deceased
+        },
+        "Justin Bieber": {
+          heartRate: 76,
+          spO2: 98,
+          bodyTemp: 36.7,
+          cholesterol: 185,
+          potassium: 4.2,
+          diabetes: "Non-diabetic",
+          ecg: [76, 78, 77, 79, 75],
+          majorDiseases: [
+            "Lyme Disease",
+            "Mental Health",
+            "Ramsay Hunt Syndrome",
+          ],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Beverly Park, Beverly Hills, California",
+          causeOfDeath: null, // Alive
+        },
+
+        "Alain Joshua Palis": {
+          heartRate: 75,
+          spO2: 95,
+          bodyTemp: 38.0,
+          cholesterol: 170,
+          potassium: 4.0,
+          diabetes: "Non-diabetic",
+          ecg: [75, 77, 76, 74, 75],
+          majorDiseases: [],
+          hasSymptoms: {
+            fever: true,
+            cough: true,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Philippines",
+          causeOfDeath: null, // Alive, mild flu
+        },
+
+        "Dyanella Malicdem": {
+          heartRate: 72,
+          spO2: 98,
+          bodyTemp: 36.5,
+          cholesterol: 160,
+          potassium: 4.2,
+          diabetes: "Non-diabetic",
+          ecg: [72, 74, 73, 75, 72],
+          majorDiseases: [],
+          hasSymptoms: {
+            fever: false,
+            cough: false,
+            breathShortness: false,
+            headache: false,
+          },
+          registeredCity: "Philippines",
+          causeOfDeath: null, // Alive, healthy
+        },
+      };
+
+      // Function to check for Bird Flu or COVID-19 symptoms
+      function detectFluOrCovid(symptoms) {
+        const results = [];
+        if (symptoms.fever && symptoms.cough && symptoms.breathShortness) {
+          results.push(
+            "Possible COVID-19 or Bird Flu. Please seek medical attention."
+          );
+        } else if (symptoms.fever || symptoms.cough) {
+          results.push(
+            "Mild symptoms detected. Monitor for potential flu-like conditions."
+          );
+        } else {
+          results.push("No symptoms of COVID-19 or Bird Flu detected.");
+        }
+        return results;
+      }
+
+      // Function to display health data based on name input
+      function loadUserData() {
+        const nameInput = document
+          .getElementById("name-input")
+          .value.trim()
+          .toLowerCase(); // Convert input to lowercase
+        const userKey = Object.keys(userData).find(
+          (key) => key.toLowerCase() === nameInput // Convert each user key to lowercase for comparison
+        );
+
+        const data = userData[userKey]; // Retrieve data using matched key
+
+        if (data) {
+          // Display the symptom section and health data
+          document.getElementById("symptom-section").style.display = "block";
+          document.getElementById(
+            "user-greeting"
+          ).textContent = `Health Data for ${userKey}`;
+          document.getElementById(
+            "heart-rate"
+          ).textContent = `${data.heartRate} bpm`;
+          document.getElementById("spO2").textContent = `${data.spO2}%`;
+          document.getElementById(
+            "body-temp"
+          ).textContent = `${data.bodyTemp}°C`;
+          document.getElementById(
+            "cholesterol"
+          ).textContent = `${data.cholesterol} mg/dL`;
+          document.getElementById(
+            "potassium"
+          ).textContent = `${data.potassium} mmol/L`;
+          document.getElementById("diabetes").textContent = `${data.diabetes}`;
+          document.getElementById(
+            "registered-city"
+          ).textContent = `Registered City: ${data.registeredCity}`;
+
+          // Handle Cause of Death display
+          if (data.causeOfDeath) {
+            document.getElementById("cause-of-death-card").style.display =
+              "block";
+            document.getElementById(
+              "cause-of-death"
+            ).textContent = `Cause of Death: ${data.causeOfDeath}`;
+          } else {
+            document.getElementById("cause-of-death-card").style.display =
+              "none";
+          }
+
+          // Display major diseases
+          const diseaseList = document.getElementById("major-diseases");
+          diseaseList.innerHTML = ""; // Clear previous list
+          if (data.majorDiseases.length > 0) {
+            data.majorDiseases.forEach((disease) => {
+              const li = document.createElement("li");
+              li.textContent = disease;
+              diseaseList.appendChild(li);
+            });
+          } else {
+            const li = document.createElement("li");
+            li.textContent = "None";
+            diseaseList.appendChild(li);
+          }
+
+          // Detect Bird Flu / COVID-19
+          const fluCovidList = document.getElementById("flu-covid-detection");
+          fluCovidList.innerHTML = ""; // Clear previous list
+          const detectionResults = detectFluOrCovid(data.hasSymptoms);
+          detectionResults.forEach((result) => {
+            const li = document.createElement("li");
+            li.textContent = result;
+            fluCovidList.appendChild(li);
+          });
+
+          // Check for high cholesterol and add note for diabetes risk
+          if (data.cholesterol > 200) {
+            document.getElementById("cholesterol-note").textContent =
+              "Note: Possible risk of diabetes due to high sugar level.";
+          } else {
+            document.getElementById("cholesterol-note").textContent = ""; // Clear the note if not applicable
+          }
+
+          // Check for headache and display possible migraine note
+          if (data.hasSymptoms.headache) {
+            document.getElementById("headache-note-card").style.display =
+              "block";
+            document.getElementById("headache-note").textContent =
+              "Note: Possible migraine due to reported headache.";
+          } else {
+            document.getElementById("headache-note-card").style.display =
+              "none"; // Hide if no headache
+          }
+
+          // Update the ECG chart based on whether the person is alive or not
+          updateECGChart(data.ecg, data.causeOfDeath === null);
+        } else {
+          alert("User not found! Please enter a valid name.");
+        }
+      }
+
+      // Function to update ECG chart
+      function updateECGChart(ecgData, isAlive) {
+        const ctx = document.getElementById("ecgChart").getContext("2d");
+
+        if (ecgChart) {
+          ecgChart.destroy(); // Destroy the previous chart instance
+        }
+
+        // If the person is alive, show normal ECG data, otherwise show a flat line
+        const ecgValues = isAlive ? ecgData : new Array(ecgData.length).fill(0); // Flat line for deceased
+
+        ecgChart = new Chart(ctx, {
+          type: "line",
+          data: {
+            labels: Array.from({ length: ecgValues.length }, (_, i) => i + 1),
+            datasets: [
+              {
+                label: "ECG (bpm)",
+                data: ecgValues,
+                borderColor: "rgba(75, 192, 192, 1)",
+                borderWidth: 2,
+                fill: false,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              x: {
+                beginAtZero: true,
+              },
+              y: {
+                beginAtZero: true,
+                max: 120,
+              },
+            },
+          },
+        });
+      }
+    </script>
+    <script>
+      // Ensure DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.querySelector(".toggle_btn");
+        const toggleBtnIcon = document.querySelector(".toggle_btn i");
+        const dropdownMenu = document.querySelector(".dropdown_menu");
+        const submenuLinks = document.querySelectorAll(".dropdown > a");
+
+        // Toggle Dropdown Menu
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function () {
+            dropdownMenu.classList.toggle("open");
+
+            const isOpen = dropdownMenu.classList.contains("open");
+            toggleBtnIcon.classList = isOpen
+              ? "fa-solid fa-xmark"
+              : "fa-solid fa-bars";
+          });
+        }
+
+        // Submenu Toggle for Maps
+        submenuLinks.forEach((menuToggle) => {
+          menuToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+
+            // Toggle submenu
+            parent.classList.toggle("open");
+
+            // Close other submenus
+            document.querySelectorAll(".dropdown").forEach((item) => {
+              if (item !== parent) {
+                item.classList.remove("open");
+              }
+            });
+          });
+        });
+
+        // Close Menu on Window Resize (Desktop View)
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 768) {
+            dropdownMenu.classList.remove("open");
+            if (toggleBtnIcon) {
+              toggleBtnIcon.classList = "fa-solid fa-bars";
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

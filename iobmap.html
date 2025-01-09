@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Internet of Bodies Map</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!--Favicon-->
+    <link rel="icon" href="iob logo_BLACK.png" type="image/png" />
+
+    <style>
+      body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      box-sizing: border-box;
+      }
+      #map {
+      height: 50vh;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 20px;
+      border: 2px solid black; /* Black border for key elements */
+      box-sizing: border-box; /
+      }
+      .info-popup {
+      font-size: 14px;
+      }
+      .info-popup strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 16px;
+      }
+      .custom-icon {
+      background-color: transparent;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: black;
+      font-weight: bold;
+      font-size: 24px;
+      }
+      .h1 {
+      align-items: center;
+      }
+
+      /* Mobile Menu Bar */
+
+      li {
+      list-style: none;
+      }
+
+      a {
+      text-decoration: none;
+      color: #000; /* Changed to black */
+      font-size: 1rem;
+      }
+
+      a:hover {
+      color: #555; /* Changed to a lighter black (gray) */
+      }
+
+      /* HEADER */
+      header {
+      position: relative;
+      padding: 0 2rem;
+      }
+
+      .navbar {
+      width: 100%;
+      height: 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      }
+
+      .navbar .logo a {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #000; /* Changed to black */
+      }
+
+      .navbar .links {
+      display: flex;
+      gap: 2rem;
+      }
+
+      .navbar .toggle_btn {
+      color: #000; /* Changed to black */
+      font-size: 1.5rem;
+      cursor: pointer;
+      display: none;
+      }
+
+      .action_btn {
+      background-color: #000000; /* Changed to black */
+      color: #ffffff; /* Kept white text for contrast */
+      padding: 0.5rem 1rem;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: scale 0.2 ease;
+      }
+
+      .action_btn:hover {
+      scale: 1.05;
+      color: #000000; /* Kept white text */
+      }
+
+      .action_btn:active {
+      scale: 0.95;
+      }
+
+      a.action_btn{
+      background-color: #000000; /* Changed to black */
+      color: #ffffff !important; /* Kept white text for contrast */
+      padding: 0.5rem 1rem;
+      border: none;
+      outline: none;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: scale 0.2 ease;
+      }
+
+
+      .logo img {
+      height: 60px;
+      width: auto;
+      display: block;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+      .navbar .links,
+      .navbar .action_btn {
+      display: none;
+      }
+
+      .navbar .toggle_btn {
+      display: block;
+      }
+
+      .dropdown_menu {
+      display: block;
+      }
+      }
+
+      @media (max-width: 576px) {
+      .dropdown_menu {
+      left: 2rem;
+      width: unset;
+      }
+      }
+      /* Mega Menu Container */
+      .mega-menu-container {
+      position: relative; /* Required for absolute positioning of the mega menu */
+      }
+
+      /* Mega Menu Link */
+      .mega-menu-link {
+      position: relative;
+      color: #000; /* Black text */
+      font-weight: normal;
+      transition: color 0.3s ease;
+      }
+
+      .mega-menu-link:hover {
+      color: #555; /* Light gray on hover */
+      }
+
+      /* Mega Menu Content */
+      .mega-menu {
+      display: none; /* Hidden by default */
+      position: absolute;
+      top: 100%; /* Position below the parent link */
+      left: 0;
+      background-color: #fff; /* White background */
+      color: #000; /* Black text */
+      width: 200px; /* Adjust width as needed */
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      border: 1px solid #000; /* Black border */
+      border-radius: 5px;
+      z-index: 1000;
+      }
+
+      .mega-menu-container:hover .mega-menu {
+      display: block; /* Show on hover */
+      }
+
+      .mega-menu h4 {
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #000; /* Black heading */
+      }
+
+      .mega-menu a {
+      display: block;
+      padding: 5px 0;
+      font-size: 1rem;
+      color: #000; /* Black links */
+      text-decoration: none;
+      transition: color 0.3s ease;
+      }
+
+      .mega-menu a:hover {
+      color: #555; /* Light gray on hover */
+      }
+      /* Dropdown Menu */
+      .dropdown_menu {
+      display: none;
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 400px;
+      background: rgba(255, 255, 255, 0.981);
+      backdrop-filter: blur(15px);
+      border: 1px solid black; /* Add black border */
+      border-radius: 10px;
+      z-index: 10000;
+      overflow-y: auto;
+      max-height: 90vh;
+      }
+
+      .dropdown_menu.open {
+      display: block;
+      }
+
+      .dropdown_menu li {
+      text-align: center;
+      padding: 0.7rem;
+      }
+
+      .dropdown_menu li a {
+      color: #000;
+      text-decoration: none;
+      display: block;
+      }
+
+      .dropdown_menu li a:hover {
+      color: #000;
+      }
+
+      /* Centered Submenu with Transparent Background */
+      .dropdown {
+      position: relative;
+      }
+
+      .dropdown__menu {
+      display: none;
+      position: relative;
+      left: 50%;
+      transform: translateX(-50%); /* Center Submenu */
+      background: rgba(255, 255, 255, 0.981);
+      backdrop-filter: blur(15px);
+      border-radius: 5px;
+      margin-top: 0.5rem;
+      width: 90%; /* Responsive width */
+      box-shadow: 0 2px 5px rgba(255, 255, 255, 0.981);
+      }
+
+      .dropdown.open .dropdown__menu {
+      display: block;
+      }
+
+      .dropdown__menu li {
+      padding: 0.5rem 1rem;
+      text-align: center;
+      }
+
+      .dropdown__menu li a {
+      color: #000;
+      font-size: 14px;
+      text-decoration: none;
+      }
+
+      .dropdown__menu li a:hover {
+      background-color: rgba(0, 0, 0, 0.05);
+      color: #000;
+      }
+
+      /* Responsive Fix */
+      @media (max-width: 768px) {
+      .dropdown_menu {
+      width: 95%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 1px solid black; /* Ensure border remains for small screens */
+      }
+
+      .dropdown__menu {
+      width: 90%; /* Submenu stays within parent */
+      }
+      }
+
+      .password-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #000; /* Solid black */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      }
+      .password-box {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+      padding: 10px 0;
+      font-size: 1rem;
+      margin: 8px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      }
+      button {
+      background-color: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      }
+
+      button:hover {
+      background-color: #333;
+      }
+      /* Footer Make sure the HTML and body elements take full height */
+      html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      }
+
+      /*Footer Main content should grow to fill the space */
+      #main-content {
+      flex: 1; /* This allows the main content to take up remaining space */
+      width: 100%;
+      }
+
+      /* Footer styles */
+      footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px 20px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+      margin-top: auto;
+      }
+
+      @media (min-width: 768px) {
+      footer {
+      font-size: 16px;
+      }
+      }
+    </style>
+
+    <!--Nav bar-->
+    <div class="navbar">
+      <div class="logo">
+        <a href="portal.html">
+          <img src="iob logo_BLACK.png" alt="IOB logo" />
+        </a>
+      </div>
+
+      <!--Menu links-->
+      <ul class="links">
+        <li><a href="home.html">Health Dashboard</a></li>
+
+        <!-- Mega Menu -->
+        <li class="mega-menu-container">
+          <a href="#" class="mega-menu-link">Features Section</a>
+          <div class="mega-menu">
+            <h4>Features Section</h4>
+            <a href="citytracker.html">City Tracker</a>
+            <a href="prediction.html">Prediction</a>
+            <a href="healthsync.html">HealthSync Alert</a>
+          </div>
+        </li>
+        <!-- Mega Menu -->
+        <li class="mega-menu-container">
+          <a href="#" class="mega-menu-link">Map Tools</a>
+          <div class="mega-menu">
+            <h4>Map Tools</h4>
+            <a href="mobiledemo.html">Multi-Location Map</a>
+            <a href="humanlocation.html">Human Locator Map</a>
+            <a href="animalvaccination.html">Animals Locator Map</a>
+            <a href="iobmap.html">Internet of Bodies Map</a>
+            <a href="location.html">Location Surveillance Map</a>
+            <a href="livegps.html">Live ID Map</a>
+            <a href="wban.html">WBAN Monitoring Map</a>
+          </div>
+        </li>
+      </ul>
+
+      <a href="index.html" class="action_btn">Logout</a>
+      <div class="toggle_btn">
+        <i class="fa-solid fa-bars"></i>
+      </div>
+    </div>
+
+    <!--Dropdown Mobile-->
+    <div class="dropdown_menu">
+      <ul>
+        <li><a href="home.html">Health Dashboard</a></li>
+        <li><a href="citytracker.html">CityBaron Tracker</a></li>
+        <li><a href="prediction.html">Prediction</a></li>
+        <li><a href="healthsync.html">HealthSync Alert</a></li>
+        <!-- Dropdown for Maps -->
+        <li class="dropdown">
+          <a href="#">Maps ▼</a>
+          <ul class="dropdown__menu">
+            <li><a href="mobiledemo.html">Multi-Location Map</a></li>
+            <li><a href="humanlocation.html">Human Locator Map</a></li>
+            <li><a href="animalvaccination.html">Animals Locator Map</a></li>
+            <li><a href="location.html">Location Surveillance Map</a></li>
+            <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+            <li><a href="livegps.html">Live ID Map</a></li>
+            <li><a href="wban.html">WBAN Monitoring Map</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="index.html" class="action_btn">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <body>
+      <div class="password-container" id="passwordContainer">
+        <div class="password-box">
+          <h2>Enter Password</h2>
+          <input
+            type="password"
+            id="pagePassword"
+            placeholder="Enter password"
+          />
+          <button onclick="validatePassword()">Submit</button>
+        </div>
+      </div>
+      <h1>Internet of Bodies Map</h1>
+      <div id="map"></div>
+      <!-- Footer -->
+      <footer>
+        <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+      </footer>
+
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+      <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
+      <script>
+        // Sample data of individuals
+        const peopleData = [
+          {
+            id: 1,
+            name: "Anderson, David",
+            age: 35,
+            address: "123 Main St, New York, NY",
+            healthData: "userdavid.html",
+            financialData: "financedavid.html",
+            coordinates: [40.7128, -74.006],
+          },
+          {
+            id: 2,
+            name: "Miller, Jane",
+            age: 28,
+            address: "124 Main St, New York, NY",
+            healthData: "userjane.html",
+            financialData: "financejane.html",
+            coordinates: [40.713, -74.0062],
+          },
+          {
+            id: 3,
+            name: "Taylor, John",
+            age: 44,
+            address: "125 Main St, New York, NY",
+            healthData: "userjohn.html",
+            financialData: "financejohn.html",
+            coordinates: [40.7129, -74.0058],
+          },
+          // New people in California and Texas with no health or finance data
+          {
+            id: 4,
+            name: "Brown, Sarah",
+            age: 30,
+            address: "200 Market St, San Francisco, CA",
+            coordinates: [37.7749, -122.4194],
+          },
+          {
+            id: 5,
+            name: "Davis, Michael",
+            age: 40,
+            address: "300 Main St, Los Angeles, CA",
+            coordinates: [34.0522, -118.2437],
+          },
+          {
+            id: 6,
+            name: "Wilson, Emma",
+            age: 29,
+            address: "400 Elm St, Austin, TX",
+            coordinates: [30.2672, -97.7431],
+          },
+          {
+            id: 7,
+            name: "Johnson, Robert",
+            age: 50,
+            address: "500 Congress Ave, Houston, TX",
+            coordinates: [29.7604, -95.3698],
+          },
+          {
+            id: 8,
+            name: "Clark, Emily",
+            age: 35,
+            address: "600 Dallas Rd, Dallas, TX",
+            coordinates: [32.7767, -96.797],
+          },
+        ];
+
+        // Initialize the map with a temporary center
+        const map = L.map("map");
+
+        // Add OpenStreetMap tiles
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // Create a marker cluster group
+        const markers = L.markerClusterGroup();
+
+        // Custom person icon
+        const personIcon = L.divIcon({
+          className: "custom-icon",
+          html: "👤",
+          iconSize: [50, 50],
+          iconAnchor: [25, 25],
+        });
+
+        // Function to add a marker
+        function addMarker(person) {
+          const marker = L.marker(person.coordinates, { icon: personIcon });
+
+          // Add a popup with the person's details
+          let popupContent = `
+    <div class="info-popup">
+      <strong>ID: ${person.id}</strong><br>
+      <strong>${person.name}</strong><br>
+      Age: ${person.age}<br>
+      Address: ${person.address}<br>
+  `;
+
+          if (person.healthData && person.financialData) {
+            popupContent += `
+      Health: <a href="${person.healthData}" target="_blank">Health Data</a><br>
+      Financial: <a href="${person.financialData}" target="_blank">Financial Data</a>
+    `;
+          }
+
+          popupContent += `</div>`;
+          marker.bindPopup(popupContent);
+          markers.addLayer(marker);
+        }
+
+        // Add markers to the map
+        peopleData.forEach((person) => addMarker(person));
+
+        // Add the marker cluster group to the map
+        map.addLayer(markers);
+
+        // Adjust the map's view to fit all markers
+        const allCoordinates = peopleData.map((person) => person.coordinates);
+        const bounds = L.latLngBounds(allCoordinates);
+        map.fitBounds(bounds);
+      </script>
+
+      <script>
+        const correctPassword = "admin";
+        const passwordContainer = document.getElementById("passwordContainer");
+        const mainContent = document.getElementById("mainContent");
+
+        function validatePassword() {
+          const enteredPassword = document.getElementById("pagePassword").value;
+          if (enteredPassword === correctPassword) {
+            passwordContainer.style.display = "none";
+            mainContent.style.display = "block";
+          } else {
+            alert("Incorrect password. Please try again.");
+          }
+        }
+      </script>
+      <script>
+        // Ensure DOM is fully loaded
+        document.addEventListener("DOMContentLoaded", function () {
+          const toggleBtn = document.querySelector(".toggle_btn");
+          const toggleBtnIcon = document.querySelector(".toggle_btn i");
+          const dropdownMenu = document.querySelector(".dropdown_menu");
+          const submenuLinks = document.querySelectorAll(".dropdown > a");
+
+          // Toggle Dropdown Menu
+          if (toggleBtn) {
+            toggleBtn.addEventListener("click", function () {
+              dropdownMenu.classList.toggle("open");
+
+              const isOpen = dropdownMenu.classList.contains("open");
+              toggleBtnIcon.classList = isOpen
+                ? "fa-solid fa-xmark"
+                : "fa-solid fa-bars";
+            });
+          }
+
+          // Submenu Toggle for Maps
+          submenuLinks.forEach((menuToggle) => {
+            menuToggle.addEventListener("click", function (e) {
+              e.preventDefault();
+              const parent = this.parentElement;
+
+              // Toggle submenu
+              parent.classList.toggle("open");
+
+              // Close other submenus
+              document.querySelectorAll(".dropdown").forEach((item) => {
+                if (item !== parent) {
+                  item.classList.remove("open");
+                }
+              });
+            });
+          });
+
+          // Close Menu on Window Resize (Desktop View)
+          window.addEventListener("resize", function () {
+            if (window.innerWidth > 768) {
+              dropdownMenu.classList.remove("open");
+              if (toggleBtnIcon) {
+                toggleBtnIcon.classList = "fa-solid fa-bars";
+              }
+            }
+          });
+        });
+      </script>
+    </body>
+  </head>
+</html>
