@@ -9,6 +9,10 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
       rel="stylesheet"
     />
+
+    <!--Favicon-->
+    <link rel="icon" href="logo.png" type="image/png" />
+
     <style>
       body {
         font-family: "Arial", sans-serif;
@@ -73,6 +77,8 @@
           justify-content: space-between;
           transform: translateY(-50%);
           z-index: 1000;
+          pointer-events: none; /* Prevent the container from blocking clicks */
+          box-sizing: border-box;
         }
 
         /* Navigation button styling */
@@ -85,18 +91,31 @@
           ); /* Semi-transparent background */
           color: white;
           border: none;
-          width: 40px; /* Fixed width */
-          height: 40px; /* Fixed height */
+          width: 40px;
+          height: 40px;
           display: flex;
-          justify-content: center; /* Center icon horizontally */
-          align-items: center; /* Center icon vertically */
-          font-size: 18px; /* Font size for the arrow */
-          border-radius: 50%; /* Circular buttons */
+          justify-content: center;
+          align-items: center;
+          font-size: 18px;
+          border-radius: 50%;
           cursor: pointer;
           transition: background-color 0.3s ease;
-          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          pointer-events: auto; /* Allow clicking */
+          position: absolute; /* For precise placement */
         }
 
+        /* Position the left arrow */
+        .nav-button#prev {
+          left: 10px; /* Adjust spacing from the left edge */
+        }
+
+        /* Position the right arrow */
+        .nav-button#next {
+          right: 52px; /* Adjust spacing from the right edge */
+        }
+
+        /* Hover effects */
         .nav-button:hover {
           background-color: rgba(0, 0, 0, 0.6); /* Darker on hover */
         }
@@ -104,6 +123,7 @@
         .nav-button:focus {
           outline: none;
         }
+
         /* Responsive Design */
         @media (max-width: 768px) {
           .slideshow-container {
