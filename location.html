@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Surveillance Map</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
+      integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <!--Favicon-->
+    <link rel="icon" href="iob logo_BLACK.png" type="image/png" />
+
+    <style>
+      /* General Body Style */
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #fff;
+        color: #333;
+      }
+
+      /* Title Section */
+      h1 {
+        margin: 20px 0;
+        color: #000;
+        font-size: 2rem;
+        text-align: center;
+      }
+
+      /* Form Styling */
+      form {
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        background: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      input,
+      button {
+        padding: 12px;
+        width: 100%;
+        max-width: 300px;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #000;
+      }
+
+      button {
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 1rem;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #333;
+      }
+
+      #clearHistory {
+        background: #000;
+      }
+
+      #clearHistory:hover {
+        background: #000;
+      }
+
+      /* Map Styling */
+      #map {
+        height: 60vh;
+        width: 80vw;
+        margin: 20px 0;
+        border: 2px solid #eee;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      /* Make the map square in mobile view */
+      @media (max-width: 768px) {
+        #map {
+          width: 90vw; /* Adjust width to 90% of the viewport width */
+          height: 90vw; /* Make the height equal to the width for a square shape */
+          border-radius: 5px; /* Optional: small border-radius for aesthetics */
+        }
+      }
+
+      /* Details Section */
+      #details {
+        padding: 20px;
+        background: #fff;
+        width: 80vw;
+        border: 2px solid #eee;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: left;
+        margin-bottom: 20px;
+      }
+      @media (max-width: 768px) {
+        #details {
+          width: 90vw; /* Adjust width to 90% of the viewport width */
+          height: 90vw; /* Make the height equal to the width for a square shape */
+          border-radius: 5px; /* Optional: small border-radius for aesthetics */
+        }
+      }
+
+      .location-info {
+        margin: 10px 0;
+        font-size: 1.1rem;
+        line-height: 1.5;
+      }
+
+      .location-info strong {
+        color: #007bff;
+      }
+
+      /* Mega Menu Container */
+      .mega-menu-container {
+        position: relative; /* Required for absolute positioning of the mega menu */
+      }
+
+      /* Mega Menu Link */
+      .mega-menu-link {
+        position: relative;
+        color: #000; /* Black text */
+        font-weight: normal;
+        transition: color 0.3s ease;
+      }
+
+      .mega-menu-link:hover {
+        color: #555; /* Light gray on hover */
+      }
+
+      /* Mega Menu Content */
+      .mega-menu {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: 100%; /* Position below the parent link */
+        left: 0;
+        background-color: #fff; /* White background */
+        color: #000; /* Black text */
+        width: 200px; /* Adjust width as needed */
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border: 1px solid #000; /* Black border */
+        border-radius: 5px;
+        z-index: 1000;
+      }
+
+      .mega-menu-container:hover .mega-menu {
+        display: block; /* Show on hover */
+      }
+
+      .mega-menu h4 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+        font-weight: bold;
+        color: #000; /* Black heading */
+      }
+
+      .mega-menu a {
+        display: block;
+        padding: 5px 0;
+        font-size: 1rem;
+        color: #000; /* Black links */
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      .mega-menu a:hover {
+        color: #555; /* Light gray on hover */
+      }
+
+      li {
+        list-style: none;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000; /* Changed to black */
+        font-size: 1rem;
+      }
+
+      a:hover {
+        color: #555; /* Changed to a lighter black (gray) */
+      }
+
+      /* HEADER */
+      header {
+        position: relative;
+        padding: 0 2rem;
+      }
+
+      .navbar {
+        width: 100%;
+        height: 60px;
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .navbar .logo a {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #000; /* Changed to black */
+      }
+
+      .navbar .links {
+        display: flex;
+        gap: 2rem;
+      }
+
+      .navbar .toggle_btn {
+        color: #000; /* Changed to black */
+        font-size: 1.5rem;
+        cursor: pointer;
+        display: none;
+      }
+
+      .action_btn {
+        background-color: #000; /* Changed to black */
+        color: #fff; /* Kept white text for contrast */
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: scale 0.2 ease;
+      }
+
+      .action_btn:hover {
+        scale: 1.05;
+        color: #fff; /* Kept white text */
+      }
+
+      .action_btn:active {
+        scale: 0.95;
+      }
+      a.action_btn {
+        background-color: #000; /* Changed to black */
+        color: #fff !important; /* Kept white text for contrast */
+        padding: 0.5rem 1rem;
+        border: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: scale 0.2 ease;
+      }
+      .logo img {
+        height: 60px;
+        width: auto;
+        display: block;
+      }
+
+      /* RESPONSIVE DESIGN */
+      @media (max-width: 992px) {
+        .navbar .links,
+        .navbar .action_btn {
+          display: none;
+        }
+
+        .navbar .toggle_btn {
+          display: block;
+        }
+      }
+
+      /* Dropdown Menu */
+      .dropdown_menu {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        background: rgba(255, 255, 255, 0.981);
+        backdrop-filter: blur(15px);
+        border: 1px solid black; /* Add black border */
+        border-radius: 10px;
+        z-index: 10000;
+        overflow-y: auto;
+        max-height: 90vh;
+      }
+
+      .dropdown_menu.open {
+        display: block;
+      }
+
+      .dropdown_menu li {
+        text-align: center;
+        padding: 0.7rem;
+      }
+
+      .dropdown_menu li a {
+        color: #000;
+        text-decoration: none;
+        display: block;
+      }
+
+      .dropdown_menu li a:hover {
+        color: #000;
+      }
+
+      /* Centered Submenu with Transparent Background */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown__menu {
+        display: none;
+        position: relative;
+        left: 50%;
+        transform: translateX(-50%); /* Center Submenu */
+        background: rgba(255, 255, 255, 0.981);
+        backdrop-filter: blur(15px);
+        border-radius: 5px;
+        margin-top: 0.5rem;
+        width: 90%; /* Responsive width */
+        box-shadow: 0 2px 5px rgba(255, 255, 255, 0.981);
+      }
+
+      .dropdown.open .dropdown__menu {
+        display: block;
+      }
+
+      .dropdown__menu li {
+        padding: 0.5rem 1rem;
+        text-align: center;
+      }
+
+      .dropdown__menu li a {
+        color: #000;
+        font-size: 14px;
+        text-decoration: none;
+      }
+
+      .dropdown__menu li a:hover {
+        background-color: rgba(0, 0, 0, 0.05);
+        color: #000;
+      }
+
+      /* Responsive Fix */
+      @media (max-width: 768px) {
+        .dropdown_menu {
+          width: 95%;
+          left: 50%;
+          transform: translateX(-50%);
+          border: 1px solid black; /* Ensure border remains for small screens */
+        }
+
+        .dropdown__menu {
+          width: 90%; /* Submenu stays within parent */
+        }
+      }
+
+      .fa-bars,
+      .fa-navicon {
+        padding: 20px;
+      }
+      .fa-close,
+      .fa-multiply,
+      .fa-remove,
+      .fa-times,
+      .fa-xmark {
+        padding: 20px;
+      }
+      #userForm,
+      #map,
+      #details {
+        border: 2px solid black; /* Black border */
+        box-sizing: border-box; /* Ensures border doesn't affect layout */
+      }
+      #userForm {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center inputs horizontally */
+        justify-content: center; /* Align content inside the form */
+        gap: 15px; /* Space between form elements */
+        background: #fff;
+        padding: 20px;
+        border: 2px solid black; /* Add black border as requested */
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      @media (max-width: 768px) {
+        #userForm {
+          width: 90vw; /* Adjust width to 90% of the viewport width */
+          height: 90vw; /* Make the height equal to the width for a square shape */
+          border-radius: 5px; /* Optional: small border-radius for aesthetics */
+        }
+      }
+      .password-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000; /* Solid black */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+      .password-box {
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      }
+      .password-box input {
+        padding: 10px 0;
+        font-size: 1rem;
+        margin: 8px 0;
+        width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      @media (min-width: 768px) {
+        footer {
+          font-size: 16px;
+        }
+      }
+    </style>
+  </head>
+
+  <!--Nav bar-->
+  <div class="navbar">
+    <div class="logo">
+      <a href="portal.html">
+        <img src="iob logo_BLACK.png" alt="IOB logo" />
+      </a>
+    </div>
+
+    <!--Menu links-->
+    <ul class="links">
+      <li><a href="home.html">Health Dashboard</a></li>
+
+      <!-- Mega Menu -->
+      <li class="mega-menu-container">
+        <a href="#" class="mega-menu-link">Features Section</a>
+        <div class="mega-menu">
+          <h4>Features Section</h4>
+          <a href="citytracker.html">City Tracker</a>
+          <a href="prediction.html">Prediction</a>
+          <a href="healthsync.html">HealthSync Alert</a>
+        </div>
+      </li>
+      <!-- Mega Menu -->
+      <li class="mega-menu-container">
+        <a href="#" class="mega-menu-link">Map Tools</a>
+        <div class="mega-menu">
+          <h4>Map Tools</h4>
+          <a href="mobiledemo.html">Multi-Location Map</a>
+          <a href="humanlocation.html">Human Locator Map</a>
+          <a href="animalvaccination.html">Animals Locator Map</a>
+          <a href="iobmap.html">Internet of Bodies Map</a>
+          <a href="location.html">Location Surveillance Map</a>
+          <a href="livegps.html">Live ID Map</a>
+          <a href="wban.html">WBAN Monitoring Map</a>
+        </div>
+      </li>
+    </ul>
+
+    <a href="index.html" class="action_btn">Logout</a>
+    <div class="toggle_btn">
+      <i class="fa-solid fa-bars"></i>
+    </div>
+  </div>
+
+  <!--Dropdown Mobile-->
+  <div class="dropdown_menu">
+    <ul>
+      <li><a href="home.html">Health Dashboard</a></li>
+      <li><a href="citytracker.html">CityBaron Tracker</a></li>
+      <li><a href="prediction.html">Prediction</a></li>
+      <li><a href="healthsync.html">HealthSync Alert</a></li>
+      <!-- Dropdown for Maps -->
+      <li class="dropdown">
+        <a href="#">Maps ▼</a>
+        <ul class="dropdown__menu">
+          <li><a href="mobiledemo.html">Multi-Location Map</a></li>
+          <li><a href="humanlocation.html">Human Locator Map</a></li>
+          <li><a href="animalvaccination.html">Animals Locator Map</a></li>
+          <li><a href="location.html">Location Surveillance Map</a></li>
+          <li><a href="iobmap.html">Internet of Bodies Map</a></li>
+          <li><a href="livegps.html">Live ID Map</a></li>
+          <li><a href="wban.html">WBAN Monitoring Map</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="index.html" class="action_btn">Logout</a>
+      </li>
+    </ul>
+  </div>
+  <body>
+    <div class="password-container" id="passwordContainer">
+      <div class="password-box">
+        <h2>Enter Password</h2>
+        <input type="password" id="pagePassword" placeholder="Enter password" />
+        <button onclick="validatePassword()">Submit</button>
+      </div>
+    </div>
+
+    <h1>Location Surveillance Map</h1>
+    <form id="userForm">
+      <input type="text" id="name" placeholder="Enter Name" required />
+      <input type="text" id="id" placeholder="Enter ID" required />
+      <button type="submit">Detect Location</button>
+    </form>
+
+    <div id="map"></div>
+    <div id="details">
+      <h3 style="color: #444; text-align: center">Detected Person Details</h3>
+      <div id="history"></div>
+      <button id="clearHistory">Clear History</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
+
+    <script>
+      // Initialize the map
+      const map = L.map("map").setView([37.0902, -95.7129], 4); // Center USA
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      // OpenCage Geocoder API Key
+      const apiKey = "692914491aec4471ad3cd3b89506e67f";
+
+      // Get saved locations from localStorage or initialize empty array
+      const savedLocations =
+        JSON.parse(localStorage.getItem("locations")) || [];
+
+      // Array to store map markers
+      const markers = [];
+
+      // Render saved locations on map and history
+      function renderSavedLocations() {
+        const historyDiv = document.getElementById("history");
+        historyDiv.innerHTML = ""; // Clear history section
+
+        // Add each saved location
+        savedLocations.forEach((location) => {
+          // Add marker to the map
+          const marker = L.marker([
+            location.coords[0],
+            location.coords[1],
+          ]).addTo(map);
+          markers.push(marker); // Store marker to remove later if needed
+          marker.bindPopup(
+            `<strong>${location.name}</strong><br>ID: ${location.id}<br>City: ${
+              location.city
+            }<br>Coordinates: ${location.coords.join(", ")}`
+          );
+
+          // Add to history section
+          const div = document.createElement("div");
+          div.classList.add("location-info");
+          div.innerHTML = `<strong>Name:</strong> ${
+            location.name
+          } <br> <strong>ID:</strong> ${
+            location.id
+          } <br> <strong>City:</strong> ${
+            location.city
+          } <br> <strong>Coordinates:</strong> ${location.coords.join(", ")}`;
+          historyDiv.appendChild(div);
+        });
+      }
+
+      // Generate random coordinates in the USA
+      function getRandomCoordinates() {
+        const lat = Math.random() * (49.3457868 - 24.396308) + 24.396308; // Between USA latitudes
+        const lng = Math.random() * (-66.93457 - -125.00165) + -125.00165; // Between USA longitudes
+        return [lat.toFixed(6), lng.toFixed(6)];
+      }
+
+      // Fetch city details from OpenCage API
+      async function fetchCityDetails(coords) {
+        const [lat, lng] = coords;
+        const response = await fetch(
+          `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lng}&key=${apiKey}`
+        );
+        const data = await response.json();
+        return (
+          data.results?.[0]?.components?.city ||
+          data.results?.[0]?.components?.state ||
+          "Unknown City"
+        );
+      }
+
+      // Handle form submission
+      document
+        .getElementById("userForm")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          // Get input values
+          const name = document.getElementById("name").value.trim();
+          const id = document.getElementById("id").value.trim();
+
+          if (!name || !id) {
+            alert("Please enter both Name and ID.");
+            return;
+          }
+
+          // Generate random coordinates (for simulation)
+          const coords = getRandomCoordinates();
+
+          // Fetch city details using OpenCage API
+          const city = await fetchCityDetails(coords);
+
+          // Save location data
+          const locationData = { name, id, city, coords };
+          savedLocations.push(locationData);
+          localStorage.setItem("locations", JSON.stringify(savedLocations));
+
+          // Render the updated locations
+          renderSavedLocations();
+
+          // Center the map to the new location
+          map.setView(coords, 10);
+        });
+
+      // Clear history and remove markers
+      document.getElementById("clearHistory").addEventListener("click", () => {
+        localStorage.removeItem("locations"); // Clear local storage
+        savedLocations.length = 0; // Clear array
+
+        // Remove all markers from the map
+        markers.forEach((marker) => map.removeLayer(marker));
+        markers.length = 0;
+
+        // Clear the history section
+        document.getElementById("history").innerHTML = "";
+      });
+
+      // Render existing locations on page load
+      renderSavedLocations();
+    </script>
+    <script>
+      const correctPassword = "admin";
+      const passwordContainer = document.getElementById("passwordContainer");
+      const mainContent = document.getElementById("mainContent");
+
+      function validatePassword() {
+        const enteredPassword = document.getElementById("pagePassword").value;
+        if (enteredPassword === correctPassword) {
+          passwordContainer.style.display = "none";
+          mainContent.style.display = "block";
+        } else {
+          alert("Incorrect password. Please try again.");
+        }
+      }
+    </script>
+    <script>
+      // Ensure DOM is fully loaded
+      document.addEventListener("DOMContentLoaded", function () {
+        const toggleBtn = document.querySelector(".toggle_btn");
+        const toggleBtnIcon = document.querySelector(".toggle_btn i");
+        const dropdownMenu = document.querySelector(".dropdown_menu");
+        const submenuLinks = document.querySelectorAll(".dropdown > a");
+
+        // Toggle Dropdown Menu
+        if (toggleBtn) {
+          toggleBtn.addEventListener("click", function () {
+            dropdownMenu.classList.toggle("open");
+
+            const isOpen = dropdownMenu.classList.contains("open");
+            toggleBtnIcon.classList = isOpen
+              ? "fa-solid fa-xmark"
+              : "fa-solid fa-bars";
+          });
+        }
+
+        // Submenu Toggle for Maps
+        submenuLinks.forEach((menuToggle) => {
+          menuToggle.addEventListener("click", function (e) {
+            e.preventDefault();
+            const parent = this.parentElement;
+
+            // Toggle submenu
+            parent.classList.toggle("open");
+
+            // Close other submenus
+            document.querySelectorAll(".dropdown").forEach((item) => {
+              if (item !== parent) {
+                item.classList.remove("open");
+              }
+            });
+          });
+        });
+
+        // Close Menu on Window Resize (Desktop View)
+        window.addEventListener("resize", function () {
+          if (window.innerWidth > 768) {
+            dropdownMenu.classList.remove("open");
+            if (toggleBtnIcon) {
+              toggleBtnIcon.classList = "fa-solid fa-bars";
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

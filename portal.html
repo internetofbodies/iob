@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Manager Access Portal</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!--Favicon-->
+    <link rel="icon" href="iob logo_BLACK.png" type="image/png" />
+
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #ece9e6, #ffffff);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        -webkit-font-smoothing: antialiased; /* Better font rendering for Safari */
+        /* General styling for slideshow container */
+        .slideshow-container {
+          position: relative;
+          width: 80%; /* Reduce width further for a minimalist look */
+          max-width: 900px; /* Adjust maximum width to make it smaller */
+          margin: 20px auto;
+          margin-top: 70px;
+          overflow: hidden;
+          border-radius: 10px;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for a clean look */
+          padding: 20px;
+        }
+
+        /* Style for each slide */
+        .slides {
+          display: none;
+          width: 100%;
+        }
+
+        .slides img {
+          width: 100%;
+          height: auto;
+          display: block;
+          padding: 0 10px; /* Reduce padding for smaller spacing */
+          box-sizing: border-box; /* Ensure padding doesn’t affect total width */
+          border-radius: 12px; /* Slightly smaller rounded corners */
+        }
+
+        /* Active slide display */
+        .slides.active {
+          display: block;
+          animation: fade 1.5s;
+        }
+
+        /* Fade animation */
+        @keyframes fade {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        /* Navigation buttons container */
+        .nav-buttons-container {
+          position: absolute;
+          top: 50%;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          transform: translateY(-50%);
+          z-index: 1000;
+          pointer-events: none; /* Prevent the container from blocking clicks */
+          box-sizing: border-box;
+        }
+
+        /* Navigation button styling */
+        .nav-button {
+          background-color: rgba(
+            0,
+            0,
+            0,
+            0.4
+          ); /* Semi-transparent background */
+          color: white;
+          border: none;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          font-size: 18px;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+          pointer-events: auto; /* Allow clicking */
+          position: absolute; /* For precise placement */
+        }
+
+        /* Position the left arrow */
+        .nav-button#prev {
+          left: 10px; /* Adjust spacing from the left edge */
+        }
+
+        /* Position the right arrow */
+        .nav-button#next {
+          right: 52px; /* Adjust spacing from the right edge */
+        }
+
+        /* Hover effects */
+        .nav-button:hover {
+          background-color: rgba(0, 0, 0, 0.6); /* Darker on hover */
+        }
+
+        .nav-button:focus {
+          outline: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .slideshow-container {
+            width: 90%; /* Slightly wider for tablets */
+            max-width: 600px;
+          }
+          .slides img {
+            height: auto;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .slideshow-container {
+            width: 95%; /* Full-width for mobile */
+            max-width: 100%;
+          }
+        }
+      }
+      @media (max-width: 768px) {
+        .nav-button {
+          width: 30px;
+          height: 30px;
+          font-size: 14px; /* Smaller font size */
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-button {
+          width: 25px;
+          height: 25px;
+          font-size: 12px; /* Further reduced for mobile devices */
+        }
+      }
+
+      h1 {
+        font-size: 3vw;
+        text-align: center;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 768px) {
+        h1 {
+          font-size: 5vw;
+        }
+      }
+
+      .search-bar {
+        width: 80%;
+        max-width: 400px;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        font-size: 16px;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        max-width: 1200px;
+        padding: 20px;
+        min-height: 0; /* Explicitly handle height issues in Safari */
+        flex: 1; /* Pushes the footer to the bottom */
+      }
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centers content vertically */
+        align-items: center; /* Centers content horizontally */
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        animation: fadeIn 1s ease-in-out;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        background-color: #f5f5f5;
+      }
+
+      .icon {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .card-description {
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 15px;
+      }
+
+      .button {
+        text-decoration: none;
+        font-size: 14px;
+        padding: 10px 20px;
+        color: #fff;
+        background-color: #333;
+        border-radius: 20px;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+      }
+
+      .button:hover {
+        background-color: #555;
+      }
+
+      @media (hover: none) {
+        .button:hover {
+          background-color: #333;
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .button {
+          width: 80%;
+        }
+      }
+      @media (hover: hover) {
+        .card:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+          background-color: #f5f5f5;
+        }
+      }
+
+      footer {
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        padding: 15px 20px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+        position: relative; /* Prevents overlap */
+      }
+
+      @media (min-width: 576px) {
+        footer {
+          font-size: 15px;
+          padding: 20px 30px;
+        }
+      }
+
+      @media (min-width: 768px) {
+        footer {
+          font-size: 16px;
+          padding: 20px 40px; /* Balanced padding for tablets */
+        }
+      }
+
+      @media (min-width: 1200px) {
+        footer {
+          font-size: 18px; /* Larger font for desktops and large screens */
+          padding: 25px 50px; /* Generous padding for larger screens */
+        }
+      }
+
+      /* Navbar */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 20px;
+        background: rgba(0, 0, 0, 0.8);
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        box-sizing: border-box;
+        transition: transform 0.3s ease-in-out;
+        height: 70px; /* Define a fixed height for the navbar */
+      }
+
+      .navbar .logo img {
+        height: 60px;
+      }
+
+      .navbar .cta {
+        text-decoration: none;
+        color: white;
+        border: 2px solid white;
+        padding: 10px 20px;
+        text-transform: uppercase;
+        font-size: 14px;
+        font-weight: bold;
+        transition: background 0.3s ease, color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin-left: auto;
+      }
+
+      .navbar .cta:hover {
+        background: white;
+        color: black;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <div class="logo">
+        <img src="iob logo_WHITE.png" alt="Logo" />
+      </div>
+      <a href="requestdemo.html" class="cta">Request Demo</a>
+    </div>
+    <div class="slideshow-container">
+      <div class="slides active">
+        <img src="iobpro.png" alt="Slide 1" />
+      </div>
+      <div class="slides">
+        <img src="iobproCB.png" alt="Slide 2" />
+      </div>
+      <div class="slides">
+        <img src="iobpropredict.png" alt="Slide 3" />
+      </div>
+      <div class="slides">
+        <img src="iobproAI.png" alt="Slide 4" />
+      </div>
+      <div class="slides">
+        <img src="iobproboard.png" alt="Slide 5" />
+      </div>
+      <div class="slides">
+        <img src="iobproall.png" alt="Slide 6" />
+      </div>
+
+      <div class="nav-buttons-container">
+        <button class="nav-button" id="prev">&lt;</button>
+        <button class="nav-button" id="next">&gt;</button>
+      </div>
+    </div>
+
+    <h1>Manager Access Portal</h1>
+    <input type="text" class="search-bar" placeholder="Search..." />
+
+    <div class="container">
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-map-marked-alt"></i>
+        </div>
+        <div class="card-title">Multi-Location Map</div>
+        <div class="card-description">
+          Explore multiple locations simultaneously.
+        </div>
+        <a href="https://internetofbodies.ai/mobiledemo.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-video"></i>
+        </div>
+        <div class="card-title">Location Surveillance Map</div>
+        <div class="card-description">
+          Monitor areas with advanced surveillance.
+        </div>
+        <a href="https://internetofbodies.ai/location.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-user"></i>
+        </div>
+        <div class="card-title">Human Locator Map</div>
+        <div class="card-description">
+          Track and locate individuals efficiently.
+        </div>
+        <a href="https://internetofbodies.ai/humanlocation.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-paw"></i>
+        </div>
+        <div class="card-title">Animals Locator Map</div>
+        <div class="card-description">
+          Locate and monitor animals with precision.
+        </div>
+        <a
+          href="https://internetofbodies.ai/animalvaccination.html"
+          class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-globe"></i>
+        </div>
+        <div class="card-title">Internet of Bodies Map</div>
+        <div class="card-description">
+          Access health and financial data visualizations.
+        </div>
+        <a href="https://internetofbodies.ai/iobmap.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-id-card"></i>
+        </div>
+        <div class="card-title">Live I.D Map</div>
+        <div class="card-description">
+          Get real-time identification details.
+        </div>
+        <a href="https://internetofbodies.ai/livegps.html" class="button"
+          >Visit</a
+        >
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <div class="card-title">WBAN Map</div>
+        <div class="card-description">
+          Visualize wireless body area network data.
+        </div>
+        <a href="wban.html" class="button">Visit</a>
+      </div>
+      <div class="card">
+        <div class="icon">
+          <i class="fas fa-chart-bar"></i>
+        </div>
+        <div class="card-title">Health Dashboard</div>
+        <div class="card-description">
+          Access and manage health data efficiently.
+        </div>
+        <a href="https://internetofbodies.ai/home.html" class="button">Visit</a>
+      </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+      <p>Internet of Bodies © Accountable Infrastructure Inc. 2024</p>
+    </footer>
+    <script>
+      // Select all slides and navigation buttons
+      const slides = document.querySelectorAll(".slides");
+      const prevButton = document.getElementById("prev");
+      const nextButton = document.getElementById("next");
+      let currentIndex = 0;
+
+      // Function to display the current slide
+      function showSlide(index) {
+        slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === index);
+        });
+      }
+
+      // Add event listeners for navigation buttons
+      prevButton.addEventListener("click", () => {
+        currentIndex = currentIndex > 0 ? currentIndex - 1 : slides.length - 1;
+        showSlide(currentIndex);
+      });
+
+      nextButton.addEventListener("click", () => {
+        currentIndex = currentIndex < slides.length - 1 ? currentIndex + 1 : 0;
+        showSlide(currentIndex);
+      });
+
+      // Initial display
+      showSlide(currentIndex);
+    </script>
+  </body>
+</html>
