@@ -1,0 +1,893 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: #000; /* Black font */
+  background-color: #fff; /* White background */
+  line-height: 1.6;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: #000; /* Changed to black */
+  font-size: 1rem;
+}
+
+a:hover {
+  color: #555; /* Changed to a lighter black (gray) */
+}
+
+/* HEADER */
+header {
+  position: relative;
+  padding: 0 2rem;
+}
+
+.navbar {
+  width: 100%;
+  height: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar .logo a {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #000; /* Changed to black */
+}
+
+.navbar .links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar .toggle_btn {
+  color: #000; /* Changed to black */
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: none;
+}
+
+.action_btn {
+  background-color: #000; /* Changed to black */
+  color: #fff; /* Kept white text for contrast */
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: scale 0.2 ease;
+}
+
+.action_btn:hover {
+  scale: 1.05;
+  color: #fff; /* Kept white text */
+}
+
+.action_btn:active {
+  scale: 0.95;
+}
+a.action_btn {
+  background-color: #000; /* Changed to black */
+  color: #fff !important; /* Kept white text for contrast */
+  padding: 0.5rem 1rem;
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: scale 0.2 ease;
+}
+.logo img {
+  height: 60px;
+  width: auto;
+  display: block;
+}
+
+/* RESPONSIVE DESIGN */
+@media (max-width: 992px) {
+  .navbar .links,
+  .navbar .action_btn {
+    display: none;
+  }
+
+  .navbar .toggle_btn {
+    display: block;
+  }
+}
+
+/* Checkbox in Health data */
+.checkbox-container {
+  display: flex; /* Use flexbox for alignment */
+  align-items: center; /* Align items vertically */
+  gap: 10px; /* Add spacing between the checkbox and label */
+  margin: 10px 0; /* Add some vertical margin */
+}
+
+/* Checkbox Styling */
+input[type="checkbox"] {
+  width: 18px; /* Standard checkbox size */
+  height: 18px; /* Standard checkbox size */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin: 0; /* Remove default margin for better alignment */
+}
+
+/* Label Styling */
+.checkbox-container label {
+  font-size: 1rem; /* Adjust font size for better readability */
+  color: #000; /* Black text color */
+  cursor: pointer; /* Pointer cursor for the label */
+}
+
+/* Health Dashboard Title */
+.dashboard-title {
+  text-align: center;
+  font-size: 3rem;
+  color: #000; /* Black font */
+  margin: 20px 0;
+  font-weight: bold;
+  border-bottom: 2px solid #000; /* Add a bottom border for emphasis */
+}
+
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2rem;
+  }
+}
+
+/* Feature Section */
+.feature-section {
+  background: #fff; /* White background for sections */
+  padding: 20px;
+  margin: 20px auto; /* Center sections */
+  border: 2px solid #000; /* Black border for each section */
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  max-width: 100%; /* Ensure sections stay responsive */
+  box-sizing: border-box;
+}
+
+.feature-section h3 {
+  color: #000; /* Black font for headings */
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  border-bottom: 2px solid #000; /* Black bottom border for headings */
+  padding-bottom: 5px;
+}
+
+.feature-section p {
+  color: #333; /* Dark gray font */
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .feature-section {
+    padding: 20px;
+  }
+
+  .feature-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .feature-section p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Inputs and Buttons */
+input,
+textarea,
+select,
+button {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 2px solid #000; /* Black border for inputs */
+  background-color: #fff; /* White input background */
+  color: #000; /* Black text */
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  border-color: #333; /* Slightly darker black for focus */
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  background-color: #000; /* Black button */
+  color: #fff; /* White text */
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid #000; /* Black border for buttons */
+  padding: 12px 20px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #555; /* Darker gray on hover */
+  color: #fff;
+  border-color: #333; /* Darker border on hover */
+}
+
+@media (max-width: 768px) {
+  button {
+    font-size: 0.9rem;
+  }
+}
+
+/* Breathing Exercise Styling */
+.circle-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 30px auto;
+}
+
+.circle {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px solid #4caf50;
+  background: radial-gradient(
+    circle,
+    rgba(76, 175, 80, 0.1),
+    rgba(76, 175, 80, 0.3)
+  );
+  transition: transform 4s ease-in-out, border-color 4s ease-in-out;
+}
+
+.circle.inhale {
+  border-color: #4caf50; /* Green */
+  transform: scale(1.1);
+}
+
+.circle.hold {
+  border-color: #ffeb3b; /* Yellow */
+}
+
+.circle.exhale {
+  border-color: #f44336; /* Red */
+  transform: scale(0.9);
+}
+
+#breathing-guide {
+  position: absolute;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000000;
+}
+
+#breathing-exercise h3 {
+  color: #000000;
+  margin-bottom: 10px;
+}
+
+/* TB detection */
+#tb-detection {
+  margin: 20px 0;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.tb-detection-container {
+  margin-top: 10px;
+}
+
+.tb-detection-container input {
+  margin-right: 10px;
+}
+
+#tb-analysis-result p {
+  margin-top: 15px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+/* Nutrition tracker */
+#nutrition-warnings {
+  margin-top: 20px;
+}
+
+#nutrition-warnings p {
+  color: red;
+  font-weight: bold;
+}
+
+/* Footer */
+footer {
+  background-color: #f9f9f9; /* Light gray background */
+  color: #333; /* Dark gray font */
+  text-align: center;
+  padding: 20px 10px;
+  border-top: 1px solid #ddd;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  main {
+    padding: 15px;
+  }
+
+  .feature-section {
+    padding: 20px;
+  }
+
+  .dashboard-title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar__menu {
+    gap: 10px;
+  }
+
+  .navbar__links {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.8rem;
+    padding: 10px 15px;
+  }
+
+  .feature-section h3 {
+    font-size: 1.2rem;
+  }
+
+  .feature-section p {
+    font-size: 0.8rem;
+  }
+
+  .dashboard-title {
+    font-size: 1.8rem;
+  }
+
+  .logo-image {
+    width: 60px; /* Smaller logo for mobile */
+  }
+
+  .mobile-menu-icon {
+    font-size: 1.5rem; /* Adjusted icon size for mobile */
+  }
+}
+
+/*City Tracker */
+/* H1 Title Styling */
+.dashboard-title {
+  text-align: center; /* Center-align the title */
+  font-size: 3rem; /* Default size for large screens */
+  color: #000; /* Black text */
+  margin: 20px 0; /* Space above and below */
+  font-weight: bold;
+  line-height: 1.2; /* Adjust line height for better readability */
+  border-bottom: 2px solid #000; /* Optional underline for emphasis */
+  padding: 10px;
+}
+/* Adjustments for medium screens */
+@media (max-width: 768px) {
+  .dashboard-title {
+    font-size: 2.5rem; /* Slightly smaller font size */
+    margin: 15px 0; /* Adjust spacing */
+  }
+}
+
+/* Adjustments for small screens */
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 2rem; /* Smaller font size for mobile */
+    margin: 10px 0; /* Reduce spacing for compact view */
+  }
+}
+
+.citybaron-button {
+  display: inline-block; /* Makes the link behave like a button */
+  text-align: center; /* Centers the text inside the button */
+  padding: 8px 16px; /* Smaller padding for medium size */
+  font-size: 0.9rem; /* Medium font size */
+  font-weight: bold; /* Keeps the text bold */
+  color: #fff; /* White text */
+  background-color: #000; /* Black background */
+  border: 2px solid #000; /* Black border for consistency */
+  border-radius: 4px; /* Slightly rounded corners */
+  text-decoration: none; /* Removes underline */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin: 0 auto; /* Centers the button within its parent container */
+  cursor: pointer; /* Changes cursor to pointer for better UX */
+}
+
+.citybaron-button:hover {
+  background-color: #555; /* Dark gray background on hover */
+  transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.citybaron-button:active {
+  transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+/* Center the button */
+p {
+  text-align: center; /* Ensures the button is horizontally centered */
+}
+
+/* Map */
+#map {
+  height: 500px;
+  max-width: 100%;
+  border-radius: 10px;
+  margin: 20px auto;
+}
+
+@media (max-width: 768px) {
+  #map {
+    height: 300px;
+  }
+}
+
+.layer-controls {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.layer-controls label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  color: #000;
+  cursor: pointer;
+}
+
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+}
+
+input[type="checkbox"]:hover {
+  outline: 2px solid #555;
+}
+.feature-section {
+  background-color: #fff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+#comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #000;
+}
+
+#comparison-table th,
+#comparison-table td {
+  border: 1px solid #000;
+  padding: 10px;
+  text-align: center;
+}
+
+#comparison-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  #comparison-table {
+    font-size: 0.8rem;
+  }
+}
+button {
+  background-color: #000;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background-color: #333;
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+input:focus,
+select:focus {
+  border-color: #555;
+  outline: none;
+}
+@media (max-width: 768px) {
+  .feature-section {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  .layer-controls {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .chatbot-container input {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  #map {
+    height: 250px;
+  }
+
+  .dashboard-title {
+    font-size: 2rem;
+  }
+
+  .chatbot-container button {
+    font-size: 0.9rem;
+  }
+
+  .feature-section h3 {
+    font-size: 1.2rem;
+  }
+}
+
+.population-icons {
+  display: flex; /* Use flexbox for horizontal alignment */
+  flex-wrap: wrap; /* Allows wrapping to a new line if space is insufficient */
+  justify-content: center; /* Centers the items horizontally */
+  gap: 10px; /* Adds spacing between items */
+}
+
+.person {
+  width: 20px;
+  height: 40px;
+  background-color: #ccc;
+  clip-path: polygon(
+    50% 0%,
+    62% 12%,
+    75% 25%,
+    75% 62%,
+    50% 100%,
+    25% 62%,
+    25% 25%,
+    38% 12%
+  );
+}
+
+.person.positive {
+  background-color: #64b9ff;
+}
+
+/* Prediction Dashboard */
+#prediction-dashboard {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff; /* White background */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  border: 1px solid #000; /* Black border */
+  border-radius: 10px;
+}
+
+#future-predictor {
+  text-align: center;
+  font-size: 1rem;
+  color: #000; /* Black text */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#prediction-dashboard h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #000; /* Black text */
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+#prediction-dashboard h2 {
+  font-size: 1.5rem;
+  color: #000; /* Black text */
+  margin-bottom: 10px;
+}
+
+/* Form Styling */
+#prediction-dashboard form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#prediction-dashboard form input,
+#prediction-dashboard form button {
+  width: 90%;
+  max-width: 400px;
+  padding: 10px;
+  margin: 10px 0;
+  font-size: 1rem;
+  border: 1px solid #000; /* Black border */
+  border-radius: 5px;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+  transition: all 0.3s ease;
+}
+
+#prediction-dashboard form input:focus {
+  border-color: #333; /* Slightly darker black for focus */
+  outline: none;
+  box-shadow: none;
+}
+
+#prediction-dashboard form button {
+  background-color: #000; /* Black button */
+  color: #fff; /* White text */
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+#prediction-dashboard form button:hover {
+  background-color: #333; /* Slightly lighter black */
+}
+
+#prediction-dashboard form button:active {
+  background-color: #444; /* Even lighter black */
+}
+
+/* Results Section */
+#results,
+#growth-results,
+#weather-results {
+  margin: 20px 0;
+  text-align: center;
+  background-color: #fff; /* White background for results */
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #000; /* Black border */
+}
+
+#results h2,
+#growth-results h2,
+#weather-results h2 {
+  font-size: 1.5rem;
+  color: #000; /* Black text */
+}
+
+#results p,
+#growth-results ul,
+#weather-results p {
+  font-size: 1rem;
+  color: #000; /* Black text */
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* Weather Simulation */
+#weather-simulation {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #000; /* Black border */
+  max-width: 800px;
+}
+
+#weather-simulation form label {
+  font-size: 1rem;
+  color: #000;
+  display: block;
+  margin: 10px 0 5px;
+}
+
+/* Population Growth Section */
+#population-growth-simulation {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff; /* White background */
+  border-radius: 10px;
+  border: 1px solid #000; /* Black border */
+  max-width: 800px;
+}
+
+#population-growth-simulation h1 {
+  text-align: center;
+  font-size: 2rem;
+  color: #000; /* Black text */
+  margin-bottom: 20px; /* Add a value here */
+}
+
+/* Mega Menu Container */
+.mega-menu-container {
+  position: relative; /* Required for absolute positioning of the mega menu */
+}
+
+/* Mega Menu Link */
+.mega-menu-link {
+  position: relative;
+  color: #000; /* Black text */
+  font-weight: normal;
+  transition: color 0.3s ease;
+}
+
+.mega-menu-link:hover {
+  color: #555; /* Light gray on hover */
+}
+
+/* Mega Menu Content */
+.mega-menu {
+  display: none; /* Hidden by default */
+  position: absolute;
+  top: 100%; /* Position below the parent link */
+  left: 0;
+  background-color: #fff; /* White background */
+  color: #000; /* Black text */
+  width: 200px; /* Adjust width as needed */
+  padding: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid #000; /* Black border */
+  border-radius: 5px;
+  z-index: 1000;
+}
+
+.mega-menu-container:hover .mega-menu {
+  display: block; /* Show on hover */
+}
+
+.mega-menu h4 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #000; /* Black heading */
+}
+
+.mega-menu a {
+  display: block;
+  padding: 5px 0;
+  font-size: 1rem;
+  color: #000; /* Black links */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.mega-menu a:hover {
+  color: #000; /* Light gray on hover */
+}
+/* Dropdown Menu */
+.dropdown_menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.981);
+  backdrop-filter: blur(15px);
+  border: 1px solid black; /* Add black border */
+  border-radius: 10px;
+  z-index: 10000;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+.dropdown_menu.open {
+  display: block;
+}
+
+.dropdown_menu li {
+  text-align: center;
+  padding: 0.7rem;
+}
+
+.dropdown_menu li a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown_menu li a:hover {
+  color: #000;
+}
+
+/* Centered Submenu with Transparent Background */
+.dropdown {
+  position: relative;
+}
+
+.dropdown__menu {
+  display: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%); /* Center Submenu */
+  background: rgba(255, 255, 255, 0.981);
+  backdrop-filter: blur(15px);
+  border-radius: 5px;
+  margin-top: 0.5rem;
+  width: 90%; /* Responsive width */
+  box-shadow: 0 2px 5px rgba(255, 255, 255, 0.981);
+}
+
+.dropdown.open .dropdown__menu {
+  display: block;
+}
+
+.dropdown__menu li {
+  padding: 0.5rem 1rem;
+  text-align: center;
+}
+
+.dropdown__menu li a {
+  color: #000;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.dropdown__menu li a:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #000;
+}
+
+/* Responsive Fix */
+@media (max-width: 768px) {
+  .dropdown_menu {
+    width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid black;
+  }
+
+  .dropdown__menu {
+    width: 90%;
+  }
+}
